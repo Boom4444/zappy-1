@@ -1,4 +1,4 @@
-zappy
-=====
+my_ftp
+======
 
-Last project for Epitech Unix System Module
+my_ftp project for epitech UNIX module 
