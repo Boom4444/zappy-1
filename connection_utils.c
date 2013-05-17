@@ -1,26 +1,20 @@
 /*
-** connection_utils.c for my_ftp in /home/hero/Dropbox/EPITECH/II/UNIX System/my_ftp
+** connection_utils.c for zappy in /home/hero/zappy
 ** 
 ** Made by Marin Alcaraz
 ** Login   <alcara_m@epitech.net>
 ** 
 ** Started on  Thu Apr 11 19:09:26 2013 Marin Alcaraz
-** Last update Thu Apr 11 19:42:14 2013 Marin Alcaraz
+** Last update Fri May 17 09:34:41 2013 Marin Alcaraz
 */
 
 #include "connection_utils.h"
 
-void    init_sockadd(struct sockaddr_in *sa, int port, int mode, char *ip)
+void    init_sockadd(struct sockaddr_in *sa, int port)
 {
     sa->sin_family = AF_INET;
     sa->sin_port = htons(port);
-    if (mode == CLIENT)
-      (sa->sin_addr).s_addr = inet_addr(ip);
-    else
-    {
-      (sa->sin_addr).s_addr = INADDR_ANY;
-      (void) ip;
-    }
+    (sa->sin_addr).s_addr = INADDR_ANY;
 }
 
 int         create_socket(void)

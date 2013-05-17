@@ -5,7 +5,7 @@
 ** Login   <alcara_m@epitech.net>
 ** 
 ** Started on  Wed Apr 10 21:48:38 2013 Marin Alcaraz
-** Last update Wed May 15 18:09:24 2013 Marin Alcaraz
+** Last update Fri May 17 09:56:59 2013 Marin Alcaraz
 */
 
 #include "server.h"
@@ -49,7 +49,7 @@ int                     server(int port)
   ds[2] = LIMIT;
   ds[0] = create_socket();
   s_in_size = sizeof(s_in_client);
-  init_sockadd(&s_in, port, SERVER, "NA");
+  init_sockadd(&s_in, port);
   if (bind(ds[0], (const struct sockaddr *)&s_in, sizeof(s_in)) == -1)
     my_errorandclose("Error: unable to bind\n", ds);
   listen (ds[0], QUEUE_S);
