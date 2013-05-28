@@ -57,7 +57,8 @@ void  invalid_find(int argc, char *argv[])
           i++;
       }
       else
-        i++;
+        if (*argv[i + 1] != '-')
+          i++;
     }
     else
     {
