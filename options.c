@@ -92,6 +92,6 @@ void    options_parse(int argc, char *argv[], t_opt *g_opt)
     if (l_opt == '?')
       default_error(argv);
     if (l_opt == ':')
-      eagle_error(argc, argv);
+      eagle_error(argv[0]);
   }
 }

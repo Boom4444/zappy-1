@@ -7,10 +7,10 @@ void  negative_error(char *str, char *ptr)
   exit(-1);
 }
 
-void  eagle_error(int argc, char *argv[])
+void  eagle_error(char *str)
 {
-  printf("%s: option requires an argument -- '%c'\n", argv[0], optopt);
-  usage_display(argv[0]);
+  printf("%s: option requires an argument -- '%c'\n", str, optopt);
+  usage_display(str);
 }
 
 void  lparse_error_1(char *str)
