@@ -42,8 +42,8 @@ void    the_parse(int argc, char *argv[])
     curr = argv[i];
     if (curr[0] == '-' && curr[1] != 0 && isdigit(curr[1]))
       negative_error(argv[0], argv[i]);
-     if (curr[t] == '-' && curr[t + 1] == 0)
-        syntax_error(argv[0], argv[i]);
+    if (curr[t] == '-' && curr[t + 1] == 0)
+      syntax_error(argv[0], argv[i]);
     while (curr[t] != 0)
     {
       if (curr[t] == 10)

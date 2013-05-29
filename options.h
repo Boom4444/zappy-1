@@ -6,7 +6,7 @@
 #include <string.h> // strlen
 #include <stdio.h> // printf
 #include <stdlib.h> // exit
-#include <ctype.h> // isdigit
+#include <ctype.h> // isalnum
 
 typedef struct  s_options 
 {
