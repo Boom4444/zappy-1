@@ -1,6 +1,6 @@
 #include "options.h"
 
-void    negative_parse(int argc, char *argv[])
+void    invalid_find(int argc, char *argv[])
 {
   int   i;
   char  *curr;
@@ -8,49 +8,28 @@ void    negative_parse(int argc, char *argv[])
   i = 1;
   while (i != argc)
   {
-    curr = argv[i];
-    if (curr[0] == '-' && curr[1] != 0 && isdigit(curr[1]))
+    if (*argv[i] == '-')
     {
-      printf("%s: illegal characters -- \"%s\"\n", argv[0], argv[i]);
-      printf("Argument values can only be positive.\n");
-      exit(1);
+      curr = argv[i];
+      if (curr[1] != 0 && curr[1] == 'n')
+      {
+        while ((i + 1) != argc && *argv[i + 1] != '-')
+          i++;
+      }
+      else
+        if ((i + 1) != argc && *argv[i + 1] != '-')
+          i++;
+    }
+    else
+    {
+      printf("%s: invalid option -- \"%s\"\n", argv[0], argv[i]);
+      usage_display(argv[0]);
     }
     i++;
   }
 }
 
-void    names_parse(char *argv[], char c, int argc, t_opt *opt)
-{
-  if (*optarg == '-')
-  {
-    printf("%s: option requires an argument -- '%c'\n", argv[0], c);
-    usage_display(argv[0]);
-  }
-  optind--;
-  while ((optind < argc) && (*argv[optind] != '-'))
-  {
-    list_add_back(opt->names, argv[optind], strlen(argv[optind]));
-    optind++;
-  }
-}
-
-void    lparse_error_1(char *str)
-{
-  printf("%s: illegal characters -- \'\\n\'\n", str);
-  printf("Server args and options can contain only letters");
-  printf(" and numbers (+ '-', '_' characters).\n");
-  exit(1);
-}
-
-void    lparse_error_2(char *str, char *ptr)
-{
-  printf("%s: illegal characters -- '%s'\n", str, ptr);
-  printf("Server args and options can contain only letters");
-  printf(" and numbers (+ '-', '_' characters).\n");
-  exit(1);
-}
-
-void    letters_parse(int argc, char *argv[])
+void    the_parse(int argc, char *argv[])
 {
   int   i;
   int   t;
@@ -61,13 +40,12 @@ void    letters_parse(int argc, char *argv[])
   while (i != argc)
   {
     curr = argv[i];
+    if (curr[0] == '-' && curr[1] != 0 && isdigit(curr[1]))
+      negative_error(argv[0], argv[i]);
+     if (curr[t] == '-' && curr[t + 1] == 0)
+        syntax_error(argv[0], argv[i]);
     while (curr[t] != 0)
     {
-      if (curr[t] == '-' && curr[t + 1] == 0)
-      {
-        printf("%s: syntax error -- '%s'\n", argv[0], argv[i]);
-        usage_display(argv[0]);
-      }
       if (curr[t] == 10)
         lparse_error_1(argv[0]);
       if (isalnum(curr[t]) == 0 && curr[t] != '-' && curr[t] != '_')

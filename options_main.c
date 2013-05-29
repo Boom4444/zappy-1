@@ -11,7 +11,7 @@ void    usage_display(char *str)
   exit(0);
 }
 
-void    default_error(int argc, char *argv[])
+void    default_error(char *argv[])
 {
   int   i;
   char  *curr;
@@ -30,32 +30,18 @@ void    default_error(int argc, char *argv[])
   }
 }
 
-void    invalid_find(int argc, char *argv[])
+void    names_parse(char *argv[], char c, int argc, t_opt *opt)
 {
-  int   i;
-  char  *curr;
-
-  i = 1;
-  while (i != argc)
+  if (*optarg == '-')
   {
-    if (*argv[i] == '-')
-    {
-      curr = argv[i];
-      if (curr[1] != 0 && curr[1] == 'n')
-      {
-        while ((i + 1) != argc && *argv[i + 1] != '-')
-          i++;
-      }
-      else
-        if ((i + 1) != argc && *argv[i + 1] != '-')
-          i++;
-    }
-    else
-    {
-      printf("%s: invalid option -- \"%s\"\n", argv[0], argv[i]);
-      usage_display(argv[0]);
-    }
-    i++;
+    printf("%s: option requires an argument -- '%c'\n", argv[0], c);
+    usage_display(argv[0]);
+  }
+  optind--;
+  while ((optind < argc) && (*argv[optind] != '-'))
+  {
+    list_add_back(opt->names, argv[optind], strlen(argv[optind]));
+    optind++;
   }
 }
 
@@ -69,7 +55,7 @@ void    options_get(char *argv[], char c, int *opt)
     usage_display(argv[0]);
   }
   *opt = atoi(optarg);
-  if (optarg[0] != 48 && *opt == 0)
+  if (optarg[0] != '0' && *opt == 0)
   {
     curr = argv[optind - 1];
     if (curr[1] != 0)
@@ -86,11 +72,10 @@ void    options_parse(int argc, char *argv[], t_opt *g_opt)
 {
   int   l_opt;
 
-  letters_parse(argc, argv);
-  negative_parse(argc, argv);
+  the_parse(argc, argv);
   invalid_find(argc, argv);
   opterr = 0;
-  while ((l_opt = getopt(argc, argv, "p:x:y:n:c:t:")) != -1)
+  while ((l_opt = getopt(argc, argv, ":p:x:y:n:c:t:")) != -1)
   {
     if (l_opt == 'p')
       options_get(argv, l_opt, &g_opt->port);
@@ -105,6 +90,8 @@ void    options_parse(int argc, char *argv[], t_opt *g_opt)
     if (l_opt == 't')
       options_get(argv, l_opt, &g_opt->tdelay);
     if (l_opt == '?')
-      default_error(argc, argv);
+      default_error(argv);
+    if (l_opt == ':')
+      eagle_error(argc, argv);
   }
 }
