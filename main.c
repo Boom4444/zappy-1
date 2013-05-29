@@ -18,18 +18,18 @@ void    server_settings_init(t_opt *opt)
 
 int     main(int argc, char *argv[])
 {
-  t_opt g_opt;
+  t_opt option;
   
-  server_settings_init(&g_opt);
-  options_parse(argc, argv, &g_opt);
+  server_settings_init(&option);
+  options_parse(argc, argv, &option);
 
   printf("\n-p=%d, -x=%d, -y=%d, -c=%d, -t=%d\n", 
-    g_opt.port, g_opt.width, g_opt.height, g_opt.nclients, g_opt.tdelay);
-  printf("Teams (%d):\n", g_opt.names->len);
-  list_iter(g_opt.names, &dump_string);
+    option.port, option.width, option.height, option.nclients, option.tdelay);
+  printf("Teams (%d):\n", option.names->len);
+  list_iter(option.names, &dump_string);
   printf("\n");
   // dis salad is for test printing ^
 
-  delete_list(g_opt.names);
+  delete_list(option.names);
   return (1);
 }
