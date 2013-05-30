@@ -86,7 +86,7 @@ void    options_parse(int argc, char *argv[], t_opt *g_opt)
     if (l_opt == 'n')
       names_parse(argv, l_opt, argc, g_opt);     
     if (l_opt == 'c')
-      options_get(argv, l_opt, &g_opt->nclients);
+      options_get(argv, l_opt, &g_opt->cmax);
     if (l_opt == 't')
       options_get(argv, l_opt, &g_opt->tdelay);
     if (l_opt == '?')
@@ -94,4 +94,5 @@ void    options_parse(int argc, char *argv[], t_opt *g_opt)
     if (l_opt == ':')
       eagle_error(argv[0]);
   }
+  teams_fill(g_opt);
 }
