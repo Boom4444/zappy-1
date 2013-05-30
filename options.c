@@ -1,6 +1,6 @@
 #include "options.h"
 
-void    usage_display(char *str)
+void  usage_display(char *str)
 {
   printf("Usage: %s [option] argument(s)\n", str);
   printf("Server options :\n");
@@ -8,7 +8,7 @@ void    usage_display(char *str)
   printf("-y height of the world\n-n name_of_team_1 name_of_team_2 ...\n");
   printf("-c number of clients allowed at the game beginning\n");
   printf("-t time delay for executing actions.\n");
-  exit(0);
+  exit(EXIT_SUCCESS);
 }
 
 void    default_error(char *argv[])
@@ -30,18 +30,18 @@ void    default_error(char *argv[])
   }
 }
 
-void    names_parse(char *argv[], char c, int argc, t_opt *opt)
+void  names_parse(char *argv[], char c, int argc, t_opt *opt)
 {
   if (*optarg == '-')
   {
     printf("%s: option requires an argument -- '%c'\n", argv[0], c);
     usage_display(argv[0]);
   }
-  optind--;
+  --optind;
   while ((optind < argc) && (*argv[optind] != '-'))
   {
-    list_add_back(opt->names, argv[optind], strlen(argv[optind]));
-    optind++;
+    item_pb(opt->names, argv[optind], (strlen(argv[optind]) + 1));
+    ++optind;
   }
 }
 

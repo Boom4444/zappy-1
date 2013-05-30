@@ -6,14 +6,14 @@ static void dump_string(void *content, int size) // for test
   printf(" %s\n", (char*)content);
 }
 
-void    server_settings_init(t_opt *opt)
+void  server_settings_init(t_opt *opt)
 {
   opt->port = 3528;
   opt->width = 600;
   opt->height = 600;
   opt->cmax = 2;
   opt->tdelay = 0; // ?
-  opt->names = new_list_by_default();
+  opt->names = list_init();
 }
 
 int     main(int argc, char *argv[])
@@ -30,6 +30,6 @@ int     main(int argc, char *argv[])
   printf("\n");
   // dis salad is for test printing ^
 
-  delete_list(opt.names);
+  list_delete(opt.names);
   return (1);
 }

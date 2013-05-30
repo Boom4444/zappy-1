@@ -14,18 +14,18 @@ void    invalid_find(int argc, char *argv[])
       if (curr[1] != 0 && curr[1] == 'n')
       {
         while ((i + 1) != argc && *argv[i + 1] != '-')
-          i++;
+          ++i;
       }
       else
         if ((i + 1) != argc && *argv[i + 1] != '-')
-          i++;
+          ++i;
     }
     else
     {
       printf("%s: invalid option -- \"%s\"\n", argv[0], argv[i]);
       usage_display(argv[0]);
     }
-    i++;
+    ++i;
   }
 }
 
@@ -53,19 +53,19 @@ void    the_parse(int argc, char *argv[])
       t++;
     }
     t = 0;
-    i++;
+    ++i;
   }
 }
 
-int     get_nbrlen(int nbr)
+int   get_nbrlen(int nbr)
 {
-  int   i;
+  int i;
 
   i = 0;
   while (nbr != 0)
   {
     nbr /= 10;
-    i++;
+    ++i;
   }
   return (i);
 }
@@ -80,15 +80,15 @@ void    teams_fill(t_opt *opt)
   i = opt->names->len;
   while (i < opt->cmax)
   {
-    i++;
+    ++i;
     size = get_nbrlen(i) + 6;
     if ((tmp = realloc(tmp, size)) == NULL)
     {
-      printf("%s error: %s\n", "realloc", strerror(errno));
-      exit(-1);
+      fprintf(stderr, "%s ERROR: %s\n", "realloc", "teams_fill");
+      exit(EXIT_FAILURE);
     }
     sprintf(tmp, "Team_%d", i);
-    list_add_back(opt->names, tmp, size);
+    item_pb(opt->names, tmp, size);
   }
   free(tmp);
 }
