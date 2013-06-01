@@ -48,8 +48,9 @@ void    the_parse(int argc, char *argv[])
     {
       if (curr[t] == 10)
         lparse_error_1(argv[0]);
-      if (isalnum(curr[t]) == 0 && curr[t] != '-' && curr[t] != '_')
-        lparse_error_2(argv[0], argv[i]);
+      if (isalnum(curr[t]) == 0 && curr[t] != '-' 
+          && curr[t] != ' ' && curr[t] != '_')
+        lparse_error_2(argv[0], curr[t]);
       t++;
     }
     t = 0;
@@ -87,8 +88,34 @@ void    teams_fill(t_opt *opt)
       fprintf(stderr, "%s ERROR: %s\n", "realloc", "teams_fill");
       exit(EXIT_FAILURE);
     }
-    sprintf(tmp, "Team_%d", i);
+    sprintf(tmp, "Team %d", i);
     item_pb(opt->names, tmp, size);
   }
   free(tmp);
+}
+
+options_getopt(int argc, char *argv[], t_opt *g_opt)
+{
+  int   l_opt;
+
+  opterr = 0;
+  while ((l_opt = getopt(argc, argv, ":p:x:y:n:c:t:")) != -1)
+  {
+    if (l_opt == 'p')
+      options_get(argv, l_opt, &g_opt->port);
+    if (l_opt == 'x')
+      options_get(argv, l_opt, &g_opt->width);
+    if (l_opt == 'y')
+      options_get(argv, l_opt, &g_opt->height);
+    if (l_opt == 'n')
+      names_parse(argv, l_opt, argc, g_opt);     
+    if (l_opt == 'c')
+      options_get(argv, l_opt, &g_opt->cmax);
+    if (l_opt == 't')
+      options_get(argv, l_opt, &g_opt->tdelay);
+    if (l_opt == '?')
+      default_error(argv);
+    if (l_opt == ':')
+      eagle_error(argv[0]);
+  }
 }

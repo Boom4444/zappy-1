@@ -5,7 +5,7 @@ void  usage_display(char *str)
   printf("Usage: %s [option] argument(s)\n", str);
   printf("Server options :\n");
   printf("-p port\n-x width of the world\n");
-  printf("-y height of the world\n-n name_of_team_1 name_of_team_2 ...\n");
+  printf("-y height of the world\n-n name_of_team_1 \"name of team 2\" ...\n");
   printf("-c number of clients allowed at the game beginning\n");
   printf("-t time delay for executing actions.\n");
   exit(EXIT_SUCCESS);
@@ -68,31 +68,19 @@ void    options_get(char *argv[], char c, int *opt)
   }
 }
 
-void    options_parse(int argc, char *argv[], t_opt *g_opt)
+void  options_parse(int argc, char *argv[], t_opt *g_opt)
 {
-  int   l_opt;
+  int i;
 
+  i = 0;
+  while (i != argc)
+  {
+    if (strcmp("--help", argv[i]) == 0)
+      usage_display(argv[0]);
+    ++i;
+  }
   the_parse(argc, argv);
   invalid_find(argc, argv);
-  opterr = 0;
-  while ((l_opt = getopt(argc, argv, ":p:x:y:n:c:t:")) != -1)
-  {
-    if (l_opt == 'p')
-      options_get(argv, l_opt, &g_opt->port);
-    if (l_opt == 'x')
-      options_get(argv, l_opt, &g_opt->width);
-    if (l_opt == 'y')
-      options_get(argv, l_opt, &g_opt->height);
-    if (l_opt == 'n')
-      names_parse(argv, l_opt, argc, g_opt);     
-    if (l_opt == 'c')
-      options_get(argv, l_opt, &g_opt->cmax);
-    if (l_opt == 't')
-      options_get(argv, l_opt, &g_opt->tdelay);
-    if (l_opt == '?')
-      default_error(argv);
-    if (l_opt == ':')
-      eagle_error(argv[0]);
-  }
+  options_getopt(argc, argv, g_opt);
   teams_fill(g_opt);
 }
