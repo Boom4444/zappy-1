@@ -5,7 +5,7 @@
 ## Login   <alcara_m@epitech.net>
 ##
 ## Started on  Fri Mar 01 09:38:17 2013 Marin Alcaraz
-## Last update Fri May 24 19:45:14 2013 ivan ignatiev
+## Last update Wed May 29 18:21:16 2013 ivan ignatiev
 ##
 
 SNAME	=	server
@@ -17,11 +17,19 @@ SSRC	=	server.c 			\
 
 SOBJ		=	$(SSRC:.c=.o)
 
-CAINAME = 	client_ai
+CAINAME = 	player
 
-CAISRC 	= 	client_ai.c
+CAISRC 	= 	player.c
 
 CAIOBJ 	= 	$(CAISRC:.c=.o)
+
+CNAME 	= 	client
+
+CSRC 	= 	client.c 	\
+			error.c 	\
+			socket.c
+
+COBJ 	= 	$(CSRC:.c=.o)
 
 CFLAGS	=	-Wall -Wextra -Werror
 
@@ -33,11 +41,15 @@ ECHO	=	echo -e
 %.o: %.c
 	$(CC) -c -o $@ $< $(CFLAGS)
 
-all	: $(SNAME) $(CAINAME)
+all	: $(SNAME) $(CAINAME) $(CNAME)
 
 $(SNAME) : $(SOBJ)
 	$(CC) $(SOBJ) $(CFLAGS) -o $(SNAME)
 	@$(ECHO) '\033[0;33m> Server Compiled\033[0m'
+
+$(CNAME) : $(COBJ)
+	$(CC) $(COBJ) $(CFLAGS) -o $(CNAME)
+	@$(ECHO) '\033[0;33m> Client Compiled\033[0m'
 
 $(CAINAME) : $(CAIOBJ)
 	$(CC) $(CAIOBJ) $(CFLAGS) -o $(CAINAME)

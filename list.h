@@ -1,43 +1,58 @@
+/*
+** list.h for Zappy in /home/el
+** 
+** Made by Oleg Kuznietsov
+** Login   <kuznet_o@epitech.net>
+** 
+** Started on  Thu May 30 13:37:36 2013 Oleg Kuznietsov
+** Last update Thu May 30 13:37:44 2013 Oleg Kuznietsov
+*/
+
 #ifndef LIST_H_
 # define LIST_H_
 
+#include <stdlib.h>
+#include <string.h>
+#include <errno.h>
+#include <stdio.h>
+
 typedef struct  s_item
 {
-  void          *content;
+  void          *cont;
   int           size;
   struct s_item *prev;
   struct s_item *next;
-} t_item;
+}               t_item;
 
 typedef struct  s_list
 {
-  int    len;
-  t_item *head;
-  t_item *tail;
-} t_list;
+  int           len;
+  t_item        *head;
+  t_item        *tail;
+}               t_list;
 
-t_item  *new_item_by_param(void *src_content, int content_size);
+/*
+**                   item.c
+*/
+void    item_pf(t_list *list, void *data, int size);
 
-void    delete_item(t_list *list, t_item *item);
+void    item_pb(t_list *list, void *data, int size);
 
-// ------------------------------- item ^ --------------------------------------
+void    item_delete(t_list *list, t_item *item);
 
-t_list  *new_list_by_default();
+t_item  *item_create(void *src_content, int content_size);
 
-void    delete_list(t_list *list);
+t_item  *item_init(t_item *item);
 
-int     list_iter(t_list *list, void (*f)(void *, int));
+/*
+**                   list.c
+*/
+t_list  *list_init();
+
+void    list_delete(t_list *list);
+
+void    list_iter(t_list *list, void (*f)(void *, int));
 
 int     list_mem(t_list *list, void *content, int size);
-
-t_list  *list_map(t_list *list, t_item *(*f)(void *, int));
-
-// ----------------------------- o_list ^ --------------------------------------
-
-int     list_add_front(t_list *list, void *data, int size);
-
-int     list_add_back(t_list *list, void *data, int size);
-
-// ----------------------------- p_list ^ --------------------------------------
 
 #endif /* LIST_H_ */

@@ -5,8 +5,9 @@
 #include <unistd.h> // getopt
 #include <string.h> // strlen
 #include <stdio.h> // printf
-#include <stdlib.h> // exit
-#include <ctype.h> // isdigit
+#include <stdlib.h> // malloc
+#include <ctype.h> // isalnum
+#include <errno.h> // errno
 
 typedef struct  s_options 
 {
@@ -14,7 +15,7 @@ typedef struct  s_options
   int           width; // -x
   int           height; // -y
   t_list        *names; // -n
-  int           nclients; // -c
+  int           cmax; // -c
   int           tdelay; // -t
 }               t_opt;
 

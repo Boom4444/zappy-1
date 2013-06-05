@@ -1,11 +1,11 @@
 /*
-** error.c for zappy in /home/hero/zappy
+** error.c for zappy in /home/ignatiev/Projects/zappy
 ** 
 ** Made by Marin Alcaraz
 ** Login   <alcara_m@epitech.net>
 * 
 ** Started on  Fri Mar 15 16:42:14 2013 Marin Alcaraz
-** Last update Wed May 15 18:09:55 2013 Marin Alcaraz
+** Last update Wed May 29 18:30:31 2013 ivan ignatiev
 **/
 
 #include "error.h"
@@ -27,7 +27,9 @@ void    my_error(char *s)
         my_errorstr(s);
         exit(0);
 }
-
+/*
+ * TODO : Clear management unit
+ *
 void    my_errorandclose(char *s, int *descriptors)
 {
   int   i;
@@ -43,4 +45,11 @@ void    my_errorandclose(char *s, int *descriptors)
     i = i + 1;
   }
   my_error(s);
+}
+*/
+
+int		error_show(const char *str)
+{
+  fprintf(stderr, "zappy: %s (%d:%s)\n", str, errno, strerror(errno));
+  return (EXIT_FAILURE);
 }
