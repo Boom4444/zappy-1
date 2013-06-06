@@ -1,24 +1,19 @@
 /*
-** item.c for server in /home/hero/zappy/server
-** 
-** Made by Oleg Kuznietsov
+** item.c for Zappy in /home/el/Zappy/Main
+**
+** Made by oleg kuznietsov
 ** Login   <kuznet_o@epitech.net>
-** 
-** Started on  Thu May 30 13:36:03 2013 Oleg Kuznietsov
-** Last update Thu Jun 06 00:39:54 2013 Marin Alcaraz
+**
+** Started on  Wed Jun  05 19:21:34 2013 oleg kuznietsov
+** Last update Thu Jun  06 21:45:36 2013 oleg kuznietsov
 */
 
 #include "list.h"
 
-t_item  *item_init()
+t_item  *item_init(t_item *item)
 {
-  t_item  *item;
-
   if ((item = malloc(sizeof(t_item))) == NULL)
-  {
-      fprintf(stderr, "%s ERROR: %s\n", "malloc", "item_init");
-      exit(EXIT_FAILURE);
-  }
+    return (NULL);
   item->cont = NULL;
   item->prev = NULL;
   item->next = NULL;
@@ -30,49 +25,50 @@ t_item    *item_create(void *src_content, int content_size)
 {
   t_item  *item;
 
-  item = item_init();
-  if (src_content != NULL && content_size > 0)
-    {
-      item->size = content_size;
-      item->cont = src_content;
-    }
+  item = item_init(item);
+  if (src_content == NULL || content_size <= 0)
+    return (NULL);
+  if ((item->cont = malloc(content_size)) == NULL)
+    return (NULL);
+  item->cont = memcpy(item->cont, src_content, content_size);
+  item->size = content_size;
   return (item);
 }
 
-void      item_pf(t_list *list, void *data, int size)
+int       item_pf(t_list *list, void *data, int size)
 {
   t_item  *item;
 
   item = item_create(data, size);
-  if (list != NULL && item != NULL)
-    {
-      item->prev = NULL;
-      item->next = list->head;
-      if (list->head != NULL)
-	list->head->prev = item;
-      if (list->tail == NULL)
-	list->tail = item;
-      list->head = item;
-      list->len += 1;
-    }
+  if (list == NULL || item == NULL)
+    return -1;
+  item->prev = NULL;
+  item->next = list->head;
+  if (list->head != NULL)
+    list->head->prev = item;
+  if (list->tail == NULL)
+    list->tail = item;
+  list->head = item;
+  list->len += 1;
+  return 1;
 }
 
-void      item_pb(t_list *list, void *data, int size)
+int       item_pb(t_list *list, void *data, int size)
 {
   t_item  *item;
 
   item = item_create(data, size);
-  if (list != NULL && item != NULL)
-    {
-      item->prev = list->tail;
-      item->next = NULL;
-      if (list->tail != NULL)
-	list->tail->next = item;
-      if (list->head == NULL)
-	list->head = item;
-      list->tail = item;
-      list->len += 1;
-    }
+  if (list == NULL || item == NULL)
+    return -1;
+  item->prev = list->tail;
+  item->next = NULL;
+  if (list->tail != NULL)
+    list->tail->next = item;
+  if (list->head == NULL)
+    list->head = item;
+  list->tail = item;
+  list->len += 1;
+  return 1;
 }
 
 void      item_delete(t_list *list, t_item *item)
@@ -80,22 +76,22 @@ void      item_delete(t_list *list, t_item *item)
   t_item  *current = NULL;
 
   if (list != NULL && item != NULL)
+  {
+    current = list->head;
+    while (current != NULL)
     {
-      current = list->head;
-      while (current != NULL)
-	{
-	  if (current == item)
-	    {
-	      if (current->prev != NULL)
-		current->prev->next = current->next;
-	      if (current->next != NULL)
-		current->next->prev = current->prev;
-	      if (item->cont != NULL)
-		free(item->cont);
-	      free(item);
-	      list->len -= 1;
-	    }
-	  current = current->next;
-	}
+      if (current == item)
+      {
+        if (current->prev != NULL)
+          current->prev->next = current->next;
+        if (current->next != NULL)
+          current->next->prev = current->prev;
+        if (item->cont != NULL)
+          free(item->cont);
+        free(item);
+        list->len -= 1;
+      }
+      current = current->next;
     }
+  }
 }

@@ -1,30 +1,21 @@
 /*
-** options.c for zappy in /home/hero/zappy
-** 
-** Made by Marin Alcaraz
-** Login   <alcara_m@epitech.net>
-** 
-** Started on  Fri Mar 15 16:48:12 2013 Marin Alcaraz
-** Last update Thu Jun 06 11:12:43 2013 Marin Alcaraz
+** options.c for Zappy in /home/el/Zappy/Main
+**
+** Made by oleg kuznietsov
+** Login   <kuznet_o@epitech.net>
+**
+** Started on  Thu Jun  06 21:51:41 2013 oleg kuznietsov
+** Last update Thu Jun  06 21:51:48 2013 oleg kuznietsov
 */
 
 #include "options.h"
 
-void  usage_display(char *str)
-{
-  printf("Usage: %s [option] argument(s)\n", str);
-  printf("Server options :\n");
-  printf("-p port\n-x width of the world\n");
-  printf("-y height of the world\n-n name_of_team_1 \"name of team 2\" ...\n");
-  printf("-c number of clients allowed at the game beginning\n");
-  printf("-t time delay for executing actions.\n");
-  exit(EXIT_SUCCESS);
-}
-
 void    default_error(char *argv[])
 {
+  int   i;
   char  *curr;
 
+  i = 1;
   curr = argv[optind - 1];
   if (optopt == curr[1])
   {
@@ -48,7 +39,11 @@ void  names_parse(char *argv[], char c, int argc, t_opt *opt)
   --optind;
   while ((optind < argc) && (*argv[optind] != '-'))
   {
-    item_pb(opt->names, argv[optind], (strlen(argv[optind]) + 1));
+    if (item_pb(opt->names, argv[optind], (strlen(argv[optind]) + 1)) == -1)
+    {
+      fprintf(stderr, "%s ERROR: %s\n", "item_pb", "names_parse");
+      exit(EXIT_FAILURE);
+    }
     ++optind;
   }
 }
@@ -73,6 +68,32 @@ void    options_get(char *argv[], char c, int *opt)
     }
     printf("%s: invalid argument -- \'%c'\n", argv[0], c);
     usage_display(argv[0]);
+  }
+}
+
+void    options_getopt(int argc, char *argv[], t_opt *g_opt)
+{
+  int   l_opt;
+
+  opterr = 0;
+  while ((l_opt = getopt(argc, argv, ":p:x:y:n:c:t:")) != -1)
+  {
+    if (l_opt == 'p')
+      options_get(argv, l_opt, &g_opt->port);
+    if (l_opt == 'x')
+      options_get(argv, l_opt, &g_opt->width);
+    if (l_opt == 'y')
+      options_get(argv, l_opt, &g_opt->height);
+    if (l_opt == 'n')
+      names_parse(argv, l_opt, argc, g_opt);     
+    if (l_opt == 'c')
+      options_get(argv, l_opt, &g_opt->cmax);
+    if (l_opt == 't')
+      options_get(argv, l_opt, &g_opt->tdelay);
+    if (l_opt == '?')
+      default_error(argv);
+    if (l_opt == ':')
+      eagle_error(argv[0]);
   }
 }
 
