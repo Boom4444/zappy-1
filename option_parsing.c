@@ -1,3 +1,13 @@
+/*
+** option_parsing.c for zappy in /home/hero/zappy
+** 
+** Made by Marin Alcaraz
+** Login   <alcara_m@epitech.net>
+** 
+** Started on  Fri Mar 15 16:48:12 2013 Marin Alcaraz
+** Last update Thu Jun 06 11:14:06 2013 Marin Alcaraz
+*/
+
 #include "options.h"
 
 void    invalid_find(int argc, char *argv[])

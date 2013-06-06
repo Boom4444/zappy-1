@@ -1,3 +1,13 @@
+/*
+** main.c for zappy in /home/hero/zappy
+** 
+** Made by Marin Alcaraz
+** Login   <alcara_m@epitech.net>
+** 
+** Started on  Fri Mar 15 16:48:12 2013 Marin Alcaraz
+** Last update Thu Jun 06 16:26:52 2013 Marin Alcaraz
+*/
+
 #include <stdio.h>
 #include "options.h"
 
@@ -30,6 +40,6 @@ int     main(int argc, char *argv[])
   list_iter(opt.names, &dump_string);
   printf("\n");
 
-  list_delete(opt.names);
+  //list_delete(opt.names);
   return (1);
 }

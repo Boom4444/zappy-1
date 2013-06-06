@@ -1,11 +1,11 @@
 /*
-** error.c for server in /home/hero/zappy/server
+** error.c for zappy in /home/hero/zappy
 ** 
 ** Made by Marin Alcaraz
 ** Login   <alcara_m@epitech.net>
 * 
 ** Started on  Fri Mar 15 16:42:14 2013 Marin Alcaraz
-** Last update Sun May 26 19:30:49 2013 Marin Alcaraz
+** Last update Thu Jun 06 15:51:18 2013 Marin Alcaraz
 **/
 
 #include "server.h"
@@ -22,6 +22,12 @@ void        my_errorstr(char *s)
         write(STDERR_FILENO, &s[i], 1);
         i = i + 1;
     }
+}
+
+int     error_show(const char *str)
+{
+    fprintf(stderr, "Zappy: %s (%d:%s)\n", str, errno, strerror(errno));
+    return (EXIT_FAILURE);
 }
 
 void    my_error(char *s)
