@@ -1,11 +1,11 @@
 /*
-** select.c for server in /home/hero/zappy/server
+** select.c for zappy in /home/ignatiev/Projects/zappy
 ** 
 ** Made by ivan ignatiev
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Sat Apr 27 14:58:48 2013 ivan ignatiev
-** Last update Thu Jun 06 00:41:54 2013 Marin Alcaraz
+** Last update Thu Jun 06 17:30:37 2013 ivan ignatiev
 */
 
 #include    "select.h"
@@ -51,6 +51,8 @@ static int	select_accept_connection(t_list *users, int serverfd)
 static int	select_check_fdset(t_list *users, fd_set *fdset, int sfd)
 {
   t_item    *current;
+  int       len;
+  char      buf[255];
 
   (void) sfd;
   current = users->head;
@@ -58,11 +60,11 @@ static int	select_check_fdset(t_list *users, fd_set *fdset, int sfd)
   {
       if (FD_ISSET((((t_user *)(current->cont))->clientfd), fdset))
        {
-          perror("");
-          log_error("Error: unable to check fdset", -1);
-        }
+           len = read((((t_user *)(current->cont))->clientfd), buf, 255);
+       }
       current = current->next;
   }
+  (void) (len);
   return (0);
 }
 
