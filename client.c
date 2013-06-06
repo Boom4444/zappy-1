@@ -5,7 +5,7 @@
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Fri May 24 19:45:50 2013 ivan ignatiev
-** Last update Wed May 29 21:54:13 2013 ivan ignatiev
+** Last update Thu Jun 06 17:18:49 2013 ivan ignatiev
 */
 
 #include    <stdlib.h>
@@ -19,10 +19,31 @@
 #include    "socket.h"
 #include    "error.h"
 
-int                 client_prompt(int sfd)
+int                 client_process(int sfd, fd_set *fdreadset)
 {
     char            buf[255];
     int             len;
+
+    if (FD_ISSET(1, fdreadset))
+    {
+        len = read(1, buf, 255);
+        buf[len] = '\0';
+        printf("#zappy(client)<--%s", buf);
+        write(sfd, buf, len);
+    }
+
+    if (FD_ISSET(sfd, fdreadset))
+    {
+        len = read(sfd, buf, 255);
+        buf[len] = '\0';
+        printf("zappy(server)-->%s", buf);
+    }
+
+    return (1);
+}
+
+int                 client_prompt(int sfd)
+{
     int             prompt;
     int             rs;
     fd_set          fdreadset;
@@ -30,39 +51,19 @@ int                 client_prompt(int sfd)
 
     prompt = 1;
     delim = '#';
-
-    while (prompt)
+    while (prompt > 0)
     {
         FD_ZERO(&fdreadset);
         FD_SET(1, &fdreadset);
         FD_SET(sfd, &fdreadset);
         write(0, &delim, 1);
-        rs = select(sfd + 1, &fdreadset, NULL, NULL, NULL);
-        if (rs == -1 && errno == EINTR)
-        {
-            printf("\n Close connection ... \n");
-            prompt = 0;
-        }
-        else if (rs >= 0)
-        {
-            if (FD_ISSET(1, &fdreadset))
-            {
-                len = read(1, buf, 255);
-                buf[len] = '\0';
-                printf("#zappy(client)<--%s", buf);
-                write(sfd, buf, len);
-            }
-
-            if (FD_ISSET(sfd, &fdreadset))
-            {
-                len = read(sfd, buf, 255);
-                buf[len] = '\0';
-                printf("zappy(server)-->%s", buf);
-            }
-        }
+        if ((rs = select(sfd + 1, &fdreadset, NULL, NULL, NULL)) == -1)
+            prompt = -1;
+        else
+            prompt = client_process(sfd, &fdreadset);
     }
     close(sfd);
-    return (EXIT_SUCCESS);
+    return (prompt == 0 ? EXIT_SUCCESS : EXIT_FAILURE);
 }
 
 int                 client_options(int argc, char **argv, t_options *options)
@@ -77,7 +78,7 @@ int                 client_options(int argc, char **argv, t_options *options)
             options->port = optarg;
     }
     if (!options->host || !options->port)
-        return (error_show("Too few arguments\n\t-h [host]\n\t-p [port]\n"));
+        return (error_show("Too few arguments\n\t-h [host] %s\n\t-p [port] %s\n"));
     return (EXIT_SUCCESS);
 }
 
