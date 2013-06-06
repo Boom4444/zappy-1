@@ -5,17 +5,15 @@
 ** Login   <kuznet_o@epitech.net>
 **
 ** Started on  Thu Jun  06 21:51:41 2013 oleg kuznietsov
-** Last update Thu Jun  06 21:51:48 2013 oleg kuznietsov
+** Last update Thu Jun  06 21:57:39 2013 oleg kuznietsov
 */
 
 #include "options.h"
 
 void    default_error(char *argv[])
 {
-  int   i;
   char  *curr;
 
-  i = 1;
   curr = argv[optind - 1];
   if (optopt == curr[1])
   {

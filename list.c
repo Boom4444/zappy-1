@@ -5,7 +5,7 @@
 ** Login   <kuznet_o@epitech.net>
 **
 ** Started on  Wed Jun  05 19:21:23 2013 oleg kuznietsov
-** Last update Wed Jun  05 19:21:27 2013 oleg kuznietsov
+** Last update Thu Jun  06 22:23:26 2013 oleg kuznietsov
 */
 
 #include "list.h"
@@ -71,7 +71,7 @@ int       list_mem(t_list *list, void *content, int size)
   current = list->head;
   while (current != NULL)
   {
-    if (current->size == size)
+    if (current->size == (size_t)size)
     {
       while (i < size)
       {

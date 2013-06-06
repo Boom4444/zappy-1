@@ -5,7 +5,7 @@
 ** Login   <kuznet_o@epitech.net>
 **
 ** Started on  Wed Jun  05 18:48:34 2013 oleg kuznietsov
-** Last update Wed Jun  05 19:20:58 2013 oleg kuznietsov
+** Last update Thu Jun  06 22:26:29 2013 oleg kuznietsov
 */
 
 #ifndef LIST_H_
@@ -13,8 +13,6 @@
 
 #include <stdlib.h>
 #include <string.h>
-#include <errno.h>
-#include <stdio.h>
 
 typedef struct  s_item
 {
@@ -42,7 +40,7 @@ void    item_delete(t_list *list, t_item *item);
 
 t_item  *item_create(void *src_content, int content_size);
 
-t_item  *item_init(t_item *item);
+t_item  *item_init();
 
 /*
 **                   list.c
