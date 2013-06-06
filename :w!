@@ -1,0 +1,30 @@
+#ifndef MAIN_H_
+# define MAIN_H_
+
+#include "list.h"
+#include <unistd.h>
+#include <string.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <ctype.h>
+#include <errno.h>
+
+typedef struct  s_options
+{
+  int           port;
+  int           width;
+  int           height;
+  t_list        *names;
+  int           cmax;
+  int           tdelay;
+}               t_opt;
+
+int     get_nbrlen(int nbr);
+void    the_parse(int argc, char *argv[]);
+void    invalid_find(int argc, char *argv[]);
+void    teams_fill(t_opt *opt);
+int     get_nbrlen(int nbr);
+void    options_getopt(int argc, char *argv[], t_opt *g_opt);
+
+
+#endif /* MAIN_H_ */

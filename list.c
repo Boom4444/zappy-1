@@ -1,11 +1,11 @@
 /*
-** list.c for Zappy in /home/el
+** list.c for server in /home/hero/zappy/server
 ** 
 ** Made by Oleg Kuznietsov
 ** Login   <kuznet_o@epitech.net>
 ** 
 ** Started on  Thu May 30 13:34:18 2013 Oleg Kuznietsov
-** Last update Thu May 30 13:35:26 2013 Oleg Kuznietsov
+** Last update Thu Jun 06 00:34:51 2013 Marin Alcaraz
 */
 
 #include "list.h"
@@ -42,7 +42,7 @@ void      list_delete(t_list *list)
 	  current = current->next;
 	  item = current;
 	}
-      free(list);
+
     }
 }
 

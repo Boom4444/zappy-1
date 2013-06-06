@@ -1,22 +1,24 @@
 /*
-** item.c for Zappy in /home/el
+** item.c for server in /home/hero/zappy/server
 ** 
 ** Made by Oleg Kuznietsov
 ** Login   <kuznet_o@epitech.net>
 ** 
 ** Started on  Thu May 30 13:36:03 2013 Oleg Kuznietsov
-** Last update Thu May 30 13:36:15 2013 Oleg Kuznietsov
+** Last update Thu Jun 06 00:39:54 2013 Marin Alcaraz
 */
 
 #include "list.h"
 
-t_item  *item_init(t_item *item)
+t_item  *item_init()
 {
+  t_item  *item;
+
   if ((item = malloc(sizeof(t_item))) == NULL)
-    {
+  {
       fprintf(stderr, "%s ERROR: %s\n", "malloc", "item_init");
       exit(EXIT_FAILURE);
-    }  
+  }
   item->cont = NULL;
   item->prev = NULL;
   item->next = NULL;
@@ -28,16 +30,11 @@ t_item    *item_create(void *src_content, int content_size)
 {
   t_item  *item;
 
-  item = item_init(item);
+  item = item_init();
   if (src_content != NULL && content_size > 0)
     {
-      if ((item->cont = malloc(content_size)) == NULL)
-	{
-	  fprintf(stderr, "%s ERROR: %s\n", "malloc", "item_create");
-	  exit(EXIT_FAILURE);
-	}
-      item->cont = memcpy(item->cont, src_content, content_size);
       item->size = content_size;
+      item->cont = src_content;
     }
   return (item);
 }

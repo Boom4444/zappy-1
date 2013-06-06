@@ -1,11 +1,11 @@
 /*
-** list.h for Zappy in /home/el
+** list.h for server in /home/hero/zappy/server
 ** 
 ** Made by Oleg Kuznietsov
 ** Login   <kuznet_o@epitech.net>
 ** 
 ** Started on  Thu May 30 13:37:36 2013 Oleg Kuznietsov
-** Last update Thu May 30 13:37:44 2013 Oleg Kuznietsov
+** Last update Thu Jun 06 00:14:45 2013 Marin Alcaraz
 */
 
 #ifndef LIST_H_
@@ -31,28 +31,14 @@ typedef struct  s_list
   t_item        *tail;
 }               t_list;
 
-/*
-**                   item.c
-*/
 void    item_pf(t_list *list, void *data, int size);
-
 void    item_pb(t_list *list, void *data, int size);
-
 void    item_delete(t_list *list, t_item *item);
-
 t_item  *item_create(void *src_content, int content_size);
-
-t_item  *item_init(t_item *item);
-
-/*
-**                   list.c
-*/
+t_item  *item_init();
 t_list  *list_init();
-
 void    list_delete(t_list *list);
-
 void    list_iter(t_list *list, void (*f)(void *, int));
-
 int     list_mem(t_list *list, void *content, int size);
 
 #endif /* LIST_H_ */

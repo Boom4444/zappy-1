@@ -48,7 +48,7 @@ void    the_parse(int argc, char *argv[])
     {
       if (curr[t] == 10)
         lparse_error_1(argv[0]);
-      if (isalnum(curr[t]) == 0 && curr[t] != '-' 
+      if (isalnum(curr[t]) == 0 && curr[t] != '-'
           && curr[t] != ' ' && curr[t] != '_')
         lparse_error_2(argv[0], curr[t]);
       t++;
@@ -94,7 +94,7 @@ void    teams_fill(t_opt *opt)
   free(tmp);
 }
 
-options_getopt(int argc, char *argv[], t_opt *g_opt)
+void    options_getopt(int argc, char *argv[], t_opt *g_opt)
 {
   int   l_opt;
 
@@ -108,7 +108,7 @@ options_getopt(int argc, char *argv[], t_opt *g_opt)
     if (l_opt == 'y')
       options_get(argv, l_opt, &g_opt->height);
     if (l_opt == 'n')
-      names_parse(argv, l_opt, argc, g_opt);     
+      names_parse(argv, l_opt, argc, g_opt);
     if (l_opt == 'c')
       options_get(argv, l_opt, &g_opt->cmax);
     if (l_opt == 't')

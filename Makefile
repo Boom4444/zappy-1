@@ -1,18 +1,26 @@
 ##
-## Makefile for zappy in /home/ignatiev/Projects/zappy
+## Makefile for zappy in /home/hero/zappy
 ##
 ## Made by Marin Alcaraz
 ## Login   <alcara_m@epitech.net>
 ##
 ## Started on  Fri Mar 01 09:38:17 2013 Marin Alcaraz
-## Last update Wed May 29 18:21:16 2013 ivan ignatiev
+## Last update Thu Jun 06 10:55:04 2013 Marin Alcaraz
 ##
 
 SNAME	=	server
 
 SSRC	=	server.c 			\
+			select.c 			\
+			option_errors.c 	\
+			options.c 			\
+			option_parsing.c 	\
+			item.c 				\
+			server_functions.c 	\
+			list.c 				\
 			error.c  			\
 			connection_utils.c  \
+			log.c  				\
 			main.c
 
 SOBJ		=	$(SSRC:.c=.o)

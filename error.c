@@ -1,14 +1,16 @@
 /*
-** error.c for zappy in /home/ignatiev/Projects/zappy
+** error.c for server in /home/hero/zappy/server
 ** 
 ** Made by Marin Alcaraz
 ** Login   <alcara_m@epitech.net>
 * 
 ** Started on  Fri Mar 15 16:42:14 2013 Marin Alcaraz
-** Last update Wed May 29 18:30:31 2013 ivan ignatiev
+** Last update Sun May 26 19:30:49 2013 Marin Alcaraz
 **/
 
+#include "server.h"
 #include "error.h"
+
 
 void        my_errorstr(char *s)
 {
@@ -25,11 +27,8 @@ void        my_errorstr(char *s)
 void    my_error(char *s)
 {
         my_errorstr(s);
-        exit(0);
 }
-/*
- * TODO : Clear management unit
- *
+
 void    my_errorandclose(char *s, int *descriptors)
 {
   int   i;
@@ -42,14 +41,8 @@ void    my_errorandclose(char *s, int *descriptors)
       perror("");
       my_error("Error: Unable to close socket, socket corrupted\n");
     }
+    log_error("Closed FD on ", i);
     i = i + 1;
   }
   my_error(s);
-}
-*/
-
-int		error_show(const char *str)
-{
-  fprintf(stderr, "zappy: %s (%d:%s)\n", str, errno, strerror(errno));
-  return (EXIT_FAILURE);
 }

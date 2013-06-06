@@ -13,10 +13,8 @@ void  usage_display(char *str)
 
 void    default_error(char *argv[])
 {
-  int   i;
   char  *curr;
 
-  i = 1;
   curr = argv[optind - 1];
   if (optopt == curr[1])
   {
