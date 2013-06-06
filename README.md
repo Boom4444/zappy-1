@@ -1,4 +1,7 @@
-my_ftp
+Zappy
 ======
 
-my_ftp project for epitech UNIX module 
+Zappy project for epitech UNIX module
+
+
+this is the last project :)
