@@ -5,7 +5,7 @@
 ## Login   <alcara_m@epitech.net>
 ##
 ## Started on  Fri Mar 01 09:38:17 2013 Marin Alcaraz
-## Last update Thu Jun 06 10:55:04 2013 Marin Alcaraz
+## Last update Thu Jun 06 16:19:23 2013 Marin Alcaraz
 ##
 
 SNAME	=	server
@@ -21,9 +21,29 @@ SSRC	=	server.c 			\
 			error.c  			\
 			connection_utils.c  \
 			log.c  				\
-			main.c
+			server_main.c
 
 SOBJ		=	$(SSRC:.c=.o)
+
+PNAME	=   pdemo
+
+PSRC	=	option_errors.c 	\
+			options.c 			\
+			option_parsing.c 	\
+			item.c 				\
+			list.c 				\
+			error.c  			\
+			log.c  				\
+			main.c
+
+POBJ		=	$(PSRC:.c=.o)
+
+WNAME	=   world
+
+WSRC	=	world.c
+
+WOBJ		=	$(WSRC:.c=.o)
+
 
 CAINAME = 	player
 
@@ -35,6 +55,7 @@ CNAME 	= 	client
 
 CSRC 	= 	client.c 	\
 			error.c 	\
+			log.c 		\
 			socket.c
 
 COBJ 	= 	$(CSRC:.c=.o)
@@ -49,7 +70,7 @@ ECHO	=	echo -e
 %.o: %.c
 	$(CC) -c -o $@ $< $(CFLAGS)
 
-all	: $(SNAME) $(CAINAME) $(CNAME)
+all	: $(SNAME) $(CAINAME) $(CNAME) $(PNAME) $(WNAME)
 
 $(SNAME) : $(SOBJ)
 	$(CC) $(SOBJ) $(CFLAGS) -o $(SNAME)
@@ -58,6 +79,15 @@ $(SNAME) : $(SOBJ)
 $(CNAME) : $(COBJ)
 	$(CC) $(COBJ) $(CFLAGS) -o $(CNAME)
 	@$(ECHO) '\033[0;33m> Client Compiled\033[0m'
+
+$(WNAME) : $(WOBJ)
+	$(CC) $(WOBJ) $(CFLAGS) -o $(WNAME) -lSDL -lSDL_image
+	@$(ECHO) '\033[0;33m> Word demo Compiled\033[0m'
+
+
+$(PNAME) : $(POBJ)
+	$(CC) $(POBJ) $(CFLAGS) -o $(PNAME)
+	@$(ECHO) '\033[0;33m> Parser Demo Compiled\033[0m'
 
 $(CAINAME) : $(CAIOBJ)
 	$(CC) $(CAIOBJ) $(CFLAGS) -o $(CAINAME)

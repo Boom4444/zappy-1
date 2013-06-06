@@ -1,3 +1,13 @@
+/*
+** options.c for zappy in /home/hero/zappy
+** 
+** Made by Marin Alcaraz
+** Login   <alcara_m@epitech.net>
+** 
+** Started on  Fri Mar 15 16:48:12 2013 Marin Alcaraz
+** Last update Thu Jun 06 11:12:43 2013 Marin Alcaraz
+*/
+
 #include "options.h"
 
 void  usage_display(char *str)

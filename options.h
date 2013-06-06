@@ -1,3 +1,13 @@
+/*
+** options.h for zappy in /home/hero/zappy
+** 
+** Made by Marin Alcaraz
+** Login   <alcara_m@epitech.net>
+** 
+** Started on  Fri Mar 15 16:48:12 2013 Marin Alcaraz
+** Last update Thu Jun 06 11:12:32 2013 Marin Alcaraz
+*/
+
 #ifndef MAIN_H_
 # define MAIN_H_
 
