@@ -1,11 +1,11 @@
 /*
-** option_parsing.c for Zappy in /home/el/Zappy/Main
+** options_parsing.c for Zappy in /home/el/Zappy/Main
 **
 ** Made by oleg kuznietsov
-** Login   <kuznet_o@epitech.net>
+** Login   <kuznet_o@epitech.eu>
 **
-** Started on  Wed Jun  05 15:14:30 2013 oleg kuznietsov
-** Last update Thu Jun  06 21:23:01 2013 oleg kuznietsov
+** Started on  Fri Jun  07 00:49:53 2013 oleg kuznietsov
+** Last update Fri Jun  07 00:49:53 2013 oleg kuznietsov
 */
 
 #include "options.h"
@@ -33,18 +33,17 @@ void    invalid_find(int argc, char *argv[])
     {
       curr = argv[i];
       if (curr[1] != 0 && curr[1] == 'n')
-      {
         while ((i + 1) != argc && *argv[i + 1] != '-')
           ++i;
-      }
       else
-        if ((i + 1) != argc && *argv[i + 1] != '-')
+        if ((i + 1) != argc && *argv[i + 1] != '-' && curr[2] == 0)
           ++i;
     }
     else
     {
-      printf("%s: invalid option -- \"%s\"\n", argv[0], argv[i]);
-      usage_display(argv[0]);
+      printf("%s: syntax error -- \"%s\"\n", argv[0], argv[i]);
+      printf("Use \"%s --help\" to get more information.\n", argv[0]);
+      exit(EXIT_SUCCESS);
     }
     ++i;
   }
