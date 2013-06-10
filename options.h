@@ -5,11 +5,11 @@
 ** Login   <alcara_m@epitech.net>
 ** 
 ** Started on  Fri Mar 15 16:48:12 2013 Marin Alcaraz
-** Last update Thu Jun 06 11:12:32 2013 Marin Alcaraz
+** Last update Thu Jun 06 16:29:51 2013 Marin Alcaraz
 */
 
-#ifndef MAIN_H_
-# define MAIN_H_
+#ifndef OPTIONS_H_
+# define OPTIONS_H_
 
 #include <unistd.h>
 #include <string.h>
@@ -46,4 +46,4 @@ void    names_parse(char *argv[], char c, int argc, t_opt *opt);
 void    options_get(char *argv[], char c, int *opt);
 void    options_parse(int argc, char *argv[], t_opt *g_opt);
 
-#endif /* MAIN_H_ */
+#endif /* OPTIONS_H_ */
