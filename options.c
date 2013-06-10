@@ -119,7 +119,7 @@ void  options_parse(int argc, char *argv[], t_opt *g_opt)
   teams_fill(g_opt);
 
   /* to be updated */
-  printf("Server launching on values :\n");
+  printf("Server launching with values :\n");
   printf("port=%d, width=%d, height=%d, cmax=%d, tdelay=%d\n",
     g_opt->port, g_opt->width, g_opt->height, g_opt->cmax, g_opt->tdelay);
 }
