@@ -5,7 +5,7 @@
 ** Login   <alcara_m@epitech.net>
 ** 
 ** Started on  Fri Mar 15 16:48:12 2013 Marin Alcaraz
-** Last update Thu Jun 06 15:52:11 2013 Marin Alcaraz
+** Last update Thu Jun  06 22:28:48 2013 oleg kuznietsov
 */
 
 #ifndef ERROR_H_
@@ -13,6 +13,7 @@
 
 #include <stdlib.h>
 #include <unistd.h>
+#include <errno.h>
 #include "server.h"
 #include "log.h"
 #include "connection_utils.h"

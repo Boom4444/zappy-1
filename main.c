@@ -5,7 +5,7 @@
 ** Login   <alcara_m@epitech.net>
 ** 
 ** Started on  Fri Mar 15 16:48:12 2013 Marin Alcaraz
-** Last update Thu Jun 06 16:26:52 2013 Marin Alcaraz
+** Last update Thu Jun  06 21:43:48 2013 oleg kuznietsov
 */
 
 #include <stdio.h>
@@ -36,10 +36,10 @@ int     main(int argc, char *argv[])
 
   printf("\n-p=%d, -x=%d, -y=%d, -c=%d, -t=%d\n",
     opt.port, opt.width, opt.height, opt.cmax, opt.tdelay);
-  printf("Teams (%d):\n", opt.names->len);
+  printf("Teams (%zu):\n", opt.names->len);
   list_iter(opt.names, &dump_string);
   printf("\n");
 
-  //list_delete(opt.names);
+  list_delete(opt.names);
   return (1);
 }

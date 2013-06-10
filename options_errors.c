@@ -1,18 +1,18 @@
 /*
-** option_errors.c for zappy in /home/hero/zappy
-** 
-** Made by Marin Alcaraz
-** Login   <alcara_m@epitech.net>
-** 
-** Started on  Fri Mar 15 16:48:12 2013 Marin Alcaraz
-** Last update Thu Jun 06 11:11:37 2013 Marin Alcaraz
+** options_errors.c for Zappy in /home/el/Zappy/Main
+**
+** Made by oleg kuznietsov
+** Login   <kuznet_o@epitech.net>
+**
+** Started on  Thu Jun  06 22:43:10 2013 oleg kuznietsov
+** Last update Fri Jun  07 00:24:15 2013 oleg kuznietsov
 */
 
 #include "options.h"
 
 void  negative_error(char *str, char *ptr)
 {
-  printf("%s: illegal characters -- \"%s\"\n", str, ptr);
+  printf("%s: syntax error -- \"%s\"\n", str, ptr);
   printf("Argument values can only be positive.\n");
   exit(EXIT_SUCCESS);
 }
@@ -20,7 +20,8 @@ void  negative_error(char *str, char *ptr)
 void  eagle_error(char *str)
 {
   printf("%s: option requires an argument -- '%c'\n", str, optopt);
-  usage_display(str);
+  printf("Use \"%s --help\" to get more information.\n", str);
+  exit(EXIT_SUCCESS);
 }
 
 void  lparse_error_1(char *str)
@@ -30,7 +31,7 @@ void  lparse_error_1(char *str)
   printf("Server argumens can contain only letters");
   printf(" and numbers (+ ' ' '_' characters).\n");
   exit(EXIT_SUCCESS);
-
+  
 }
 
 void  lparse_error_2(char *str, char c)
@@ -45,5 +46,6 @@ void  lparse_error_2(char *str, char c)
 void  syntax_error(char *str, char *ptr)
 {
   printf("%s: syntax error -- '%s'\n", str, ptr);
-  usage_display(str);
+  printf("Use \"%s --help\" to get more information.\n", str);
+  exit(EXIT_SUCCESS);
 }

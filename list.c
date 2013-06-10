@@ -1,11 +1,11 @@
 /*
-** list.c for server in /home/hero/zappy/server
-** 
-** Made by Oleg Kuznietsov
+** list.c for Zappy in /home/el/Zappy/Main
+**
+** Made by oleg kuznietsov
 ** Login   <kuznet_o@epitech.net>
-** 
-** Started on  Thu May 30 13:34:18 2013 Oleg Kuznietsov
-** Last update Thu Jun 06 00:34:51 2013 Marin Alcaraz
+**
+** Started on  Wed Jun  05 19:21:23 2013 oleg kuznietsov
+** Last update Thu Jun  06 22:23:26 2013 oleg kuznietsov
 */
 
 #include "list.h"
@@ -15,10 +15,7 @@ t_list    *list_init()
   t_list  *list;
 
   if ((list = malloc(sizeof(t_list))) == NULL)
-    {
-      fprintf(stderr, "%s ERROR: %s\n", "malloc", "list_init");
-      exit(EXIT_FAILURE);
-    }
+    return (NULL);
   list->len = 0;
   list->head = NULL;
   list->tail = NULL;
@@ -33,33 +30,33 @@ void      list_delete(t_list *list)
   item = list->head;
   current = item;
   if (list != NULL)
+  {
+    while (current != NULL)
     {
-      while (current != NULL)
-	{
-	  if (item->cont != NULL)
-	    free(item->cont);
-	  free(item);
-	  current = current->next;
-	  item = current;
-	}
-
+      if (item->cont != NULL)
+        free(item->cont);
+      free(item);
+      current = current->next;
+      item = current;
     }
+    free(list);
+  }
 }
 
-void      list_iter(t_list *list, void (*f)(void *, int))
+int       list_iter(t_list *list, void (*f)(void *, int))
 {
   t_item  *current;
 
   current = NULL;
-  if (list != NULL && f != NULL)
-    {
-      current = list->head;
-      while (current != NULL)
-	{
-	  f(current->cont, current->size);
-	  current = current->next;
-	}
-    }
+  if (list == NULL || f == NULL)
+    return -1;
+  current = list->head;
+  while (current != NULL)
+  {
+    f(current->cont, current->size);
+    current = current->next;
+  }
+  return 1;
 }
 
 int       list_mem(t_list *list, void *content, int size)
@@ -73,17 +70,17 @@ int       list_mem(t_list *list, void *content, int size)
     return -1;
   current = list->head;
   while (current != NULL)
+  {
+    if (current->size == (size_t)size)
     {
-      if (current->size == size)
-	{
-	  while (i < size)
-	    {
-	      if (((char*)content)[i] != ((char*)current->cont)[i])
-		return -1;
-	      ++i;
-	    }
-	}
-      current = current->next;
+      while (i < size)
+      {
+        if (((char*)content)[i] != ((char*)current->cont)[i])
+          return -1;
+        ++i;
+      }
     }
+    current = current->next;
+  }
   return 1;
 }

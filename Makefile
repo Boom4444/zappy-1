@@ -5,16 +5,16 @@
 ## Login   <alcara_m@epitech.net>
 ##
 ## Started on  Fri Mar 01 09:38:17 2013 Marin Alcaraz
-## Last update Thu Jun 06 16:19:23 2013 Marin Alcaraz
+## Last update Thu Jun  6 22:42:07 2013 Oleg Kuznietsov
 ##
 
 SNAME	=	server
 
 SSRC	=	server.c 			\
 			select.c 			\
-			option_errors.c 	\
+			options_errors.c 	\
 			options.c 			\
-			option_parsing.c 	\
+			options_parsing.c 	\
 			item.c 				\
 			server_functions.c 	\
 			list.c 				\
@@ -27,9 +27,9 @@ SOBJ		=	$(SSRC:.c=.o)
 
 PNAME	=   pdemo
 
-PSRC	=	option_errors.c 	\
+PSRC	=	options_errors.c 	\
 			options.c 			\
-			option_parsing.c 	\
+			options_parsing.c 	\
 			item.c 				\
 			list.c 				\
 			error.c  			\

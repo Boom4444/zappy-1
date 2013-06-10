@@ -5,7 +5,11 @@
 ** Login   <alcara_m@epitech.net>
 ** 
 ** Started on  Fri Mar 15 16:48:12 2013 Marin Alcaraz
+<<<<<<< HEAD
 ** Last update Thu Jun 06 16:29:51 2013 Marin Alcaraz
+=======
+** Last update Thu Jun  06 22:33:54 2013 oleg kuznietsov
+>>>>>>> e00a39bdaa550e9b1501a56cc48cc8b31ad63e29
 */
 
 #ifndef OPTIONS_H_
@@ -16,7 +20,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <ctype.h>
-#include <errno.h>
 #include "list.h"
 
 typedef struct  s_options
