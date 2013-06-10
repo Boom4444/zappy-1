@@ -1,11 +1,11 @@
 /*
-** select.c for zappy in /home/ignatiev/Projects/zappy
+** select.c for zappy in /home/hero/zappy
 ** 
 ** Made by ivan ignatiev
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Sat Apr 27 14:58:48 2013 ivan ignatiev
-** Last update Thu Jun 06 17:30:37 2013 ivan ignatiev
+** Last update Mon Jun 10 11:57:31 2013 Marin Alcaraz
 */
 
 #include    "select.h"
@@ -44,6 +44,7 @@ static int	select_accept_connection(t_list *users, int serverfd)
   user->connected = PRE_CONNECTED;
   item_pf(users, user, sizeof(t_user));
   printf("[%s] Connected\n", inet_ntoa(user->addr.sin_addr));
+  server_handshake(user->clientfd);
   log_access(inet_ntoa(user->addr.sin_addr));
   return (0);
 }
@@ -59,9 +60,7 @@ static int	select_check_fdset(t_list *users, fd_set *fdset, int sfd)
   while (current != NULL)
   {
       if (FD_ISSET((((t_user *)(current->cont))->clientfd), fdset))
-       {
            len = read((((t_user *)(current->cont))->clientfd), buf, 255);
-       }
       current = current->next;
   }
   (void) (len);

@@ -1,18 +1,17 @@
 /*
-** server.c for server in /home/hero/zappy/server
+** server.c for zappy in /home/hero/zappy
 ** 
 ** Made by Marin Alcaraz
 ** Login   <alcara_m@epitech.net>
 ** 
 ** Started on  Tue May 21 09:42:30 2013 Marin Alcaraz
-** Last update Thu Jun 06 00:32:19 2013 Marin Alcaraz
+** Last update Mon Jun 10 11:57:39 2013 Marin Alcaraz
 */
 
 #include    "server.h"
 
-int         server_handshake(int *fds, char const *ip)
+int         server_handshake(int fd)
 {
-    (void) ip;
     int     rb;
     char    *coordinates;
     char    *team;
@@ -20,11 +19,11 @@ int         server_handshake(int *fds, char const *ip)
 
     coordinates = server_getXY();
     team =  server_getTNumber();
-    rb = read(fds[CLI_FD], buf, 1024);
-    server_welcome_msg(fds[CLI_FD]);
+    rb = read(fd, buf, 1024);
+    server_welcome_msg(fd);
     write(STDIN_FILENO, buf, rb);
-    write(fds[CLI_FD], team, strlen(team));
-    write(fds[CLI_FD], coordinates, strlen(team));
+    write(fd, team, strlen(team));
+    write(fd, coordinates, strlen(team));
     return (1);
 }
 
@@ -57,6 +56,4 @@ int                         server_start(t_opt *opt)
     listen(fds[SERV_FD], QUEUE_LIMIT);
     while(SERVER_RUN)
         select_do(clients, fds[SERV_FD]);
-
-
 }
