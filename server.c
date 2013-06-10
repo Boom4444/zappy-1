@@ -5,25 +5,25 @@
 ** Login   <alcara_m@epitech.net>
 ** 
 ** Started on  Tue May 21 09:42:30 2013 Marin Alcaraz
-** Last update Mon Jun 10 11:57:39 2013 Marin Alcaraz
+** Last update Mon Jun 10 12:45:08 2013 Marin Alcaraz
 */
 
 #include    "server.h"
 
 int         server_handshake(int fd)
 {
-    int     rb;
-    char    *coordinates;
-    char    *team;
-    char    buf[1024];
+    /*int     rb;*/
+    /*char    *coordinates;*/
+    /*char    *team;*/
+    /*char    buf[1024];*/
 
-    coordinates = server_getXY();
-    team =  server_getTNumber();
-    rb = read(fd, buf, 1024);
+    /*coordinates = server_getXY();*/
+    /*team =  server_getTNumber();*/
     server_welcome_msg(fd);
-    write(STDIN_FILENO, buf, rb);
-    write(fd, team, strlen(team));
-    write(fd, coordinates, strlen(team));
+    /*rb = read(fd, buf, 1024);*/
+    /*write(STDIN_FILENO, buf, rb);*/
+    /*write(fd, team, strlen(team));*/
+    /*write(fd, coordinates, strlen(team));*/
     return (1);
 }
 

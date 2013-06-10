@@ -1,11 +1,11 @@
 /*
-** server_functions.c for server in /home/hero/zappy/server
+** server_functions.c for zappy in /home/hero/zappy
 ** 
 ** Made by Marin Alcaraz
 ** Login   <alcara_m@epitech.net>
 ** 
 ** Started on  Mon May 27 13:47:20 2013 Marin Alcaraz
-** Last update Wed Jun 05 12:48:47 2013 Marin Alcaraz
+** Last update Mon Jun 10 12:44:22 2013 Marin Alcaraz
 */
 
 #include "server_functions.h"
@@ -17,7 +17,7 @@ char     *server_getTNumber()
 
 char     *server_getXY()
 {
-    return ("8. 8");
+    return ("8, 8");
 }
 
 int     server_welcome_msg(int fd)
