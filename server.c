@@ -42,7 +42,7 @@ void        server_handleclient(struct sockaddr_in *s_client, int *fds)
     /*}*/
 }
 
-int                         server_start(int port)
+int                         server_start(t_opt *opt)
 {
     int                     fds[3];
     t_list                  *clients;
@@ -51,7 +51,7 @@ int                         server_start(int port)
     fds[LIMIT] = LIMIT;
     clients = list_init();
     fds[SERV_FD] = create_socket();
-    init_sockadd(&s_in, port);
+    init_sockadd(&s_in, opt->port);
     if (bind(fds[SERV_FD], (const struct sockaddr *)&s_in, sizeof(s_in)) == -1)
         my_error("Error: unable to bind\n");
     listen(fds[SERV_FD], QUEUE_LIMIT);

@@ -13,6 +13,7 @@
 
 #include    <string.h>
 #include    <stdio.h>
+#include    "options.h"
 #include    "connection_utils.h"
 #include    "server_functions.h"
 #include    "select.h"
@@ -42,6 +43,6 @@ typedef struct      s_word
 
 int         server_handshake(int *, char const *ip);
 void        server_handleclient(struct sockaddr_in *s_client, int *);
-int         server_start(int port);
+int         server_start(t_opt *opt);
 
 #endif /* !SERVER_H_ */

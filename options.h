@@ -22,7 +22,7 @@
 #include <ctype.h>
 #include "list.h"
 
-typedef struct  s_options
+typedef struct  s_opt
 {
   int           port;
   int           width;

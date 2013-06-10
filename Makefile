@@ -21,7 +21,7 @@ SSRC	=	server.c 			\
 			error.c  			\
 			connection_utils.c  \
 			log.c  				\
-			server_main.c
+			main.c
 
 SOBJ		=	$(SSRC:.c=.o)
 
@@ -34,7 +34,7 @@ PSRC	=	options_errors.c 	\
 			list.c 				\
 			error.c  			\
 			log.c  				\
-			main.c
+			pdemo_main.c
 
 POBJ		=	$(PSRC:.c=.o)
 

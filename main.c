@@ -10,12 +10,7 @@
 
 #include <stdio.h>
 #include "options.h"
-
-static void dump_string(void *content, int size)
-{
-  (void) size;
-  printf(" %s\n", (char*)content);
-}
+#include "server.h"
 
 void  server_settings_init(t_opt *opt)
 {
@@ -33,13 +28,7 @@ int     main(int argc, char *argv[])
 
   server_settings_init(&opt);
   options_parse(argc, argv, &opt);
-
-  printf("\n-p=%d, -x=%d, -y=%d, -c=%d, -t=%d\n",
-    opt.port, opt.width, opt.height, opt.cmax, opt.tdelay);
-  printf("Teams (%zu):\n", opt.names->len);
-  list_iter(opt.names, &dump_string);
-  printf("\n");
-
+  server_start(&opt);
   list_delete(opt.names);
   return (1);
 }
