@@ -96,11 +96,17 @@ $(CAINAME) : $(CAIOBJ)
 clean	:
 	$(RM) $(SOBJ)
 	$(RM) $(CAIOBJ)
+	$(RM) $(COBJ)
+	$(RM) $(POBJ)
+	$(RM) $(WOBJ)
 	@$(ECHO) '\033[0;33m> Directory cleaned\033[0m'
 
 fclean	: clean
 	$(RM) $(SNAME)
 	$(RM) $(CAINAME)
+	$(RM) $(CNAME)
+	$(RM) $(PNAME)
+	$(RM) $(WNAME)
 	@$(ECHO) '\033[0;33m> Remove executables\033[0m'
 
 re	: fclean all
