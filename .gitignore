@@ -15,6 +15,11 @@
 *.exe
 *.out
 *.app
+client
+pdemo
+player
+server
+world
 
 #BK files
 #

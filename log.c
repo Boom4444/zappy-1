@@ -1,11 +1,11 @@
 /*
-** log.c for server in /home/hero/zappy/server
+** log.c for zappy in /home/hero/zappy
 ** 
 ** Made by Marin Alcaraz
 ** Login   <alcara_m@epitech.net>
 ** 
 ** Started on  Sun May 26 19:31:09 2013 Marin Alcaraz
-** Last update Wed May 29 19:31:46 2013 Marin Alcaraz
+** Last update Wed Jun 12 14:34:49 2013 Marin Alcaraz
 */
 
 #include "log.h"
@@ -25,7 +25,7 @@ int         log_error(const char *msg, int info)
    {
        error_msg = strdup("can't open error_log.txt\n");
        write(STDIN_FILENO, error_msg, strlen(error_msg));
-       return (-1);
+       return (EXIT_FAILURE);
    }
    time(&log_time);
    slog_time = ctime(&log_time);
@@ -33,7 +33,7 @@ int         log_error(const char *msg, int info)
    sprintf(log_msg, "%s %s %d]\n",  slog_time, msg, info);
    write(log_fd, log_msg, strlen(log_msg));
    close(log_fd);
-   return(1);
+   return(-1);
 }
 
 int         log_access(const char *ip)

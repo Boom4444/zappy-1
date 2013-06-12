@@ -1,11 +1,11 @@
 /*
-** client.c for zappy in /home/ignatiev/Projects/zappy
+** client.c for zappy in /home/hero/zappy
 ** 
 ** Made by ivan ignatiev
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Fri May 24 19:45:50 2013 ivan ignatiev
-** Last update Thu Jun 06 17:18:49 2013 ivan ignatiev
+** Last update Wed Jun 12 14:34:54 2013 Marin Alcaraz
 */
 
 #include    <stdlib.h>

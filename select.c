@@ -5,7 +5,7 @@
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Sat Apr 27 14:58:48 2013 ivan ignatiev
-** Last update Mon Jun 10 11:57:31 2013 Marin Alcaraz
+** Last update Wed Jun 12 14:48:55 2013 Marin Alcaraz
 */
 
 #include    "select.h"
@@ -79,7 +79,7 @@ int			        select_do(t_list *users, int serverfd)
   tv.tv_usec = 10000;
   maxfd = select_create_fdset(users, &fdset, serverfd);
   if (select(maxfd + 1, &fdset, NULL, NULL, &tv) < 0)
-      log_error("Error: can't perform select", -1);
+      return (log_error("Error: can't perform select", -1));
   if (FD_ISSET(serverfd, &fdset))
     return (select_accept_connection(users, serverfd));
   return (select_check_fdset(users, &fdset, serverfd));

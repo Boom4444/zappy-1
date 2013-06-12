@@ -5,10 +5,14 @@
 ** Login   <alcara_m@epitech.net>
 ** 
 ** Started on  Fri Mar 15 16:48:12 2013 Marin Alcaraz
-** Last update Thu Jun  06 21:43:48 2013 oleg kuznietsov
+** Last update Wed Jun 12 14:48:50 2013 Marin Alcaraz
 */
 
 #include <stdio.h>
+#include <sys/time.h>
+#include <sys/types.h>
+#include <signal.h>
+#include <unistd.h>
 #include "options.h"
 #include "server.h"
 
@@ -22,13 +26,20 @@ void  server_settings_init(t_opt *opt)
   opt->names = list_init();
 }
 
+void                sigint_handler(int sig)
+{
+    (void) sig;
+}
+
 int     main(int argc, char *argv[])
 {
   t_opt opt;
 
+  signal(SIGINT, sigint_handler);
   server_settings_init(&opt);
   options_parse(argc, argv, &opt);
   server_start(&opt);
+  /** TODO FREE RESOURCES **/
   list_delete(opt.names);
   return (1);
 }
