@@ -5,7 +5,7 @@
 ** Login   <alcara_m@epitech.net>
 ** 
 ** Started on  Fri Mar 15 16:48:12 2013 Marin Alcaraz
-** Last update Wed Jun 12 14:48:50 2013 Marin Alcaraz
+** Last update Wed Jun 12 15:06:16 2013 Marin Alcaraz
 */
 
 #include <stdio.h>
@@ -31,15 +31,16 @@ void                sigint_handler(int sig)
     (void) sig;
 }
 
-int     main(int argc, char *argv[])
+int         main(int argc, char *argv[])
 {
-  t_opt opt;
+  t_server  s;
+  t_world   w;
 
   signal(SIGINT, sigint_handler);
-  server_settings_init(&opt);
-  options_parse(argc, argv, &opt);
-  server_start(&opt);
+  server_settings_init(&(s.options));
+  options_parse(argc, argv, &(s.options));
+  server_start(&s, &w);
   /** TODO FREE RESOURCES **/
-  list_delete(opt.names);
+  //list_delete(opt.names); DEPRECATED
   return (1);
 }

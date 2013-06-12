@@ -5,7 +5,7 @@
 ** Login   <alcara_m@epitech.net>
 ** 
 ** Started on  Sun May 26 18:53:05 2013 Marin Alcaraz
-** Last update Mon Jun 10 12:11:44 2013 Marin Alcaraz
+** Last update Wed Jun 12 15:27:40 2013 Marin Alcaraz
 */
 
 #ifndef SERVER_H_
@@ -16,7 +16,6 @@
 #include    "options.h"
 #include    "connection_utils.h"
 #include    "server_functions.h"
-#include    "select.h"
 #include    "error.h"
 #include    "list.h"
 #include    "log.h"
@@ -33,16 +32,18 @@ typedef  struct     s_server
   t_list            *request_list;
   t_list            *answer_list;
   t_list            *team_list;
+  t_opt             options;
+  int               server_fd;
 }                   t_server;
 
-typedef struct      s_word
+typedef struct      s_world
 {
   t_list            *trantor;
 
-}                   t_word;
+}                   t_world;
 
 int         server_handshake(int);
 void        server_handleclient(struct sockaddr_in *s_client, int *);
-int         server_start(t_opt *opt);
+int         server_start(t_server *s, t_world *w);
 
 #endif /* !SERVER_H_ */
