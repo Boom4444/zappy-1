@@ -5,7 +5,7 @@
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Fri May 24 19:45:50 2013 ivan ignatiev
-** Last update Thu Jun 06 17:18:49 2013 ivan ignatiev
+** Last update Wed Jun 12 15:55:54 2013 ivan ignatiev
 */
 
 #include    <stdlib.h>
@@ -26,15 +26,18 @@ int                 client_process(int sfd, fd_set *fdreadset)
 
     if (FD_ISSET(1, fdreadset))
     {
-        len = read(1, buf, 255);
+        if ((len = read(1, buf, 255)) <= 0)
+            return (-1);
         buf[len] = '\0';
         printf("#zappy(client)<--%s", buf);
-        write(sfd, buf, len);
+        if (write(sfd, buf, len) < 0)
+            return (-1);
     }
 
     if (FD_ISSET(sfd, fdreadset))
     {
-        len = read(sfd, buf, 255);
+        if ((len = read(sfd, buf, 255)) <= 0)
+            return (-1);
         buf[len] = '\0';
         printf("zappy(server)-->%s", buf);
     }
@@ -57,7 +60,7 @@ int                 client_prompt(int sfd)
         FD_SET(1, &fdreadset);
         FD_SET(sfd, &fdreadset);
         write(0, &delim, 1);
-        if ((rs = select(sfd + 1, &fdreadset, NULL, NULL, NULL)) == -1)
+        if ((rs = select(sfd + 1, &fdreadset, NULL, NULL, NULL)) < 0)
             prompt = -1;
         else
             prompt = client_process(sfd, &fdreadset);
