@@ -5,11 +5,10 @@
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Sat Apr 27 14:58:48 2013 ivan ignatiev
-** Last update Wed Jun 12 15:36:15 2013 Marin Alcaraz
+** Last update Wed Jun 12 17:04:09 2013 Marin Alcaraz
 */
 
 #include    "select.h"
-
 
 static int	select_create_fdset(t_server *s, fd_set *fdset, int maxfd)
 {
@@ -19,9 +18,9 @@ static int	select_create_fdset(t_server *s, fd_set *fdset, int maxfd)
   current = (s->client_list)->head;
   while (current != NULL)
   {
-      if (maxfd < ((t_user *)(current->cont))->clientfd)
-          maxfd = ((t_user *)(current->cont))->clientfd;
-      outfd = ((t_user *)(current->cont))->clientfd;
+      if (maxfd < T_USER(current->cont)->clientfd)
+          maxfd = T_USER(current->cont)->clientfd;
+      outfd = T_USER(current->cont)->clientfd;
       FD_SET(outfd, fdset);
       current = current->next;
   }
@@ -53,13 +52,17 @@ static int	select_check_fdset(t_server *s, t_world *w, fd_set *fdset)
 {
   t_item    *current;
   int       len;
-  char      buf[255];
 
   current = (s->client_list)->head;
   while (current != NULL)
   {
-      if (FD_ISSET((((t_user *)(current->cont))->clientfd), fdset))
-           len = read((((t_user *)(current->cont))->clientfd), buf, 255);
+      if (FD_ISSET((T_USER((current->cont))->clientfd), fdset))
+      {
+          if(T_USER(current->cont)->connected == PRE_CONNECTED)
+              proto_define(T_USER(current->cont), w);
+          else if(T_USER(current->cont)->connected == CONNECTED)
+              proto_parse(T_USER(current->cont), s, w);
+      }
       current = current->next;
   }
   (void) (len); /** READ FULL MESSAGE ?? **/
