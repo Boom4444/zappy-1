@@ -1,11 +1,11 @@
 /*
-** select.c for zappy in /home/hero/zappy
+** select.c for zappy in /home/ignatiev/Projects/zappy
 ** 
 ** Made by ivan ignatiev
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Sat Apr 27 14:58:48 2013 ivan ignatiev
-** Last update Wed Jun 12 17:04:09 2013 Marin Alcaraz
+** Last update Thu Jun 13 18:52:45 2013 ivan ignatiev
 */
 
 #include    "select.h"
@@ -27,19 +27,29 @@ static int	select_create_fdset(t_server *s, fd_set *fdset, int maxfd)
   return (maxfd);
 }
 
+t_user      *user_init()
+{
+    t_user  *user;
+
+    if ((user = (t_user*)malloc(sizeof(t_user))) != NULL)
+    {
+        strcpy(user->team, "My super team");
+        user->connected = PRE_CONNECTED;
+        user->request = NULL;
+        user->addrlen = sizeof(struct sockaddr_in);
+    }
+    return (user);
+}
+
 static int	select_accept_connection(t_server *s, t_world *w)
 {
   t_user	*user;
 
-  user = malloc(sizeof(t_user));
-  if (user == NULL)
+  if ((user = user_init()) == NULL)
       return (log_error("Error: unable to allocate memory to new client", -1));
-  user->addrlen = sizeof(struct sockaddr_in);
   if ((user->clientfd =
               accept(s->server_fd, (struct sockaddr*)&user->addr,&user->addrlen)) < 0)
       log_error("Error: unable to accept new connection", -1);
-  strcpy(user->team, "My super team");
-  user->connected = PRE_CONNECTED;
   item_pf(s->client_list, user, sizeof(t_user));
   printf("[%s] Connected\n", inet_ntoa(user->addr.sin_addr));
   server_handshake(user->clientfd);
