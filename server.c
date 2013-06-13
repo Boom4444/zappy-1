@@ -1,11 +1,11 @@
 /*
-** server.c for zappy in /home/hero/zappy
+** server.c for zappy in /home/ignatiev/Projects/zappy
 ** 
 ** Made by Marin Alcaraz
 ** Login   <alcara_m@epitech.net>
 ** 
 ** Started on  Tue May 21 09:42:30 2013 Marin Alcaraz
-** Last update Wed Jun 12 15:45:20 2013 Marin Alcaraz
+** Last update Thu Jun 13 19:40:16 2013 ivan ignatiev
 */
 
 #include    "server.h"
@@ -29,5 +29,6 @@ int                         server_start(t_server *s, t_world *w)
         my_error("Error: unable to bind\n");
     listen(s->server_fd, QUEUE_LIMIT);
     while(select_do(s, w) == 0);
+    close(s->server_fd);
     return (0);
 }

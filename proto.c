@@ -1,27 +1,43 @@
 /*
-** proto.c for zappy in /home/hero/zappy
+** proto.c for zappy in /home/ignatiev/Projects/zappy
 ** 
 ** Made by Marin Alcaraz
 ** Login   <alcara_m@epitech.net>
 ** 
 ** Started on  Wed Jun 12 16:34:40 2013 Marin Alcaraz
-** Last update Wed Jun 12 17:20:42 2013 Marin Alcaraz
+** Last update Thu Jun 13 19:36:15 2013 ivan ignatiev
 */
 
 #include    "proto.h"
 
-void        cli_parse(t_user *u, t_server *s, t_world *w)
+void            cli_parse(t_user *u, t_server *s, t_world *w)
 {
     (void) (s);
     (void) (w);
-    int     rb;
-    char    buf[256];
+    t_request   *request;
+    int         rb;
+    char        buf[PROTO_BUFFER];
 
-    if ((rb = read(u->clientfd, buf, 256)) > 0)
+    if ((rb = read(u->clientfd, buf, PROTO_BUFFER)) > 0)
     {
         buf[rb] = '\0';
-        printf("the CLI parser should run here\n");
-    }
+        if (u->request == NULL && (u->request = (char*)malloc(sizeof(char) * strlen(buf))) != NULL)
+            strcpy(u->request, buf);
+        else if ((u->request = (char*)realloc(u->request, sizeof(char) * (strlen(buf) + strlen(u->request) + 1))) != NULL)
+            strcat(u->request, buf);
+        if (u->request != NULL && strchr(u->request, '\n') != NULL)
+        {
+            if ((request = cli_parse_request(u->request)) != NULL)
+            {
+                printf("request accepted \n");
+
+                if (request->type->func != NULL)
+                    request->type->func(request->data, s, w);
+                /*item_pf(request);*/
+            }
+            u->request = NULL;
+        }
+   }
 }
 
 void        graph_parse(t_user *u, t_server *s, t_world *w)

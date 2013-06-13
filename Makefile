@@ -1,30 +1,31 @@
 ##
-## Makefile for zappy in /home/hero/zappy
+## Makefile for zappy in /home/ignatiev/Projects/zappy
 ##
 ## Made by Marin Alcaraz
 ## Login   <alcara_m@epitech.net>
 ##
 ## Started on  Fri Mar 01 09:38:17 2013 Marin Alcaraz
-## Last update Wed Jun 12 17:03:28 2013 Marin Alcaraz
+## Last update Thu Jun 13 19:13:38 2013 ivan ignatiev
 ##
 
 SNAME	=	server
 
-SSRC	=	server.c 			\
-			select.c 			\
-			options_errors.c 	\
-			options.c 			\
-			proto.c 			\
-			options_parsing.c 	\
-			item.c 				\
-			server_functions.c 	\
-			list.c 				\
-			error.c  			\
-			connection_utils.c  \
-			log.c  				\
+SSRC	=	server.c 				\
+			select.c 				\
+			options_errors.c 		\
+			options.c 				\
+			proto.c 				\
+			options_parsing.c 		\
+			item.c 					\
+			server_functions.c 		\
+			cli_command_parse.c 	\
+			list.c 					\
+			error.c  				\
+			connection_utils.c  	\
+			log.c  					\
 			main.c
 
-SOBJ		=	$(SSRC:.c=.o)
+SOBJ	=	$(SSRC:.c=.o)
 
 PNAME	=   pdemo
 
@@ -37,13 +38,13 @@ PSRC	=	options_errors.c 	\
 			log.c  				\
 			pdemo_main.c
 
-POBJ		=	$(PSRC:.c=.o)
+POBJ	=	$(PSRC:.c=.o)
 
 WNAME	=   world
 
 WSRC	=	world.c
 
-WOBJ		=	$(WSRC:.c=.o)
+WOBJ	=	$(WSRC:.c=.o)
 
 
 CAINAME = 	player
