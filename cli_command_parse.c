@@ -5,26 +5,30 @@
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Thu Jun 13 17:27:55 2013 ivan ignatiev
-** Last update Thu Jun 13 19:41:11 2013 ivan ignatiev
+** Last update Thu Jun 13 19:51:38 2013 ivan ignatiev
 */
 
 #include        "proto.h"
 #include        "cli_command_parse.h"
 
+#include        "proto_commands_net.h"
+#include        "proto_commands_movement.h"
+#include        "proto_commands_items.h"
+
 t_request_type  cli_commands[] =
 {
-    {"avance", 7, 0, cli_parse_avance, NULL },
-    {"droite", 7, 0, cli_parse_droite, NULL },
-    {"gauche", 7, 0, cli_parse_gauche, NULL  },
-    {"voir", 7, 0, cli_parse_voir, NULL },
-    {"inventaire", 7, 0, cli_parse_inventaire, NULL },
-    {"prend", 7, 1, cli_parse_prend, NULL },
-    {"pose", 7, 1, cli_parse_pose, NULL },
-    {"expluse", 7, 0, cli_parse_expulse, NULL },
-    {"broadcast", 7, 1, cli_parse_broadcast, NULL },
-    {"incantation", 300, 0, cli_parse_incantation, NULL },
-    {"fork", 42, 0, cli_parse_fork, NULL },
-    {"connect_nbr", 0, 0, cli_parse_connect_nbr, NULL },
+    {"avance", 7, 0, cli_parse_avance, cli_avance },
+    {"droite", 7, 0, cli_parse_droite, cli_droite },
+    {"gauche", 7, 0, cli_parse_gauche, cli_gauche  },
+    {"voir", 7, 0, cli_parse_voir, cli_voir },
+    {"inventaire", 7, 0, cli_parse_inventaire, cli_inventaire },
+    {"prend", 7, 1, cli_parse_prend, cli_prend },
+    {"pose", 7, 1, cli_parse_pose, cli_pose },
+    {"expluse", 7, 0, cli_parse_expulse, cli_expulse },
+    {"broadcast", 7, 1, cli_parse_broadcast, cli_broadcast  },
+    {"incantation", 300, 0, cli_parse_incantation, cli_incantation },
+    {"fork", 42, 0, cli_parse_fork, cli_fork_player },
+    {"connect_nbr", 0, 0, cli_parse_connect_nbr, cli_connect_nbr },
     {NULL, 0, 0, NULL, NULL }
 };
 
