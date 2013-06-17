@@ -1,15 +1,36 @@
 ##
-## Makefile for zappy in /home/hero/zappy
+## Makefile for zappy in /home/ignatiev/Projects/zappy
 ##
 ## Made by Marin Alcaraz
 ## Login   <alcara_m@epitech.net>
 ##
 ## Started on  Fri Mar 01 09:38:17 2013 Marin Alcaraz
-## Last update Thu Jun 13 18:54:55 2013 Marin Alcaraz
+<<<<<<< HEAD
+## Last update Thu Jun 13 18:52:56 2013 Marin Alcaraz
+=======
+## Last update Thu Jun 13 19:13:38 2013 ivan ignatiev
+>>>>>>> e058341ae368e18cd6bdb6a1f8fc4f2e59b062d5
 ##
 
 SNAME	=	server
 
+<<<<<<< HEAD
+SSRC	=	server.c 			\
+			select.c 			\
+			options_errors.c 	\
+			options.c 			\
+			proto.c 						\
+			proto_commands_items.c 			\
+			proto_commands_net.c 			\
+			proto_commands_movement.c 			\
+			options_parsing.c 	\
+			item.c 				\
+			server_functions.c 	\
+			list.c 				\
+			error.c  			\
+			connection_utils.c  \
+			log.c  				\
+=======
 SSRC	=	server.c 				\
 			select.c 				\
 			options_errors.c 		\
@@ -22,9 +43,8 @@ SSRC	=	server.c 				\
 			list.c 					\
 			error.c  				\
 			connection_utils.c  	\
-			proto_commands_items.c 			\
-			proto_commands_net.c 			\
-			proto_commands_movement.c 			\
+			log.c  					\
+>>>>>>> e058341ae368e18cd6bdb6a1f8fc4f2e59b062d5
 			main.c
 
 SOBJ	=	$(SSRC:.c=.o)
@@ -37,6 +57,7 @@ PSRC	=	options_errors.c 	\
 			item.c 				\
 			list.c 				\
 			error.c  			\
+			log.c  				\
 			pdemo_main.c
 
 POBJ	=	$(PSRC:.c=.o)
@@ -58,6 +79,7 @@ CNAME 	= 	client
 
 CSRC 	= 	client.c 	\
 			error.c 	\
+			log.c 		\
 			socket.c
 
 COBJ 	= 	$(CSRC:.c=.o)
