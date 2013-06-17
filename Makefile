@@ -5,7 +5,7 @@
 ## Login   <alcara_m@epitech.net>
 ##
 ## Started on  Fri Mar 01 09:38:17 2013 Marin Alcaraz
-## Last update Wed Jun 12 17:03:28 2013 Marin Alcaraz
+## Last update Mon Jun 17 03:13:55 2013 Oleg Kuznietsov
 ##
 
 SNAME	=	server
@@ -21,7 +21,6 @@ SSRC	=	server.c 			\
 			list.c 				\
 			error.c  			\
 			connection_utils.c  \
-			log.c  				\
 			main.c
 
 SOBJ		=	$(SSRC:.c=.o)
@@ -34,7 +33,6 @@ PSRC	=	options_errors.c 	\
 			item.c 				\
 			list.c 				\
 			error.c  			\
-			log.c  				\
 			pdemo_main.c
 
 POBJ		=	$(PSRC:.c=.o)
@@ -56,7 +54,6 @@ CNAME 	= 	client
 
 CSRC 	= 	client.c 	\
 			error.c 	\
-			log.c 		\
 			socket.c
 
 COBJ 	= 	$(CSRC:.c=.o)

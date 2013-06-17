@@ -24,11 +24,10 @@ int         create_socket(void)
 
   pe = getprotobyname("TCP");
   if (pe == (void *)-1)
-    my_error("Error obtaining protocol, unable to create socket\n");
+    error_log("create_socket", "getprotobyname", 
+      "Error obtaining protocol, unable to create socket\n");
   fd = socket(AF_INET, SOCK_STREAM, pe->p_proto);
   if (fd == -1)
-    my_error("Error creating socket\n");
+    error_log("create_socket", "getprotobyname", strerror(errno));
   return (fd);
 }
-
-

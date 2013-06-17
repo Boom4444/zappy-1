@@ -18,7 +18,6 @@
 #include    "server_functions.h"
 #include    "error.h"
 #include    "list.h"
-#include    "log.h"
 
 #define  QUEUE_LIMIT    10
 #define  SERVER_RUN     1

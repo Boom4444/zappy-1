@@ -24,8 +24,7 @@ int     server_welcome_msg(int fd)
 {
     if (write(fd, "BIENVENUE\n", sizeof("BIENVENUE\n")) == -1)
     {
-        my_error("Error: Unable to write welcome msg on client");
-        log_error("Unable to write welcome msg on client FD ", fd);
+        error_show("server_welcome_msg", "write", strerror(errno));
         return (-1);
     }
     return (0);

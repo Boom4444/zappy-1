@@ -5,7 +5,7 @@
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Sat Apr 27 14:58:48 2013 ivan ignatiev
-** Last update Wed Jun 12 17:04:09 2013 Marin Alcaraz
+** Last update Mon Jun 17 02:39:01 2013 Oleg Kuznietsov
 */
 
 #include    "select.h"
@@ -33,11 +33,11 @@ static int	select_accept_connection(t_server *s, t_world *w)
 
   user = malloc(sizeof(t_user));
   if (user == NULL)
-      return (log_error("Error: unable to allocate memory to new client", -1));
+    return (error_log("select_accept_connection" ,"malloc", strerror(errno)));
   user->addrlen = sizeof(struct sockaddr_in);
   if ((user->clientfd =
               accept(s->server_fd, (struct sockaddr*)&user->addr,&user->addrlen)) < 0)
-      log_error("Error: unable to accept new connection", -1);
+      error_log("select_accept_connection", "accept", strerror(errno));
   strcpy(user->team, "My super team");
   user->connected = PRE_CONNECTED;
   item_pf(s->client_list, user, sizeof(t_user));
@@ -82,7 +82,7 @@ int			        select_do(t_server *s, t_world *w)
   tv.tv_usec = 10000;
   maxfd = select_create_fdset(s, &fdset, s->server_fd);
   if (select(maxfd + 1, &fdset, NULL, NULL, &tv) < 0)
-      return (log_error("Error: can't perform select", -1));
+      return (error_log("select_do", "select", strerror(errno)));
   if (FD_ISSET(s->server_fd, &fdset))
     return (select_accept_connection(s, w));
   return (select_check_fdset(s, w, &fdset));

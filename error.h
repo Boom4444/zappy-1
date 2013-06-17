@@ -11,16 +11,35 @@
 #ifndef ERROR_H_
 # define ERROR_H_
 
-#include <stdlib.h>
+#include "users.h"
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <fcntl.h>
+#include <time.h>
 #include <unistd.h>
+#include <string.h>
 #include <errno.h>
-#include "server.h"
-#include "log.h"
-#include "connection_utils.h"
+#include <stdio.h>
+#include <sys/socket.h>
+#include <netinet/in.h>
+#include <arpa/inet.h>
 
-void my_errorstr(char *);
-int  error_show(const char *);
-void my_error(char *);
-void my_errorandclose(char *, int *);
+/*
+** Use this only in special cases
+*/
+void  error_put(char *s);
+
+/*
+** Example: error_log("main", "open", strerror(errno));
+*/
+int   error_log(char *loc, char *func, char *msg);
+
+/*
+** For displaying and loging at the same time
+*/
+int   error_show(char *loc, char *func, char *msg);
+
+int   log_access(const char *ip);
+int   log_command(t_user *user, char *cmd);
 
 #endif /* !ERROR_H_ */
