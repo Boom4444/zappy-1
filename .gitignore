@@ -27,3 +27,7 @@ world
 *.swp
 1
 :w!
+error_log.txt
+access_log.txt
+error.log
+access.log
