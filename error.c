@@ -29,7 +29,7 @@ int       error_log(char *loc, char *func, char *msg)
   char    *slog_time;
   time_t  log_time;
 
-  log_stream = fopen("error_log.txt", "a");
+  log_stream = fopen("error.log", "a");
   if (log_stream == NULL)
   {
     error_put("'error_log' fails to store error [ ");
@@ -59,7 +59,7 @@ int       log_access(const char *ip)
   char    *slog_time;
   time_t  log_time;
 
-  log_stream = fopen("access_log.txt", "a");
+  log_stream = fopen("access.log", "a");
   if (log_stream == NULL)
   {
     error_log("log_access", "fopen", strerror(errno));
@@ -79,7 +79,7 @@ int       log_command(char *user_name, char *cmd, int dir)
   char    *slog_time;
   time_t  log_time;
 
-  log_stream = fopen("command_log.txt", "a");
+  log_stream = fopen("command.log", "a");
   if (log_stream == NULL)
   {
     error_log("log_command", "fopen", strerror(errno));
