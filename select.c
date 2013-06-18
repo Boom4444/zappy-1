@@ -46,10 +46,11 @@ static int	select_accept_connection(t_server *s, t_world *w)
   t_user	*user;
 
   if ((user = user_init()) == NULL)
-      return (log_error("Error: unable to allocate memory to new client", -1));
+      return (error_log("select_accept_connection", "user_init", 
+        "unable to allocate memory to new client"));
   if ((user->clientfd =
               accept(s->server_fd, (struct sockaddr*)&user->addr,&user->addrlen)) < 0)
-      log_error("Error: unable to accept new connection", -1);
+      error_log("select_accept_connection", "accept", strerror(errno));
   item_pf(s->client_list, user, sizeof(t_user));
   printf("[%s] Connected\n", inet_ntoa(user->addr.sin_addr));
   server_handshake(user->clientfd);
@@ -92,7 +93,7 @@ int			        select_do(t_server *s, t_world *w)
   tv.tv_usec = 10000;
   maxfd = select_create_fdset(s, &fdset, s->server_fd);
   if (select(maxfd + 1, &fdset, NULL, NULL, &tv) < 0)
-      return (log_error("Error: can't perform select", -1));
+      return (error_log("select_do", "select", strerror(errno)));
   if (FD_ISSET(s->server_fd, &fdset))
     return (select_accept_connection(s, w));
   return (select_check_fdset(s, w, &fdset));

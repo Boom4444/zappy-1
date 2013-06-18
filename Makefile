@@ -22,7 +22,6 @@ SSRC	=	server.c 				\
 			list.c 					\
 			error.c  				\
 			connection_utils.c  	\
-			log.c  					\
 			proto_commands_items.c 			\
 			proto_commands_net.c 			\
 			proto_commands_movement.c 			\
@@ -38,7 +37,6 @@ PSRC	=	options_errors.c 	\
 			item.c 				\
 			list.c 				\
 			error.c  			\
-			log.c  				\
 			pdemo_main.c
 
 POBJ	=	$(PSRC:.c=.o)
@@ -60,7 +58,6 @@ CNAME 	= 	client
 
 CSRC 	= 	client.c 	\
 			error.c 	\
-			log.c 		\
 			socket.c
 
 COBJ 	= 	$(CSRC:.c=.o)

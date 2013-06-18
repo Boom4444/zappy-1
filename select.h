@@ -17,11 +17,9 @@
 # include	<stdio.h>
 # include	<string.h>
 # include   "server.h"
-# include   "log.h"
 # include   "error.h"
 # include	"users.h"
 # include   "list.h"
-# include   "log.h"
 # include   "proto.h"
 
 # define    T_USER(user) ((t_user *)(user))

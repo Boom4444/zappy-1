@@ -81,7 +81,8 @@ int                 client_options(int argc, char **argv, t_options *options)
             options->port = optarg;
     }
     if (!options->host || !options->port)
-        return (error_show("Too few arguments\n\t-h [host] %s\n\t-p [port] %s\n"));
+        return (error_show("client_options", "error_show", 
+            "Too few arguments\n\t-h [host] %s\n\t-p [port] %s\n"));
     return (EXIT_SUCCESS);
 }
 
@@ -101,6 +102,6 @@ int                 main(int argc, char **argv)
         return (EXIT_FAILURE);
     printf("Trying to connect %s : %s\n", options.host, options.port);
     if ((sfd = socket_connect(options.host, options.port)) < 0)
-        return (error_show("Connection failed"));
+        return (error_show("main", "socket_connect", "Connection failed"));
     return (client_prompt(sfd));
 }

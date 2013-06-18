@@ -84,5 +84,5 @@ int         proto_define(t_user *u, t_world *w)
         u->connected = CONNECTED;
         return (0);
     }
-    return (log_error("Error: Unable to read on client init", -1));
+    return (error_log("proto_define", "read", strerror(errno)));
 }
