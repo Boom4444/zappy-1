@@ -33,7 +33,9 @@ int   error_log(char *loc, char *func, char *msg);
 /* For displaying and loging at the same time */
 int   error_show(char *loc, char *func, char *msg);
 
+/* dir is direction to 1 (server) or 0 (client) */
+int   log_command(char *user_name, char *cmd, int dir);
+
 int   log_access(const char *ip);
-int   log_command(t_user *user, char *cmd);
 
 #endif /* !ERROR_H_ */

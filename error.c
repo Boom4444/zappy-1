@@ -29,19 +29,19 @@ int       error_log(char *loc, char *func, char *msg)
   char    *slog_time;
   time_t  log_time;
 
-   log_stream = fopen("error_log.txt", "a");
-   if (log_stream == NULL)
-   {
-      error_put("'error_log' fails to 'fopen'");
-      fprintf(stderr, "error info: %s fails in %s\n", func, loc);
-      return (-1);
-   }
-   time(&log_time);
-   slog_time = ctime(&log_time);
-   slog_time[strlen(slog_time) - 1] = 0;
-   fprintf(log_stream, "%s %s: %s: %s\n", slog_time, loc, func, msg);
-   fclose(log_stream);
-   return (1);
+  log_stream = fopen("error_log.txt", "a");
+  if (log_stream == NULL)
+  {
+    error_put("'error_log' fails to store error [ ");
+    fprintf(stderr, "%s fails in %s]\n", func, loc);
+    return (-1);
+  }
+  time(&log_time);
+  slog_time = ctime(&log_time);
+  slog_time[strlen(slog_time) - 1] = 0;
+  fprintf(log_stream, "%s %s [%s]: %s\n", slog_time, loc, func, msg);
+  fclose(log_stream);
+  return (1);
 }
 
 int   error_show(char *loc, char *func, char *msg)
@@ -55,48 +55,49 @@ int   error_show(char *loc, char *func, char *msg)
 
 int       log_access(const char *ip)
 {
-  int     log_fd;
-  char    log_msg[256];
+  FILE    *log_stream;
   char    *slog_time;
   time_t  log_time;
 
-  log_fd = open("access_log.txt", O_CREAT | O_WRONLY | O_APPEND, 0666);
-  if (log_fd == -1)
+  log_stream = fopen("access_log.txt", "a");
+  if (log_stream == NULL)
   {
-    error_log("log_access", "open", strerror(errno));
+    error_log("log_access", "fopen", strerror(errno));
     return (-1);
   }
   time(&log_time);
   slog_time = ctime(&log_time);
-  slog_time[strlen(slog_time) - 1] = '\0';
-  sprintf(log_msg, "%s Connection accepted from %s\n",  slog_time, ip);
-  write(log_fd, log_msg, strlen(log_msg));
-  close(log_fd);
-  return(1);
+  slog_time[strlen(slog_time) - 1] = 0;
+  fprintf(log_stream, "%s Connection accepted from %s\n",  slog_time, ip);
+  fclose(log_stream);
+  return (1);
 }
 
-/*
-** TODO: to be updated
-*/ 
-// int       log_command(t_user *user, char *cmd)
-// {
-//   FILE    *log_stream;
-//   char    *slog_time;
-//   time_t  log_time;
+int       log_command(char *user_name, char *cmd, int dir)
+{
+  FILE    *log_stream;
+  char    *slog_time;
+  time_t  log_time;
 
-//   log_stream = fopen("command_log.txt", "a");
-//   if (log_stream == NULL)
-//   {
-//     error_log("log_command", "fopen", strerror(errno));
-//     return (-1);
-//   }
-//   time(&log_time);
-//   slog_time = ctime(&log_time);
-//   slog_time[strlen(slog_time) - 1] = 0;
-//   fprintf(log_stream, "%s %s (%s): %s\n", 
-//   slog_time, 
-//   inet_ntoa(user->addr.sin_addr), 
-//   user->team, cmd);
-//   fclose(log_stream);
-//   return (1);
-// }
+  log_stream = fopen("command_log.txt", "a");
+  if (log_stream == NULL)
+  {
+    error_log("log_command", "fopen", strerror(errno));
+    return (-1);
+  }
+  time(&log_time);
+  slog_time = ctime(&log_time);
+  slog_time[strlen(slog_time) - 1] = 0;
+  if (dir == 0)
+    fprintf(log_stream, 
+      "%s Sending [%s] from server to \"%s\"\n", 
+      slog_time, cmd, user_name);
+  if (dir == 1)
+    fprintf(log_stream, 
+      "%s Sending [%s] from \"%s\" to server\n", 
+      slog_time, cmd, user_name);
+  else
+    return (-1);
+  fclose(log_stream);
+  return (1);
+}
