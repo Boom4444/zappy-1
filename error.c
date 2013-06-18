@@ -33,7 +33,7 @@ int       error_log(char *loc, char *func, char *msg)
    if (log_stream == NULL)
    {
       error_put("'error_log' fails to 'fopen'");
-      printf("error info: %s fails in %s\n", func, loc); // ?
+      fprintf(stderr, "error info: %s fails in %s\n", func, loc);
       return (-1);
    }
    time(&log_time);
@@ -78,43 +78,25 @@ int       log_access(const char *ip)
 /*
 ** TODO: to be updated
 */ 
-int       log_command(t_user *user, char *cmd)
-{
-  FILE    *log_stream;
-  char    *slog_time;
-  time_t  log_time;
-
-  log_stream = fopen("command_log.txt", "a");
-  if (log_stream == NULL)
-  {
-    error_log("log_command", "fopen", strerror(errno));
-    return (-1);
-  }
-  time(&log_time);
-  slog_time = ctime(&log_time);
-  slog_time[strlen(slog_time) - 1] = 0;
-  fprintf(log_stream, "%s %s (%s): %s\n", 
-  slog_time, 
-  inet_ntoa(user->addr.sin_addr), 
-  user->team, cmd);
-  fclose(log_stream);
-  return (1);
-}
-
-// void    my_errorandclose(char *s, int *descriptors)
+// int       log_command(t_user *user, char *cmd)
 // {
-//   int   i;
+//   FILE    *log_stream;
+//   char    *slog_time;
+//   time_t  log_time;
 
-//   i = 0;
-//   while (descriptors[i] != LIMIT)
+//   log_stream = fopen("command_log.txt", "a");
+//   if (log_stream == NULL)
 //   {
-//     if (close(descriptors[i]) == -1)
-//     {
-//       perror("");
-//       my_error("Error: Unable to close socket, socket corrupted\n");
-//     }
-//     log_error("Closed FD on ", i);
-//     i = i + 1;
+//     error_log("log_command", "fopen", strerror(errno));
+//     return (-1);
 //   }
-//   my_error(s);
+//   time(&log_time);
+//   slog_time = ctime(&log_time);
+//   slog_time[strlen(slog_time) - 1] = 0;
+//   fprintf(log_stream, "%s %s (%s): %s\n", 
+//   slog_time, 
+//   inet_ntoa(user->addr.sin_addr), 
+//   user->team, cmd);
+//   fclose(log_stream);
+//   return (1);
 // }

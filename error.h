@@ -24,19 +24,13 @@
 #include <netinet/in.h>
 #include <arpa/inet.h>
 
-/*
-** Use this only in special cases
-*/
+/* Use this only in special cases */
 void  error_put(char *s);
 
-/*
-** Example: error_log("main", "open", strerror(errno));
-*/
+/* Example: error_log("main", "open", strerror(errno)); */
 int   error_log(char *loc, char *func, char *msg);
 
-/*
-** For displaying and loging at the same time
-*/
+/* For displaying and loging at the same time */
 int   error_show(char *loc, char *func, char *msg);
 
 int   log_access(const char *ip);
