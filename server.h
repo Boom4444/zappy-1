@@ -1,11 +1,11 @@
 /*
-** server.h for zappy in /home/hero/zappy
+** server.h for zappy in /home/ignatiev/Projects/zappy
 ** 
 ** Made by Marin Alcaraz
 ** Login   <alcara_m@epitech.net>
 ** 
 ** Started on  Sun May 26 18:53:05 2013 Marin Alcaraz
-** Last update Wed Jun 12 15:27:40 2013 Marin Alcaraz
+** Last update Thu Jun 20 19:02:07 2013 ivan ignatiev
 */
 
 #ifndef SERVER_H_
@@ -13,6 +13,7 @@
 
 #include    <string.h>
 #include    <stdio.h>
+#include    <time.h>
 #include    "options.h"
 #include    "connection_utils.h"
 #include    "server_functions.h"
@@ -33,6 +34,8 @@ typedef  struct     s_server
   t_list            *team_list;
   t_opt             options;
   int               server_fd;
+  clock_t           diff;
+  clock_t           tick;
 }                   t_server;
 
 typedef struct      s_world
@@ -44,5 +47,6 @@ typedef struct      s_world
 int         server_handshake(int);
 void        server_handleclient(struct sockaddr_in *s_client, int *);
 int         server_start(t_server *s, t_world *w);
+int        server_send(t_user *u, char *message);
 
 #endif /* !SERVER_H_ */

@@ -5,7 +5,7 @@
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Thu Jun 13 17:27:55 2013 ivan ignatiev
-** Last update Thu Jun 13 19:51:38 2013 ivan ignatiev
+** Last update Thu Jun 20 18:52:20 2013 ivan ignatiev
 */
 
 #include        "proto.h"
@@ -39,13 +39,13 @@ t_request_data          *request_data_init(char *message, int argc)
     if((rqd = (t_request_data*)malloc(sizeof(t_request_data))) != NULL)
     {
         rqd->message = message;
+        rqd->argv = NULL;
         if (argc > 0
-                && (rqd->argv = (void**)malloc(sizeof(void*) * argc)) != NULL)
+            && (rqd->argv = (void**)malloc(sizeof(void*) * argc)) == NULL)
         {
-            return (rqd);
+            free(rqd);
+            return (NULL);
         }
-        free(rqd);
-        rqd = NULL;
     }
 
     return (rqd);
@@ -62,7 +62,7 @@ t_request               *request_init()
     return (request);
 }
 
-t_request               *cli_parse_request(char *message)
+t_request               *cli_parse_request(t_user *user)
 {
     t_request           *request;
     int                 i;
@@ -72,12 +72,15 @@ t_request               *cli_parse_request(char *message)
         i = 0;
         while (cli_commands[i].cmd)
         {
-            if (strncmp(cli_commands[i].cmd, message, strlen(cli_commands[i].cmd)) == 0)
+            if (strncmp(cli_commands[i].cmd, user->request, strlen(cli_commands[i].cmd)) == 0)
             {
                 request->type = &cli_commands[i];
                 request->current_time = request->type->delay;
                 if (request->type->parse != NULL)
-                    request->data = request->type->parse(request->type, message);
+                {
+                    if ((request->data = request->type->parse(request->type, user->request)) != NULL)
+                        request->data->user = user;
+                }
                 else
                     request->data = NULL;
                 return (request);

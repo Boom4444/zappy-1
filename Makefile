@@ -1,11 +1,11 @@
 ##
-## Makefile for zappy in /home/hero/zappy
+## Makefile for zappy in /home/ignatiev/Projects/zappy
 ##
 ## Made by Marin Alcaraz
 ## Login   <alcara_m@epitech.net>
 ##
 ## Started on  Fri Mar 01 09:38:17 2013 Marin Alcaraz
-## Last update Thu Jun 13 18:54:55 2013 Marin Alcaraz
+## Last update Thu Jun 20 18:44:50 2013 ivan ignatiev
 ##
 
 SNAME	=	server
@@ -62,7 +62,7 @@ CSRC 	= 	client.c 	\
 
 COBJ 	= 	$(CSRC:.c=.o)
 
-CFLAGS	=	-Wall -Wextra -Werror
+CFLAGS	=	-Wall -Wextra -Werror -g3
 
 CC		=	cc
 

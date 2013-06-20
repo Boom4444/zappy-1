@@ -5,7 +5,7 @@
 ** Login   <alcara_m@epitech.net>
 ** 
 ** Started on  Wed Jun 12 16:34:40 2013 Marin Alcaraz
-** Last update Thu Jun 13 19:36:15 2013 ivan ignatiev
+** Last update Thu Jun 20 19:00:16 2013 ivan ignatiev
 */
 
 #include    "proto.h"
@@ -27,12 +27,16 @@ void            cli_parse(t_user *u, t_server *s, t_world *w)
             strcat(u->request, buf);
         if (u->request != NULL && strchr(u->request, '\n') != NULL)
         {
-            if ((request = cli_parse_request(u->request)) != NULL)
+            if ((request = cli_parse_request(u)) != NULL)
             {
                 printf("request accepted \n");
 
-                if (request->type->func != NULL)
+                if (request->type->func != NULL
+                        && request->data != NULL)
+                {
                     request->type->func(request->data, s, w);
+                    s->diff = 1;
+                }
                 /*item_pf(request);*/
             }
             u->request = NULL;

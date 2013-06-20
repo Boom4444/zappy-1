@@ -5,16 +5,19 @@
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Thu Jun 13 18:43:36 2013 ivan ignatiev
-** Last update Thu Jun 13 19:25:24 2013 ivan ignatiev
+** Last update Thu Jun 20 18:48:41 2013 ivan ignatiev
 */
 
 #ifndef REQUEST_H_
 # define REQUEST_H_
 
+#include        "users.h"
+
 # define MAX_COMMAND_LENGTH         32
 
 typedef struct  s_request_data
 {
+    t_user      *user;
     char        *message;
     void        **argv;
 }               t_request_data;
