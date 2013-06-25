@@ -1,11 +1,11 @@
 /*
-** proto_commands_net.h for zappy in /home/hero/zappy
+** proto_commands_net.h for zappy in /home/ignatiev/Projects/zappy
 ** 
 ** Made by Marin Alcaraz
 ** Login   <alcara_m@epitech.net>
 ** 
 ** Started on  Thu Jun 13 16:35:15 2013 Marin Alcaraz
-** Last update Thu Jun 13 19:02:04 2013 Marin Alcaraz
+** Last update Thu Jun 20 18:59:41 2013 ivan ignatiev
 */
 
 #ifndef PROTO_COMMANDS_NET_H_

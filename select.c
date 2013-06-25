@@ -5,7 +5,7 @@
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Sat Apr 27 14:58:48 2013 ivan ignatiev
-** Last update Thu Jun 13 18:52:45 2013 ivan ignatiev
+** Last update Thu Jun 20 18:38:35 2013 ivan ignatiev
 */
 
 #include    "select.h"
@@ -46,7 +46,7 @@ static int	select_accept_connection(t_server *s, t_world *w)
   t_user	*user;
 
   if ((user = user_init()) == NULL)
-      return (error_log("select_accept_connection", "user_init", 
+      return (error_log("select_accept_connection", "user_init",
         "unable to allocate memory to new client"));
   if ((user->clientfd =
               accept(s->server_fd, (struct sockaddr*)&user->addr,&user->addrlen)) < 0)
@@ -90,7 +90,7 @@ int			        select_do(t_server *s, t_world *w)
   FD_ZERO(&fdset);
   FD_SET(s->server_fd, &fdset);
   tv.tv_sec = 0;
-  tv.tv_usec = 10000;
+  tv.tv_usec = 10;
   maxfd = select_create_fdset(s, &fdset, s->server_fd);
   if (select(maxfd + 1, &fdset, NULL, NULL, &tv) < 0)
       return (error_log("select_do", "select", strerror(errno)));
