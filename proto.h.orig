@@ -1,15 +1,23 @@
 /*
-** proto.h for zappy in /home/ignatiev/Projects/zappy
+** proto.h for zappy in /home/hero/zappy
 ** 
 ** Made by Marin Alcaraz
 ** Login   <alcara_m@epitech.net>
 ** 
 ** Started on  Wed Jun 12 17:02:27 2013 Marin Alcaraz
-** Last update Tue Jun 25 18:22:12 2013 ivan ignatiev
+<<<<<<< HEAD
+** Last update Mon Jun 24 12:25:02 2013 Marin Alcaraz
+=======
+** Last update Thu Jun 20 18:59:54 2013 ivan ignatiev
+>>>>>>> 3c403fadcb8a6b04ff253e7b23069deb2af5754a
 */
 
 #ifndef PROTO_H_
 # define PROTO_H_
+
+# include "server.h"
+# include "select.h"
+# include "request.h"
 
 # define PROTO_BUFFER               256
 

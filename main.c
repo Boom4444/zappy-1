@@ -5,7 +5,7 @@
 ** Login   <alcara_m@epitech.net>
 ** 
 ** Started on  Fri Mar 15 16:48:12 2013 Marin Alcaraz
-** Last update Wed Jun 12 15:06:16 2013 Marin Alcaraz
+** Last update Tue Jun 25 16:19:25 2013 Marin Alcaraz
 */
 
 #include <stdio.h>
@@ -39,6 +39,9 @@ int         main(int argc, char *argv[])
   signal(SIGINT, sigint_handler);
   server_settings_init(&(s.options));
   options_parse(argc, argv, &(s.options));
+  init_world(&w,s.options.width, s.options.height);
+  //generate_minerals(&w,s.options.width, s.options.height);
+  //display_world(&w,s.options.width, s.options.height);
   server_start(&s, &w);
   /** TODO FREE RESOURCES **/
   //list_delete(opt.names); DEPRECATED

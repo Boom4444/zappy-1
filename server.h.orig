@@ -5,8 +5,11 @@
 ** Login   <alcara_m@epitech.net>
 ** 
 ** Started on  Sun May 26 18:53:05 2013 Marin Alcaraz
-** Last update Tue Jun 25 18:23:12 2013 ivan ignatiev
-** Last update Tue Jun 25 16:25:00 2013 Marin Alcaraz
+<<<<<<< HEAD
+** Last update Mon Jun 24 12:23:07 2013 Marin Alcaraz
+=======
+** Last update Thu Jun 20 19:02:07 2013 ivan ignatiev
+>>>>>>> 3c403fadcb8a6b04ff253e7b23069deb2af5754a
 */
 
 #ifndef SERVER_H_
@@ -14,9 +17,12 @@
 
 #include    <string.h>
 #include    <stdio.h>
+<<<<<<< HEAD
 #include    "list.h"
+=======
 #include    <time.h>
 #include    "options.h"
+>>>>>>> 3c403fadcb8a6b04ff253e7b23069deb2af5754a
 #include    "connection_utils.h"
 #include    "server_functions.h"
 #include    "error.h"
