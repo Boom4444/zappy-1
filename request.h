@@ -1,17 +1,21 @@
 /*
-** request.h for zappy in /home/ignatiev/Projects/zappy
+** request.h for zappy in /home/hero/zappy
 ** 
 ** Made by ivan ignatiev
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Thu Jun 13 18:43:36 2013 ivan ignatiev
-** Last update Thu Jun 13 19:25:24 2013 ivan ignatiev
+** Last update Mon Jun 24 11:57:33 2013 Marin Alcaraz
 */
 
 #ifndef REQUEST_H_
 # define REQUEST_H_
 
 # define MAX_COMMAND_LENGTH         32
+
+#include "server.h"
+#include "select.h"
+#include "error.h"
 
 typedef struct  s_request_data
 {

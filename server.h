@@ -5,7 +5,7 @@
 ** Login   <alcara_m@epitech.net>
 ** 
 ** Started on  Sun May 26 18:53:05 2013 Marin Alcaraz
-** Last update Wed Jun 12 15:27:40 2013 Marin Alcaraz
+** Last update Mon Jun 24 12:23:07 2013 Marin Alcaraz
 */
 
 #ifndef SERVER_H_
@@ -13,17 +13,20 @@
 
 #include    <string.h>
 #include    <stdio.h>
-#include    "options.h"
+#include    "list.h"
 #include    "connection_utils.h"
 #include    "server_functions.h"
 #include    "error.h"
-#include    "list.h"
+#include    "options.h"
+#include    "trantor.h"
 
 #define  QUEUE_LIMIT    10
 #define  SERVER_RUN     1
 #define  LIMIT          2
 #define  SERV_FD        0
 #define  CLI_FD         1
+#define  LIM_X          30
+#define  LIM_y          30
 
 typedef  struct     s_server
 {
@@ -34,12 +37,6 @@ typedef  struct     s_server
   t_opt             options;
   int               server_fd;
 }                   t_server;
-
-typedef struct      s_world
-{
-  t_list            *trantor;
-
-}                   t_world;
 
 int         server_handshake(int);
 void        server_handleclient(struct sockaddr_in *s_client, int *);

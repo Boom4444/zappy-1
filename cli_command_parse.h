@@ -1,15 +1,17 @@
 /*
-** cli_command_parse.h for zappy in /home/ignatiev/Projects/zappy
+** cli_command_parse.h for zappy in /home/hero/zappy
 ** 
 ** Made by ivan ignatiev
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Thu Jun 13 19:09:46 2013 ivan ignatiev
-** Last update Thu Jun 13 19:11:23 2013 ivan ignatiev
+** Last update Mon Jun 24 12:24:36 2013 Marin Alcaraz
 */
 
 #ifndef CLI_COMMAND_PARSE_H_
 # define CLI_COMMAND_PARSE_H_
+
+#include "request.h"
 
 t_request_data          *request_data_init(char *message, int argc);
 t_request               *request_init();

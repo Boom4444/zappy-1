@@ -1,43 +1,28 @@
 /*
-** proto.c for zappy in /home/ignatiev/Projects/zappy
+** proto.c for zappy in /home/hero/zappy
 ** 
 ** Made by Marin Alcaraz
 ** Login   <alcara_m@epitech.net>
 ** 
 ** Started on  Wed Jun 12 16:34:40 2013 Marin Alcaraz
-** Last update Thu Jun 13 19:36:15 2013 ivan ignatiev
+** Last update Mon Jun 24 15:23:43 2013 Marin Alcaraz
 */
 
 #include    "proto.h"
+#include    "error.h"
 
-void            cli_parse(t_user *u, t_server *s, t_world *w)
+void        cli_parse(t_user *u, t_server *s, t_world *w)
 {
     (void) (s);
     (void) (w);
-    t_request   *request;
-    int         rb;
-    char        buf[PROTO_BUFFER];
+    int     rb;
+    char    buf[256];
 
-    if ((rb = read(u->clientfd, buf, PROTO_BUFFER)) > 0)
+    if ((rb = read(u->clientfd, buf, 256)) > 0)
     {
         buf[rb] = '\0';
-        if (u->request == NULL && (u->request = (char*)malloc(sizeof(char) * strlen(buf))) != NULL)
-            strcpy(u->request, buf);
-        else if ((u->request = (char*)realloc(u->request, sizeof(char) * (strlen(buf) + strlen(u->request) + 1))) != NULL)
-            strcat(u->request, buf);
-        if (u->request != NULL && strchr(u->request, '\n') != NULL)
-        {
-            if ((request = cli_parse_request(u->request)) != NULL)
-            {
-                printf("request accepted \n");
-
-                if (request->type->func != NULL)
-                    request->type->func(request->data, s, w);
-                /*item_pf(request);*/
-            }
-            u->request = NULL;
-        }
-   }
+        printf("the CLI parser should run here\n");
+    }
 }
 
 void        graph_parse(t_user *u, t_server *s, t_world *w)
@@ -84,5 +69,5 @@ int         proto_define(t_user *u, t_world *w)
         u->connected = CONNECTED;
         return (0);
     }
-    return (error_log("proto_define", "read", strerror(errno)));
+    return (error_log("proto.c", "proto_define", "Error: Unable to read on client init"));
 }
