@@ -5,7 +5,7 @@
 ** Login   <alcara_m@epitech.net>
 ** 
 ** Started on  Thu Jun 20 17:33:58 2013 Marin Alcaraz
-** Last update Tue Jun 25 16:11:28 2013 Marin Alcaraz
+** Last update Tue Jun 25 17:17:14 2013 Marin Alcaraz
 */
 
 #include    "trantor.h"
@@ -35,7 +35,7 @@ int     mineral_checker(t_square_unit sq)
     i = 0;
     while (i < 6)
     {
-        if (sq.minerals[i] != 0)
+        if (sq.resources[i] != 0)
             return (1);
         i = i + 1;
     }
@@ -72,17 +72,17 @@ void        random_number(int *container, int limit)
     *container = rand() % limit;
 }
 
-int         generate_minerals(t_world *w, int width, int height)
+int         generate_resource(t_world *w, int width, int height)
 {
     int     minx;
     int     miny;
-    int     mineral;
+    int     resource;
 
     random_number(&minx, width);
     random_number(&miny, height);
-    random_number(&mineral, 6);
-    (w->surface[miny][minx]).minerals[mineral]++;
-    printf("Generated on x[%d] y[%d] the mineral[%d]\n", minx, miny, mineral);
+    random_number(&resource, 7);
+    (w->surface[miny][minx]).resources[resource]++;
+    printf("Generated on x[%d] y[%d] the mineral[%d]\n", minx, miny, resource);
     return (0);
 }
 
