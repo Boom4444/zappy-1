@@ -5,7 +5,7 @@
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Sat Apr 27 14:58:48 2013 ivan ignatiev
-** Last update Thu Jun 20 18:38:35 2013 ivan ignatiev
+** Last update Thu Jun 20 19:49:48 2013 ivan ignatiev
 */
 
 #include    "select.h"
@@ -51,7 +51,7 @@ static int	select_accept_connection(t_server *s, t_world *w)
   if ((user->clientfd =
               accept(s->server_fd, (struct sockaddr*)&user->addr,&user->addrlen)) < 0)
       error_log("select_accept_connection", "accept", strerror(errno));
-  item_pf(s->client_list, user, sizeof(t_user));
+  item_pf(s->client_list, (void*)user, sizeof(t_user));
   printf("[%s] Connected\n", inet_ntoa(user->addr.sin_addr));
   server_handshake(user->clientfd);
   log_access(inet_ntoa(user->addr.sin_addr));

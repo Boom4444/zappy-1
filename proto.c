@@ -5,10 +5,14 @@
 ** Login   <alcara_m@epitech.net>
 ** 
 ** Started on  Wed Jun 12 16:34:40 2013 Marin Alcaraz
-** Last update Thu Jun 20 19:00:16 2013 ivan ignatiev
+** Last update Tue Jun 25 17:35:24 2013 ivan ignatiev
 */
 
-#include    "proto.h"
+#include       "server.h"
+#include       "select.h"
+#include       "request.h"
+#include       "cli_command_parse.h"
+#include        "proto.h"
 
 void            cli_parse(t_user *u, t_server *s, t_world *w)
 {
@@ -27,17 +31,10 @@ void            cli_parse(t_user *u, t_server *s, t_world *w)
             strcat(u->request, buf);
         if (u->request != NULL && strchr(u->request, '\n') != NULL)
         {
-            if ((request = cli_parse_request(u)) != NULL)
+            if ((request = cli_request_parse(u)) != NULL)
             {
                 printf("request accepted \n");
-
-                if (request->type->func != NULL
-                        && request->data != NULL)
-                {
-                    request->type->func(request->data, s, w);
-                    s->diff = 1;
-                }
-                /*item_pf(request);*/
+                item_pb(s->request_list, (void*)request, sizeof(t_request));
             }
             u->request = NULL;
         }

@@ -1,11 +1,11 @@
 /*
-** item.c for Zappy in /home/el/Zappy/Main
+** item.c for zappy in /home/ignatiev/Projects/zappy
 **
 ** Made by oleg kuznietsov
 ** Login   <kuznet_o@epitech.net>
 **
 ** Started on  Wed Jun  05 19:21:34 2013 oleg kuznietsov
-** Last update Thu Jun  06 22:17:56 2013 oleg kuznietsov
+** Last update Tue Jun 25 18:04:32 2013 ivan ignatiev
 */
 
 #include "list.h"
@@ -84,6 +84,10 @@ void      item_delete(t_list *list, t_item *item)
     {
       if (current == item)
       {
+        if (list->head == current)
+            list->head = current->next;
+        if (list->tail == current)
+            list->tail = current->prev;
         if (current->prev != NULL)
           current->prev->next = current->next;
         if (current->next != NULL)
@@ -92,6 +96,7 @@ void      item_delete(t_list *list, t_item *item)
           free(item->cont);
         free(item);
         list->len -= 1;
+        return ;
       }
       current = current->next;
     }

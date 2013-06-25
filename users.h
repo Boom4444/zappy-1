@@ -5,7 +5,7 @@
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Sat Apr 27 17:03:35 2013 ivan ignatiev
-** Last update Thu Jun 13 18:48:01 2013 ivan ignatiev
+** Last update Tue Jun 25 18:09:13 2013 ivan ignatiev
 */
 
 #ifndef USERS_H_
@@ -27,6 +27,8 @@
 # define ARTICLES_LIMIT 21
 # define GRAPHIC_PROTO  100
 # define CLI_PROTO      200
+
+# define    T_USER(user) ((t_user *)(user))
 
 typedef struct		    s_user
 {

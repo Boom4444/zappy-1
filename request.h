@@ -5,15 +5,14 @@
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Thu Jun 13 18:43:36 2013 ivan ignatiev
-** Last update Thu Jun 20 18:48:41 2013 ivan ignatiev
+** Last update Tue Jun 25 17:30:33 2013 ivan ignatiev
 */
 
 #ifndef REQUEST_H_
 # define REQUEST_H_
 
-#include        "users.h"
-
 # define MAX_COMMAND_LENGTH         32
+# define T_REQUEST(request)         ((t_request*)(request->cont))
 
 typedef struct  s_request_data
 {
@@ -44,5 +43,10 @@ typedef struct  s_request
     t_request_data  *data;
     int             current_time;
 }               t_request;
+
+t_request_data          *cli_request_data_init(char *message, int argc);
+t_request               *cli_request_init();
+t_request               *cli_request_parse(t_user *user);
+void            cli_requests_process(t_server *s, t_world *w);
 
 #endif /* !REQUEST_H_ */

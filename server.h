@@ -5,7 +5,7 @@
 ** Login   <alcara_m@epitech.net>
 ** 
 ** Started on  Sun May 26 18:53:05 2013 Marin Alcaraz
-** Last update Thu Jun 20 19:02:07 2013 ivan ignatiev
+** Last update Thu Jun 20 19:47:50 2013 ivan ignatiev
 */
 
 #ifndef SERVER_H_

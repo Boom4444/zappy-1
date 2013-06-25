@@ -5,13 +5,15 @@
 ## Login   <alcara_m@epitech.net>
 ##
 ## Started on  Fri Mar 01 09:38:17 2013 Marin Alcaraz
-## Last update Thu Jun 20 18:44:50 2013 ivan ignatiev
+## Last update Thu Jun 20 20:11:00 2013 ivan ignatiev
 ##
 
 SNAME	=	server
 
 SSRC	=	server.c 				\
 			select.c 				\
+			answer.c 				\
+			request.c 				\
 			options_errors.c 		\
 			options.c 				\
 			proto.c 				\

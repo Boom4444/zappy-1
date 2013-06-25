@@ -5,27 +5,26 @@
 ** Login   <alcara_m@epitech.net>
 ** 
 ** Started on  Thu Jun 13 16:31:20 2013 Marin Alcaraz
-** Last update Thu Jun 20 19:19:10 2013 ivan ignatiev
+** Last update Tue Jun 25 17:40:51 2013 ivan ignatiev
 */
 
+#include    "users.h"
+#include    "server.h"
+#include "answer.h"
 #include "proto_commands_net.h"
 
-void    cli_expulse(t_request_data *rqd, t_server *t, t_world *w)
+void    cli_expulse(t_request_data *rqd, t_server *s, t_world *w)
 {
     (void) (w);
-    (void) (t);
-    (void) (rqd);
     printf("expulse\n");
-    server_send(rqd->user, "OK\n");
+    cli_answer(rqd->user,s , "OK\n");
 }
 
-void    cli_incantation(t_request_data *rqd, t_server *t, t_world *w)
+void    cli_incantation(t_request_data *rqd, t_server *s, t_world *w)
 {
     (void) (w);
-    (void) (t);
-    (void) (rqd);
     printf("incantation\n");
-    server_send(rqd->user, "OK\n");
+    cli_answer(rqd->user, s, "OK\n");
 }
 
 void    cli_fork_player(t_request_data *rqd, t_server *s, t_world *w)

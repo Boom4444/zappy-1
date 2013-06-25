@@ -1,11 +1,11 @@
 /*
-** select.h for zappy in /home/hero/zappy
+** select.h for zappy in /home/ignatiev/Projects/zappy
 ** 
 ** Made by ivan ignatiev
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Sat Apr 27 20:28:03 2013 ivan ignatiev
-** Last update Wed Jun 12 17:03:14 2013 Marin Alcaraz
+** Last update Tue Jun 25 18:09:06 2013 ivan ignatiev
 */
 
 #ifndef SELECT_H_
@@ -22,7 +22,6 @@
 # include   "list.h"
 # include   "proto.h"
 
-# define    T_USER(user) ((t_user *)(user))
 
 int		select_do(t_server *s, t_world *w);
 
