@@ -9,13 +9,27 @@
 */
 
 #include "proto_commands_movement.h"
+#include "answer.h"
 
-void    cli_avance(t_request_data *rqd, t_server *t, t_world *w)
+static t_steps 	g_steps[]=
 {
-    (void) (w);
-    (void) (t);
-    (void) (rqd);
-    printf("avance\n");
+	{0, 1},
+	{-1, 1},
+	{-1, 0},
+	{-1, -1},
+	{0, -1},
+	{1, -1},
+	{1, 0},
+	{1, 1}
+};
+
+void    		cli_avance(t_request_data *rqd, t_server *t, t_world *w)
+{
+	
+	(void) w;
+	rqd->user->posx += g_steps[rqd->user->direction].x; 
+	rqd->user->posy += g_steps[rqd->user->direction].y; 
+    cli_answer(rqd->user, t, "OK\n");
 }
 
 void    cli_droite(t_request_data *rqd, t_server *t, t_world *w)

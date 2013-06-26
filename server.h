@@ -1,11 +1,11 @@
 /*
-** server.h for zappy in /home/ignatiev/Projects/zappy
+** server.h for zappy in /home/hero/zappy
 ** 
 ** Made by Marin Alcaraz
 ** Login   <alcara_m@epitech.net>
 ** 
 ** Started on  Sun May 26 18:53:05 2013 Marin Alcaraz
-** Last update Tue Jun 25 18:23:12 2013 ivan ignatiev
+** Last update Wed Jun 26 14:28:06 2013 Marin Alcaraz
 ** Last update Tue Jun 25 16:25:00 2013 Marin Alcaraz
 */
 
@@ -46,6 +46,6 @@ typedef  struct     s_server
 int         server_handshake(int);
 void        server_handleclient(struct sockaddr_in *s_client, int *);
 int         server_start(t_server *s, t_world *w);
-int        server_send(t_user *u, char *message);
+int         server_send(t_user *u, char *message);
 
 #endif /* !SERVER_H_ */

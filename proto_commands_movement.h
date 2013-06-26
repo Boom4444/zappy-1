@@ -14,6 +14,12 @@
 #include "server.h"
 #include "request.h"
 
+typedef struct 		s_steps
+{
+    int 			x;
+    int 			y;
+} 					t_steps;
+
 void    cli_avance(t_request_data *d, t_server *t, t_world *w);
 void    cli_droite(t_request_data *rqd, t_server *t, t_world *w);
 void    cli_gauche(t_request_data *rqd, t_server *t, t_world *w);

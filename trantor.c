@@ -5,7 +5,7 @@
 ** Login   <alcara_m@epitech.net>
 ** 
 ** Started on  Thu Jun 20 17:33:58 2013 Marin Alcaraz
-** Last update Tue Jun 25 17:17:14 2013 Marin Alcaraz
+** Last update Tue Jun 25 17:33:35 2013 Marin Alcaraz
 */
 
 #include    "trantor.h"
@@ -82,7 +82,6 @@ int         generate_resource(t_world *w, int width, int height)
     random_number(&miny, height);
     random_number(&resource, 7);
     (w->surface[miny][minx]).resources[resource]++;
-    printf("Generated on x[%d] y[%d] the mineral[%d]\n", minx, miny, resource);
     return (0);
 }
 

@@ -5,7 +5,7 @@
 ** Login   <alcara_m@epitech.net>
 ** 
 ** Started on  Fri Mar 15 16:48:12 2013 Marin Alcaraz
-** Last update Tue Jun 25 16:19:25 2013 Marin Alcaraz
+** Last update Wed Jun 26 11:34:47 2013 Marin Alcaraz
 */
 
 #include <stdio.h>
@@ -15,6 +15,7 @@
 #include <unistd.h>
 #include "options.h"
 #include "server.h"
+#include "proto_commands_items.h"
 
 void  server_settings_init(t_opt *opt)
 {
@@ -40,8 +41,8 @@ int         main(int argc, char *argv[])
   server_settings_init(&(s.options));
   options_parse(argc, argv, &(s.options));
   init_world(&w,s.options.width, s.options.height);
-  //generate_minerals(&w,s.options.width, s.options.height);
-  //display_world(&w,s.options.width, s.options.height);
+  generate_resource(&w,s.options.width, s.options.height);
+  display_world(&w,s.options.width, s.options.height);
   server_start(&s, &w);
   /** TODO FREE RESOURCES **/
   //list_delete(opt.names); DEPRECATED

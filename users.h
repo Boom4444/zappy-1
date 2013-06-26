@@ -1,11 +1,11 @@
 /*
-** users.h for zappy in /home/ignatiev/Projects/zappy
+** users.h for zappy in /home/hero/zappy
 ** 
 ** Made by ivan ignatiev
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Sat Apr 27 17:03:35 2013 ivan ignatiev
-** Last update Tue Jun 25 18:09:13 2013 ivan ignatiev
+** Last update Wed Jun 26 16:03:01 2013 Marin Alcaraz
 */
 
 #ifndef USERS_H_
@@ -20,36 +20,51 @@
 # include	<unistd.h>
 # include   "list.h"
 
-# define PRE_CONNECTED	2
-# define CONNECTED		1
-# define DISCONNECTED	0
-# define NAME_LIMIT     256
-# define ARTICLES_LIMIT 21
-# define GRAPHIC_PROTO  100
-# define CLI_PROTO      200
+#define PRE_CONNECTED	2
+#define CONNECTED		1
+#define DISCONNECTED	0
+#define NAME_LIMIT     256
+#define ARTICLES_LIMIT 7
+#define GRAPHIC_PROTO  100
+#define CLI_PROTO      200
 
-# define    T_USER(user) ((t_user *)(user))
+#define TOP         0
+#define TOP_LEFT    1
+#define MID_LEFT    2
+#define BOT_LEFT    3
+#define BOT_MID     4
+#define BOT_RIGHT   5
+#define MID_RIGHT   6
+#define TOP_RIGHT   7
 
-typedef struct		    s_user
+#define    T_USER(user) ((t_user *)(user))
+
+typedef struct		s_user
 {
-  int			        clientfd;
-  int			        connected;
+  int			clientfd;
+  int			connected;
   int                   protocol;
   struct sockaddr_in	addr;
-  socklen_t		        addrlen;
+  socklen_t		addrlen;
   char                  *request;
 
-  char			        team[NAME_LIMIT];
+  int                   posx;
+  int                   posy;
+  int                   direction;
+
+  char			team[NAME_LIMIT];
   int                   inventory[ARTICLES_LIMIT];
   int                   request_counter;
 }			            t_user;
 
-/* TODO : struct for each type of client */
+typedef struct          s_user_player
+{
 
-t_user		*user_create(void);
-t_list		*user_add(t_list *users, t_user *user);
-t_list		*user_remove(t_list *users, t_user *user);
-t_user		*user_find(t_list *users, char *nick);
-t_list		*user_remove_all(t_list *users);
+}                       t_user_player;
+
+typedef struct          s_user_graph
+{
+
+}                       t_user_graph;
 
 #endif /* !USERS_H_ */

@@ -5,7 +5,7 @@
 ** Login   <alcara_m@epitech.net>
 ** 
 ** Started on  Thu Jun 20 17:38:38 2013 Marin Alcaraz
-** Last update Tue Jun 25 17:13:33 2013 Marin Alcaraz
+** Last update Wed Jun 26 11:24:13 2013 Marin Alcaraz
 */
 
 #ifndef TRANTOR_H_
@@ -16,13 +16,13 @@
 #include "list.h"
 #include "error.h"
 
-#define LINEMATE    0
-#define DERAUMERE   1
-#define SIBUR       2
-#define MENDIANE    3
-#define PHIRAS      4
-#define THYSTAME    5
-#define FOOD        6
+#define FOOD        0
+#define LINEMATE    1
+#define DERAUMERE   2
+#define SIBUR       3
+#define MENDIANE    4
+#define PHIRAS      5
+#define THYSTAME    6
 
 typedef struct  s_square_unit
 {
