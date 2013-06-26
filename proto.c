@@ -5,7 +5,7 @@
 ** Login   <alcara_m@epitech.net>
 ** 
 ** Started on  Wed Jun 12 16:34:40 2013 Marin Alcaraz
-** Last update Tue Jun 25 18:25:34 2013 ivan ignatiev
+** Last update Wed Jun 26 16:59:43 2013 ivan ignatiev
 */
 
 #include        "server.h"
@@ -31,11 +31,19 @@ void            cli_parse(t_user *u, t_server *s, t_world *w)
             strcat(u->request, buf);
         if (u->request != NULL && strchr(u->request, '\n') != NULL)
         {
+            if (u->request_counter > REQUESTS_LIMIT)
+            {
+                u->request = NULL;
+                return ;
+            }
+
             if ((request = cli_request_parse(u)) != NULL)
             {
                 printf("request accepted \n");
+                request->data->user->request_counter++;
                 item_pb(s->request_list, (void*)request, sizeof(t_request));
             }
+
             u->request = NULL;
         }
     }

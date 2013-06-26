@@ -31,3 +31,4 @@ error_log.txt
 access_log.txt
 error.log
 access.log
+/nbproject/private/

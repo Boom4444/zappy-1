@@ -5,28 +5,28 @@
 ** Login   <alcara_m@epitech.net>
 ** 
 ** Started on  Tue May 21 09:42:30 2013 Marin Alcaraz
-** Last update Tue Jun 25 18:22:58 2013 ivan ignatiev
+** Last update Tue Jun 25 18:48:34 2013 ivan ignatiev
 */
 
-#include    "server.h"
-#include    "users.h"
-#include    "request.h"
-#include    "answer.h"
-#include    "select.h"
+#include                "server.h"
+#include                "users.h"
+#include                "request.h"
+#include                "answer.h"
+#include                "select.h"
 
-int         server_handshake(int fd)
+int                     server_handshake(int fd)
 {
     server_welcome_msg(fd);
     return (1);
 }
 
-int            server_send(t_user *u, char *message)
+int                     server_send(t_user *u, char *message)
 {
     send(u->clientfd, message, strlen(message), MSG_DONTWAIT);
     return (1);
 }
 
-void                        server_init(t_server *s)
+void                    server_init(t_server *s)
 {
     s->client_list = list_init();
     s->request_list = list_init();
@@ -36,18 +36,21 @@ void                        server_init(t_server *s)
     s->diff = 0;
 }
 
-int                         server_start(t_server *s, t_world *w)
+int                     server_start(t_server *s, t_world *w)
 {
-    struct  sockaddr_in     s_in;
-    int                     result;
-    clock_t                 start_loop;
-    clock_t                 end_loop;
+    struct sockaddr_in  s_in;
+    int                 result;
+    clock_t             start_loop;
+    clock_t             end_loop;
 
     server_init(s);
     init_sockadd(&s_in, s->options.port);
+    
     if (bind(s->server_fd,
-                (const struct sockaddr *)&s_in, sizeof(s_in)) == -1)
+                (const struct sockaddr *)&s_in, 
+                sizeof(s_in)) == -1)
         error_log("server_start", "bind", strerror(errno));
+    
     listen(s->server_fd, QUEUE_LIMIT);
     result = 0;
     while(result == 0)
@@ -55,12 +58,14 @@ int                         server_start(t_server *s, t_world *w)
         start_loop = clock();
         result = select_do(s, w);
         cli_requests_process(s, w);
+        cli_answers_process(s, start_loop, 100);
         end_loop = clock();
-        if (s->diff)
+
+       // if (s->diff)
             printf("loop [%llu] : %llu - %llu %f sec.\n", (unsigned long long)s->tick,
                     (unsigned long long)(end_loop),
                     (unsigned long long)(start_loop),
-                    (float)(end_loop - start_loop) / CLOCKS_PER_SEC );
+                    (float)(end_loop - start_loop) );
         s->diff = 0;
         ++s->tick;
     }

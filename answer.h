@@ -5,7 +5,7 @@
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Tue Jun 25 17:18:35 2013 ivan ignatiev
-** Last update Tue Jun 25 17:40:17 2013 ivan ignatiev
+** Last update Tue Jun 25 18:49:15 2013 ivan ignatiev
 */
 
 #ifndef ANSWER_H_
@@ -19,9 +19,9 @@ typedef struct  s_answer
     char        *message;
 }               t_answer;
 
-t_answer    *cli_answer_create(t_user *user, char *message);
+t_answer        *cli_answer_create(t_user *user, char *message);
 void            cli_answer(t_user *user, t_server *server, char *message);
 void            cli_answer_to_graph(t_server *server, char *message);
-void        cli_answers_process(t_server *s);
+void            cli_answers_process(t_server *s, clock_t start, clock_t tick_size);
 
 #endif /* !ANSWER_H_ */

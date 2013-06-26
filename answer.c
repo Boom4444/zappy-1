@@ -5,22 +5,21 @@
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Thu Jun 20 20:02:59 2013 ivan ignatiev
-** Last update Tue Jun 25 18:09:33 2013 ivan ignatiev
+** Last update Wed Jun 26 16:11:29 2013 ivan ignatiev
 */
 
-#include    "users.h"
-#include    "server.h"
-#include    "answer.h"
+#include        "users.h"
+#include        "server.h"
+#include        "answer.h"
 
-t_answer    *cli_answer_create(t_user *user, char *message)
+t_answer        *cli_answer_create(t_user *user, char *message)
 {
     t_answer    *answer;
 
-    (void) user;
-    (void) message;
     if ((answer = (t_answer*)malloc(sizeof(t_answer))) != NULL)
     {
-
+        answer->message = message;
+        answer->user = user;
     }
 
     return (answer);
@@ -28,16 +27,12 @@ t_answer    *cli_answer_create(t_user *user, char *message)
 
 void            cli_answer(t_user *user, t_server *server, char *message)
 {
-/*    t_answer    *answer;
+    t_answer    *answer;
 
-    (void) server;
     if ((answer = cli_answer_create(user, message)) != NULL)
     {
         item_pb(server->answer_list, answer, sizeof(t_answer));
-        server_send(user, message);
-    }*/
-    (void) server;
-    server_send(user, message);
+    }
 }
 
 void            cli_answer_to_graph(t_server *server, char *message)
@@ -56,16 +51,22 @@ void            cli_answer_to_graph(t_server *server, char *message)
     }
 }
 
-void        cli_answers_process(t_server *s)
+void            cli_answers_process(t_server *s, clock_t start, clock_t tick_size)
 {
-    t_item  *current;
+    t_item      *tmp;
+    t_item      *current;
+    clock_t     inter;
 
     current = s->answer_list->head;
-    while (current != NULL)
+    while ((inter = (tick_size - (clock() - start))) > 0 && current != NULL)
     {
         server_send(T_ANSWER(current)->user, T_ANSWER(current)->message);
+        tmp = current;
         current = current->next;
+        item_delete(s->answer_list, tmp);
     }
+    if (inter > 0)
+        usleep(inter);
 }
 
 

@@ -5,7 +5,7 @@
 ** Login   <kuznet_o@epitech.net>
 **
 ** Started on  Wed Jun  05 19:21:34 2013 oleg kuznietsov
-** Last update Tue Jun 25 18:04:32 2013 ivan ignatiev
+** Last update Wed Jun 26 18:42:28 2013 ivan ignatiev
 */
 
 #include "list.h"
@@ -92,8 +92,8 @@ void      item_delete(t_list *list, t_item *item)
           current->prev->next = current->next;
         if (current->next != NULL)
           current->next->prev = current->prev;
-        if (item->cont != NULL)
-          free(item->cont);
+  /*      if (item->cont != NULL)
+          free(item->cont);*/
         free(item);
         list->len -= 1;
         return ;

@@ -5,13 +5,14 @@
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Thu Jun 13 18:43:36 2013 ivan ignatiev
-** Last update Tue Jun 25 18:26:30 2013 ivan ignatiev
+** Last update Wed Jun 26 17:00:20 2013 ivan ignatiev
 */
 
 #ifndef REQUEST_H_
 # define REQUEST_H_
 
 # define MAX_COMMAND_LENGTH         32
+# define REQUESTS_LIMIT             10
 # define T_REQUEST(request)         ((t_request*)(request->cont))
 
 

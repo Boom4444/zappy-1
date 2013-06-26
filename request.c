@@ -5,7 +5,7 @@
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Thu Jun 20 20:00:46 2013 ivan ignatiev
-** Last update Tue Jun 25 17:54:12 2013 ivan ignatiev
+** Last update Wed Jun 26 17:00:44 2013 ivan ignatiev
 */
 
 #include        "server.h"
@@ -82,7 +82,9 @@ t_request               *cli_request_parse(t_user *user)
                 if (request->type->parse != NULL)
                 {
                     if ((request->data = request->type->parse(request->type, user->request)) != NULL)
+                    {
                         request->data->user = user;
+                    }
                 }
                 else
                     request->data = NULL;

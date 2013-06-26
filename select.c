@@ -5,7 +5,7 @@
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Sat Apr 27 14:58:48 2013 ivan ignatiev
-** Last update Thu Jun 20 19:49:48 2013 ivan ignatiev
+** Last update Wed Jun 26 17:00:33 2013 ivan ignatiev
 */
 
 #include    "select.h"
@@ -36,6 +36,7 @@ t_user      *user_init()
         strcpy(user->team, "My super team");
         user->connected = PRE_CONNECTED;
         user->request = NULL;
+        user->request_counter = 0;
         user->addrlen = sizeof(struct sockaddr_in);
     }
     return (user);
