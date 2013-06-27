@@ -81,8 +81,11 @@ int                 client_options(int argc, char **argv, t_options *options)
             options->port = optarg;
     }
     if (!options->host || !options->port)
-        return (error_show("client_options", "error_show", 
-            "Too few arguments\n\t-h [host] %s\n\t-p [port] %s\n"));
+    {
+        printf("%s: Too few arguments\n\t-h [host] %%s\n\t-p [port] %%s\n",
+             argv[0]);
+        return (EXIT_FAILURE);
+    }
     return (EXIT_SUCCESS);
 }
 
