@@ -1,11 +1,11 @@
 ##
-## Makefile for zappy in /home/hero/zappy
+## Makefile for zappy in /home/ignatiev/Projects/zappy
 ##
 ## Made by Marin Alcaraz
 ## Login   <alcara_m@epitech.net>
 ##
 ## Started on  Fri Mar 01 09:38:17 2013 Marin Alcaraz
-## Last update Wed Jun 26 12:13:09 2013 Marin Alcaraz
+## Last update Mon Jul 01 17:21:39 2013 ivan ignatiev
 ##
 
 SNAME	=	server
@@ -18,6 +18,7 @@ SSRC	=	server.c 						\
 			options_parsing.c 				\
 			item.c 							\
 			server_functions.c 				\
+			graph_command.c 				\
 			cli_command_parse.c 			\
 			list.c 							\
 			error.c  						\

@@ -12,6 +12,7 @@
 #include        "select.h"
 #include        "request.h"
 #include        "cli_command_parse.h"
+#include        "graph_command.h"
 #include        "proto.h"
 #include        "error.h"
 
@@ -19,10 +20,10 @@ void            cli_parse(t_user *u, t_server *s, t_world *w)
 {
     t_request   *request;
     int         rb;
-    char        buf[256];
+    char        buf[PROTO_BUFFER + 1];
 
     (void) w;
-    if ((rb = read(u->clientfd, buf, 256)) > 0)
+    if ((rb = recv(u->clientfd, buf, PROTO_BUFFER, MSG_DONTWAIT)) > 0)
     {
         buf[rb] = '\0';
         if (u->request == NULL && (u->request = (char*)malloc(sizeof(char) * strlen(buf))) != NULL)
@@ -54,12 +55,12 @@ void        graph_parse(t_user *u, t_server *s, t_world *w)
     (void) (s);
     (void) (w);
     int     rb;
-    char    buf[256];
+    char    buf[PROTO_BUFFER + 1];
 
-    if ((rb = read(u->clientfd, buf, 256)) > 0)
+    if ((rb = recv(u->clientfd, buf, PROTO_BUFFER, MSG_DONTWAIT)) > 0)
     {
         buf[rb] = '\0';
-        printf("the GRAPH parser should run here\n");
+        graph_command_exec(u, s, w, buf);
     }
 }
 

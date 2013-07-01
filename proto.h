@@ -11,7 +11,7 @@
 #ifndef PROTO_H_
 # define PROTO_H_
 
-# define PROTO_BUFFER               256
+# define PROTO_BUFFER               1024
 
 void        cli_parse(t_user *u, t_server *s, t_world *);
 void        graph_parse(t_user *u, t_server *s, t_world *);
