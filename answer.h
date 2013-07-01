@@ -22,6 +22,7 @@ typedef struct  s_answer
 t_answer        *cli_answer_create(t_user *user, char *message);
 void            cli_answer(t_user *user, t_server *server, char *message);
 void            cli_answer_to_graph(t_server *server, char *message);
-void            cli_answers_process(t_server *s, clock_t start, clock_t tick_size);
+void            cli_answers_process(t_server *s, struct timeval *start,
+                                        unsigned long long tick_size);
 
 #endif /* !ANSWER_H_ */

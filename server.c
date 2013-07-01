@@ -8,6 +8,7 @@
 ** Last update Tue Jun 25 18:48:34 2013 ivan ignatiev
 */
 
+#include                <sys/time.h>
 #include                "server.h"
 #include                "users.h"
 #include                "request.h"
@@ -40,9 +41,10 @@ int                     server_start(t_server *s, t_world *w)
 {
     struct sockaddr_in  s_in;
     int                 result;
-    clock_t             start_loop;
-    clock_t             end_loop;
-
+    struct timeval      start_loop;
+    struct timeval      stop_loop;
+    unsigned long long    elapsedTime;
+    
     server_init(s);
     init_sockadd(&s_in, s->options.port);
     
@@ -55,17 +57,15 @@ int                     server_start(t_server *s, t_world *w)
     result = 0;
     while(result == 0)
     {
-        start_loop = clock();
+        gettimeofday(&start_loop, NULL);
         result = select_do(s, w);
         cli_requests_process(s, w);
-        cli_answers_process(s, start_loop, 100);
-        end_loop = clock();
-
-       // if (s->diff)
-            printf("loop [%llu] : %llu - %llu %f sec.\n", (unsigned long long)s->tick,
-                    (unsigned long long)(end_loop),
-                    (unsigned long long)(start_loop),
-                    (float)(end_loop - start_loop) );
+        cli_answers_process(s, &start_loop, 5000);
+        gettimeofday(&stop_loop, NULL);
+        elapsedTime = (stop_loop.tv_sec - start_loop.tv_sec) * 1000000;
+        elapsedTime = elapsedTime + (stop_loop.tv_usec - start_loop.tv_usec);
+        if (s->diff)
+                printf("%lf sec.\n", (double) elapsedTime / 1000000.0);
         s->diff = 0;
         ++s->tick;
     }

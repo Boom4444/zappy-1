@@ -8,6 +8,8 @@
 ** Last update Wed Jun 26 16:11:29 2013 ivan ignatiev
 */
 
+#include                <sys/time.h>
+#include                <time.h>
 #include        "users.h"
 #include        "server.h"
 #include        "answer.h"
@@ -51,22 +53,30 @@ void            cli_answer_to_graph(t_server *server, char *message)
     }
 }
 
-void            cli_answers_process(t_server *s, clock_t start, clock_t tick_size)
+void                            cli_answers_process(t_server *s, 
+                                        struct timeval *start, 
+                                        unsigned long long tick_size)
 {
-    t_item      *tmp;
-    t_item      *current;
-    clock_t     inter;
+    t_item                      *tmp;
+    t_item                      *current;
+    struct timeval              iter;
+    unsigned long long          elapsedTime;
 
     current = s->answer_list->head;
-    while ((inter = (tick_size - (clock() - start))) > 0 && current != NULL)
+    elapsedTime = 0;
+    while (elapsedTime < tick_size && current != NULL)
     {
         server_send(T_ANSWER(current)->user, T_ANSWER(current)->message);
         tmp = current;
         current = current->next;
         item_delete(s->answer_list, tmp);
+        gettimeofday(&iter, NULL);
+        elapsedTime = (iter.tv_sec - start->tv_sec) * 1000000;
+        elapsedTime = elapsedTime + (iter.tv_usec - start->tv_usec);
     }
-    if (inter > 0)
-        usleep(inter);
+    
+    if (elapsedTime < tick_size)
+        usleep(tick_size - elapsedTime);
 }
 
 
