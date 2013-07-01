@@ -6,10 +6,10 @@
 ##
 ## Started on  Fri Mar 01 09:38:17 2013 Marin Alcaraz
 <<<<<<< HEAD
-## Last update Mon Jun 24 15:43:47 2013 Marin Alcaraz
+## Last update Mon Jul 01 17:31:55 2013 Marin Alcaraz
 =======
-## Last update Thu Jun 20 18:44:50 2013 ivan ignatiev
->>>>>>> 3c403fadcb8a6b04ff253e7b23069deb2af5754a
+## Last update Mon Jul 01 17:21:39 2013 ivan ignatiev
+>>>>>>> 136759b1538d357ab75ee723d5f021ffd217b3a6
 ##
 
 SNAME	=	server
@@ -22,14 +22,19 @@ SSRC	=	server.c 						\
 			options_parsing.c 				\
 			item.c 							\
 			server_functions.c 				\
+			graph_command.c 				\
 			cli_command_parse.c 			\
 			list.c 							\
+			broadcast.c 				    \
 			error.c  						\
+			users.c 						\
 			connection_utils.c  			\
 			proto_commands_items.c 			\
 			proto_commands_net.c 			\
 			proto_commands_movement.c 		\
 			trantor.c 						\
+			request.c 						\
+			answer.c 						\
 			main.c
 
 SOBJ	=	$(SSRC:.c=.o)
@@ -68,7 +73,7 @@ ECHO	=	echo -e
 all	: $(SNAME) $(CAINAME) $(CNAME) $(WNAME)
 
 $(SNAME) : $(SOBJ)
-	$(CC) $(SOBJ) $(CFLAGS) -o $(SNAME)
+	$(CC) $(SOBJ) $(CFLAGS) -o $(SNAME) -lm
 	@$(ECHO) '\033[0;33m> Server Compiled\033[0m'
 
 $(CNAME) : $(COBJ)

@@ -5,7 +5,7 @@
 ## Login   <alcara_m@epitech.net>
 ##
 ## Started on  Fri Mar 01 09:38:17 2013 Marin Alcaraz
-## Last update Mon Jul 01 17:31:55 2013 Marin Alcaraz
+## Last update Mon Jul 01 17:54:39 2013 Marin Alcaraz
 ##
 
 SNAME	=	server
@@ -18,6 +18,7 @@ SSRC	=	server.c 						\
 			options_parsing.c 				\
 			item.c 							\
 			server_functions.c 				\
+			graph_command.c 				\
 			cli_command_parse.c 			\
 			list.c 							\
 			broadcast.c 				    \
