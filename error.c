@@ -15,7 +15,6 @@ void  error_put(char *s)
   int i;
 
   i = 0;
-  write(STDERR_FILENO, "Error: ", 7);
   while (s[i] != 0)
   {
     write(STDERR_FILENO, &s[i], 1);
@@ -32,7 +31,7 @@ int       error_log(char *loc, char *func, char *msg)
   log_stream = fopen("error.log", "a");
   if (log_stream == NULL)
   {
-    error_put("'error_log' fails to store error [ ");
+    error_put("Error: 'error_log' fails to store error [");
     fprintf(stderr, "%s fails in %s]\n", func, loc);
     return (-1);
   }
@@ -46,11 +45,12 @@ int       error_log(char *loc, char *func, char *msg)
 
 int   error_show(char *loc, char *func, char *msg)
 {
+  write(STDERR_FILENO, "Error: ", 7);
   error_put(msg);
-  if (error_log(loc, func, msg) != -1)
-    return 1;
-  else
-    return -1;
+  write(STDERR_FILENO, "\n", 1);
+  if (error_log(loc, func, msg) == -1)
+    return (-1);
+  return (1);
 }
 
 int       log_access(const char *ip)
