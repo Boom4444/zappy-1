@@ -5,7 +5,7 @@
 ** Login   <alcara_m@epitech.net>
 ** 
 ** Started on  Thu Jun 13 16:26:19 2013 Marin Alcaraz
-** Last update Thu Jun 13 19:07:17 2013 Marin Alcaraz
+** Last update Mon Jul 01 17:49:40 2013 Marin Alcaraz
 */
 
 #include "proto_commands_movement.h"
@@ -25,35 +25,75 @@ static t_steps 	g_steps[]=
 
 void    		cli_avance(t_request_data *rqd, t_server *t, t_world *w)
 {
-	
-	(void) w;
-	rqd->user->posx += g_steps[rqd->user->direction].x; 
-	rqd->user->posy += g_steps[rqd->user->direction].y; 
+    //item_delete(w->surface[rqd->user->posy][rqd->user->posx].players, rqd->user);
+	rqd->user->posx += g_steps[rqd->user->direction].x;
+	rqd->user->posy += g_steps[rqd->user->direction].y;
+    item_pf(w->surface[rqd->user->posy][rqd->user->posx].players, rqd->user, sizeof(t_user));
     cli_answer(rqd->user, t, "OK\n");
 }
 
-void    cli_droite(t_request_data *rqd, t_server *t, t_world *w)
+void        cli_droite(t_request_data *rqd, t_server *t, t_world *w)
 {
-    (void) (w);
-    (void) (t);
-    (void) (rqd);
-    printf("droite\n");
+    (void)  (w);
+
+	if (rqd->user->direction == TOP)
+        rqd->user->direction = MID_RIGHT;
+	else if (rqd->user->direction == MID_RIGHT)
+        rqd->user->direction = BOT_MID;
+	else if (rqd->user->direction == BOT_MID)
+        rqd->user->direction = MID_LEFT;
+	else if (rqd->user->direction == MID_LEFT)
+        rqd->user->direction = TOP;
+	else if (rqd->user->direction == TOP_RIGHT)
+        rqd->user->direction = BOT_RIGHT;
+	else if (rqd->user->direction == BOT_RIGHT)
+        rqd->user->direction = BOT_LEFT;
+	else if (rqd->user->direction == BOT_LEFT)
+        rqd->user->direction = TOP_LEFT;
+	else if (rqd->user->direction == TOP_LEFT)
+        rqd->user->direction = TOP_RIGHT;
+    cli_answer(rqd->user, t, "OK\n");
 }
 
-void    cli_gauche(t_request_data *rqd, t_server *t, t_world *w)
+void        cli_gauche(t_request_data *rqd, t_server *t, t_world *w)
 {
     (void) (w);
-    (void) (t);
-    (void) (rqd);
-    printf("gauche\n");
+
+	if (rqd->user->direction == TOP)
+        rqd->user->direction = MID_LEFT;
+	else if (rqd->user->direction == MID_RIGHT)
+        rqd->user->direction = TOP;
+	else if (rqd->user->direction == BOT_MID)
+        rqd->user->direction = MID_RIGHT;
+	else if (rqd->user->direction == MID_LEFT)
+        rqd->user->direction = BOT_MID;
+	else if (rqd->user->direction == TOP_RIGHT)
+        rqd->user->direction = TOP_LEFT;
+	else if (rqd->user->direction == BOT_RIGHT)
+        rqd->user->direction = TOP_RIGHT;
+	else if (rqd->user->direction == BOT_LEFT)
+        rqd->user->direction = BOT_RIGHT;
+	else if (rqd->user->direction == TOP_LEFT)
+        rqd->user->direction = BOT_LEFT;
+    cli_answer(rqd->user, t, "OK\n");
 }
 
-void    cli_broadcast(t_request_data *rqd, t_server *t, t_world *w)
+void        cli_broadcast(t_request_data *rqd, t_server *t, t_world *w)
 {
-    (void) (w);
-    (void) (t);
-    (void) (rqd);
-    printf("broadcast\n");
+    (void)  w;
+    t_item  *current_item;
+
+    current_item = t->client_list->head;
+    printf("CABRON\n");
+    while (current_item != NULL)
+    {
+        printf("CLI_PROTO: %d \n", (T_USER(current_item->cont)->protocol));
+        if ((T_USER(current_item->cont)->protocol == CLI_PROTO)
+            && T_USER(current_item->cont) != rqd->user)
+            broadcast_to(T_USER(current_item->cont), rqd, t);
+        current_item = current_item->next;
+    }
+    cli_answer(rqd->user, t, "OK\n");
 }
 
 void    cli_voir(t_request_data *rqd, t_server *t, t_world *w)

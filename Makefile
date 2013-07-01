@@ -5,7 +5,7 @@
 ## Login   <alcara_m@epitech.net>
 ##
 ## Started on  Fri Mar 01 09:38:17 2013 Marin Alcaraz
-## Last update Wed Jun 26 12:13:09 2013 Marin Alcaraz
+## Last update Mon Jul 01 17:31:55 2013 Marin Alcaraz
 ##
 
 SNAME	=	server
@@ -20,6 +20,7 @@ SSRC	=	server.c 						\
 			server_functions.c 				\
 			cli_command_parse.c 			\
 			list.c 							\
+			broadcast.c 				    \
 			error.c  						\
 			users.c 						\
 			connection_utils.c  			\
@@ -67,7 +68,7 @@ ECHO	=	echo -e
 all	: $(SNAME) $(CAINAME) $(CNAME) $(WNAME)
 
 $(SNAME) : $(SOBJ)
-	$(CC) $(SOBJ) $(CFLAGS) -o $(SNAME)
+	$(CC) $(SOBJ) $(CFLAGS) -o $(SNAME) -lm
 	@$(ECHO) '\033[0;33m> Server Compiled\033[0m'
 
 $(CNAME) : $(COBJ)

@@ -1,11 +1,11 @@
 /*
-** proto.c for zappy in /home/ignatiev/Projects/zappy
+** proto.c for zappy in /home/hero/zappy
 ** 
 ** Made by Marin Alcaraz
 ** Login   <alcara_m@epitech.net>
 ** 
 ** Started on  Wed Jun 12 16:34:40 2013 Marin Alcaraz
-** Last update Wed Jun 26 16:59:43 2013 ivan ignatiev
+** Last update Mon Jul 01 17:48:36 2013 Marin Alcaraz
 */
 
 #include        "server.h"

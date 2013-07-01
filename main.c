@@ -5,7 +5,7 @@
 ** Login   <alcara_m@epitech.net>
 ** 
 ** Started on  Fri Mar 15 16:48:12 2013 Marin Alcaraz
-** Last update Wed Jun 26 11:34:47 2013 Marin Alcaraz
+** Last update Mon Jul 01 17:32:31 2013 Marin Alcaraz
 */
 
 #include <stdio.h>
@@ -42,7 +42,7 @@ int         main(int argc, char *argv[])
   options_parse(argc, argv, &(s.options));
   init_world(&w,s.options.width, s.options.height);
   generate_resource(&w,s.options.width, s.options.height);
-  display_world(&w,s.options.width, s.options.height);
+  //display_world(&w,s.options.width, s.options.height);
   server_start(&s, &w);
   /** TODO FREE RESOURCES **/
   //list_delete(opt.names); DEPRECATED
