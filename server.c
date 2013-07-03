@@ -1,11 +1,11 @@
 /*
-** server.c for zappy in /home/ignatiev/Projects/zappy
+** server.c for zappy in /home/hero/zappy
 ** 
 ** Made by Marin Alcaraz
 ** Login   <alcara_m@epitech.net>
 ** 
 ** Started on  Tue May 21 09:42:30 2013 Marin Alcaraz
-** Last update Tue Jun 25 18:48:34 2013 ivan ignatiev
+** Last update Wed Jul 03 10:48:06 2013 Marin Alcaraz
 */
 
 #include                <sys/time.h>
@@ -44,15 +44,19 @@ int                     server_start(t_server *s, t_world *w)
     struct timeval      start_loop;
     struct timeval      stop_loop;
     unsigned long long    elapsedTime;
-    
+
     server_init(s);
     init_sockadd(&s_in, s->options.port);
-    
     if (bind(s->server_fd,
-                (const struct sockaddr *)&s_in, 
+                (const struct sockaddr *)&s_in,
                 sizeof(s_in)) == -1)
-        error_log("server_start", "bind", strerror(errno));
-    
+    {
+        if (error_show("server_start", "bind", strerror(errno)) == 1)
+        {
+            close(s->options.port);
+            return (EXIT_FAILURE);
+        }
+    }
     listen(s->server_fd, QUEUE_LIMIT);
     result = 0;
     while(result == 0)

@@ -5,7 +5,7 @@
 ** Login   <alcara_m@epitech.net>
 ** 
 ** Started on  Thu Jun 13 16:26:19 2013 Marin Alcaraz
-** Last update Mon Jul 01 17:49:40 2013 Marin Alcaraz
+** Last update Wed Jul 03 15:33:07 2013 Marin Alcaraz
 */
 
 #include "proto_commands_movement.h"
@@ -84,10 +84,8 @@ void        cli_broadcast(t_request_data *rqd, t_server *t, t_world *w)
     t_item  *current_item;
 
     current_item = t->client_list->head;
-    printf("CABRON\n");
     while (current_item != NULL)
     {
-        printf("CLI_PROTO: %d \n", (T_USER(current_item->cont)->protocol));
         if ((T_USER(current_item->cont)->protocol == CLI_PROTO)
             && T_USER(current_item->cont) != rqd->user)
             broadcast_to(T_USER(current_item->cont), rqd, t);

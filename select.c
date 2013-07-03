@@ -1,11 +1,11 @@
 /*
-** select.c for zappy in /home/ignatiev/Projects/zappy
+** select.c for zappy in /home/hero/zappy
 ** 
 ** Made by ivan ignatiev
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Sat Apr 27 14:58:48 2013 ivan ignatiev
-** Last update Wed Jun 26 17:00:33 2013 ivan ignatiev
+** Last update Wed Jul 03 11:33:16 2013 Marin Alcaraz
 */
 
 #include    "select.h"
@@ -91,7 +91,7 @@ int			        select_do(t_server *s, t_world *w)
   FD_ZERO(&fdset);
   FD_SET(s->server_fd, &fdset);
   tv.tv_sec = 0;
-  tv.tv_usec = 10;
+  tv.tv_usec = 200;
   maxfd = select_create_fdset(s, &fdset, s->server_fd);
   if (select(maxfd + 1, &fdset, NULL, NULL, &tv) < 0)
       return (error_log("select_do", "select", strerror(errno)));
