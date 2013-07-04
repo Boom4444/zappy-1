@@ -5,7 +5,7 @@
 ** Login   <alcara_m@epitech.net>
 ** 
 ** Started on  Fri Mar 15 16:48:12 2013 Marin Alcaraz
-** Last update Mon Jul 01 17:32:31 2013 Marin Alcaraz
+** Last update Thu Jul 04 16:23:31 2013 Marin Alcaraz
 */
 
 #include <stdio.h>
@@ -20,8 +20,8 @@
 void  server_settings_init(t_opt *opt)
 {
   opt->port = 3528;
-  opt->width = 600;
-  opt->height = 600;
+  opt->width = 10;
+  opt->height = 11;
   opt->cmax = 2;
   opt->tdelay = 0;
   opt->names = list_init();
@@ -42,7 +42,7 @@ int         main(int argc, char *argv[])
   options_parse(argc, argv, &(s.options));
   init_world(&w,s.options.width, s.options.height);
   generate_resource(&w,s.options.width, s.options.height);
-  //display_world(&w,s.options.width, s.options.height);
+  display_world(&w, s.options.width, s.options.height);
   server_start(&s, &w);
   /** TODO FREE RESOURCES **/
   //list_delete(opt.names); DEPRECATED

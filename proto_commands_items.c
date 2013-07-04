@@ -5,7 +5,7 @@
 ** Login   <alcara_m@epitech.net>
 ** 
 ** Started on  Thu Jun 13 16:28:40 2013 Marin Alcaraz
-** Last update Wed Jun 26 15:50:06 2013 Marin Alcaraz
+** Last update Thu Jul 04 09:02:06 2013 Marin Alcaraz
 */
 
 #include "trantor.h"
@@ -42,7 +42,7 @@ void    cli_pose(t_request_data *rqd, t_server *t, t_world *w)
 {
     int     item;
     (void) (t);
-	
+
     item = (rqd->user)->inventory[atoi(rqd->argv[0])]--;
     (w->surface[rqd->user->posy]
                [rqd->user->posx]).resources[item]++;

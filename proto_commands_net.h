@@ -1,11 +1,11 @@
 /*
-** proto_commands_net.h for zappy in /home/ignatiev/Projects/zappy
+** proto_commands_net.h for zappy in /home/hero/zappy
 ** 
 ** Made by Marin Alcaraz
 ** Login   <alcara_m@epitech.net>
 ** 
 ** Started on  Thu Jun 13 16:35:15 2013 Marin Alcaraz
-** Last update Thu Jun 20 18:59:41 2013 ivan ignatiev
+** Last update Thu Jul 04 10:36:35 2013 Marin Alcaraz
 */
 
 #ifndef PROTO_COMMANDS_NET_H_
@@ -14,6 +14,7 @@
 #include "server.h"
 #include "request.h"
 
+void    expulse_square(int, int, t_request_data *, t_world *);
 void    cli_expulse(t_request_data *rqd, t_server *t, t_world *w);
 void    cli_incantation(t_request_data *rqd, t_server *t, t_world *w);
 void    cli_fork_player(t_request_data *rqd, t_server *t, t_world *w);

@@ -5,7 +5,7 @@
 ** Login   <alcara_m@epitech.net>
 ** 
 ** Started on  Thu Jun 20 17:38:38 2013 Marin Alcaraz
-** Last update Wed Jun 26 11:24:13 2013 Marin Alcaraz
+** Last update Thu Jul 04 10:06:55 2013 Marin Alcaraz
 */
 
 #ifndef TRANTOR_H_
@@ -33,6 +33,8 @@ typedef struct  s_square_unit
 typedef struct      s_world
 {
     t_square_unit   **surface;
+    int             width;
+    int             height;
 }                   t_world;
 
 int        init_world(t_world *w, int width, int height);

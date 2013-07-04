@@ -5,7 +5,7 @@
 ** Login   <alcara_m@epitech.net>
 ** 
 ** Started on  Thu Jun 13 16:26:19 2013 Marin Alcaraz
-** Last update Wed Jul 03 15:33:07 2013 Marin Alcaraz
+** Last update Thu Jul 04 10:23:09 2013 Marin Alcaraz
 */
 
 #include "proto_commands_movement.h"
@@ -25,9 +25,18 @@ static t_steps 	g_steps[]=
 
 void    		cli_avance(t_request_data *rqd, t_server *t, t_world *w)
 {
+    int     new_position_x;
+    int     new_position_y;
+
     //item_delete(w->surface[rqd->user->posy][rqd->user->posx].players, rqd->user);
-	rqd->user->posx += g_steps[rqd->user->direction].x;
-	rqd->user->posy += g_steps[rqd->user->direction].y;
+    new_position_x = (rqd->user->posx + g_steps[rqd->user->direction].x);
+    new_position_y = (rqd->user->posy + g_steps[rqd->user->direction].y);
+    if (new_position_x > w->width)
+        new_position_x = new_position_x % w->width;
+    if (new_position_y > w->height)
+        new_position_y = new_position_y % w->height;
+	rqd->user->posx = new_position_x;
+	rqd->user->posy = new_position_y;
     item_pf(w->surface[rqd->user->posy][rqd->user->posx].players, rqd->user, sizeof(t_user));
     cli_answer(rqd->user, t, "OK\n");
 }

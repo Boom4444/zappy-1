@@ -5,7 +5,7 @@
 ## Login   <alcara_m@epitech.net>
 ##
 ## Started on  Fri Mar 01 09:38:17 2013 Marin Alcaraz
-## Last update Mon Jul 01 17:54:39 2013 Marin Alcaraz
+## Last update Thu Jul 04 10:35:30 2013 Marin Alcaraz
 ##
 
 SNAME	=	server
@@ -15,6 +15,7 @@ SSRC	=	server.c 						\
 			options_errors.c 				\
 			options.c 						\
 			proto.c 						\
+			expulse.c 						\
 			options_parsing.c 				\
 			item.c 							\
 			server_functions.c 				\

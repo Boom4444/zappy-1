@@ -5,7 +5,7 @@
 ** Login   <alcara_m@epitech.net>
 ** 
 ** Started on  Mon Jul 01 14:23:40 2013 Marin Alcaraz
-** Last update Wed Jul 03 17:15:21 2013 Marin Alcaraz
+** Last update Wed Jul 03 17:37:49 2013 Marin Alcaraz
 */
 
 #include <math.h>
@@ -86,5 +86,6 @@ int             broadcast_to(t_user *user, t_request_data *rqd, t_server *t)
     alpha = generate_offsets(point_data, rqd, user, t);
     direction = determine_direction(alpha);
     direction = (8 - user->direction + direction) % 8;
+    sleep(10);
     return (direction);
 }
