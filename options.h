@@ -24,7 +24,10 @@ typedef struct  s_opt
 int     get_nbrlen(int nbr);
 void    the_parse(int argc, char *argv[]);
 void    invalid_find(int argc, char *argv[]);
-void    teams_fill(t_opt *opt);
+
+/* default number of teams */
+void    teams_fill(t_opt *opt, int n);
+
 int     get_nbrlen(int nbr);
 void    options_getopt(int argc, char *argv[], t_opt *g_opt);
 void    negative_error(char *str, char *ptr);

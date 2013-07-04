@@ -24,7 +24,7 @@ void        server_settings_init(t_opt *opt)
   opt->port = 3528;
   opt->width = 10;
   opt->height = 11;
-  opt->cmax = 2;
+  opt->cmax = 10;
   opt->tdelay = 100;
   opt->names = list_init();
 }
