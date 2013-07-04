@@ -1,11 +1,11 @@
 /*
-** select.c for zappy in /home/hero/zappy
+** select.c for zappy in /home/ignatiev/Projects/zappy
 ** 
 ** Made by ivan ignatiev
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Sat Apr 27 14:58:48 2013 ivan ignatiev
-** Last update Wed Jul 03 11:33:16 2013 Marin Alcaraz
+** Last update Thu Jul 04 16:31:06 2013 ivan ignatiev
 */
 
 #include    "select.h"
@@ -37,6 +37,7 @@ t_user      *user_init()
         user->connected = PRE_CONNECTED;
         user->request = NULL;
         user->request_counter = 0;
+        user->tick = 0;
         user->addrlen = sizeof(struct sockaddr_in);
     }
     return (user);
@@ -63,7 +64,6 @@ static int	select_accept_connection(t_server *s, t_world *w)
 static int	select_check_fdset(t_server *s, t_world *w, fd_set *fdset)
 {
   t_item    *current;
-  int       len;
 
   current = (s->client_list)->head;
   while (current != NULL)
@@ -77,8 +77,6 @@ static int	select_check_fdset(t_server *s, t_world *w, fd_set *fdset)
       }
       current = current->next;
   }
-  (void) (len); /** READ FULL MESSAGE ?? **/
-  (void) (w);
   return (0);
 }
 
@@ -91,7 +89,7 @@ int			        select_do(t_server *s, t_world *w)
   FD_ZERO(&fdset);
   FD_SET(s->server_fd, &fdset);
   tv.tv_sec = 0;
-  tv.tv_usec = 200;
+  tv.tv_usec = 10;
   maxfd = select_create_fdset(s, &fdset, s->server_fd);
   if (select(maxfd + 1, &fdset, NULL, NULL, &tv) < 0)
       return (error_log("select_do", "select", strerror(errno)));

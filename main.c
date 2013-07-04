@@ -1,42 +1,47 @@
 /*
-** main.c for zappy in /home/hero/zappy
+** main.c for zappy in /home/ignatiev/Projects/zappy
 ** 
 ** Made by Marin Alcaraz
 ** Login   <alcara_m@epitech.net>
 ** 
 ** Started on  Fri Mar 15 16:48:12 2013 Marin Alcaraz
-** Last update Mon Jul 01 17:32:31 2013 Marin Alcaraz
+** Last update Thu Jul 04 17:41:18 2013 ivan ignatiev
 */
 
-#include <stdio.h>
-#include <sys/time.h>
-#include <sys/types.h>
-#include <signal.h>
-#include <unistd.h>
-#include "options.h"
-#include "server.h"
-#include "proto_commands_items.h"
+#include    <stdio.h>
+#include    <sys/time.h>
+#include    <sys/types.h>
+#include    <signal.h>
+#include    <unistd.h>
+#include    "options.h"
+#include    "server.h"
+#include    "proto_commands_items.h"
 
-void  server_settings_init(t_opt *opt)
+int         *g_server_result;
+
+void        server_settings_init(t_opt *opt)
 {
   opt->port = 3528;
   opt->width = 600;
   opt->height = 600;
   opt->cmax = 2;
-  opt->tdelay = 0;
+  opt->tdelay = 100;
   opt->names = list_init();
 }
 
-void                sigint_handler(int sig)
+void        sigint_handler(int sig)
 {
     (void) sig;
+    *g_server_result = 1;
 }
 
 int         main(int argc, char *argv[])
 {
-  t_server  s;
-  t_world   w;
+  t_server      s;
+  t_world       w;
 
+  s.result = 0;
+  g_server_result = &s.result;
   signal(SIGINT, sigint_handler);
   server_settings_init(&(s.options));
   options_parse(argc, argv, &(s.options));

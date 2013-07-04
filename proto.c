@@ -1,11 +1,11 @@
 /*
-** proto.c for zappy in /home/hero/zappy
+** proto.c for zappy in /home/ignatiev/Projects/zappy
 ** 
 ** Made by Marin Alcaraz
 ** Login   <alcara_m@epitech.net>
 ** 
 ** Started on  Wed Jun 12 16:34:40 2013 Marin Alcaraz
-** Last update Mon Jul 01 17:48:36 2013 Marin Alcaraz
+** Last update Thu Jul 04 17:19:34 2013 ivan ignatiev
 */
 
 #include        "server.h"
@@ -15,6 +15,7 @@
 #include        "graph_command.h"
 #include        "proto.h"
 #include        "error.h"
+#include        "item.h"
 
 void            cli_parse(t_user *u, t_server *s, t_world *w)
 {
@@ -38,15 +39,19 @@ void            cli_parse(t_user *u, t_server *s, t_world *w)
                 return ;
             }
 
-            if ((request = cli_request_parse(u)) != NULL)
+            if ((request = cli_request_parse(s, u)) != NULL)
             {
-                printf("request accepted \n");
+                printf("request accepted %llu tick\n", s->tick);
                 request->data->user->request_counter++;
                 item_pb(s->request_list, (void*)request, sizeof(t_request));
             }
-
             u->request = NULL;
         }
+    }
+    else
+    {
+        close(u->clientfd);
+        item_delete_by_content(s->client_list, (void*)u);
     }
 }
 
@@ -61,6 +66,11 @@ void        graph_parse(t_user *u, t_server *s, t_world *w)
     {
         buf[rb] = '\0';
         graph_command_exec(u, s, w, buf);
+    }
+    else
+    {
+        close(u->clientfd);
+        item_delete_by_content(s->client_list, (void*)u);
     }
 }
 

@@ -1,11 +1,11 @@
 /*
-** server.h for zappy in /home/hero/zappy
+** server.h for zappy in /home/ignatiev/Projects/zappy
 ** 
 ** Made by Marin Alcaraz
 ** Login   <alcara_m@epitech.net>
 ** 
 ** Started on  Sun May 26 18:53:05 2013 Marin Alcaraz
-** Last update Wed Jun 26 14:28:06 2013 Marin Alcaraz
+** Last update Thu Jul 04 17:37:06 2013 ivan ignatiev
 ** Last update Tue Jun 25 16:25:00 2013 Marin Alcaraz
 */
 
@@ -39,8 +39,9 @@ typedef  struct     s_server
   t_list            *team_list;
   t_opt             options;
   int               server_fd;
-  clock_t           diff;
-  clock_t           tick;
+  int               diff;
+  unsigned long long tick;
+  int               result;
 }                   t_server;
 
 int         server_handshake(int);

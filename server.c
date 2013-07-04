@@ -1,11 +1,11 @@
 /*
-** server.c for zappy in /home/hero/zappy
+** server.c for zappy in /home/ignatiev/Projects/zappy
 ** 
 ** Made by Marin Alcaraz
 ** Login   <alcara_m@epitech.net>
 ** 
 ** Started on  Tue May 21 09:42:30 2013 Marin Alcaraz
-** Last update Wed Jul 03 10:48:06 2013 Marin Alcaraz
+** Last update Thu Jul 04 17:40:35 2013 ivan ignatiev
 */
 
 #include                <sys/time.h>
@@ -37,13 +37,27 @@ void                    server_init(t_server *s)
     s->diff = 0;
 }
 
+void                    server_stop(t_server *s)
+{
+    t_item              *current;
+
+    printf("Server stop;\n");
+    current = s->client_list->head;
+    while (current != NULL)
+    {
+        close(T_USER(current->cont)->clientfd);
+        current = current->next;
+    }
+    close(s->server_fd);
+}
+
 int                     server_start(t_server *s, t_world *w)
 {
     struct sockaddr_in  s_in;
-    int                 result;
     struct timeval      start_loop;
     struct timeval      stop_loop;
     unsigned long long    elapsedTime;
+    unsigned long long    tick_size;
 
     server_init(s);
     init_sockadd(&s_in, s->options.port);
@@ -58,21 +72,21 @@ int                     server_start(t_server *s, t_world *w)
         }
     }
     listen(s->server_fd, QUEUE_LIMIT);
-    result = 0;
-    while(result == 0)
+    tick_size = 1000000 / s->options.tdelay;
+    while(s->result == 0)
     {
         gettimeofday(&start_loop, NULL);
-        result = select_do(s, w);
+        select_do(s, w);
         cli_requests_process(s, w);
-        cli_answers_process(s, &start_loop, 5000);
+        cli_answers_process(s, &start_loop, tick_size);
         gettimeofday(&stop_loop, NULL);
         elapsedTime = (stop_loop.tv_sec - start_loop.tv_sec) * 1000000;
         elapsedTime = elapsedTime + (stop_loop.tv_usec - start_loop.tv_usec);
         if (s->diff)
-                printf("%lf sec.\n", (double) elapsedTime / 1000000.0);
+            printf("%lf sec. %llu tick.\n", (double) elapsedTime / 1000000.0, s->tick);
         s->diff = 0;
         ++s->tick;
     }
-    close(s->server_fd);
+    server_stop(s);
     return (0);
 }

@@ -5,7 +5,7 @@
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Thu Jun 13 18:43:36 2013 ivan ignatiev
-** Last update Wed Jun 26 17:00:20 2013 ivan ignatiev
+** Last update Thu Jul 04 16:19:23 2013 ivan ignatiev
 */
 
 #ifndef REQUEST_H_
@@ -16,12 +16,12 @@
 # define T_REQUEST(request)         ((t_request*)(request->cont))
 
 
-typedef struct  s_request_data
+typedef struct          s_request_data
 {
-    t_user      *user;
-    char        *message;
-    void        **argv;
-}               t_request_data;
+    t_user              *user;
+    char                *message;
+    void                **argv;
+}                       t_request_data;
 
 typedef struct          s_request_type t_request_type;
 
@@ -39,16 +39,16 @@ typedef struct          s_request_type
     t_proto_func        func;
 }                       t_request_type;
 
-typedef struct  s_request
+typedef struct          s_request
 {
-    t_request_type    *type;
-    t_request_data  *data;
-    int             current_time;
-}               t_request;
+    t_request_type      *type;
+    t_request_data      *data;
+    unsigned long long  tick;
+}                       t_request;
 
 t_request_data          *cli_request_data_init(char *message, int argc);
 t_request               *cli_request_init();
-t_request               *cli_request_parse(t_user *user);
+t_request               *cli_request_parse(t_server *s, t_user *user);
 void                    cli_requests_process(t_server *s, t_world *w);
 
 #endif /* !REQUEST_H_ */

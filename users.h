@@ -1,11 +1,11 @@
 /*
-** users.h for zappy in /home/hero/zappy
+** users.h for zappy in /home/ignatiev/Projects/zappy
 ** 
 ** Made by ivan ignatiev
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Sat Apr 27 17:03:35 2013 ivan ignatiev
-** Last update Wed Jun 26 16:03:01 2013 Marin Alcaraz
+** Last update Thu Jul 04 12:50:44 2013 ivan ignatiev
 */
 
 #ifndef USERS_H_
@@ -41,18 +41,18 @@
 
 typedef struct		s_user
 {
-  int			clientfd;
-  int			connected;
+  int			        clientfd;
+  int			        connected;
   int                   protocol;
   struct sockaddr_in	addr;
-  socklen_t		addrlen;
+  socklen_t		        addrlen;
   char                  *request;
 
   int                   posx;
   int                   posy;
   int                   direction;
-
-  char			team[NAME_LIMIT];
+  unsigned long long    tick;
+  char			        team[NAME_LIMIT];
   int                   inventory[ARTICLES_LIMIT];
   int                   request_counter;
 }			            t_user;

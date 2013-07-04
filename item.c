@@ -5,7 +5,7 @@
 ** Login   <kuznet_o@epitech.net>
 **
 ** Started on  Wed Jun  05 19:21:34 2013 oleg kuznietsov
-** Last update Wed Jun 26 18:42:28 2013 ivan ignatiev
+** Last update Thu Jul 04 17:13:52 2013 ivan ignatiev
 */
 
 #include "list.h"
@@ -73,32 +73,58 @@ int       item_pb(t_list *list, void *data, int size)
   return 1;
 }
 
-void      item_delete(t_list *list, t_item *item)
+void        item_delete(t_list *list, t_item *item)
 {
-  t_item  *current = NULL;
+    t_item  *current = NULL;
 
-  if (list != NULL && item != NULL)
-  {
-    current = list->head;
-    while (current != NULL)
+    if (list != NULL && item != NULL)
     {
-      if (current == item)
-      {
-        if (list->head == current)
-            list->head = current->next;
-        if (list->tail == current)
-            list->tail = current->prev;
-        if (current->prev != NULL)
-          current->prev->next = current->next;
-        if (current->next != NULL)
-          current->next->prev = current->prev;
-  /*      if (item->cont != NULL)
-          free(item->cont);*/
-        free(item);
-        list->len -= 1;
-        return ;
-      }
-      current = current->next;
+        current = list->head;
+        while (current != NULL)
+        {
+            if (current == item)
+            {
+                if (list->head == current)
+                    list->head = current->next;
+                if (list->tail == current)
+                    list->tail = current->prev;
+                if (current->prev != NULL)
+                    current->prev->next = current->next;
+                if (current->next != NULL)
+                    current->next->prev = current->prev;
+                free(item);
+                list->len -= 1;
+                return ;
+            }
+            current = current->next;
+        }
     }
-  }
+}
+
+void        item_delete_by_content(t_list *list, void *item)
+{
+    t_item  *current = NULL;
+
+    if (list != NULL && item != NULL)
+    {
+        current = list->head;
+        while (current != NULL)
+        {
+            if (current->cont == item)
+            {
+                if (list->head == current)
+                    list->head = current->next;
+                if (list->tail == current)
+                    list->tail = current->prev;
+                if (current->prev != NULL)
+                    current->prev->next = current->next;
+                if (current->next != NULL)
+                    current->next->prev = current->prev;
+                free(item);
+                list->len -= 1;
+                return ;
+            }
+            current = current->next;
+        }
+    }
 }
