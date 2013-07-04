@@ -1,15 +1,22 @@
 /*
-** proto_commands_movement.c for zappy in /home/hero/zappy
+** proto_commands_movement.c for zappy in /home/ignatiev/Projects/zappy
 ** 
 ** Made by Marin Alcaraz
 ** Login   <alcara_m@epitech.net>
 ** 
 ** Started on  Thu Jun 13 16:26:19 2013 Marin Alcaraz
-** Last update Wed Jul 03 15:33:07 2013 Marin Alcaraz
+** Last update Thu Jul 04 21:37:28 2013 ivan ignatiev
 */
 
-#include "proto_commands_movement.h"
-#include "answer.h"
+#include        "main.h"
+#include        "list.h"
+#include        "options.h"
+#include        "trantor.h"
+#include        "server.h"
+#include        "users.h"
+#include        "request.h"
+#include        "answer.h"
+#include        "proto_commands_movement.h"
 
 static t_steps 	g_steps[]=
 {
@@ -86,9 +93,9 @@ void        cli_broadcast(t_request_data *rqd, t_server *t, t_world *w)
     current_item = t->client_list->head;
     while (current_item != NULL)
     {
-        if ((T_USER(current_item->cont)->protocol == CLI_PROTO)
-            && T_USER(current_item->cont) != rqd->user)
-            broadcast_to(T_USER(current_item->cont), rqd, t);
+        if ((T_PLAYER(current_item->cont)->protocol == CLI_PROTO)
+            && T_PLAYER(current_item->cont) != rqd->user)
+            broadcast_to(T_PLAYER(current_item->cont), rqd, t);
         current_item = current_item->next;
     }
     cli_answer(rqd->user, t, "OK\n");

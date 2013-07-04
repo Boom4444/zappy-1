@@ -1,13 +1,15 @@
 /*
-** options_parsing.c for Zappy in /home/el/Zappy/Main
+** options_parsing.c for zappy in /home/ignatiev/Projects/zappy
 **
 ** Made by oleg kuznietsov
 ** Login   <kuznet_o@epitech.eu>
 **
 ** Started on  Fri Jun  07 00:49:53 2013 oleg kuznietsov
-** Last update Fri Jun  07 00:49:53 2013 oleg kuznietsov
+** Last update Thu Jul 04 21:14:37 2013 ivan ignatiev
 */
 
+#include "main.h"
+#include "list.h"
 #include "options.h"
 
 void  usage_display(char *str)
@@ -68,7 +70,7 @@ void    the_parse(int argc, char *argv[])
     {
       if (curr[t] == 10)
         lparse_error_1(argv[0]);
-      if (isalnum(curr[t]) == 0 && curr[t] != '-' 
+      if (isalnum(curr[t]) == 0 && curr[t] != '-'
           && curr[t] != ' ' && curr[t] != '_')
         lparse_error_2(argv[0], curr[t]);
       t++;

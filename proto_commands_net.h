@@ -5,14 +5,11 @@
 ** Login   <alcara_m@epitech.net>
 ** 
 ** Started on  Thu Jun 13 16:35:15 2013 Marin Alcaraz
-** Last update Thu Jun 20 18:59:41 2013 ivan ignatiev
+** Last update Thu Jul 04 20:26:42 2013 ivan ignatiev
 */
 
 #ifndef PROTO_COMMANDS_NET_H_
 # define PROTO_COMMANDS_NET_H_
-
-#include "server.h"
-#include "request.h"
 
 void    cli_expulse(t_request_data *rqd, t_server *t, t_world *w);
 void    cli_incantation(t_request_data *rqd, t_server *t, t_world *w);

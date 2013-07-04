@@ -5,10 +5,13 @@
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Thu Jun 13 17:27:55 2013 ivan ignatiev
-** Last update Tue Jun 25 17:35:56 2013 ivan ignatiev
+** Last update Thu Jul 04 21:21:31 2013 ivan ignatiev
 */
 
-#include        <stdlib.h>
+#include        "main.h"
+#include        "list.h"
+#include        "options.h"
+#include        "trantor.h"
 #include        "server.h"
 #include        "users.h"
 #include        "proto.h"

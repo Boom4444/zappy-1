@@ -1,20 +1,15 @@
 /*
-** trantor.h for zappy in /home/hero/zappy
+** trantor.h for zappy in /home/ignatiev/Projects/zappy
 ** 
 ** Made by Marin Alcaraz
 ** Login   <alcara_m@epitech.net>
 ** 
 ** Started on  Thu Jun 20 17:38:38 2013 Marin Alcaraz
-** Last update Wed Jun 26 11:24:13 2013 Marin Alcaraz
+** Last update Thu Jul 04 20:31:48 2013 ivan ignatiev
 */
 
 #ifndef TRANTOR_H_
 # define TRANTOR_H_
-
-#include <stdlib.h>
-#include <time.h>
-#include "list.h"
-#include "error.h"
 
 #define FOOD        0
 #define LINEMATE    1

@@ -1,18 +1,15 @@
 /*
-** list.h for zappy in /home/hero/zappy
+** list.h for zappy in /home/ignatiev/Projects/zappy
 **
 ** Made by oleg kuznietsov
 ** Login   <kuznet_o@epitech.net>
 **
 ** Started on  Wed Jun  05 18:48:34 2013 oleg kuznietsov
-** Last update Wed Jun 26 12:18:53 2013 Marin Alcaraz
+** Last update Thu Jul 04 20:40:02 2013 ivan ignatiev
 */
 
 #ifndef LIST_H_
 # define LIST_H_
-
-#include <stdlib.h>
-#include <string.h>
 
 typedef struct  s_item
 {

@@ -5,31 +5,20 @@
 ** Login   <alcara_m@epitech.net>
 ** 
 ** Started on  Sun May 26 18:53:05 2013 Marin Alcaraz
-** Last update Thu Jul 04 17:37:06 2013 ivan ignatiev
+** Last update Thu Jul 04 20:43:40 2013 ivan ignatiev
 ** Last update Tue Jun 25 16:25:00 2013 Marin Alcaraz
 */
 
 #ifndef SERVER_H_
 # define SERVER_H_
 
-#include    <string.h>
-#include    <stdio.h>
-#include    "list.h"
-#include    <time.h>
-#include    "options.h"
-#include    "connection_utils.h"
-#include    "server_functions.h"
-#include    "error.h"
-#include    "options.h"
-#include    "trantor.h"
-
-#define  QUEUE_LIMIT    10
-#define  SERVER_RUN     1
-#define  LIMIT          2
-#define  SERV_FD        0
-#define  CLI_FD         1
-#define  LIM_X          30
-#define  LIM_y          30
+# define  QUEUE_LIMIT    10
+# define  SERVER_RUN     1
+# define  LIMIT          2
+# define  SERV_FD        0
+# define  CLI_FD         1
+# define  LIM_X          30
+# define  LIM_y          30
 
 typedef  struct     s_server
 {
@@ -47,6 +36,6 @@ typedef  struct     s_server
 int         server_handshake(int);
 void        server_handleclient(struct sockaddr_in *s_client, int *);
 int         server_start(t_server *s, t_world *w);
-int         server_send(t_user *u, char *message);
+int         server_send(int clientfd, char *message);
 
 #endif /* !SERVER_H_ */

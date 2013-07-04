@@ -1,16 +1,21 @@
 /*
-** proto_commands_items.c for zappy in /home/hero/zappy
+** proto_commands_items.c for zappy in /home/ignatiev/Projects/zappy
 ** 
 ** Made by Marin Alcaraz
 ** Login   <alcara_m@epitech.net>
 ** 
 ** Started on  Thu Jun 13 16:28:40 2013 Marin Alcaraz
-** Last update Wed Jun 26 15:50:06 2013 Marin Alcaraz
+** Last update Thu Jul 04 21:32:42 2013 ivan ignatiev
 */
 
+#include "main.h"
+#include "list.h"
+#include "options.h"
 #include "trantor.h"
-#include "proto_commands_items.h"
+#include "server.h"
+#include "users.h"
 #include "request.h"
+#include "proto_commands_items.h"
 #include "answer.h"
 
 void        cli_inventaire(t_request_data *rqd, t_server *t, t_world *w)
@@ -42,7 +47,7 @@ void    cli_pose(t_request_data *rqd, t_server *t, t_world *w)
 {
     int     item;
     (void) (t);
-	
+
     item = (rqd->user)->inventory[atoi(rqd->argv[0])]--;
     (w->surface[rqd->user->posy]
                [rqd->user->posx]).resources[item]++;

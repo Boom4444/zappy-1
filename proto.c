@@ -5,19 +5,25 @@
 ** Login   <alcara_m@epitech.net>
 ** 
 ** Started on  Wed Jun 12 16:34:40 2013 Marin Alcaraz
-** Last update Thu Jul 04 17:19:34 2013 ivan ignatiev
+** Last update Thu Jul 04 21:43:11 2013 ivan ignatiev
 */
 
+#include        "main.h"
+#include        "list.h"
+#include        "options.h"
+#include        "item.h"
+#include        "trantor.h"
 #include        "server.h"
+#include        "users.h"
 #include        "select.h"
 #include        "request.h"
+#include        "answer.h"
 #include        "cli_command_parse.h"
 #include        "graph_command.h"
 #include        "proto.h"
 #include        "error.h"
-#include        "item.h"
 
-void            cli_parse(t_user *u, t_server *s, t_world *w)
+int            cli_parse(t_user_player *u, t_server *s, t_world *w)
 {
     t_request   *request;
     int         rb;
@@ -36,9 +42,8 @@ void            cli_parse(t_user *u, t_server *s, t_world *w)
             if (u->request_counter > REQUESTS_LIMIT)
             {
                 u->request = NULL;
-                return ;
+                return (-1);
             }
-
             if ((request = cli_request_parse(s, u)) != NULL)
             {
                 printf("request accepted %llu tick\n", s->tick);
@@ -47,62 +52,55 @@ void            cli_parse(t_user *u, t_server *s, t_world *w)
             }
             u->request = NULL;
         }
+        return (0);
     }
-    else
-    {
-        close(u->clientfd);
-        item_delete_by_content(s->client_list, (void*)u);
-    }
+    close(u->clientfd);
+    item_delete_by_content(s->client_list, (void*)u);
+    return (-1);
 }
 
-void        graph_parse(t_user *u, t_server *s, t_world *w)
+int        graph_parse(t_user_graph *u, t_server *s, t_world *w)
 {
-    (void) (s);
-    (void) (w);
     int     rb;
     char    buf[PROTO_BUFFER + 1];
 
     if ((rb = recv(u->clientfd, buf, PROTO_BUFFER, MSG_DONTWAIT)) > 0)
     {
         buf[rb] = '\0';
-        graph_command_exec(u, s, w, buf);
+        return (graph_command_exec(u, s, w, buf));
     }
-    else
-    {
-        close(u->clientfd);
-        item_delete_by_content(s->client_list, (void*)u);
-    }
+    close(u->clientfd);
+    item_delete_by_content(s->client_list, (void*)u);
+    return (-1);
 }
 
 int         proto_parse(t_user *u, t_server *s, t_world *w)
 {
     if (u->protocol == CLI_PROTO)
-        cli_parse(u, s, w);
-    else if (u->protocol == GRAPHIC_PROTO)
-        graph_parse(u, s, w);
-    return (0);
+        return (cli_parse((t_user_player*)u, s, w));
+    return (graph_parse((t_user_graph*)u, s, w));
 }
 
-int         proto_define(t_user *u, t_world *w)
+t_user         *proto_define(t_user *u, t_server *s, t_world *w)
 {
     int     rb;
     char    buf[256];
 
     (void) (w);
-    /** TODO: GET COORDINATES **/
     if ((rb = read(u->clientfd, buf, 256)) > 0)
     {
         buf[rb] = '\0';
-
         if (strcmp(buf, "GRAPHIC\n") == 0)
-            u->protocol = GRAPHIC_PROTO;
-        else
+            return ((t_user*)user_graph_init(u));
+        u = (t_user*)user_player_init(u, s);
+        if (team_add_player(s->team_list, (t_user_player*)u, buf) == 0)
         {
-            strcpy(u->team, buf);
-            u->protocol = CLI_PROTO;
+            cli_answer((t_user_player*)u, s, "X Y\n");
+            return (u);
         }
-        u->connected = CONNECTED;
-        return (0);
+        cli_answer((t_user_player*)u, s, "mort\n");
     }
-    return (error_log("proto.c", "proto_define", "Error: Unable to read on client init"));
+    close(u->clientfd);
+    item_delete_by_content(s->client_list, (void*)u);
+    return (NULL);
 }

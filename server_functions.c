@@ -1,13 +1,20 @@
 /*
-** server_functions.c for zappy in /home/hero/zappy
+** server_functions.c for zappy in /home/ignatiev/Projects/zappy
 ** 
 ** Made by Marin Alcaraz
 ** Login   <alcara_m@epitech.net>
 ** 
 ** Started on  Mon May 27 13:47:20 2013 Marin Alcaraz
-** Last update Mon Jun 10 12:44:22 2013 Marin Alcaraz
+** Last update Thu Jul 04 21:16:07 2013 ivan ignatiev
 */
 
+#include "main.h"
+#include "list.h"
+#include "options.h"
+#include "trantor.h"
+#include "server.h"
+#include "connection_utils.h"
+#include "error.h"
 #include "server_functions.h"
 
 char     *server_getTNumber()

@@ -1,13 +1,16 @@
 /*
-** trantor.c for zappy in /home/hero/zappy
+** trantor.c for zappy in /home/ignatiev/Projects/zappy
 ** 
 ** Made by Marin Alcaraz
 ** Login   <alcara_m@epitech.net>
 ** 
 ** Started on  Thu Jun 20 17:33:58 2013 Marin Alcaraz
-** Last update Tue Jun 25 17:33:35 2013 Marin Alcaraz
+** Last update Thu Jul 04 21:38:16 2013 ivan ignatiev
 */
 
+#include    "main.h"
+#include    "list.h"
+#include    "error.h"
 #include    "trantor.h"
 
 int        init_world(t_world *w, int width, int height)
