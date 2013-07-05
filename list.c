@@ -1,13 +1,15 @@
 /*
-** list.c for Zappy in /home/el/Zappy/Main
+** list.c for zappy in /home/ignatiev/Projects/zappy
 **
 ** Made by oleg kuznietsov
 ** Login   <kuznet_o@epitech.net>
 **
 ** Started on  Wed Jun  05 19:21:23 2013 oleg kuznietsov
-** Last update Thu Jun  06 22:23:26 2013 oleg kuznietsov
+** Last update Thu Jul 04 20:40:43 2013 ivan ignatiev
 */
 
+#include <stdlib.h>
+#include <string.h>
 #include "list.h"
 
 t_list    *list_init()

@@ -25,6 +25,7 @@ world
 #
 *.swo
 *.swp
+*.orig
 1
 :w!
 error_log.txt
@@ -32,3 +33,5 @@ access_log.txt
 error.log
 access.log
 /nbproject/private/
+nbproject
+/nbproject

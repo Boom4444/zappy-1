@@ -1,13 +1,15 @@
 /*
-** options.c for Zappy in /home/el/Zappy/Main
+** options.c for zappy in /home/ignatiev/Projects/zappy
 **
 ** Made by oleg kuznietsov
 ** Login   <kuznet_o@epitech.net>
 **
 ** Started on  Fri Jun  07 00:47:46 2013 oleg kuznietsov
-** Last update Fri Jun  07 00:47:46 2013 oleg kuznietsov
+** Last update Thu Jul 04 20:48:14 2013 ivan ignatiev
 */
 
+#include "main.h"
+#include "list.h"
 #include "options.h"
 
 void    default_error(char *argv[])
@@ -90,7 +92,7 @@ void    options_getopt(int argc, char *argv[], t_opt *g_opt)
     if (l_opt == 'y')
       options_get(argv, l_opt, &g_opt->height);
     if (l_opt == 'n')
-      names_parse(argv, l_opt, argc, g_opt);     
+      names_parse(argv, l_opt, argc, g_opt);
     if (l_opt == 'c')
       options_get(argv, l_opt, &g_opt->cmax);
     if (l_opt == 't')

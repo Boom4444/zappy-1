@@ -5,11 +5,16 @@
 ** Login   <alcara_m@epitech.net>
 ** 
 ** Started on  Thu Jun 13 16:31:20 2013 Marin Alcaraz
-** Last update Thu Jul 04 10:41:09 2013 Marin Alcaraz
+** Last update Fri Jul 05 11:14:50 2013 Marin Alcaraz
 */
 
-#include        "users.h"
+#include        "main.h"
+#include        "list.h"
+#include        "options.h"
+#include        "trantor.h"
 #include        "server.h"
+#include        "users.h"
+#include        "request.h"
 #include        "answer.h"
 #include        "proto_commands_net.h"
 #include        "proto_commands_movement.h"
@@ -56,7 +61,6 @@ void    cli_fork_player(t_request_data *rqd, t_server *s, t_world *w)
     (void) (s);
     (void) (rqd);
     printf("fork_player\n");
-    server_send(rqd->user, "OK\n");
 }
 
 void    cli_connect_nbr(t_request_data *rqd, t_server *t, t_world *w)
@@ -65,7 +69,6 @@ void    cli_connect_nbr(t_request_data *rqd, t_server *t, t_world *w)
     (void) (t);
     (void) (rqd);
     printf("connect_nbr\n");
-    server_send(rqd->user, "OK\n");
 }
 
 void    cli_death(t_request_data *rqd, t_server *t, t_world *w)
@@ -74,5 +77,4 @@ void    cli_death(t_request_data *rqd, t_server *t, t_world *w)
     (void) (t);
     (void) (rqd);
     printf("death\n");
-    server_send(rqd->user, "OK\n");
 }

@@ -5,16 +5,16 @@
 ** Login   <alcara_m@epitech.net>
 ** 
 ** Started on  Fri Mar 15 16:48:12 2013 Marin Alcaraz
-** Last update Thu Jul 04 16:47:39 2013 Marin Alcaraz
+** Last update Fri Jul 05 11:13:47 2013 Marin Alcaraz
 */
 
-#include    <stdio.h>
-#include    <sys/time.h>
-#include    <sys/types.h>
-#include    <signal.h>
-#include    <unistd.h>
+#include    "main.h"
+#include    "list.h"
 #include    "options.h"
+#include    "trantor.h"
 #include    "server.h"
+#include    "users.h"
+#include    "request.h"
 #include    "proto_commands_items.h"
 
 int         *g_server_result;

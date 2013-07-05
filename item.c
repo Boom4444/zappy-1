@@ -5,9 +5,10 @@
 ** Login   <kuznet_o@epitech.net>
 **
 ** Started on  Wed Jun  05 19:21:34 2013 oleg kuznietsov
-** Last update Thu Jul 04 17:13:52 2013 ivan ignatiev
+** Last update Thu Jul 04 21:14:55 2013 ivan ignatiev
 */
 
+#include "main.h"
 #include "list.h"
 
 t_item    *item_init()

@@ -1,13 +1,15 @@
 /*
-** connection_utils.c for server in /home/hero/zappy/server
+** connection_utils.c for zappy in /home/ignatiev/Projects/zappy
 ** 
 ** Made by Marin Alcaraz
 ** Login   <alcara_m@epitech.net>
 ** 
 ** Started on  Thu Apr 11 19:09:26 2013 Marin Alcaraz
-** Last update Fri May 24 19:18:18 2013 Marin Alcaraz
+** Last update Thu Jul 04 21:30:07 2013 ivan ignatiev
 */
 
+#include "main.h"
+#include "error.h"
 #include "connection_utils.h"
 
 void    init_sockadd(struct sockaddr_in *sa, int port)
@@ -24,7 +26,7 @@ int         create_socket(void)
 
   pe = getprotobyname("TCP");
   if (pe == (void *)-1)
-    error_log("create_socket", "getprotobyname", 
+    error_log("create_socket", "getprotobyname",
       "Error obtaining protocol, unable to create socket\n");
   fd = socket(AF_INET, SOCK_STREAM, pe->p_proto);
   if (fd == -1)

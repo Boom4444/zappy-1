@@ -1,13 +1,19 @@
 /*
-** error.c for zappy in /home/hero/zappy
+** error.c for zappy in /home/ignatiev/Projects/zappy
 ** 
 ** Made by Marin Alcaraz
 ** Login   <alcara_m@epitech.net>
 * 
 ** Started on  Fri Mar 15 16:42:14 2013 Marin Alcaraz
-** Last update Thu Jun 06 15:51:18 2013 oleg kuznietsov
+** Last update Thu Jul 04 21:25:36 2013 ivan ignatiev
 **/
 
+#include "main.h"
+#include "list.h"
+#include "options.h"
+#include "trantor.h"
+#include "server.h"
+#include "users.h"
 #include "error.h"
 
 void  error_put(char *s)
@@ -89,12 +95,12 @@ int       log_command(char *user_name, char *cmd, int dir)
   slog_time = ctime(&log_time);
   slog_time[strlen(slog_time) - 1] = 0;
   if (dir == 0)
-    fprintf(log_stream, 
-      "%s Sending [%s] from server to \"%s\"\n", 
+    fprintf(log_stream,
+      "%s Sending [%s] from server to \"%s\"\n",
       slog_time, cmd, user_name);
   if (dir == 1)
-    fprintf(log_stream, 
-      "%s Sending [%s] from \"%s\" to server\n", 
+    fprintf(log_stream,
+      "%s Sending [%s] from \"%s\" to server\n",
       slog_time, cmd, user_name);
   else
     return (-1);

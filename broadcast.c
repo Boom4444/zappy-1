@@ -5,10 +5,17 @@
 ** Login   <alcara_m@epitech.net>
 ** 
 ** Started on  Mon Jul 01 14:23:40 2013 Marin Alcaraz
-** Last update Thu Jul 04 19:51:00 2013 Marin Alcaraz
+** Last update Fri Jul 05 11:12:34 2013 Marin Alcaraz
 */
 
 #include <math.h>
+#include        "main.h"
+#include        "list.h"
+#include        "options.h"
+#include        "trantor.h"
+#include        "server.h"
+#include        "users.h"
+#include        "request.h"
 #include "proto_commands_movement.h"
 #include "answer.h"
 
@@ -46,12 +53,12 @@ int     determine_direction(int alpha)
     return (-1);
 }
 
-double  broadcast_get_distance(t_user *u, int x, int y)
+double  broadcast_get_distance(t_user_player *u, int x, int y)
 {
     return (sqrt(pow((u->posx - x), 2) + pow((u->posy - y), 2)));
 }
 
-double          generate_offsets(double offsets[9][3], t_request_data  *rqd, t_user *current, t_server *t)
+double          generate_offsets(double offsets[9][3], t_request_data  *rqd, t_user_player *current, t_server *t)
 {
     int         i;
     int         mini;
@@ -77,7 +84,7 @@ double          generate_offsets(double offsets[9][3], t_request_data  *rqd, t_u
     return ((180.0 * rad) / M_PI);
 }
 
-int             broadcast_to(t_user *user, t_request_data *rqd, t_server *t)
+int             broadcast_to(t_user_player *user, t_request_data *rqd, t_server *t)
 {
     double      alpha;
     double      point_data[9][3];

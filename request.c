@@ -5,9 +5,13 @@
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Thu Jun 20 20:00:46 2013 ivan ignatiev
-** Last update Thu Jul 04 17:35:06 2013 ivan ignatiev
+** Last update Thu Jul 04 21:38:51 2013 ivan ignatiev
 */
 
+#include        "main.h"
+#include        "list.h"
+#include        "options.h"
+#include        "trantor.h"
 #include        "server.h"
 #include        "users.h"
 #include        "request.h"
@@ -65,7 +69,7 @@ t_request               *cli_request_init()
     return (request);
 }
 
-t_request               *cli_request_parse(t_server *s, t_user *user)
+t_request               *cli_request_parse(t_server *s, t_user_player *user)
 {
     t_request           *request;
     int                 i;

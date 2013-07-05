@@ -5,11 +5,13 @@
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Wed Jun 12 17:02:27 2013 Marin Alcaraz
-** Last update Thu Jul 04 19:26:28 2013 Marin Alcaraz
+** Last update Fri Jul 05 11:13:11 2013 Marin Alcaraz
 */
 
-#include        <stdlib.h>
-#include        <string.h>
+#include        "main.h"
+#include        "list.h"
+#include        "options.h"
+#include        "trantor.h"
 #include        "server.h"
 #include        "users.h"
 #include        "graph_command.h"
@@ -28,7 +30,7 @@ static t_graph_command  graph_cmd[] = {
     {NULL, NULL}
 };
 
-int             graph_command_exec(t_user *u, t_server *s, t_world *w,
+int             graph_command_exec(t_user_graph *u, t_server *s, t_world *w,
                                         char *message)
 {
     int         i;

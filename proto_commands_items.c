@@ -5,12 +5,17 @@
 ** Login   <alcara_m@epitech.net>
 ** 
 ** Started on  Thu Jun 13 16:28:40 2013 Marin Alcaraz
-** Last update Thu Jul 04 09:02:06 2013 Marin Alcaraz
+** Last update Fri Jul 05 11:14:12 2013 Marin Alcaraz
 */
 
+#include "main.h"
+#include "list.h"
+#include "options.h"
 #include "trantor.h"
-#include "proto_commands_items.h"
+#include "server.h"
+#include "users.h"
 #include "request.h"
+#include "proto_commands_items.h"
 #include "answer.h"
 
 void        cli_inventaire(t_request_data *rqd, t_server *t, t_world *w)

@@ -5,16 +5,11 @@
 ** Login   <alcara_m@epitech.net>
 ** 
 ** Started on  Thu Jun 20 17:38:38 2013 Marin Alcaraz
-** Last update Thu Jul 04 10:06:55 2013 Marin Alcaraz
+** Last update Fri Jul 05 11:18:41 2013 Marin Alcaraz
 */
 
 #ifndef TRANTOR_H_
 # define TRANTOR_H_
-
-#include <stdlib.h>
-#include <time.h>
-#include "list.h"
-#include "error.h"
 
 #define FOOD        0
 #define LINEMATE    1

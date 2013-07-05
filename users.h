@@ -5,41 +5,56 @@
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Sat Apr 27 17:03:35 2013 ivan ignatiev
-** Last update Thu Jul 04 12:50:44 2013 ivan ignatiev
+** Last update Thu Jul 04 21:29:17 2013 ivan ignatiev
 */
 
 #ifndef USERS_H_
 # define USERS_H_
 
-# include	<stdlib.h>
-# include	<stdio.h>
-# include	<string.h>
-# include	<sys/socket.h>
-# include	<netinet/in.h>
-# include	<arpa/inet.h>
-# include	<unistd.h>
-# include   "list.h"
+# define PRE_CONNECTED	2
+# define CONNECTED		1
+# define DISCONNECTED	0
+# define NAME_LIMIT     256
+# define ARTICLES_LIMIT 7
+# define TEAM_MEMBERS_LIMIT 10
 
-#define PRE_CONNECTED	2
-#define CONNECTED		1
-#define DISCONNECTED	0
-#define NAME_LIMIT     256
-#define ARTICLES_LIMIT 7
-#define GRAPHIC_PROTO  100
-#define CLI_PROTO      200
+# define GRAPHIC_PROTO  100
+# define CLI_PROTO      200
+# define EGG_PROTO      300
+# define NONE_PROTO     400
 
-#define TOP         0
-#define TOP_LEFT    1
-#define MID_LEFT    2
-#define BOT_LEFT    3
-#define BOT_MID     4
-#define BOT_RIGHT   5
-#define MID_RIGHT   6
-#define TOP_RIGHT   7
+# define TOP         0
+# define TOP_LEFT    1
+# define MID_LEFT    2
+# define BOT_LEFT    3
+# define BOT_MID     4
+# define BOT_RIGHT   5
+# define MID_RIGHT   6
+# define TOP_RIGHT   7
 
-#define    T_USER(user) ((t_user *)(user))
+# define T_USER(user) ((t_user *)(user))
+# define T_PLAYER(user) ((t_user_player*)(user))
+# define T_GRAPH(user) ((t_user_graph*)(user))
+# define T_TEAM(team) ((t_team*)((team)->cont))
+
+typedef struct          s_team
+{
+    char                name[NAME_LIMIT];
+    int                 places;
+    int                 members;
+}                       t_team;
 
 typedef struct		s_user
+{
+  int			        clientfd;
+  int			        connected;
+  int                   protocol;
+  struct sockaddr_in	addr;
+  socklen_t		        addrlen;
+  char                  *request;
+}			            t_user;
+
+typedef struct          s_user_player
 {
   int			        clientfd;
   int			        connected;
@@ -50,21 +65,31 @@ typedef struct		s_user
 
   int                   posx;
   int                   posy;
+  int                   level;
   int                   direction;
   unsigned long long    tick;
-  char			        team[NAME_LIMIT];
+  t_team                *team;
   int                   inventory[ARTICLES_LIMIT];
   int                   request_counter;
-}			            t_user;
-
-typedef struct          s_user_player
-{
-
 }                       t_user_player;
 
 typedef struct          s_user_graph
 {
-
+  int			        clientfd;
+  int			        connected;
+  int                   protocol;
+  struct sockaddr_in	addr;
+  socklen_t		        addrlen;
+  char                  *request;
 }                       t_user_graph;
+
+
+t_user      *user_create();
+t_user_player       *user_player_init(t_user *user, t_server *s);
+t_user_graph        *user_graph_init(t_user *user);
+void        user_destroy(t_user *user);
+t_team      *team_create(char *name);
+int        team_add_player(t_list *team_list, t_user_player *user, char *team_name);
+void        team_destroy(t_team *team);
 
 #endif /* !USERS_H_ */

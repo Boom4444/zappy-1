@@ -5,9 +5,12 @@
 ** Login   <alcara_m@epitech.net>
 ** 
 ** Started on  Thu Jun 20 17:33:58 2013 Marin Alcaraz
-** Last update Thu Jul 04 19:49:20 2013 Marin Alcaraz
+** Last update Fri Jul 05 11:18:09 2013 Marin Alcaraz
 */
 
+#include    "main.h"
+#include    "list.h"
+#include    "error.h"
 #include    "trantor.h"
 #define     RESOURCE_LIMIT  10
 

@@ -5,7 +5,7 @@
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Thu Jun 13 18:43:36 2013 ivan ignatiev
-** Last update Thu Jul 04 16:19:23 2013 ivan ignatiev
+** Last update Thu Jul 04 21:20:22 2013 ivan ignatiev
 */
 
 #ifndef REQUEST_H_
@@ -18,7 +18,7 @@
 
 typedef struct          s_request_data
 {
-    t_user              *user;
+    t_user_player       *user;
     char                *message;
     void                **argv;
 }                       t_request_data;
@@ -48,7 +48,7 @@ typedef struct          s_request
 
 t_request_data          *cli_request_data_init(char *message, int argc);
 t_request               *cli_request_init();
-t_request               *cli_request_parse(t_server *s, t_user *user);
+t_request               *cli_request_parse(t_server *s, t_user_player *user);
 void                    cli_requests_process(t_server *s, t_world *w);
 
 #endif /* !REQUEST_H_ */

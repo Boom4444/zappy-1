@@ -5,10 +5,16 @@
 ** Login   <alcara_m@epitech.net>
 ** 
 ** Started on  Tue May 21 09:42:30 2013 Marin Alcaraz
-** Last update Thu Jul 04 16:47:55 2013 Marin Alcaraz
+** Last update Fri Jul 05 11:17:44 2013 Marin Alcaraz
 */
 
-#include                <sys/time.h>
+#include                "main.h"
+#include                "list.h"
+#include                "options.h"
+#include                "connection_utils.h"
+#include                "server_functions.h"
+#include                "error.h"
+#include                "trantor.h"
 #include                "server.h"
 #include                "users.h"
 #include                "request.h"
@@ -21,15 +27,16 @@ int                     server_handshake(int fd)
     return (1);
 }
 
-int                     server_send(t_user *u, char *message)
+int                     server_send(int clientfd, char *message)
 {
-    send(u->clientfd, message, strlen(message), MSG_DONTWAIT);
+    send(clientfd, message, strlen(message), MSG_DONTWAIT);
     return (1);
 }
 
 void                    server_init(t_server *s)
 {
     s->client_list = list_init();
+    s->team_list = list_init();
     s->request_list = list_init();
     s->answer_list = list_init();
     s->server_fd = create_socket();

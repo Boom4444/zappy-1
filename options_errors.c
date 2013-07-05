@@ -1,13 +1,15 @@
 /*
-** options_errors.c for Zappy in /home/el/Zappy/Main
+** options_errors.c for zappy in /home/ignatiev/Projects/zappy
 **
 ** Made by oleg kuznietsov
 ** Login   <kuznet_o@epitech.net>
 **
 ** Started on  Thu Jun  06 22:43:10 2013 oleg kuznietsov
-** Last update Fri Jun  07 00:24:15 2013 oleg kuznietsov
+** Last update Thu Jul 04 20:49:28 2013 ivan ignatiev
 */
 
+#include "main.h"
+#include "list.h"
 #include "options.h"
 
 void  negative_error(char *str, char *ptr)
@@ -31,7 +33,7 @@ void  lparse_error_1(char *str)
   printf("Server argumens can contain only letters");
   printf(" and numbers (+ ' ' '_' characters).\n");
   exit(EXIT_SUCCESS);
-  
+
 }
 
 void  lparse_error_2(char *str, char c)
