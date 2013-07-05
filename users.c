@@ -5,7 +5,7 @@
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Sat Apr 27 14:16:14 2013 ivan ignatiev
-** Last update Fri Jul 05 13:30:24 2013 ivan ignatiev
+** Last update Fri Jul 05 18:34:55 2013 ivan ignatiev
 */
 
 #include    "main.h"
@@ -81,39 +81,40 @@ t_team      *team_create(char *name)
     if ((team = (t_team*)malloc(sizeof(t_team))) != NULL)
     {
         strcpy(team->name, name);
-        team->places = 0;
         team->members = 0;
+        printf("Team created : '%s' \n", team->name);
     }
     return (team);
 }
 
-int        team_add_player(t_list *team_list, t_user_player *user, char *team_name)
+t_team          *team_search(t_list *team_list, char *team_name)
 {
-    t_team  *team;
-    t_item  *current;
+    t_item      *current;
 
     current = team_list->head;
     while (current != NULL)
     {
         if (strcmp(T_TEAM(current)->name, team_name) == 0)
-        {
-            if ((T_TEAM(current)->places - T_TEAM(current)->members) <= 0)
-                return (-1);
-            user->team = T_TEAM(current);
-            ++T_TEAM(current)->members;
-            return (0);
-        }
+            return (T_TEAM(current));
         current = current->next;
     }
-    if ((team = team_create(team_name)) != NULL)
+    return (NULL);
+}
+
+t_list      *team_list_init(t_list *team_list, t_list *team_names)
+{
+    t_team  *team;
+    t_item  *current;
+
+    team_list = list_init();
+    current = team_names->head;
+    while (current != NULL)
     {
-        team->places = 10;
-        team->members = 1;
-        user->team = team;
-        item_pf(team_list, team, sizeof(t_team));
-        return (0);
+        team = team_create((char*)(current->cont));
+        item_pf(team_list, (void*)team, sizeof(t_team));
+        current = current->next;
     }
-    return (-1);
+    return (team_list);
 }
 
 void        team_destroy(t_team *team)

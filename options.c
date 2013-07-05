@@ -5,7 +5,7 @@
 ** Login   <kuznet_o@epitech.net>
 **
 ** Started on  Fri Jun  07 00:47:46 2013 oleg kuznietsov
-** Last update Thu Jul 04 20:48:14 2013 ivan ignatiev
+** Last update Fri Jul 05 18:27:18 2013 ivan ignatiev
 */
 
 #include "main.h"
@@ -61,7 +61,7 @@ void  names_parse(char *argv[], char c, int argc, t_opt *opt)
   }
 }
 
-void  options_get(char *argv[], char c, int *opt)
+void  options_get(char *argv[], char c, unsigned int *opt)
 {
   if (*optarg == '-')
   {

@@ -1,11 +1,11 @@
 /*
-** main.c for zappy in /home/hero/zappy
+** main.c for zappy in /home/ignatiev/Projects/zappy
 ** 
 ** Made by Marin Alcaraz
 ** Login   <alcara_m@epitech.net>
 ** 
 ** Started on  Fri Mar 15 16:48:12 2013 Marin Alcaraz
-** Last update Fri Jul 05 11:13:47 2013 Marin Alcaraz
+** Last update Fri Jul 05 17:36:38 2013 ivan ignatiev
 */
 
 #include    "main.h"
@@ -17,7 +17,7 @@
 #include    "request.h"
 #include    "proto_commands_items.h"
 
-int         *g_server_result;
+static int  *g_server_result;
 
 void        server_settings_init(t_opt *opt)
 {

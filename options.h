@@ -5,7 +5,7 @@
 ** Login   <alcara_m@epitech.net>
 ** 
 ** Started on  Fri Mar 15 16:48:12 2013 Marin Alcaraz
-** Last update Thu Jul 04 20:24:28 2013 ivan ignatiev
+** Last update Fri Jul 05 18:26:48 2013 ivan ignatiev
 */
 
 #ifndef OPTIONS_H_
@@ -13,12 +13,12 @@
 
 typedef struct  s_opt
 {
-  int           port;
-  int           width;
-  int           height;
+  unsigned int  port;
+  unsigned int  width;
+  unsigned int  height;
   t_list        *names;
-  int           cmax;
-  int           tdelay;
+  unsigned int  cmax;
+  unsigned int  tdelay;
 }               t_opt;
 
 int     get_nbrlen(int nbr);
@@ -38,7 +38,7 @@ void    syntax_error(char *str, char *ptr);
 void    usage_display(char *);
 void    default_error(char *argv[]);
 void    names_parse(char *argv[], char c, int argc, t_opt *opt);
-void    options_get(char *argv[], char c, int *opt);
+void    options_get(char *argv[], char c, unsigned int *opt);
 void    options_parse(int argc, char *argv[], t_opt *g_opt);
 
 #endif /* OPTIONS_H_ */

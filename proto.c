@@ -5,7 +5,7 @@
 ** Login   <alcara_m@epitech.net>
 ** 
 ** Started on  Wed Jun 12 16:34:40 2013 Marin Alcaraz
-** Last update Fri Jul 05 13:30:01 2013 ivan ignatiev
+** Last update Fri Jul 05 18:35:53 2013 ivan ignatiev
 */
 
 #include        "main.h"
@@ -81,21 +81,26 @@ int         proto_parse(t_user *u, t_server *s, t_world *w)
     return (graph_parse((t_user_graph*)u, s, w));
 }
 
-t_user         *proto_define(t_user *u, t_server *s, t_world *w)
+t_user          *proto_define(t_user *u, t_server *s, t_world *w)
 {
-    int     rb;
-    char    buf[256];
+    t_team      *team;
+    int         rb;
+    char        buf[PROTO_BUFFER + 1];
+    char        answer[PROTO_BUFFER + 1];
 
     (void) (w);
     if ((rb = read(u->clientfd, buf, 256)) > 0)
     {
-        buf[rb] = '\0';
-        if (strcmp(buf, "GRAPHIC\n") == 0)
+        buf[rb - 1] = '\0';
+        if (strcmp(buf, "GRAPHIC") == 0)
             return ((t_user*)user_graph_init(u));
-        u = (t_user*)user_player_init(u, NULL, w, s);
-        if (team_add_player(s->team_list, (t_user_player*)u, buf) == 0)
+        if (s->players_slots > 0 && (team = team_search(s->team_list, buf)) != NULL)
         {
-            cli_answer((t_user_player*)u, s, "X Y\n");
+            u = (t_user*)user_player_init(u, team, w, s);
+            (team->members)++;
+            (s->options.cmax)--;
+            sprintf(answer, "%d %d\n", s->options.width, s->options.height);
+            cli_answer((t_user_player*)u, s, answer);
             return (u);
         }
         cli_answer((t_user_player*)u, s, "mort\n");
