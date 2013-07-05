@@ -5,7 +5,7 @@
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Sat Apr 27 14:16:14 2013 ivan ignatiev
-** Last update Thu Jul 04 21:44:10 2013 ivan ignatiev
+** Last update Fri Jul 05 13:11:59 2013 ivan ignatiev
 */
 
 #include    "main.h"
@@ -29,7 +29,7 @@ t_user      *user_create()
     return (user);
 }
 
-t_user_player       *user_player_init(t_user *user, t_server *s)
+t_user_player       *user_player_init(t_user *user, t_world *w, t_server *s)
 {
     int             i;
     t_user_player   *player;
@@ -52,6 +52,7 @@ t_user_player       *user_player_init(t_user *user, t_server *s)
             ++i;
         }
         player->inventory[FOOD] = 10; //1260 * t sec
+        item_pf(w->surface[player->posy][player->posx].players, (void*)player, sizeof(t_user_player));
     }
     return (player);
 }

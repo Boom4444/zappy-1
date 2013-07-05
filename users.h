@@ -5,7 +5,7 @@
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Sat Apr 27 17:03:35 2013 ivan ignatiev
-** Last update Thu Jul 04 21:29:17 2013 ivan ignatiev
+** Last update Fri Jul 05 13:09:03 2013 ivan ignatiev
 */
 
 #ifndef USERS_H_
@@ -85,7 +85,7 @@ typedef struct          s_user_graph
 
 
 t_user      *user_create();
-t_user_player       *user_player_init(t_user *user, t_server *s);
+t_user_player       *user_player_init(t_user *user, t_world *w, t_server *s);
 t_user_graph        *user_graph_init(t_user *user);
 void        user_destroy(t_user *user);
 t_team      *team_create(char *name);
