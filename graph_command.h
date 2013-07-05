@@ -1,11 +1,11 @@
 /*
-** graph_command.h for zappy in /home/ignatiev/Projects/zappy
+** graph_command.h for zappy in /home/hero/zappy
 ** 
 ** Made by Ivan Ignatiev
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Wed Jun 12 17:02:27 2013 Marin Alcaraz
-** Last update Thu Jul 04 21:20:38 2013 ivan ignatiev
+** Last update Fri Jul 05 11:13:30 2013 Marin Alcaraz
 */
 
 #ifndef GRAPH_COMMAND_H
@@ -36,6 +36,6 @@ int             graph_command_piv(t_graph_data *, t_server *, t_world *);
 int             graph_command_pin(t_graph_data *, t_server *, t_world *);
 int             graph_command_sgt(t_graph_data *, t_server *, t_world *);
 int             graph_command_sst(t_graph_data *, t_server *, t_world *);
+int             graph_command_display(t_graph_data *, t_server *, t_world *);
 
 #endif	/* GRAPH_COMMAND_H */
-

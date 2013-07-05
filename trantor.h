@@ -1,11 +1,11 @@
 /*
-** trantor.h for zappy in /home/ignatiev/Projects/zappy
+** trantor.h for zappy in /home/hero/zappy
 ** 
 ** Made by Marin Alcaraz
 ** Login   <alcara_m@epitech.net>
 ** 
 ** Started on  Thu Jun 20 17:38:38 2013 Marin Alcaraz
-** Last update Thu Jul 04 20:31:48 2013 ivan ignatiev
+** Last update Fri Jul 05 11:18:41 2013 Marin Alcaraz
 */
 
 #ifndef TRANTOR_H_
@@ -28,6 +28,8 @@ typedef struct  s_square_unit
 typedef struct      s_world
 {
     t_square_unit   **surface;
+    int             width;
+    int             height;
 }                   t_world;
 
 int        init_world(t_world *w, int width, int height);

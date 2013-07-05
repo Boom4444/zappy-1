@@ -1,11 +1,11 @@
 /*
-** select.c for zappy in /home/ignatiev/Projects/zappy
+** select.c for zappy in /home/hero/zappy
 ** 
 ** Made by ivan ignatiev
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Sat Apr 27 14:58:48 2013 ivan ignatiev
-** Last update Thu Jul 04 20:47:51 2013 ivan ignatiev
+** Last update Fri Jul 05 11:17:24 2013 Marin Alcaraz
 */
 
 #include    "main.h"

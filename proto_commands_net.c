@@ -1,11 +1,11 @@
 /*
-** proto_commands_net.c for zappy in /home/ignatiev/Projects/zappy
+** proto_commands_net.c for zappy in /home/hero/zappy
 ** 
 ** Made by Marin Alcaraz
 ** Login   <alcara_m@epitech.net>
 ** 
 ** Started on  Thu Jun 13 16:31:20 2013 Marin Alcaraz
-** Last update Thu Jul 04 21:34:45 2013 ivan ignatiev
+** Last update Fri Jul 05 11:14:50 2013 Marin Alcaraz
 */
 
 #include        "main.h"
@@ -17,11 +17,34 @@
 #include        "request.h"
 #include        "answer.h"
 #include        "proto_commands_net.h"
+#include        "proto_commands_movement.h"
 
-void    cli_expulse(t_request_data *rqd, t_server *s, t_world *w)
+static t_steps 	g_steps[]=
 {
-    (void) (w);
-    printf("expulse\n");
+	{0, 1},
+	{-1, 1},
+	{-1, 0},
+	{-1, -1},
+	{0, -1},
+	{1, -1},
+	{1, 0},
+	{1, 1}
+};
+
+void        cli_expulse(t_request_data *rqd, t_server *s, t_world *w)
+{
+    int     new_position_x;
+    int     new_position_y;
+    int     current_dir;
+
+    current_dir = rqd->user->direction;
+    new_position_x = rqd->user->posx + g_steps[current_dir].x;
+    new_position_y = rqd->user->posy + g_steps[current_dir].y;
+    if (new_position_x > w->width)
+        new_position_x = new_position_x % w->width;
+    if (new_position_y > w->height)
+        new_position_y = new_position_y % w->height;
+    expulse_square(new_position_x, new_position_y, rqd, w);
     cli_answer(rqd->user,s , "OK\n");
 }
 

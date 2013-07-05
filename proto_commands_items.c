@@ -1,11 +1,11 @@
 /*
-** proto_commands_items.c for zappy in /home/ignatiev/Projects/zappy
+** proto_commands_items.c for zappy in /home/hero/zappy
 ** 
 ** Made by Marin Alcaraz
 ** Login   <alcara_m@epitech.net>
 ** 
 ** Started on  Thu Jun 13 16:28:40 2013 Marin Alcaraz
-** Last update Thu Jul 04 21:32:42 2013 ivan ignatiev
+** Last update Fri Jul 05 11:14:12 2013 Marin Alcaraz
 */
 
 #include "main.h"

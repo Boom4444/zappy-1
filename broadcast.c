@@ -1,11 +1,11 @@
 /*
-** broadcast.c for zappy in /home/ignatiev/Projects/zappy
+** broadcast.c for zappy in /home/hero/zappy
 ** 
 ** Made by Marin Alcaraz
 ** Login   <alcara_m@epitech.net>
 ** 
 ** Started on  Mon Jul 01 14:23:40 2013 Marin Alcaraz
-** Last update Thu Jul 04 21:23:33 2013 ivan ignatiev
+** Last update Fri Jul 05 11:12:34 2013 Marin Alcaraz
 */
 
 #include <math.h>

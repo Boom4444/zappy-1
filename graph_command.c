@@ -1,11 +1,11 @@
 /*
-** graph_command.c for zappy in /home/ignatiev/Projects/zappy
+** graph_command.c for zappy in /home/hero/zappy
 ** 
 ** Made by Ivan Ignatiev
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Wed Jun 12 17:02:27 2013 Marin Alcaraz
-** Last update Thu Jul 04 21:20:15 2013 ivan ignatiev
+** Last update Fri Jul 05 11:13:11 2013 Marin Alcaraz
 */
 
 #include        "main.h"
@@ -26,6 +26,7 @@ static t_graph_command  graph_cmd[] = {
     {"pin #n", graph_command_pin},
     {"sgt", graph_command_sgt},
     {"sst T", graph_command_sst},
+    {"show", graph_command_display},
     {NULL, NULL}
 };
 
@@ -118,5 +119,13 @@ int             graph_command_sst(t_graph_data *rqd, t_server *s, t_world *w)
     (void) rqd;
     (void) s;
     (void) w;
+    return (0);
+}
+
+int             graph_command_display(t_graph_data *rqd, t_server *s, t_world *w)
+{
+    (void) rqd;
+    (void) s;
+    display_world(w, w->width, w->height);
     return (0);
 }
