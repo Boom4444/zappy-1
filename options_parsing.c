@@ -93,7 +93,7 @@ int   get_nbrlen(int nbr)
   return (i);
 }
 
-void    teams_fill(t_opt *opt)
+void    teams_fill(t_opt *opt, int n)
 {
   int   i;
   char  *tmp;
@@ -101,7 +101,7 @@ void    teams_fill(t_opt *opt)
 
   tmp = NULL;
   i = opt->names->len;
-  while (i < opt->cmax)
+  while (i < n)
   {
     ++i;
     size = get_nbrlen(i) + 6;

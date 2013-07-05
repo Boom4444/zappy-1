@@ -118,9 +118,9 @@ void  options_parse(int argc, char *argv[], t_opt *g_opt)
   the_parse(argc, argv);
   invalid_find(argc, argv);
   options_getopt(argc, argv, g_opt);
-  teams_fill(g_opt);
+  teams_fill(g_opt, 2);
 
-  /** TODO: could be updated **/
+  // TODO: could be updated
   printf("Server launching with values :\n");
   printf("port=%d, width=%d, height=%d, cmax=%d, tdelay=%d\n",
     g_opt->port, g_opt->width, g_opt->height, g_opt->cmax, g_opt->tdelay);
