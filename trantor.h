@@ -1,11 +1,11 @@
 /*
-** trantor.h for zappy in /home/hero/zappy
+** trantor.h for zappy in /home/ignatiev/Projects/zappy
 ** 
 ** Made by Marin Alcaraz
 ** Login   <alcara_m@epitech.net>
 ** 
 ** Started on  Thu Jun 20 17:38:38 2013 Marin Alcaraz
-** Last update Fri Jul 05 11:18:41 2013 Marin Alcaraz
+** Last update Fri Jul 05 13:14:06 2013 ivan ignatiev
 */
 
 #ifndef TRANTOR_H_

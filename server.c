@@ -1,11 +1,11 @@
 /*
-** server.c for zappy in /home/hero/zappy
+** server.c for zappy in /home/ignatiev/Projects/zappy
 ** 
 ** Made by Marin Alcaraz
 ** Login   <alcara_m@epitech.net>
 ** 
 ** Started on  Tue May 21 09:42:30 2013 Marin Alcaraz
-** Last update Fri Jul 05 11:17:44 2013 Marin Alcaraz
+** Last update Fri Jul 05 13:19:31 2013 ivan ignatiev
 */
 
 #include                "main.h"

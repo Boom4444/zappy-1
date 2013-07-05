@@ -5,7 +5,7 @@
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Sat Apr 27 14:16:14 2013 ivan ignatiev
-** Last update Fri Jul 05 13:11:59 2013 ivan ignatiev
+** Last update Fri Jul 05 13:30:24 2013 ivan ignatiev
 */
 
 #include    "main.h"
@@ -29,7 +29,7 @@ t_user      *user_create()
     return (user);
 }
 
-t_user_player       *user_player_init(t_user *user, t_world *w, t_server *s)
+t_user_player       *user_player_init(t_user *user, t_team *team, t_world *w, t_server *s)
 {
     int             i;
     t_user_player   *player;
@@ -44,7 +44,7 @@ t_user_player       *user_player_init(t_user *user, t_world *w, t_server *s)
         player->tick = 0;
         player->level = 1;
         player->request_counter = 0;
-        player->team = NULL;
+        player->team = team;
         i = 0;
         while (i < ARTICLES_LIMIT)
         {
@@ -107,7 +107,7 @@ int        team_add_player(t_list *team_list, t_user_player *user, char *team_na
     }
     if ((team = team_create(team_name)) != NULL)
     {
-        team->places = TEAM_MEMBERS_LIMIT;
+        team->places = 10;
         team->members = 1;
         user->team = team;
         item_pf(team_list, team, sizeof(t_team));
