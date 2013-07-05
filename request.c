@@ -5,7 +5,7 @@
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Thu Jun 20 20:00:46 2013 ivan ignatiev
-** Last update Wed Jun 26 17:00:44 2013 ivan ignatiev
+** Last update Thu Jul 04 17:35:06 2013 ivan ignatiev
 */
 
 #include        "server.h"
@@ -65,7 +65,7 @@ t_request               *cli_request_init()
     return (request);
 }
 
-t_request               *cli_request_parse(t_user *user)
+t_request               *cli_request_parse(t_server *s, t_user *user)
 {
     t_request           *request;
     int                 i;
@@ -78,7 +78,8 @@ t_request               *cli_request_parse(t_user *user)
             if (strncmp(cli_commands[i].cmd, user->request, strlen(cli_commands[i].cmd)) == 0)
             {
                 request->type = &cli_commands[i];
-                request->current_time = request->type->delay;
+                request->tick = (user->tick > s->tick ? user->tick : s->tick) + request->type->delay;
+                printf("Request will implemented %llu tick\n", request->tick);
                 if (request->type->parse != NULL)
                 {
                     if ((request->data = request->type->parse(request->type, user->request)) != NULL)
@@ -88,6 +89,7 @@ t_request               *cli_request_parse(t_user *user)
                 }
                 else
                     request->data = NULL;
+                user->tick = request->tick;
                 return (request);
             }
             ++i;
@@ -107,15 +109,18 @@ void            cli_requests_process(t_server *s, t_world *w)
     while (current != NULL)
     {
         if (T_REQUEST(current)->type->func != NULL
-                && T_REQUEST(current)->data != NULL)
+                && T_REQUEST(current)->data != NULL
+                && s->tick >= T_REQUEST(current)->tick)
         {
+            printf("Request implemented %llu tick\n", s->tick);
             T_REQUEST(current)->type->func(T_REQUEST(current)->data, s, w);
             s->diff = 1;
+            tmp = current;
+            current = current->next;
+            item_delete(s->request_list, tmp);
         }
-        tmp = current;
-        current = current->next;
-        sleep(1);
-        item_delete(s->request_list, tmp);
+        else
+            current = current->next;
     }
 }
 

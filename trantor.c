@@ -5,7 +5,7 @@
 ** Login   <alcara_m@epitech.net>
 ** 
 ** Started on  Thu Jun 20 17:33:58 2013 Marin Alcaraz
-** Last update Thu Jul 04 15:12:52 2013 Marin Alcaraz
+** Last update Thu Jul 04 19:49:20 2013 Marin Alcaraz
 */
 
 #include    "trantor.h"
@@ -71,22 +71,24 @@ int          display_world(t_world *w, int width, int height)
 
     i = 0;
     j = 0;
+    printf("\n\n");
     while (i < height)
     {
         while (j < width)
         {
             if (mineral_checker(w->surface[i][j]) != 0)
-                printf("R");
+                printf(" R ");
             else if ((w->surface[i][j]).players->head != NULL)
-                printf("P");
+                printf(" P ");
             else
-                printf("*");
+                printf(" * ");
             j = j + 1;
         }
         printf("\n");
         i = i + 1;
         j = 0;
     }
+    printf("\n\n");
     return (0);
 }
 
@@ -113,7 +115,7 @@ int         generate_resource(t_world *w, int width, int height)
         printf("Generated %s on %d, %d\n",g_resource[resource], minx, miny);
         (w->surface[miny][minx]).resources[resource]++;
         amount = amount + 1;
-        sleep(1);
+        usleep(888888);
     }
     return (0);
 }

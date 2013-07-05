@@ -5,7 +5,7 @@
 ** Login   <alcara_m@epitech.net>
 ** 
 ** Started on  Thu Jun 13 16:26:19 2013 Marin Alcaraz
-** Last update Thu Jul 04 10:23:09 2013 Marin Alcaraz
+** Last update Thu Jul 04 19:53:40 2013 Marin Alcaraz
 */
 
 #include "proto_commands_movement.h"
@@ -100,7 +100,7 @@ void        cli_broadcast(t_request_data *rqd, t_server *t, t_world *w)
             broadcast_to(T_USER(current_item->cont), rqd, t);
         current_item = current_item->next;
     }
-    cli_answer(rqd->user, t, "OK\n");
+    cli_answer(rqd->user, t, rqd->argv[0]);
 }
 
 void    cli_voir(t_request_data *rqd, t_server *t, t_world *w)
