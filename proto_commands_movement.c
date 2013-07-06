@@ -1,11 +1,11 @@
 /*
-** proto_commands_movement.c for zappy in /home/hero/zappy
+** proto_commands_movement.c for zappy in /home/ignatiev/Projects/zappy
 ** 
 ** Made by Marin Alcaraz
 ** Login   <alcara_m@epitech.net>
 ** 
 ** Started on  Thu Jun 13 16:26:19 2013 Marin Alcaraz
-** Last update Fri Jul 05 11:14:32 2013 Marin Alcaraz
+** Last update Sat Jul 06 13:15:52 2013 ivan ignatiev
 */
 
 #include        "main.h"
@@ -32,20 +32,11 @@ static t_steps 	g_steps[]=
 
 void    		cli_avance(t_request_data *rqd, t_server *t, t_world *w)
 {
-    int     new_position_x;
-    int     new_position_y;
-
-    //item_delete(w->surface[rqd->user->posy][rqd->user->posx].players, rqd->user);
-    new_position_x = (rqd->user->posx + g_steps[rqd->user->direction].x);
-    new_position_y = (rqd->user->posy + g_steps[rqd->user->direction].y);
-    if (new_position_x > w->width)
-        new_position_x = new_position_x % w->width;
-    if (new_position_y > w->height)
-        new_position_y = new_position_y % w->height;
-	rqd->user->posx = new_position_x;
-	rqd->user->posy = new_position_y;
-    item_pf(w->surface[rqd->user->posy][rqd->user->posx].players, rqd->user, sizeof(t_user));
-    cli_answer(rqd->user, t, "OK\n");
+    item_delete_by_content(w->surface[rqd->user->posy][rqd->user->posx].players, (void*)rqd->user);
+    rqd->user->posx = _MOD(rqd->user->posx + g_steps[rqd->user->direction].x, w->width);
+    rqd->user->posy = _MOD(rqd->user->posy + g_steps[rqd->user->direction].y, w->height);
+    item_pf(w->surface[rqd->user->posy][rqd->user->posx].players, (void*)rqd->user, sizeof(t_user));
+    cli_answer(rqd->user, t, "ok\n");
 }
 
 void        cli_droite(t_request_data *rqd, t_server *t, t_world *w)
@@ -110,10 +101,21 @@ void        cli_broadcast(t_request_data *rqd, t_server *t, t_world *w)
     cli_answer(rqd->user, t, rqd->argv[0]);
 }
 
-void    cli_voir(t_request_data *rqd, t_server *t, t_world *w)
+void        cli_voir(t_request_data *rqd, t_server *s, t_world *w)
 {
-    (void) (w);
-    (void) (t);
-    (void) (rqd);
-    printf("voir\n");
+    int     level;
+    int     x;
+    int     y;
+    (void) w;
+    (void) rqd->user->direction;
+
+    level = 0;
+    x = rqd->user->posx;
+    y = rqd->user->posy;
+    while (level < rqd->user->level)
+    {
+        x = _MOD(x + g_steps[rqd->user->direction + 1].x, w->width);
+        y = _MOD(y + g_steps[rqd->user->direction + 1].y, w->height);
+    }
+    cli_answer(rqd->user, s, "{}\n");
 }
