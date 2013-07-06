@@ -5,7 +5,7 @@
 ** Login   <alcara_m@epitech.net>
 ** 
 ** Started on  Thu Jun 13 16:31:20 2013 Marin Alcaraz
-** Last update Fri Jul 05 18:31:15 2013 ivan ignatiev
+** Last update Sat Jul 06 14:19:42 2013 ivan ignatiev
 */
 
 #include        "main.h"
@@ -21,14 +21,14 @@
 
 static t_steps 	g_steps[]=
 {
-	{0, 1},
-	{-1, 1},
-	{-1, 0},
-	{-1, -1},
 	{0, -1},
-	{1, -1},
+	{-1, -1},
+	{-1, 0},
+	{-1, 1},
+	{0, 1},
+	{1, 1},
 	{1, 0},
-	{1, 1}
+	{1, -1}
 };
 
 void        cli_expulse(t_request_data *rqd, t_server *s, t_world *w)

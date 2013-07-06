@@ -5,7 +5,7 @@
 ** Login   <alcara_m@epitech.net>
 ** 
 ** Started on  Thu Jun 13 16:26:19 2013 Marin Alcaraz
-** Last update Sat Jul 06 13:15:52 2013 ivan ignatiev
+** Last update Sat Jul 06 14:19:23 2013 ivan ignatiev
 */
 
 #include        "main.h"
@@ -16,18 +16,29 @@
 #include        "users.h"
 #include        "request.h"
 #include        "answer.h"
+#include        "item.h"
 #include        "proto_commands_movement.h"
 
 static t_steps 	g_steps[]=
 {
-	{0, 1},
-	{-1, 1},
-	{-1, 0},
-	{-1, -1},
 	{0, -1},
-	{1, -1},
+	{-1, -1},
+	{-1, 0},
+	{-1, 1},
+	{0, 1},
+	{1, 1},
 	{1, 0},
-	{1, 1}
+	{1, -1}
+};
+
+static char     *g_objects[] = {
+    "food",
+    "linemate",
+    "deraumere",
+    "sibur",
+    "mendiane",
+    "phiras",
+    "thystame"
 };
 
 void    		cli_avance(t_request_data *rqd, t_server *t, t_world *w)
@@ -101,21 +112,60 @@ void        cli_broadcast(t_request_data *rqd, t_server *t, t_world *w)
     cli_answer(rqd->user, t, rqd->argv[0]);
 }
 
+void        cli_voir_players()
+{
+
+}
+
+void        cli_voit_resources()
+{
+
+}
+
 void        cli_voir(t_request_data *rqd, t_server *s, t_world *w)
 {
     int     level;
+    int     level_count;
+    int     obj_x;
+    int     obj_y;
     int     x;
     int     y;
-    (void) w;
+    int     i;
+    (void) s;
+    (void) g_objects;
     (void) rqd->user->direction;
+
+
+    rqd->user->posx = 5;
+    rqd->user->posy = 5;
+    rqd->user->direction = TOP;
+    rqd->user->level = 4;
 
     level = 0;
     x = rqd->user->posx;
     y = rqd->user->posy;
+    printf("{");
+    level_count = 1;
     while (level < rqd->user->level)
     {
-        x = _MOD(x + g_steps[rqd->user->direction + 1].x, w->width);
-        y = _MOD(y + g_steps[rqd->user->direction + 1].y, w->height);
+        //w->surface[y][x].players;
+        //w->surface{y][x].resources[i]
+        obj_x = x;
+        obj_y = y;
+        i = 0;
+        while (i < level_count)
+        {
+            printf(" object[%d,%d] %d %d ", obj_x, obj_y, level_count, _MOD(rqd->user->direction - 2, 8));
+            obj_x = _MOD(obj_x + g_steps[_MOD(rqd->user->direction - 2, 8)].x, w->width);
+            obj_y = _MOD(obj_y + g_steps[_MOD(rqd->user->direction - 2, 8)].y, w->height);
+            ++i;
+        }
+        x = _MOD(x + g_steps[_MOD(rqd->user->direction + 1, 8)].x, w->width);
+        y = _MOD(y + g_steps[_MOD(rqd->user->direction + 1, 8)].y, w->height);
+        level_count += 2;
+        ++level;
+        printf(",");
     }
-    cli_answer(rqd->user, s, "{}\n");
+    printf("}\n");
+    //cli_answer(rqd->user, s, "{}\n");
 }

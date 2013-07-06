@@ -5,7 +5,7 @@
 ** Login   <alcara_m@epitech.net>
 ** 
 ** Started on  Thu Jun 20 17:38:38 2013 Marin Alcaraz
-** Last update Sat Jul 06 13:12:24 2013 ivan ignatiev
+** Last update Sat Jul 06 14:09:49 2013 ivan ignatiev
 */
 
 #ifndef TRANTOR_H_
@@ -19,7 +19,7 @@
 # define PHIRAS      5
 # define THYSTAME    6
 
-# define _MOD(x,d) (((x) < 0) ? ((d) - ((-x) % (d))) : ((x) % (d)))
+# define _MOD(x,d) (((x) < 0) ? ((d) - ((-(x)) % (d))) : ((x) % (d)))
 
 typedef struct  s_square_unit
 {

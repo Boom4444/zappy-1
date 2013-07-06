@@ -5,7 +5,7 @@
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Sat Apr 27 14:16:14 2013 ivan ignatiev
-** Last update Fri Jul 05 18:34:55 2013 ivan ignatiev
+** Last update Sat Jul 06 13:57:50 2013 ivan ignatiev
 */
 
 #include    "main.h"
@@ -31,6 +31,7 @@ t_user      *user_create()
 
 t_user_player       *user_player_init(t_user *user, t_team *team, t_world *w, t_server *s)
 {
+    (void) s;
     int             i;
     t_user_player   *player;
 
@@ -38,9 +39,9 @@ t_user_player       *user_player_init(t_user *user, t_team *team, t_world *w, t_
     {
         player->connected = CONNECTED;
         player->protocol = CLI_PROTO;
-        player->posx = rand() % s->options.width;
-        player->posy = rand() % s->options.height;
-        player->direction = rand() % 8;
+        player->posx = _MOD(rand(), w->width);
+        player->posy = _MOD(rand(), w->height);
+        player->direction = _MOD(rand(), 8);
         player->tick = 0;
         player->level = 1;
         player->request_counter = 0;
