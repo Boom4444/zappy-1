@@ -5,7 +5,7 @@
 ** Login   <alcara_m@epitech.net>
 ** 
 ** Started on  Thu Jun 13 16:26:19 2013 Marin Alcaraz
-** Last update Sun Jul 07 14:00:03 2013 ivan ignatiev
+** Last update Sun Jul 07 15:55:44 2013 ivan ignatiev
 */
 
 #include        "main.h"
@@ -114,12 +114,12 @@ void        cli_broadcast(t_request_data *rqd, t_server *t, t_world *w)
 
 void        cli_voir_players(t_list *player)
 {
-
+    (void) player;
 }
 
 void        cli_voit_resources(char *resources)
 {
-
+    (void) resources;
 }
 
 void        cli_voir(t_request_data *rqd, t_server *s, t_world *w)
