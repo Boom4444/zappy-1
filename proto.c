@@ -5,7 +5,7 @@
 ** Login   <alcara_m@epitech.net>
 ** 
 ** Started on  Wed Jun 12 16:34:40 2013 Marin Alcaraz
-** Last update Fri Jul 05 18:35:53 2013 ivan ignatiev
+** Last update Sun Jul 07 13:39:31 2013 ivan ignatiev
 */
 
 #include        "main.h"
@@ -99,6 +99,8 @@ t_user          *proto_define(t_user *u, t_server *s, t_world *w)
             u = (t_user*)user_player_init(u, team, w, s);
             (team->members)++;
             (s->options.cmax)--;
+            sprintf(answer, "%d\n", s->players_slots);
+            cli_answer((t_user_player*)u, s, answer);
             sprintf(answer, "%d %d\n", s->options.width, s->options.height);
             cli_answer((t_user_player*)u, s, answer);
             return (u);

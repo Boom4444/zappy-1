@@ -5,7 +5,7 @@
 ** Login   <alcara_m@epitech.net>
 ** 
 ** Started on  Thu Jun 13 16:26:19 2013 Marin Alcaraz
-** Last update Sat Jul 06 14:19:23 2013 ivan ignatiev
+** Last update Sun Jul 07 14:00:03 2013 ivan ignatiev
 */
 
 #include        "main.h"
@@ -41,7 +41,7 @@ static char     *g_objects[] = {
     "thystame"
 };
 
-void    		cli_avance(t_request_data *rqd, t_server *t, t_world *w)
+void    	cli_avance(t_request_data *rqd, t_server *t, t_world *w)
 {
     item_delete_by_content(w->surface[rqd->user->posy][rqd->user->posx].players, (void*)rqd->user);
     rqd->user->posx = _MOD(rqd->user->posx + g_steps[rqd->user->direction].x, w->width);
@@ -112,12 +112,12 @@ void        cli_broadcast(t_request_data *rqd, t_server *t, t_world *w)
     cli_answer(rqd->user, t, rqd->argv[0]);
 }
 
-void        cli_voir_players()
+void        cli_voir_players(t_list *player)
 {
 
 }
 
-void        cli_voit_resources()
+void        cli_voit_resources(char *resources)
 {
 
 }
@@ -133,7 +133,6 @@ void        cli_voir(t_request_data *rqd, t_server *s, t_world *w)
     int     i;
     (void) s;
     (void) g_objects;
-    (void) rqd->user->direction;
 
 
     rqd->user->posx = 5;
@@ -155,7 +154,7 @@ void        cli_voir(t_request_data *rqd, t_server *s, t_world *w)
         i = 0;
         while (i < level_count)
         {
-            printf(" object[%d,%d] %d %d ", obj_x, obj_y, level_count, _MOD(rqd->user->direction - 2, 8));
+            printf(" object[%d, %d] %d %d ", obj_x, obj_y, level_count, _MOD(rqd->user->direction - 2, 8));
             obj_x = _MOD(obj_x + g_steps[_MOD(rqd->user->direction - 2, 8)].x, w->width);
             obj_y = _MOD(obj_y + g_steps[_MOD(rqd->user->direction - 2, 8)].y, w->height);
             ++i;
