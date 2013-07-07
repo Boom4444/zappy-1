@@ -1,11 +1,11 @@
 /*
-** graph_command.c for zappy in /home/hero/zappy
+** graph_command.c for zappy in /home/ignati_i/zappy/zappy
 ** 
 ** Made by Ivan Ignatiev
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Wed Jun 12 17:02:27 2013 Marin Alcaraz
-** Last update Sun Jul 07 15:42:47 2013 Marin Alcaraz
+** Last update Sun Jul 07 17:13:09 2013 ivan ignatiev
 */
 
 #include        "main.h"
@@ -88,37 +88,40 @@ int             graph_command_bct(t_graph_data *rqd, t_server *s, t_world *w)
 
 int             graph_command_mct(t_graph_data *rqd, t_server *s, t_world *w)
 {
-    int         i;
-    int         j;
-    int         min;
-    char        *response;
-    (void)      rqd;
+  int         i;
+  int         j;
+  int         min;
+  char        *response;
+  char        bct_line[STR_LIMIT];
+  (void)      rqd;
 
-    j = 0;
-    if ((response  = malloc(STR_LIMIT * w->width)) == NULL)
-        return (error_show("graph", "command_mct", "Unable to alloc resp"));
-    sprintf(response, "bct ");
-    while (j < w->height)
+  j = 0;
+  if ((response  = malloc(STR_LIMIT * w->width)) == NULL)
+    return (error_show("graph", "command_mct", "Unable to alloc resp"));
+  while (j < w->height)
+  {
+    i = 0;
+    while (i < w->width)
     {
-        i = 0;
-        while (i < w->width)
-        {
-            min = 0;
-            while (min < 7)
-            {
-                if  ((w->surface[j][i]).resources[min++] != 0)
-                    sprintf(response, "%s %d ", response, i);
-            }
-            i = i + 1;
-            sprintf(response, "%s\n bct", response);
-        }
-        j = j + 1;
-        printf("Response: %s", response);
-        cli_answer_to_graph(s, response);
-        response[0] = '\0';
+
+      sprintf(response, "bct %d %d ", i, j);
+      min = 0;
+      while (min < 7)
+      {
+        //if  ((w->surface[j][i]).resources[min++] != 0)
+        sprintf(bct_line, "%d ", w->surface[j][i].resources[min++]);
+        strcat(response, bct_line);
+      }
+      i = i + 1;
+      strcat(response, "\n");
     }
-    free(response);
-    return (0);
+    j = j + 1;
+    printf("Response: %s", response);
+    cli_answer_to_graph(s, response);
+    response[0] = '\0';
+  }
+  free(response);
+  return (0);
 }
 
 int             graph_command_tna(t_graph_data *rqd, t_server *s, t_world *w)

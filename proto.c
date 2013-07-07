@@ -1,11 +1,11 @@
 /*
-** proto.c for zappy in /home/ignatiev/Projects/zappy
+** proto.c for zappy in /home/ignati_i/zappy/zappy
 ** 
 ** Made by Marin Alcaraz
 ** Login   <alcara_m@epitech.net>
 ** 
 ** Started on  Wed Jun 12 16:34:40 2013 Marin Alcaraz
-** Last update Sun Jul 07 13:39:31 2013 ivan ignatiev
+** Last update Sun Jul 07 17:20:42 2013 ivan ignatiev
 */
 
 #include        "main.h"
@@ -56,6 +56,7 @@ int            cli_parse(t_user_player *u, t_server *s, t_world *w)
     }
     close(u->clientfd);
     item_delete_by_content(s->client_list, (void*)u);
+    printf("Client disconnected\n");
     return (-1);
 }
 
@@ -67,10 +68,12 @@ int        graph_parse(t_user_graph *u, t_server *s, t_world *w)
     if ((rb = recv(u->clientfd, buf, PROTO_BUFFER, MSG_DONTWAIT)) > 0)
     {
         buf[rb] = '\0';
+        printf("Recv: %s\n", buf);
         return (graph_command_exec(u, s, w, buf));
     }
     close(u->clientfd);
     item_delete_by_content(s->client_list, (void*)u);
+    printf("Client disconnected\n");
     return (-1);
 }
 
@@ -92,8 +95,13 @@ t_user          *proto_define(t_user *u, t_server *s, t_world *w)
     if ((rb = read(u->clientfd, buf, 256)) > 0)
     {
         buf[rb - 1] = '\0';
+        printf("Recv: %s\n", buf);
         if (strcmp(buf, "GRAPHIC") == 0)
-            return ((t_user*)user_graph_init(u));
+        {
+            u =  ((t_user*)user_graph_init(u));
+            // function which send all data
+            return (u);
+        }
         if (s->players_slots > 0 && (team = team_search(s->team_list, buf)) != NULL)
         {
             u = (t_user*)user_player_init(u, team, w, s);

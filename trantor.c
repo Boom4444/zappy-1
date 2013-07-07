@@ -1,11 +1,11 @@
 /*
-** trantor.c for zappy in /home/hero/zappy
+** trantor.c for zappy in /home/ignati_i/zappy/zappy
 ** 
 ** Made by Marin Alcaraz
 ** Login   <alcara_m@epitech.net>
 ** 
 ** Started on  Thu Jun 20 17:33:58 2013 Marin Alcaraz
-** Last update Fri Jul 05 11:18:09 2013 Marin Alcaraz
+** Last update Sun Jul 07 17:04:47 2013 ivan ignatiev
 */
 
 #include    "main.h"
@@ -97,7 +97,6 @@ int          display_world(t_world *w, int width, int height)
 
 void        random_number(int *container, int limit)
 {
-    srand(time(NULL));
     *container = rand() % limit;
 }
 
@@ -110,6 +109,7 @@ int         generate_resource(t_world *w, int width, int height)
     int     resource;
 
     amount = 0;
+    srand(time(NULL));
     while (amount < RESOURCE_LIMIT)
     {
         random_number(&minx, width);
@@ -118,7 +118,6 @@ int         generate_resource(t_world *w, int width, int height)
         printf("Generated %s on %d, %d\n",g_resource[resource], minx, miny);
         (w->surface[miny][minx]).resources[resource]++;
         amount = amount + 1;
-        usleep(888888);
     }
     return (0);
 }
