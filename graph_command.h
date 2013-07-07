@@ -5,11 +5,13 @@
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Wed Jun 12 17:02:27 2013 Marin Alcaraz
-** Last update Fri Jul 05 11:13:30 2013 Marin Alcaraz
+** Last update Sat Jul 06 11:44:43 2013 Marin Alcaraz
 */
 
 #ifndef GRAPH_COMMAND_H
 # define	GRAPH_COMMAND_H
+
+# define    STR_LIMIT 256
 
 typedef struct      s_graph_data
 {

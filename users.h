@@ -1,11 +1,11 @@
 /*
-** users.h for zappy in /home/ignatiev/Projects/zappy
+** users.h for zappy in /home/hero/zappy
 ** 
 ** Made by ivan ignatiev
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Sat Apr 27 17:03:35 2013 ivan ignatiev
-** Last update Thu Jul 04 21:29:17 2013 ivan ignatiev
+** Last update Sun Jul 07 14:29:16 2013 Marin Alcaraz
 */
 
 #ifndef USERS_H_
@@ -71,6 +71,7 @@ typedef struct          s_user_player
   t_team                *team;
   int                   inventory[ARTICLES_LIMIT];
   int                   request_counter;
+  int                   number;
 }                       t_user_player;
 
 typedef struct          s_user_graph
