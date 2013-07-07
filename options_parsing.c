@@ -5,7 +5,7 @@
 ** Login   <kuznet_o@epitech.eu>
 **
 ** Started on  Fri Jun  07 00:49:53 2013 oleg kuznietsov
-** Last update Thu Jul 04 21:14:37 2013 ivan ignatiev
+** Last update Fri Jul 05 13:27:59 2013 ivan ignatiev
 */
 
 #include "main.h"
@@ -93,7 +93,7 @@ int   get_nbrlen(int nbr)
   return (i);
 }
 
-void    teams_fill(t_opt *opt)
+void    teams_fill(t_opt *opt, int n)
 {
   int   i;
   char  *tmp;
@@ -101,7 +101,7 @@ void    teams_fill(t_opt *opt)
 
   tmp = NULL;
   i = opt->names->len;
-  while (i < opt->cmax)
+  while (i < n)
   {
     ++i;
     size = get_nbrlen(i) + 6;

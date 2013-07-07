@@ -1,11 +1,11 @@
 /*
-** proto_commands_net.c for zappy in /home/hero/zappy
+** proto_commands_net.c for zappy in /home/ignatiev/Projects/zappy
 ** 
 ** Made by Marin Alcaraz
 ** Login   <alcara_m@epitech.net>
 ** 
 ** Started on  Thu Jun 13 16:31:20 2013 Marin Alcaraz
-** Last update Fri Jul 05 11:14:50 2013 Marin Alcaraz
+** Last update Sat Jul 06 14:19:42 2013 ivan ignatiev
 */
 
 #include        "main.h"
@@ -21,14 +21,14 @@
 
 static t_steps 	g_steps[]=
 {
-	{0, 1},
-	{-1, 1},
-	{-1, 0},
-	{-1, -1},
 	{0, -1},
-	{1, -1},
+	{-1, -1},
+	{-1, 0},
+	{-1, 1},
+	{0, 1},
+	{1, 1},
 	{1, 0},
-	{1, 1}
+	{1, -1}
 };
 
 void        cli_expulse(t_request_data *rqd, t_server *s, t_world *w)
@@ -63,12 +63,13 @@ void    cli_fork_player(t_request_data *rqd, t_server *s, t_world *w)
     printf("fork_player\n");
 }
 
-void    cli_connect_nbr(t_request_data *rqd, t_server *t, t_world *w)
+void        cli_connect_nbr(t_request_data *rqd, t_server *s, t_world *w)
 {
+    char    answer[256];
+
     (void) (w);
-    (void) (t);
-    (void) (rqd);
-    printf("connect_nbr\n");
+    sprintf(answer, "%u\n", (s->players_slots - rqd->user->team->members));
+    cli_answer(rqd->user, s, answer);
 }
 
 void    cli_death(t_request_data *rqd, t_server *t, t_world *w)

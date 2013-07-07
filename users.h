@@ -5,7 +5,7 @@
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Sat Apr 27 17:03:35 2013 ivan ignatiev
-** Last update Sun Jul 07 14:29:16 2013 Marin Alcaraz
+** Last update Sun Jul 07 14:53:27 2013 Marin Alcaraz
 */
 
 #ifndef USERS_H_
@@ -16,7 +16,6 @@
 # define DISCONNECTED	0
 # define NAME_LIMIT     256
 # define ARTICLES_LIMIT 7
-# define TEAM_MEMBERS_LIMIT 10
 
 # define GRAPHIC_PROTO  100
 # define CLI_PROTO      200
@@ -40,7 +39,6 @@
 typedef struct          s_team
 {
     char                name[NAME_LIMIT];
-    int                 places;
     int                 members;
 }                       t_team;
 
@@ -85,12 +83,13 @@ typedef struct          s_user_graph
 }                       t_user_graph;
 
 
-t_user      *user_create();
-t_user_player       *user_player_init(t_user *user, t_server *s);
+t_user              *user_create();
+t_user_player       *user_player_init(t_user *user, t_team *team, t_world *w, t_server *s);
 t_user_graph        *user_graph_init(t_user *user);
-void        user_destroy(t_user *user);
-t_team      *team_create(char *name);
-int        team_add_player(t_list *team_list, t_user_player *user, char *team_name);
-void        team_destroy(t_team *team);
+void                user_destroy(t_user *user);
+t_team              *team_create(char *name);
+t_team              *team_search(t_list *team_list, char *team_name);
+t_list              *team_list_init(t_list *team_list, t_list *team_names);
+void                team_destroy(t_team *team);
 
 #endif /* !USERS_H_ */

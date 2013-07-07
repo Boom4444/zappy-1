@@ -1,11 +1,11 @@
 /*
-** server.c for zappy in /home/hero/zappy
+** server.c for zappy in /home/ignatiev/Projects/zappy
 ** 
 ** Made by Marin Alcaraz
 ** Login   <alcara_m@epitech.net>
 ** 
 ** Started on  Tue May 21 09:42:30 2013 Marin Alcaraz
-** Last update Fri Jul 05 11:17:44 2013 Marin Alcaraz
+** Last update Sun Jul 07 13:07:34 2013 ivan ignatiev
 */
 
 #include                "main.h"
@@ -36,12 +36,14 @@ int                     server_send(int clientfd, char *message)
 void                    server_init(t_server *s)
 {
     s->client_list = list_init();
-    s->team_list = list_init();
+    s->team_list = team_list_init(s->team_list, s->options.names);
     s->request_list = list_init();
     s->answer_list = list_init();
     s->server_fd = create_socket();
+    s->players_slots = s->options.cmax;
     s->tick = 0;
     s->diff = 0;
+    s->players_count = 0;
 }
 
 void                    server_stop(t_server *s)

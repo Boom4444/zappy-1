@@ -5,7 +5,7 @@
 ** Login   <alcara_m@epitech.net>
 ** 
 ** Started on  Sun May 26 18:53:05 2013 Marin Alcaraz
-** Last update Thu Jul 04 20:43:40 2013 ivan ignatiev
+** Last update Sun Jul 07 13:07:08 2013 ivan ignatiev
 ** Last update Tue Jun 25 16:25:00 2013 Marin Alcaraz
 */
 
@@ -31,6 +31,8 @@ typedef  struct     s_server
   int               diff;
   unsigned long long tick;
   int               result;
+  unsigned int      players_slots;
+  unsigned int      players_count;
 }                   t_server;
 
 int         server_handshake(int);
