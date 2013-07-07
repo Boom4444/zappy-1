@@ -5,7 +5,7 @@
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Wed Jun 12 17:02:27 2013 Marin Alcaraz
-** Last update Sun Jul 07 14:49:14 2013 Marin Alcaraz
+** Last update Sun Jul 07 15:42:47 2013 Marin Alcaraz
 */
 
 #include        "main.h"
@@ -59,6 +59,7 @@ int             graph_command_msz(t_graph_data *rqd, t_server *s, t_world *w)
     (void)      s;
 
     sprintf(response, "msz %d %d\n", w->width, w->height);
+    printf("Response: %s", response);
     cli_answer_to_graph(s, response);
     return (0);
 }
@@ -80,6 +81,7 @@ int             graph_command_bct(t_graph_data *rqd, t_server *s, t_world *w)
         i = i + 1;
     }
     sprintf(response, "%s/n", response);
+    printf("Response: %s", response);
     cli_answer_to_graph(s, response);
     return (0);
 }
@@ -111,6 +113,7 @@ int             graph_command_mct(t_graph_data *rqd, t_server *s, t_world *w)
             sprintf(response, "%s\n bct", response);
         }
         j = j + 1;
+        printf("Response: %s", response);
         cli_answer_to_graph(s, response);
         response[0] = '\0';
     }
@@ -129,6 +132,7 @@ int             graph_command_tna(t_graph_data *rqd, t_server *s, t_world *w)
     while (current_team != NULL)
     {
         sprintf(response, "tna %s\n", (char *)(current_team->cont));
+        printf("Response: %s", response);
         cli_answer_to_graph(s, response);
         current_team = current_team->next;
         response[0] = '\0';
@@ -152,6 +156,7 @@ int             graph_command_ppo(t_graph_data *rqd, t_server *s, t_world *w)
             sprintf(response, "ppo %d %d %d %d\n", p_number,
                     T_PLAYER(current_player->cont)->posx, T_PLAYER(current_player->cont)->posy,
                     T_PLAYER(current_player->cont)->direction);
+            printf("Response: %s", response);
             cli_answer_to_graph(s, response);
             return (0);
         }
@@ -175,6 +180,7 @@ int             graph_command_piv(t_graph_data *rqd, t_server *s, t_world *w)
         {
             sprintf(response, "piv %d %d\n", p_number,
                     T_PLAYER(current_player->cont)->level);
+            printf("Response: %s", response);
             cli_answer_to_graph(s, response);
             return (0);
         }
@@ -206,6 +212,7 @@ int             graph_command_pin(t_graph_data *rqd, t_server *s, t_world *w)
             T_PLAYER(current_player->cont)->inventory[4],
             T_PLAYER(current_player->cont)->inventory[5],
             T_PLAYER(current_player->cont)->inventory[6]);
+            printf("Response: %s", response);
             cli_answer_to_graph(s, response);
             return (0);
         }
