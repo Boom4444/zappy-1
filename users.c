@@ -5,7 +5,7 @@
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Sat Apr 27 14:16:14 2013 ivan ignatiev
-** Last update Sat Jul 06 13:57:50 2013 ivan ignatiev
+** Last update Sun Jul 07 13:08:16 2013 ivan ignatiev
 */
 
 #include    "main.h"
@@ -54,6 +54,7 @@ t_user_player       *user_player_init(t_user *user, t_team *team, t_world *w, t_
         }
         player->inventory[FOOD] = 10; //1260 * t sec
         item_pf(w->surface[player->posy][player->posx].players, (void*)player, sizeof(t_user_player));
+        player->number = s->players_count++;
     }
     return (player);
 }

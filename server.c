@@ -5,7 +5,7 @@
 ** Login   <alcara_m@epitech.net>
 ** 
 ** Started on  Tue May 21 09:42:30 2013 Marin Alcaraz
-** Last update Fri Jul 05 18:31:48 2013 ivan ignatiev
+** Last update Sun Jul 07 13:07:34 2013 ivan ignatiev
 */
 
 #include                "main.h"
@@ -43,6 +43,7 @@ void                    server_init(t_server *s)
     s->players_slots = s->options.cmax;
     s->tick = 0;
     s->diff = 0;
+    s->players_count = 0;
 }
 
 void                    server_stop(t_server *s)

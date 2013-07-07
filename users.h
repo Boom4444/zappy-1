@@ -5,7 +5,7 @@
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Sat Apr 27 17:03:35 2013 ivan ignatiev
-** Last update Fri Jul 05 18:20:49 2013 ivan ignatiev
+** Last update Sun Jul 07 13:06:04 2013 ivan ignatiev
 */
 
 #ifndef USERS_H_
@@ -69,6 +69,7 @@ typedef struct          s_user_player
   t_team                *team;
   int                   inventory[ARTICLES_LIMIT];
   int                   request_counter;
+  int                   number;
 }                       t_user_player;
 
 typedef struct          s_user_graph
