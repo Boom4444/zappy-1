@@ -5,7 +5,7 @@
 ** Login   <kuznet_o@epitech.eu>
 **
 ** Started on  Fri Jun  07 00:49:53 2013 oleg kuznietsov
-** Last update Fri Jul 05 13:27:59 2013 ivan ignatiev
+** Last update Mon Jul 08 13:24:00 2013 ivan ignatiev
 */
 
 #include "main.h"
@@ -95,27 +95,18 @@ int   get_nbrlen(int nbr)
 
 void    teams_fill(t_opt *opt, int n)
 {
-  int   i;
-  char  *tmp;
-  int   size;
+    int   i;
+    char  tmp[255];
 
-  tmp = NULL;
-  i = opt->names->len;
-  while (i < n)
-  {
-    ++i;
-    size = get_nbrlen(i) + 6;
-    if ((tmp = realloc(tmp, size)) == NULL)
+    i = 1;
+    while (i <= n)
     {
-      fprintf(stderr, "%s ERROR: %s\n", "realloc", "teams_fill");
-      exit(EXIT_FAILURE);
+        sprintf(tmp, "Team %d", i);
+        if (item_pb(opt->names, strdup(tmp), strlen(tmp)) == -1)
+        {
+            fprintf(stderr, "%s ERROR: %s\n", "item_pb", "teams_fill");
+            return ;
+        }
+        i++;
     }
-    sprintf(tmp, "Team %d", i);
-    if (item_pb(opt->names, tmp, size) == -1)
-    {
-      fprintf(stderr, "%s ERROR: %s\n", "item_pb", "teams_fill");
-      exit(EXIT_FAILURE);
-    }
-  }
-  free(tmp);
 }

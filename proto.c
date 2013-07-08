@@ -1,11 +1,11 @@
 /*
-** proto.c for zappy in /home/ignati_i/zappy/zappy
+** proto.c for zappy in /home/ignatiev/Projects/zappy
 ** 
 ** Made by Marin Alcaraz
 ** Login   <alcara_m@epitech.net>
 ** 
 ** Started on  Wed Jun 12 16:34:40 2013 Marin Alcaraz
-** Last update Sun Jul 07 17:20:42 2013 ivan ignatiev
+** Last update Mon Jul 08 13:24:52 2013 ivan ignatiev
 */
 
 #include        "main.h"
@@ -106,11 +106,11 @@ t_user          *proto_define(t_user *u, t_server *s, t_world *w)
         {
             u = (t_user*)user_player_init(u, team, w, s);
             (team->members)++;
-            (s->options.cmax)--;
+            (s->players_slots)--;
             sprintf(answer, "%d\n", s->players_slots);
-            cli_answer((t_user_player*)u, s, answer);
+            cli_answer((t_user_player*)u, s, strdup(answer));
             sprintf(answer, "%d %d\n", s->options.width, s->options.height);
-            cli_answer((t_user_player*)u, s, answer);
+            cli_answer((t_user_player*)u, s, strdup(answer));
             return (u);
         }
         cli_answer((t_user_player*)u, s, "mort\n");

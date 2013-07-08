@@ -5,7 +5,7 @@
 ** Login   <kuznet_o@epitech.net>
 **
 ** Started on  Wed Jun  05 19:21:34 2013 oleg kuznietsov
-** Last update Thu Jul 04 21:14:55 2013 ivan ignatiev
+** Last update Mon Jul 08 13:23:40 2013 ivan ignatiev
 */
 
 #include "main.h"
@@ -31,9 +31,10 @@ t_item    *item_create(void *src_content, int content_size)
   item = item_init();
   if (src_content == NULL || content_size <= 0)
     return (NULL);
-  if ((item->cont = malloc(content_size)) == NULL)
+  /*if ((item->cont = malloc(content_size)) == NULL)
     return (NULL);
-  item->cont = memcpy(item->cont, src_content, content_size);
+  item->cont = memcpy(item->cont, src_content, content_size);*/
+  item->cont = src_content;
   item->size = content_size;
   return (item);
 }
@@ -111,6 +112,7 @@ void        item_delete_by_content(t_list *list, void *item)
         current = list->head;
         while (current != NULL)
         {
+            printf("%p %p\n", current->cont, item);
             if (current->cont == item)
             {
                 if (list->head == current)
