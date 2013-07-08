@@ -1,18 +1,18 @@
 /*
-** trantor.c for zappy in /home/ignatiev/Projects/zappy
+** trantor.c for zappy in /home/hero/zappy
 ** 
 ** Made by Marin Alcaraz
 ** Login   <alcara_m@epitech.net>
 ** 
 ** Started on  Thu Jun 20 17:33:58 2013 Marin Alcaraz
-** Last update Mon Jul 08 18:44:13 2013 ivan ignatiev
+** Last update Mon Jul 08 13:44:23 2013 Marin Alcaraz
 */
 
 #include    "main.h"
 #include    "list.h"
 #include    "error.h"
 #include    "trantor.h"
-#define     RESOURCE_LIMIT  10
+#define     RESOURCE_LIMIT  256
 
 static      char g_resource[7][21]=
 {

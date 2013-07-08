@@ -5,7 +5,7 @@
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Wed Jun 12 17:02:27 2013 Marin Alcaraz
-** Last update Mon Jul 08 12:55:43 2013 Marin Alcaraz
+** Last update Mon Jul 08 13:32:36 2013 Marin Alcaraz
 */
 
 #ifndef GRAPH_COMMAND_H
@@ -38,8 +38,8 @@ int             graph_command_piv(t_graph_data *, t_server *, t_world *);
 int             graph_command_pin(t_graph_data *, t_server *, t_world *);
 int             graph_command_sgt(t_graph_data *, t_server *, t_world *);
 int             graph_command_sst(t_graph_data *, t_server *, t_world *);
-int 			graph_display_users(t_server *s);
-int 			graph_client_init(t_server *s, t_world *w);
+int 		graph_display_users(t_server *s, t_graph_data *);
+int 		graph_client_init(t_user_graph *, t_server *s, t_world *w);
 int             graph_command_display(t_graph_data *, t_server *, t_world *);
 
 #endif	/* GRAPH_COMMAND_H */

@@ -5,7 +5,7 @@
 ** Login   <alcara_m@epitech.net>
 ** 
 ** Started on  Wed Jun 12 16:34:40 2013 Marin Alcaraz
-** Last update Mon Jul 08 13:09:02 2013 Marin Alcaraz
+** Last update Mon Jul 08 13:33:32 2013 Marin Alcaraz
 */
 
 #include        "main.h"
@@ -102,7 +102,7 @@ t_user          *proto_define(t_user *u, t_server *s, t_world *w)
         if (strcmp(buf, "GRAPHIC") == 0)
         {
             u =  ((t_user*)user_graph_init(u));
-	    graph_client_init(s, w);
+	    graph_client_init(T_GRAPH(u), s, w);
             return (u);
         }
         if (s->players_slots > 0 && (team = team_search(s->team_list, buf)) != NULL)

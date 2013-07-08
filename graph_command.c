@@ -5,7 +5,7 @@
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Wed Jun 12 17:02:27 2013 Marin Alcaraz
-** Last update Mon Jul 08 13:01:17 2013 Marin Alcaraz
+** Last update Mon Jul 08 13:38:53 2013 Marin Alcaraz
 */
 
 #include        "main.h"
@@ -60,7 +60,7 @@ int             graph_command_msz(t_graph_data *rqd, t_server *s, t_world *w)
 
     sprintf(response, "msz %d %d\n", w->width, w->height);
     printf("Response: %s", response);
-    cli_answer_to_graph(s, response);
+    cli_answer_to_graph(rqd->user, response);
     return (0);
 }
 
@@ -82,7 +82,7 @@ int             graph_command_bct(t_graph_data *rqd, t_server *s, t_world *w)
     }
     sprintf(response, "%s/n", response);
     printf("Response: %s", response);
-    cli_answer_to_graph(s, response);
+    cli_answer_to_graph(rqd->user, response);
     return (0);
 }
 
@@ -93,7 +93,7 @@ int             graph_command_mct(t_graph_data *rqd, t_server *s, t_world *w)
   int         min;
   char        *response;
   char        bct_line[STR_LIMIT];
-  (void)      rqd;
+  (void)      s;
 
   j = 0;
   if ((response  = malloc(STR_LIMIT * w->width)) == NULL)
@@ -108,16 +108,15 @@ int             graph_command_mct(t_graph_data *rqd, t_server *s, t_world *w)
       min = 0;
       while (min < 7)
       {
-        //if  ((w->surface[j][i]).resources[min++] != 0)
         sprintf(bct_line, "%d ", w->surface[j][i].resources[min++]);
         strcat(response, bct_line);
       }
       i = i + 1;
       strcat(response, "\n");
+      cli_answer_to_graph(rqd->user, response);
     }
     j = j + 1;
     printf("Response: %s", response);
-    cli_answer_to_graph(s, response);
     response[0] = '\0';
   }
   free(response);
@@ -136,7 +135,7 @@ int             graph_command_tna(t_graph_data *rqd, t_server *s, t_world *w)
     {
         sprintf(response, "tna %s\n", (char *)(current_team->cont));
         printf("Response: %s", response);
-        cli_answer_to_graph(s, response);
+        cli_answer_to_graph(rqd->user, response);
         current_team = current_team->next;
         response[0] = '\0';
     }
@@ -160,7 +159,7 @@ int             graph_command_ppo(t_graph_data *rqd, t_server *s, t_world *w)
                     T_PLAYER(current_player->cont)->posx, T_PLAYER(current_player->cont)->posy,
                     T_PLAYER(current_player->cont)->direction);
             printf("Response: %s", response);
-            cli_answer_to_graph(s, response);
+            cli_answer_to_graph(rqd->user, response);
             return (0);
         }
         current_player = current_player->next;
@@ -184,7 +183,7 @@ int             graph_command_piv(t_graph_data *rqd, t_server *s, t_world *w)
             sprintf(response, "piv %d %d\n", p_number,
                     T_PLAYER(current_player->cont)->level);
             printf("Response: %s", response);
-            cli_answer_to_graph(s, response);
+            cli_answer_to_graph(rqd->user, response);
             return (0);
         }
         current_player = current_player->next;
@@ -216,7 +215,7 @@ int             graph_command_pin(t_graph_data *rqd, t_server *s, t_world *w)
             T_PLAYER(current_player->cont)->inventory[5],
             T_PLAYER(current_player->cont)->inventory[6]);
             printf("Response: %s", response);
-            cli_answer_to_graph(s, response);
+            cli_answer_to_graph(rqd->user, response);
             return (0);
         }
         current_player = current_player->next;
@@ -231,7 +230,7 @@ int             graph_command_sgt(t_graph_data *rqd, t_server *s, t_world *w)
 	char 		response[STR_LIMIT];
 
 	sprintf(response, "sgt %u\n", s->options.tdelay);
-	cli_answer_to_graph(s, response);
+	cli_answer_to_graph(rqd->user, response);
     return (0);
 }
 
@@ -251,34 +250,40 @@ int             graph_command_display(t_graph_data *rqd, t_server *s, t_world *w
     return (0);
 }
 
-int 			graph_display_users(t_server *s)
+int 			graph_display_users(t_server *s, t_graph_data *rqd)
 {
-		t_item 	*current;
-		char 	response[STR_LIMIT];
+	t_item 	*current;
+	char 	response[STR_LIMIT];
 
-		current = s->client_list->head;
-		while (current != NULL)
+	current = s->client_list->head;
+	while (current != NULL)
+	{
+		if (T_USER(current->cont)->protocol == CLI_PROTO)
 		{
-				sprintf(response, "pnw %d %d %d %d %d %s\n",
-						T_PLAYER(current->cont)->number,
-						T_PLAYER(current->cont)->posx,
-						T_PLAYER(current->cont)->posy,
-						T_PLAYER(current->cont)->direction,
-						T_PLAYER(current->cont)->level,
-						T_PLAYER(current->cont)->team->name);
-				current = current->next;
-				cli_answer_to_graph(s, response);
+		sprintf(response, "pnw %d %d %d %d %d %s\n",
+				T_PLAYER(current->cont)->number,
+				T_PLAYER(current->cont)->posx,
+				T_PLAYER(current->cont)->posy,
+				T_PLAYER(current->cont)->direction,
+				T_PLAYER(current->cont)->level,
+				T_PLAYER(current->cont)->team->name);
+		cli_answer_to_graph(rqd->user, response);
 		}
-		return (0);
+		current = current->next;
+	}
+	return (0);
 }
 
-int 		graph_client_init(t_server *s, t_world *w)
+int 		graph_client_init(t_user_graph *u, t_server *s, t_world *w)
 {
-		graph_command_msz(NULL, s, w);
-		graph_command_sgt(NULL, s, w);
-		graph_command_mct(NULL, s, w);
-		graph_command_tna(NULL, s, w);
-		graph_display_users(s);
-		/** SEND ENW **/
-		return (0);
+	t_graph_data rqd;
+
+	rqd.user = u;
+	graph_command_msz(&rqd, s, w);
+	graph_command_sgt(&rqd, s, w);
+	graph_command_mct(&rqd, s, w);
+	graph_command_tna(&rqd, s, w);
+	graph_display_users(s, &rqd);
+	/** SEND ENW **/
+	return (0);
 }

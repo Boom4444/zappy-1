@@ -1,11 +1,11 @@
 /*
-** proto_commands_movement.c for zappy in /home/ignatiev/Projects/zappy
+** proto_commands_movement.c for zappy in /home/hero/zappy
 ** 
 ** Made by Marin Alcaraz
 ** Login   <alcara_m@epitech.net>
 ** 
 ** Started on  Thu Jun 13 16:26:19 2013 Marin Alcaraz
-** Last update Mon Jul 08 18:39:42 2013 ivan ignatiev
+** Last update Mon Jul 08 13:49:14 2013 Marin Alcaraz
 */
 
 #include        "main.h"
@@ -43,11 +43,15 @@ static char     *g_objects[] = {
 
 void    	cli_avance(t_request_data *rqd, t_server *t, t_world *w)
 {
+    char 	response[251];
+
     item_delete_by_content(w->surface[rqd->user->posy][rqd->user->posx].players, (void*)rqd->user);
     rqd->user->posx = _MOD(rqd->user->posx + g_steps[rqd->user->direction].x, w->width);
     rqd->user->posy = _MOD(rqd->user->posy + g_steps[rqd->user->direction].y, w->height);
     item_pf(w->surface[rqd->user->posy][rqd->user->posx].players, (void*)rqd->user, sizeof(t_user));
     cli_answer(rqd->user, t, "ok\n");
+    sprintf(response, "ppo %d %d %d %d\n", rqd->user->number, rqd->user->posx, rqd->user->posy, rqd->user->direction);
+    cli_answer_to_all_graph(t, response);
 }
 
 void        cli_droite(t_request_data *rqd, t_server *t, t_world *w)
