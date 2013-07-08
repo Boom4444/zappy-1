@@ -5,7 +5,7 @@
 ** Login   <alcara_m@epitech.net>
 ** 
 ** Started on  Thu Jun 20 17:38:38 2013 Marin Alcaraz
-** Last update Sat Jul 06 14:09:49 2013 ivan ignatiev
+** Last update Mon Jul 08 18:42:55 2013 ivan ignatiev
 */
 
 #ifndef TRANTOR_H_
@@ -18,13 +18,14 @@
 # define MENDIANE    4
 # define PHIRAS      5
 # define THYSTAME    6
+# define RES_TYPES_COUNT 7
 
 # define _MOD(x,d) (((x) < 0) ? ((d) - ((-(x)) % (d))) : ((x) % (d)))
 
 typedef struct  s_square_unit
 {
     t_list      *players;
-    int         resources[7];
+    int         resources[RES_TYPES_COUNT];
 }               t_square_unit;
 
 typedef struct      s_world
@@ -37,7 +38,7 @@ typedef struct      s_world
 int        init_world(t_world *w, int width, int height);
 int        display_world(t_world *w, int width, int height);
 int        generate_resource(t_world *w, int width, int height);
-int        mineral_checker(t_square_unit sq);
+int        mineral_checker(t_square_unit *sq);
 void       random_number(int *container, int limit);
 
 #endif /* !TRANTOR_H_ */

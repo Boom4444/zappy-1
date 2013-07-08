@@ -5,7 +5,7 @@
 ** Login   <alcara_m@epitech.net>
 ** 
 ** Started on  Wed Jun 12 16:34:40 2013 Marin Alcaraz
-** Last update Mon Jul 08 18:05:58 2013 ivan ignatiev
+** Last update Mon Jul 08 18:52:18 2013 ivan ignatiev
 */
 
 #include        "main.h"
@@ -40,7 +40,6 @@ int            cli_parse(t_user_player *u, t_server *s, t_world *w)
             u->request[strlen(u->request) - 1] = '\0';
             if (u->request_counter > REQUESTS_LIMIT)
             {
-                free(u->request);
                 u->request = NULL;
                 error_show("cli_parse", "", "Player %d request limit", u->number);
                 cli_answer(u, s, "ko\n");
@@ -56,7 +55,6 @@ int            cli_parse(t_user_player *u, t_server *s, t_world *w)
                 error_show("cli_parse", "", "Player %d wrong request", u->number);
                 cli_answer(u, s, "ko\n");
             }
-            free(u->request);
             u->request = NULL;
         }
         return (0);
