@@ -5,7 +5,7 @@
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Thu Jun 20 20:02:59 2013 ivan ignatiev
-** Last update Thu Jul 04 21:48:46 2013 ivan ignatiev
+** Last update Mon Jul 08 18:21:25 2013 ivan ignatiev
 */
 
 #include        "main.h"
@@ -15,6 +15,7 @@
 #include        "server.h"
 #include        "users.h"
 #include        "answer.h"
+#include        "error.h"
 
 t_answer        *cli_answer_create(t_user_player *user, char *message)
 {
@@ -22,11 +23,12 @@ t_answer        *cli_answer_create(t_user_player *user, char *message)
 
     if ((answer = (t_answer*)malloc(sizeof(t_answer))) != NULL)
     {
-        answer->message = message;
+        answer->message = strdup(message);
         answer->user = user;
+        return (answer);
     }
-
-    return (answer);
+    error_show("cli_answer_create", "malloc", "Unable allocate memory for answer");
+    return (NULL);
 }
 
 void            cli_answer(t_user_player *user, t_server *server, char *message)
@@ -59,7 +61,7 @@ void            cli_answer_to_graph(t_server *server, char *message)
     }
 }
 
-void                            cli_answers_process(t_server *s,
+void                            cli_answers_process(t_server *s, t_world *w,
                                         struct timeval *start,
                                         unsigned long long tick_size)
 {
@@ -74,9 +76,9 @@ void                            cli_answers_process(t_server *s,
     {
         if (server_send(T_ANSWER(current)->user->clientfd, T_ANSWER(current)->message) <= 0)
         {
-              close(T_ANSWER(current)->user->clientfd);
-              //item_delete(server->client_list, current);
+              user_destroy(T_USER(T_ANSWER(current)->user), s, w);
         }
+        free(T_ANSWER(current)->message);
         tmp = current;
         current = current->next;
         item_delete(s->answer_list, tmp);

@@ -5,7 +5,7 @@
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Thu Jun 20 20:00:46 2013 ivan ignatiev
-** Last update Mon Jul 08 16:42:25 2013 ivan ignatiev
+** Last update Mon Jul 08 17:41:17 2013 ivan ignatiev
 */
 
 #include        "main.h"
@@ -90,7 +90,8 @@ t_request               *cli_request_parse(t_server *s, t_user_player *user)
                 {
                     if ((request->data = request->type->parse(request->type, user->request)) != NULL)
                     {
-                        log_show("cli_parse", "", "Request '%s' accepted on the %lluth tick, plan : %llu", request->data->message, s->tick, request->tick);
+                        log_show("cli_parse", "", "Request '%s' for player %d accepted on the %lluth tick, plan : %llu",
+                         request->data->message, user->number, s->tick, request->tick);
                         request->data->user = user;
                     }
                 }

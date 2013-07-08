@@ -5,7 +5,7 @@
 ** Login   <alcara_m@epitech.net>
 ** 
 ** Started on  Wed Jun 12 16:34:40 2013 Marin Alcaraz
-** Last update Mon Jul 08 16:39:00 2013 ivan ignatiev
+** Last update Mon Jul 08 18:05:58 2013 ivan ignatiev
 */
 
 #include        "main.h"
@@ -40,7 +40,9 @@ int            cli_parse(t_user_player *u, t_server *s, t_world *w)
             u->request[strlen(u->request) - 1] = '\0';
             if (u->request_counter > REQUESTS_LIMIT)
             {
+                free(u->request);
                 u->request = NULL;
+                error_show("cli_parse", "", "Player %d request limit", u->number);
                 cli_answer(u, s, "ko\n");
                 return (-1);
             }
@@ -50,7 +52,11 @@ int            cli_parse(t_user_player *u, t_server *s, t_world *w)
                 item_pb(s->request_list, (void*)request, sizeof(t_request));
             }
             else
+            {
+                error_show("cli_parse", "", "Player %d wrong request", u->number);
                 cli_answer(u, s, "ko\n");
+            }
+            free(u->request);
             u->request = NULL;
         }
         return (0);
@@ -67,7 +73,7 @@ int        graph_parse(t_user_graph *u, t_server *s, t_world *w)
     if ((rb = recv(u->clientfd, buf, PROTO_BUFFER, MSG_DONTWAIT)) > 0)
     {
         buf[rb - 1] = '\0';
-        log_show("graph_parse", "", "Request '%s' accepted", buf);
+        log_show("graph_parse", "", "GFX Request '%s' accepted", buf);
         return (graph_command_exec(u, s, w, buf));
     }
     user_destroy(T_USER(u), s, w);
@@ -107,9 +113,9 @@ t_user          *proto_define(t_user *u, t_server *s, t_world *w)
             (team->members)++;
             (s->players_slots)--;
             sprintf(answer, "%d\n", s->players_slots);
-            cli_answer((t_user_player*)u, s, strdup(answer));
+            cli_answer((t_user_player*)u, s, answer);
             sprintf(answer, "%d %d\n", s->options.width, s->options.height);
-            cli_answer((t_user_player*)u, s, strdup(answer));
+            cli_answer((t_user_player*)u, s, answer);
             return (u);
         }
         error_show("proto_define", "", "Limit of players or undefined team");
