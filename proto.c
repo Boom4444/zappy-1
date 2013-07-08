@@ -1,11 +1,11 @@
 /*
-** proto.c for zappy in /home/ignatiev/Projects/zappy
+** proto.c for zappy in /home/hero/zappy
 ** 
 ** Made by Marin Alcaraz
 ** Login   <alcara_m@epitech.net>
 ** 
 ** Started on  Wed Jun 12 16:34:40 2013 Marin Alcaraz
-** Last update Mon Jul 08 18:05:58 2013 ivan ignatiev
+** Last update Mon Jul 08 12:51:22 2013 Marin Alcaraz
 */
 
 #include        "main.h"
@@ -104,7 +104,7 @@ t_user          *proto_define(t_user *u, t_server *s, t_world *w)
         if (strcmp(buf, "GRAPHIC") == 0)
         {
             u =  ((t_user*)user_graph_init(u));
-            // function which send all data
+	    graph_client_init(s, w);
             return (u);
         }
         if (s->players_slots > 0 && (team = team_search(s->team_list, buf)) != NULL)

@@ -1,11 +1,11 @@
 /*
-** graph_command.c for zappy in /home/ignati_i/zappy/zappy
+** graph_command.c for zappy in /home/hero/zappy
 ** 
 ** Made by Ivan Ignatiev
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Wed Jun 12 17:02:27 2013 Marin Alcaraz
-** Last update Sun Jul 07 17:13:09 2013 ivan ignatiev
+** Last update Mon Jul 08 13:01:17 2013 Marin Alcaraz
 */
 
 #include        "main.h"
@@ -226,9 +226,12 @@ int             graph_command_pin(t_graph_data *rqd, t_server *s, t_world *w)
 
 int             graph_command_sgt(t_graph_data *rqd, t_server *s, t_world *w)
 {
-    (void) rqd;
-    (void) s;
-    (void) w;
+    (void) 		rqd;
+    (void) 		w;
+	char 		response[STR_LIMIT];
+
+	sprintf(response, "sgt %u\n", s->options.tdelay);
+	cli_answer_to_graph(s, response);
     return (0);
 }
 
@@ -246,4 +249,36 @@ int             graph_command_display(t_graph_data *rqd, t_server *s, t_world *w
     (void) s;
     display_world(w, w->width, w->height);
     return (0);
+}
+
+int 			graph_display_users(t_server *s)
+{
+		t_item 	*current;
+		char 	response[STR_LIMIT];
+
+		current = s->client_list->head;
+		while (current != NULL)
+		{
+				sprintf(response, "pnw %d %d %d %d %d %s\n",
+						T_PLAYER(current->cont)->number,
+						T_PLAYER(current->cont)->posx,
+						T_PLAYER(current->cont)->posy,
+						T_PLAYER(current->cont)->direction,
+						T_PLAYER(current->cont)->level,
+						T_PLAYER(current->cont)->team->name);
+				current = current->next;
+				cli_answer_to_graph(s, response);
+		}
+		return (0);
+}
+
+int 		graph_client_init(t_server *s, t_world *w)
+{
+		graph_command_msz(NULL, s, w);
+		graph_command_sgt(NULL, s, w);
+		graph_command_mct(NULL, s, w);
+		graph_command_tna(NULL, s, w);
+		graph_display_users(s);
+		/** SEND ENW **/
+		return (0);
 }

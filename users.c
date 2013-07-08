@@ -1,11 +1,11 @@
 /*
-** users.c for zappy in /home/ignatiev/Projects/zappy
+** users.c for zappy in /home/hero/zappy
 ** 
 ** Made by ivan ignatiev
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Sat Apr 27 14:16:14 2013 ivan ignatiev
-** Last update Mon Jul 08 18:28:24 2013 ivan ignatiev
+** Last update Mon Jul 08 13:05:21 2013 Marin Alcaraz
 */
 
 #include    "main.h"
