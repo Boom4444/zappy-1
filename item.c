@@ -5,7 +5,7 @@
 ** Login   <kuznet_o@epitech.net>
 **
 ** Started on  Wed Jun  05 19:21:34 2013 oleg kuznietsov
-** Last update Mon Jul 08 13:23:40 2013 ivan ignatiev
+** Last update Mon Jul 08 13:32:28 2013 ivan ignatiev
 */
 
 #include "main.h"
@@ -112,7 +112,6 @@ void        item_delete_by_content(t_list *list, void *item)
         current = list->head;
         while (current != NULL)
         {
-            printf("%p %p\n", current->cont, item);
             if (current->cont == item)
             {
                 if (list->head == current)
@@ -123,7 +122,7 @@ void        item_delete_by_content(t_list *list, void *item)
                     current->prev->next = current->next;
                 if (current->next != NULL)
                     current->next->prev = current->prev;
-                free(item);
+                free(current);
                 list->len -= 1;
                 return ;
             }

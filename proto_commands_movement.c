@@ -5,7 +5,7 @@
 ** Login   <alcara_m@epitech.net>
 ** 
 ** Started on  Thu Jun 13 16:26:19 2013 Marin Alcaraz
-** Last update Mon Jul 08 13:03:09 2013 ivan ignatiev
+** Last update Mon Jul 08 13:33:14 2013 ivan ignatiev
 */
 
 #include        "main.h"
@@ -43,15 +43,7 @@ static char     *g_objects[] = {
 
 void    	cli_avance(t_request_data *rqd, t_server *t, t_world *w)
 {
-    t_item *current;
     item_delete_by_content(w->surface[rqd->user->posy][rqd->user->posx].players, (void*)rqd->user);
-    printf("user : %p\n", (void*)rqd->user);
-    current = t->client_list->head;
-    while (current != NULL)
-    {
-           printf("users : %p\n", current->cont);
-           current= current->next;
-    }
     rqd->user->posx = _MOD(rqd->user->posx + g_steps[rqd->user->direction].x, w->width);
     rqd->user->posy = _MOD(rqd->user->posy + g_steps[rqd->user->direction].y, w->height);
     item_pf(w->surface[rqd->user->posy][rqd->user->posx].players, (void*)rqd->user, sizeof(t_user));
