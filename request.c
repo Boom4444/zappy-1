@@ -5,7 +5,7 @@
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Thu Jun 20 20:00:46 2013 ivan ignatiev
-** Last update Mon Jul 08 17:41:17 2013 ivan ignatiev
+** Last update Mon Jul 08 18:28:14 2013 ivan ignatiev
 */
 
 #include        "main.h"
@@ -32,7 +32,7 @@ t_request_type  cli_commands[] =
     {"inventaire", 7, 0, cli_parse_inventaire, cli_inventaire },
     {"prend", 7, 1, cli_parse_prend, cli_prend },
     {"pose", 7, 1, cli_parse_pose, cli_pose },
-    {"expluse", 7, 0, cli_parse_expulse, cli_expulse },
+    {"expulse", 7, 0, cli_parse_expulse, cli_expulse },
     {"broadcast", 7, 1, cli_parse_broadcast, cli_broadcast  },
     {"incantation", 300, 0, cli_parse_incantation, cli_incantation },
     {"fork", 42, 0, cli_parse_fork, cli_fork_player },
