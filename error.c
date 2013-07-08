@@ -5,7 +5,7 @@
 ** Login   <alcara_m@epitech.net>
 * 
 ** Started on  Fri Mar 15 16:42:14 2013 Marin Alcaraz
-** Last update Thu Jul 04 21:25:36 2013 ivan ignatiev
+** Last update Mon Jul 08 16:50:41 2013 ivan ignatiev
 **/
 
 #include "main.h"
@@ -16,94 +16,39 @@
 #include "users.h"
 #include "error.h"
 
-void  error_put(char *s)
+int         error_show(char *loc, char *func, char *msg, ...)
 {
-  int i;
+    va_list ap;
+    time_t  log_time;
+    char    str_time[255];
 
-  i = 0;
-  while (s[i] != 0)
-  {
-    write(STDERR_FILENO, &s[i], 1);
-    i = i + 1;
-  }
+    va_start(ap, msg);
+    time(&log_time);
+    ctime_r(&log_time, str_time);
+    str_time[strlen(str_time) - 1] = '\0';
+    fprintf(stderr, "\e[1;31mERROR [%s %s in %s] : ", str_time, func, loc);
+    vfprintf(stderr, msg, ap);
+    fprintf(stderr, " (%d : %s) \e[m\n", errno, strerror(errno));
+    errno = 0;
+    va_end(ap);
+    return (-1);
 }
 
-int       error_log(char *loc, char *func, char *msg)
+int         log_show(char *loc, char *func, char *msg, ...)
 {
-  FILE    *log_stream;
-  char    *slog_time;
-  time_t  log_time;
+    va_list ap;
+    time_t  log_time;
+    char    str_time[255];
 
-  log_stream = fopen("error.log", "a");
-  if (log_stream == NULL)
-  {
-    error_put("Error: 'error_log' fails to store error [");
-    fprintf(stderr, "%s fails in %s]\n", func, loc);
-    return (-1);
-  }
-  time(&log_time);
-  slog_time = ctime(&log_time);
-  slog_time[strlen(slog_time) - 1] = 0;
-  fprintf(log_stream, "%s %s [%s]: %s\n", slog_time, loc, func, msg);
-  fclose(log_stream);
-  return (1);
+    va_start(ap, msg);
+    time(&log_time);
+    ctime_r(&log_time, str_time);
+    str_time[strlen(str_time) - 1] = '\0';
+    fprintf(stderr, "\e[1;36mINFO  [%s %s in %s] : ", str_time, func, loc);
+    vfprintf(stderr, msg, ap);
+    fprintf(stderr, "\e[m\n");
+    va_end(ap);
+    return (0);
 }
 
-int   error_show(char *loc, char *func, char *msg)
-{
-  write(STDERR_FILENO, "Error: ", 7);
-  error_put(msg);
-  write(STDERR_FILENO, "\n", 1);
-  if (error_log(loc, func, msg) == -1)
-    return (-1);
-  return (1);
-}
 
-int       log_access(const char *ip)
-{
-  FILE    *log_stream;
-  char    *slog_time;
-  time_t  log_time;
-
-  log_stream = fopen("access.log", "a");
-  if (log_stream == NULL)
-  {
-    error_log("log_access", "fopen", strerror(errno));
-    return (-1);
-  }
-  time(&log_time);
-  slog_time = ctime(&log_time);
-  slog_time[strlen(slog_time) - 1] = 0;
-  fprintf(log_stream, "%s Connection accepted from %s\n",  slog_time, ip);
-  fclose(log_stream);
-  return (1);
-}
-
-int       log_command(char *user_name, char *cmd, int dir)
-{
-  FILE    *log_stream;
-  char    *slog_time;
-  time_t  log_time;
-
-  log_stream = fopen("command.log", "a");
-  if (log_stream == NULL)
-  {
-    error_log("log_command", "fopen", strerror(errno));
-    return (-1);
-  }
-  time(&log_time);
-  slog_time = ctime(&log_time);
-  slog_time[strlen(slog_time) - 1] = 0;
-  if (dir == 0)
-    fprintf(log_stream,
-      "%s Sending [%s] from server to \"%s\"\n",
-      slog_time, cmd, user_name);
-  if (dir == 1)
-    fprintf(log_stream,
-      "%s Sending [%s] from \"%s\" to server\n",
-      slog_time, cmd, user_name);
-  else
-    return (-1);
-  fclose(log_stream);
-  return (1);
-}

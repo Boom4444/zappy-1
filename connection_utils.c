@@ -5,7 +5,7 @@
 ** Login   <alcara_m@epitech.net>
 ** 
 ** Started on  Thu Apr 11 19:09:26 2013 Marin Alcaraz
-** Last update Thu Jul 04 21:30:07 2013 ivan ignatiev
+** Last update Mon Jul 08 16:22:54 2013 ivan ignatiev
 */
 
 #include "main.h"
@@ -26,10 +26,10 @@ int         create_socket(void)
 
   pe = getprotobyname("TCP");
   if (pe == (void *)-1)
-    error_log("create_socket", "getprotobyname",
+    error_show("create_socket", "getprotobyname",
       "Error obtaining protocol, unable to create socket\n");
   fd = socket(AF_INET, SOCK_STREAM, pe->p_proto);
   if (fd == -1)
-    error_log("create_socket", "getprotobyname", strerror(errno));
+    error_show("create_socket", "getprotobyname", "Unable create a socket");
   return (fd);
 }

@@ -5,7 +5,7 @@
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Sat Apr 27 14:16:14 2013 ivan ignatiev
-** Last update Sun Jul 07 13:08:16 2013 ivan ignatiev
+** Last update Mon Jul 08 16:35:28 2013 ivan ignatiev
 */
 
 #include    "main.h"
@@ -14,6 +14,8 @@
 #include    "trantor.h"
 #include    "server.h"
 #include	"users.h"
+#include    "error.h"
+#include    "item.h"
 
 t_user      *user_create()
 {
@@ -55,8 +57,11 @@ t_user_player       *user_player_init(t_user *user, t_team *team, t_world *w, t_
         player->inventory[FOOD] = 10; //1260 * t sec
         item_pf(w->surface[player->posy][player->posx].players, (void*)player, sizeof(t_user_player));
         player->number = s->players_count++;
+        log_show("user_player_init", "", "Player %d created", player->number);
+        return (player);
     }
-    return (player);
+    error_show("user_player_init", "malloc", "Unable allocate memory for players");
+    return (NULL);
 }
 
 t_user_graph        *user_graph_init(t_user *user)
@@ -67,13 +72,27 @@ t_user_graph        *user_graph_init(t_user *user)
     {
         graph->protocol = GRAPHIC_PROTO;
         graph->connected = CONNECTED;
+        log_show("user_graph_init", "", "Graphic client created");
+        return (graph);
     }
-    return (graph);
+    error_show("user_graph_init", "malloc", "Unable allocate memory for GFX clients");
+    return (NULL);
 }
 
-void        user_destroy(t_user *user)
+void        user_destroy(t_user *user, t_server *s, t_world *w)
 {
-    (void) user;
+    close(user->clientfd);
+    item_delete_by_content(s->client_list, (void*)user);
+
+    if (user->protocol == CLI_PROTO)
+    {
+        item_delete_by_content(w->surface[T_PLAYER(user)->posy][T_PLAYER(user)->posx].players, (void*)user);
+        log_show("user_destroy", "", "Player %d disconnected and removed", T_PLAYER(user)->number);
+        free(user);
+        return ;
+    }
+    free(user);
+    log_show("user_destroy", "", "Graph client disconnected and removed");
 }
 
 t_team      *team_create(char *name)
@@ -84,7 +103,7 @@ t_team      *team_create(char *name)
     {
         strcpy(team->name, name);
         team->members = 0;
-        printf("Team created : '%s' \n", team->name);
+        log_show("team_create", "", "Team created : '%s'", team->name);
     }
     return (team);
 }

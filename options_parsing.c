@@ -5,7 +5,7 @@
 ** Login   <kuznet_o@epitech.eu>
 **
 ** Started on  Fri Jun  07 00:49:53 2013 oleg kuznietsov
-** Last update Mon Jul 08 13:24:00 2013 ivan ignatiev
+** Last update Mon Jul 08 15:09:35 2013 ivan ignatiev
 */
 
 #include "main.h"
@@ -78,19 +78,6 @@ void    the_parse(int argc, char *argv[])
     t = 0;
     ++i;
   }
-}
-
-int   get_nbrlen(int nbr)
-{
-  int i;
-
-  i = 0;
-  while (nbr != 0)
-  {
-    nbr /= 10;
-    ++i;
-  }
-  return (i);
 }
 
 void    teams_fill(t_opt *opt, int n)

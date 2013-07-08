@@ -1,11 +1,11 @@
 /*
-** select.c for zappy in /home/hero/zappy
+** select.c for zappy in /home/ignatiev/Projects/zappy
 ** 
 ** Made by ivan ignatiev
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Sat Apr 27 14:58:48 2013 ivan ignatiev
-** Last update Fri Jul 05 11:17:24 2013 Marin Alcaraz
+** Last update Mon Jul 08 16:07:34 2013 ivan ignatiev
 */
 
 #include    "main.h"
@@ -35,22 +35,21 @@ static int	select_create_fdset(t_server *s, fd_set *fdset, int maxfd)
   return (maxfd);
 }
 
-static int	select_accept_connection(t_server *s, t_world *w)
+static int	select_accept_connection(t_server *s)
 {
-  t_user	*user;
+    t_user	*user;
 
-  if ((user = user_create()) == NULL)
-      return (error_log("select_accept_connection", "user_create",
-        "unable to allocate memory to new client"));
-  if ((user->clientfd =
-              accept(s->server_fd, (struct sockaddr*)&user->addr,&user->addrlen)) < 0)
-      error_log("select_accept_connection", "accept", strerror(errno));
-  item_pf(s->client_list, (void*)user, sizeof(t_user));
-  printf("[%s] Connected\n", inet_ntoa(user->addr.sin_addr));
-  server_handshake(user->clientfd);
-  log_access(inet_ntoa(user->addr.sin_addr));
-  (void) (w);
-  return (0);
+    if ((user = user_create()) == NULL)
+        return (error_show("select_accept_connection", "user_create",
+                    "Unable to allocate memory to new client"));
+    if ((user->clientfd = accept(s->server_fd,
+                    (struct sockaddr*)&user->addr,&user->addrlen)) < 0)
+        error_show("select_accept_connection", "accept", "Unable to accept client");
+    item_pf(s->client_list, (void*)user, sizeof(t_user));
+    log_show("select_accept_connection", "accept",
+            "User %s connected to the server", inet_ntoa(user->addr.sin_addr));
+    server_handshake(user->clientfd);
+    return (0);
 }
 
 static int	select_check_fdset(t_server *s, t_world *w, fd_set *fdset)
@@ -84,8 +83,8 @@ int			        select_do(t_server *s, t_world *w)
   tv.tv_usec = 1;
   maxfd = select_create_fdset(s, &fdset, s->server_fd);
   if (select(maxfd + 1, &fdset, NULL, NULL, &tv) < 0)
-      return (error_log("select_do", "select", strerror(errno)));
+      return (error_show("select_do", "select", "Unable select current FDSET"));
   if (FD_ISSET(s->server_fd, &fdset))
-    return (select_accept_connection(s, w));
+    return (select_accept_connection(s));
   return (select_check_fdset(s, w, &fdset));
 }

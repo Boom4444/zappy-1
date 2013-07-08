@@ -5,13 +5,14 @@
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Thu Jul 04 20:46:31 2013 ivan ignatiev
-** Last update Thu Jul 04 21:42:08 2013 ivan ignatiev
+** Last update Mon Jul 08 15:27:03 2013 ivan ignatiev
 */
 
 #ifndef MAIN_H_
 # define MAIN_H_
 
 # include	            <stdlib.h>
+# include               <stdarg.h>
 # include               <stdio.h>
 # include               <string.h>
 # include               <sys/time.h>

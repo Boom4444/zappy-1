@@ -5,7 +5,7 @@
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Thu Jun 20 20:00:46 2013 ivan ignatiev
-** Last update Thu Jul 04 21:38:51 2013 ivan ignatiev
+** Last update Mon Jul 08 16:42:25 2013 ivan ignatiev
 */
 
 #include        "main.h"
@@ -14,6 +14,7 @@
 #include        "trantor.h"
 #include        "server.h"
 #include        "users.h"
+#include        "error.h"
 #include        "request.h"
 #include        "proto.h"
 #include        "cli_command_parse.h"
@@ -53,8 +54,9 @@ t_request_data          *cli_request_data_init(char *message, int argc)
             free(rqd);
             return (NULL);
         }
+        return (rqd);
     }
-
+    error_show("cli_request_data_init", "malloc", "Unable allocate memory for requesti data");
     return (rqd);
 }
 
@@ -64,9 +66,10 @@ t_request               *cli_request_init()
 
     if ((request = (t_request*)malloc(sizeof(t_request))) != NULL)
     {
+        return (request);
     }
-
-    return (request);
+    error_show("cli_request_init", "malloc", "Unable allocate memory for request");
+    return (NULL);
 }
 
 t_request               *cli_request_parse(t_server *s, t_user_player *user)
@@ -83,11 +86,11 @@ t_request               *cli_request_parse(t_server *s, t_user_player *user)
             {
                 request->type = &cli_commands[i];
                 request->tick = (user->tick > s->tick ? user->tick : s->tick) + request->type->delay;
-                printf("Request will implemented %llu tick\n", request->tick);
                 if (request->type->parse != NULL)
                 {
                     if ((request->data = request->type->parse(request->type, user->request)) != NULL)
                     {
+                        log_show("cli_parse", "", "Request '%s' accepted on the %lluth tick, plan : %llu", request->data->message, s->tick, request->tick);
                         request->data->user = user;
                     }
                 }
@@ -116,8 +119,8 @@ void            cli_requests_process(t_server *s, t_world *w)
                 && T_REQUEST(current)->data != NULL
                 && s->tick >= T_REQUEST(current)->tick)
         {
-            printf("Request implemented %llu tick\n", s->tick);
             T_REQUEST(current)->type->func(T_REQUEST(current)->data, s, w);
+            log_show("cli_requests_process", "", "Request '%s' implemented on %dth tick", T_REQUEST(current)->data->message, s->tick);
             s->diff = 1;
             tmp = current;
             current = current->next;

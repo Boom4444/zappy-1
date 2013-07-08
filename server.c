@@ -5,7 +5,7 @@
 ** Login   <alcara_m@epitech.net>
 ** 
 ** Started on  Tue May 21 09:42:30 2013 Marin Alcaraz
-** Last update Mon Jul 08 13:38:50 2013 ivan ignatiev
+** Last update Mon Jul 08 16:49:31 2013 ivan ignatiev
 */
 
 #include                "main.h"
@@ -35,6 +35,7 @@ int                     server_send(int clientfd, char *message)
 
 void                    server_init(t_server *s)
 {
+    log_show("server_start", "", "Server start");
     s->client_list = list_init();
     s->team_list = team_list_init(s->team_list, s->options.names);
     s->request_list = list_init();
@@ -50,7 +51,6 @@ void                    server_stop(t_server *s)
 {
     t_item              *current;
 
-    printf("Server stop;\n");
     current = s->client_list->head;
     while (current != NULL)
     {
@@ -58,6 +58,7 @@ void                    server_stop(t_server *s)
         current = current->next;
     }
     close(s->server_fd);
+    log_show("server_stop", "", "Server stop");
 }
 
 int                     server_start(t_server *s, t_world *w)
@@ -69,15 +70,11 @@ int                     server_start(t_server *s, t_world *w)
 
     server_init(s);
     init_sockadd(&s_in, s->options.port);
-    if (bind(s->server_fd,
-                (const struct sockaddr *)&s_in,
+    if (bind(s->server_fd, (const struct sockaddr *)&s_in,
                 sizeof(s_in)) == -1)
     {
-        if (error_show("server_start", "bind", strerror(errno)) == 1)
-        {
-            close(s->options.port);
-            return (EXIT_FAILURE);
-        }
+        close(s->server_fd);
+        return (error_show("server_start", "bind", "Unable to bind the server socket"));
     }
     listen(s->server_fd, QUEUE_LIMIT);
     s->tick_size = 1000000 / s->options.tdelay;
@@ -91,7 +88,7 @@ int                     server_start(t_server *s, t_world *w)
         elapsedTime = (stop_loop.tv_sec - start_loop.tv_sec) * 1000000;
         elapsedTime = elapsedTime + (stop_loop.tv_usec - start_loop.tv_usec);
         if (s->diff)
-            printf("%lf sec. %llu tick.\n", (double) elapsedTime / 1000000.0, s->tick);
+            log_show("server_start", "", "Last command time : %lf sec. %llu tick", (double) elapsedTime / 1000000.0, s->tick);
         s->diff = 0;
         ++s->tick;
     }

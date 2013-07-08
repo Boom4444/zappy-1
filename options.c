@@ -5,11 +5,12 @@
 ** Login   <kuznet_o@epitech.net>
 **
 ** Started on  Fri Jun  07 00:47:46 2013 oleg kuznietsov
-** Last update Fri Jul 05 18:27:18 2013 ivan ignatiev
+** Last update Mon Jul 08 16:54:09 2013 ivan ignatiev
 */
 
 #include "main.h"
 #include "list.h"
+#include "error.h"
 #include "options.h"
 
 void    default_error(char *argv[])
@@ -120,8 +121,7 @@ void  options_parse(int argc, char *argv[], t_opt *g_opt)
   options_getopt(argc, argv, g_opt);
   teams_fill(g_opt, 2);
 
-  // TODO: could be updated
-  printf("Server launching with values :\n");
-  printf("port=%d, width=%d, height=%d, cmax=%d, tdelay=%d\n",
-    g_opt->port, g_opt->width, g_opt->height, g_opt->cmax, g_opt->tdelay);
+  log_show("options_parse", "", "Options accepted : "
+                                "PORT = %d, WIDTH = %d, HEIGHT = %d, CMAX = %d, T = %d",
+                                g_opt->port, g_opt->width, g_opt->height, g_opt->cmax, g_opt->tdelay);
 }

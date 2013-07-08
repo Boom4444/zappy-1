@@ -1,11 +1,11 @@
 /*
-** users.h for zappy in /home/hero/zappy
+** users.h for zappy in /home/ignatiev/Projects/zappy
 ** 
 ** Made by ivan ignatiev
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Sat Apr 27 17:03:35 2013 ivan ignatiev
-** Last update Sun Jul 07 14:53:27 2013 Marin Alcaraz
+** Last update Mon Jul 08 16:11:21 2013 ivan ignatiev
 */
 
 #ifndef USERS_H_
@@ -86,7 +86,7 @@ typedef struct          s_user_graph
 t_user              *user_create();
 t_user_player       *user_player_init(t_user *user, t_team *team, t_world *w, t_server *s);
 t_user_graph        *user_graph_init(t_user *user);
-void                user_destroy(t_user *user);
+void                user_destroy(t_user *user, t_server *s, t_world *w);
 t_team              *team_create(char *name);
 t_team              *team_search(t_list *team_list, char *team_name);
 t_list              *team_list_init(t_list *team_list, t_list *team_names);
