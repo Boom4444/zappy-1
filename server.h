@@ -5,7 +5,7 @@
 ** Login   <alcara_m@epitech.net>
 ** 
 ** Started on  Sun May 26 18:53:05 2013 Marin Alcaraz
-** Last update Sun Jul 07 13:07:08 2013 ivan ignatiev
+** Last update Mon Jul 08 13:38:19 2013 ivan ignatiev
 ** Last update Tue Jun 25 16:25:00 2013 Marin Alcaraz
 */
 
@@ -20,20 +20,21 @@
 # define  LIM_X          30
 # define  LIM_y          30
 
-typedef  struct     s_server
+typedef  struct         s_server
 {
-  t_list            *client_list;
-  t_list            *request_list;
-  t_list            *answer_list;
-  t_list            *team_list;
-  t_opt             options;
-  int               server_fd;
-  int               diff;
-  unsigned long long tick;
-  int               result;
-  unsigned int      players_slots;
-  unsigned int      players_count;
-}                   t_server;
+  t_list                *client_list;
+  t_list                *request_list;
+  t_list                *answer_list;
+  t_list                *team_list;
+  t_opt                 options;
+  int                   server_fd;
+  int                   diff;
+  unsigned long long    tick;
+  int                   result;
+  unsigned int          players_slots;
+  unsigned int          players_count;
+  unsigned long long    tick_size;
+}                       t_server;
 
 int         server_handshake(int);
 void        server_handleclient(struct sockaddr_in *s_client, int *);

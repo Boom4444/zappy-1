@@ -5,7 +5,7 @@
 ** Login   <alcara_m@epitech.net>
 ** 
 ** Started on  Tue May 21 09:42:30 2013 Marin Alcaraz
-** Last update Sun Jul 07 13:07:34 2013 ivan ignatiev
+** Last update Mon Jul 08 13:38:50 2013 ivan ignatiev
 */
 
 #include                "main.h"
@@ -66,7 +66,6 @@ int                     server_start(t_server *s, t_world *w)
     struct timeval      start_loop;
     struct timeval      stop_loop;
     unsigned long long    elapsedTime;
-    unsigned long long    tick_size;
 
     server_init(s);
     init_sockadd(&s_in, s->options.port);
@@ -81,13 +80,13 @@ int                     server_start(t_server *s, t_world *w)
         }
     }
     listen(s->server_fd, QUEUE_LIMIT);
-    tick_size = 1000000 / s->options.tdelay;
+    s->tick_size = 1000000 / s->options.tdelay;
     while(s->result == 0)
     {
         gettimeofday(&start_loop, NULL);
         select_do(s, w);
         cli_requests_process(s, w);
-        cli_answers_process(s, &start_loop, tick_size);
+        cli_answers_process(s, &start_loop, s->tick_size);
         gettimeofday(&stop_loop, NULL);
         elapsedTime = (stop_loop.tv_sec - start_loop.tv_sec) * 1000000;
         elapsedTime = elapsedTime + (stop_loop.tv_usec - start_loop.tv_usec);
