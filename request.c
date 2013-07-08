@@ -5,7 +5,7 @@
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Thu Jun 20 20:00:46 2013 ivan ignatiev
-** Last update Mon Jul 08 18:28:14 2013 ivan ignatiev
+** Last update Mon Jul 08 18:52:07 2013 ivan ignatiev
 */
 
 #include        "main.h"
@@ -122,6 +122,7 @@ void            cli_requests_process(t_server *s, t_world *w)
         {
             T_REQUEST(current)->type->func(T_REQUEST(current)->data, s, w);
             log_show("cli_requests_process", "", "Request '%s' implemented on %dth tick", T_REQUEST(current)->data->message, s->tick);
+            free(T_REQUEST(current)->data->message);
             s->diff = 1;
             tmp = current;
             current = current->next;

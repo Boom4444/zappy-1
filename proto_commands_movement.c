@@ -5,7 +5,7 @@
 ** Login   <alcara_m@epitech.net>
 ** 
 ** Started on  Thu Jun 13 16:26:19 2013 Marin Alcaraz
-** Last update Mon Jul 08 18:23:38 2013 ivan ignatiev
+** Last update Mon Jul 08 18:39:42 2013 ivan ignatiev
 */
 
 #include        "main.h"
@@ -130,7 +130,7 @@ void        cli_voir_resources(char *answer, int *resources)
     int     j;
 
     i = 0;
-    while (i < 7)
+    while (i < RES_TYPES_COUNT)
     {
         j = 0;
         while (j < resources[i])

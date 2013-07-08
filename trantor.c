@@ -1,11 +1,11 @@
 /*
-** trantor.c for zappy in /home/ignati_i/zappy/zappy
+** trantor.c for zappy in /home/ignatiev/Projects/zappy
 ** 
 ** Made by Marin Alcaraz
 ** Login   <alcara_m@epitech.net>
 ** 
 ** Started on  Thu Jun 20 17:33:58 2013 Marin Alcaraz
-** Last update Sun Jul 07 17:04:47 2013 ivan ignatiev
+** Last update Mon Jul 08 18:44:13 2013 ivan ignatiev
 */
 
 #include    "main.h"
@@ -53,14 +53,14 @@ int        init_world(t_world *w, int width, int height)
     return (0);
 }
 
-int     mineral_checker(t_square_unit sq)
+int     mineral_checker(t_square_unit *sq)
 {
     int     i;
 
     i = 0;
-    while (i < 6)
+    while (i < RES_TYPES_COUNT)
     {
-        if (sq.resources[i] != 0)
+        if (sq->resources[i] != 0)
             return (1);
         i = i + 1;
     }
@@ -79,7 +79,7 @@ int          display_world(t_world *w, int width, int height)
     {
         while (j < width)
         {
-            if (mineral_checker(w->surface[i][j]) != 0)
+            if (mineral_checker(&w->surface[i][j]) != 0)
                 printf(" R ");
             else if ((w->surface[i][j]).players->head != NULL)
                 printf(" P ");
