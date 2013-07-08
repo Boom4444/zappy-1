@@ -5,7 +5,7 @@
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Thu Jun 20 20:02:59 2013 ivan ignatiev
-** Last update Mon Jul 08 18:21:25 2013 ivan ignatiev
+** Last update Mon Jul 08 20:21:47 2013 ivan ignatiev
 */
 
 #include        "main.h"
@@ -41,23 +41,30 @@ void            cli_answer(t_user_player *user, t_server *server, char *message)
     }
 }
 
-void            cli_answer_to_graph(t_server *server, char *message)
+void            cli_answer_to_all_graph(t_server *server, char *message)
 {
     t_item      *current;
 
     current = server->client_list->head;
     while (current != NULL)
     {
-        if (T_GRAPH(current)->protocol == GRAPHIC_PROTO
-             && T_GRAPH(current)->connected)
+        if (T_GRAPH(current->cont)->protocol == GRAPHIC_PROTO
+             && T_GRAPH(current->cont)->connected == CONNECTED)
          {
-             if (server_send(T_GRAPH(current)->clientfd, message) <= 0)
+             if (server_send(T_GRAPH(current->cont)->clientfd, message) <= 0)
              {
-                close((T_GRAPH(current)->clientfd));
-                //item_delete(server->client_list, current);
+                 //user_destroy(T_USER(current->cont), s)
              }
          }
         current = current->next;
+    }
+}
+
+void            cli_answer_to_graph(t_user_graph *u, char *message)
+{
+    if (server_send(u->clientfd, message) <= 0)
+    {
+        //user_destroy(T_USER(current->cont), s)
     }
 }
 
