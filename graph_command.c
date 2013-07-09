@@ -1,11 +1,11 @@
 /*
-** graph_command.c for zappy in /home/ignatiev/Projects/zappy
+** graph_command.c for zappy in /home/hero/zappy
 ** 
 ** Made by Ivan Ignatiev
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Wed Jun 12 17:02:27 2013 Marin Alcaraz
-** Last update Tue Jul 09 18:30:12 2013 ivan ignatiev
+** Last update Tue Jul 09 12:21:14 2013 Marin Alcaraz
 */
 
 #include        "main.h"
@@ -104,11 +104,11 @@ int             graph_command_mct(t_graph_data *rqd, t_server *s, t_world *w)
     while (i < w->width)
     {
 
-      sprintf(response, "bct %d %d ", i, j);
+      sprintf(response, "bct %d %d", i, j);
       min = 0;
-      while (min < 7)
+      while (min < RES_TYPES_COUNT)
       {
-        sprintf(bct_line, "%d ", w->surface[j][i].resources[min++]);
+        sprintf(bct_line, " %d", w->surface[j][i].resources[min++]);
         strcat(response, bct_line);
       }
       i = i + 1;
