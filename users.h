@@ -1,11 +1,11 @@
 /*
-** users.h for zappy in /home/ignatiev/Projects/zappy
+** users.h for zappy in /home/hero/zappy
 ** 
 ** Made by ivan ignatiev
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Sat Apr 27 17:03:35 2013 ivan ignatiev
-** Last update Mon Jul 08 16:11:21 2013 ivan ignatiev
+** Last update Tue Jul 09 07:19:19 2013 Marin Alcaraz
 */
 
 #ifndef USERS_H_
@@ -30,6 +30,11 @@
 # define BOT_RIGHT   5
 # define MID_RIGHT   6
 # define TOP_RIGHT   7
+
+# define NORTH          0
+# define EAST           1
+# define SOUTH          2
+# define WEST           3
 
 # define T_USER(user) ((t_user *)(user))
 # define T_PLAYER(user) ((t_user_player*)(user))
@@ -64,7 +69,7 @@ typedef struct          s_user_player
   int                   posx;
   int                   posy;
   int                   level;
-  int                   direction;
+  int                   orientation;;
   unsigned long long    tick;
   t_team                *team;
   int                   inventory[ARTICLES_LIMIT];

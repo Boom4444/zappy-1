@@ -5,7 +5,7 @@
 ** Login   <alcara_m@epitech.net>
 ** 
 ** Started on  Mon Jul 01 14:23:40 2013 Marin Alcaraz
-** Last update Fri Jul 05 11:12:34 2013 Marin Alcaraz
+** Last update Tue Jul 09 07:19:56 2013 Marin Alcaraz
 */
 
 #include <math.h>
@@ -58,6 +58,19 @@ double  broadcast_get_distance(t_user_player *u, int x, int y)
     return (sqrt(pow((u->posx - x), 2) + pow((u->posy - y), 2)));
 }
 
+int     or_to_dir(int orientation)
+{
+    if (orientation == NORTH)
+        return (TOP);
+    if (orientation == EAST)
+        return (MID_RIGHT);
+    if (orientation ==SOUTH)
+        return (BOT_MID);
+    if (orientation == WEST)
+        return (MID_LEFT);
+    return (orientation);
+}
+
 double          generate_offsets(double offsets[9][3], t_request_data  *rqd, t_user_player *current, t_server *t)
 {
     int         i;
@@ -92,6 +105,6 @@ int             broadcast_to(t_user_player *user, t_request_data *rqd, t_server 
 
     alpha = generate_offsets(point_data, rqd, user, t);
     direction = determine_direction(alpha);
-    direction = (8 - user->direction + direction) % 8;
+    direction = (8 - or_to_dir(user->orientation) + direction) % 8;
     return (direction);
 }

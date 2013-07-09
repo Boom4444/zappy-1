@@ -5,7 +5,7 @@
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Wed Jun 12 17:02:27 2013 Marin Alcaraz
-** Last update Mon Jul 08 13:38:53 2013 Marin Alcaraz
+** Last update Tue Jul 09 08:02:01 2013 Marin Alcaraz
 */
 
 #include        "main.h"
@@ -157,7 +157,7 @@ int             graph_command_ppo(t_graph_data *rqd, t_server *s, t_world *w)
         {
             sprintf(response, "ppo %d %d %d %d\n", p_number,
                     T_PLAYER(current_player->cont)->posx, T_PLAYER(current_player->cont)->posy,
-                    T_PLAYER(current_player->cont)->direction);
+                    T_PLAYER(current_player->cont)->orientation);
             printf("Response: %s", response);
             cli_answer_to_graph(rqd->user, response);
             return (0);
@@ -198,13 +198,13 @@ int             graph_command_pin(t_graph_data *rqd, t_server *s, t_world *w)
     t_item      *current_player;
     int         p_number;
 
-    sscanf(rqd->message, "piv %d\n", &p_number);
+    sscanf(rqd->message, "pin %d\n", &p_number);
     current_player = s->client_list->head;
     while (current_player != NULL)
     {
         if (T_PLAYER(current_player->cont)->number == p_number)
         {
-            sprintf(response, "ppo %d %d %d %d %d %d %d %d %d %d\n",
+            sprintf(response, "pin %d %d %d %d %d %d %d %d %d %d\n",
             p_number, T_PLAYER(current_player->cont)->posx,
             T_PLAYER(current_player->cont)->posy,
             T_PLAYER(current_player->cont)->inventory[0],
@@ -264,7 +264,7 @@ int 			graph_display_users(t_server *s, t_graph_data *rqd)
 				T_PLAYER(current->cont)->number,
 				T_PLAYER(current->cont)->posx,
 				T_PLAYER(current->cont)->posy,
-				T_PLAYER(current->cont)->direction,
+				T_PLAYER(current->cont)->orientation + 1,
 				T_PLAYER(current->cont)->level,
 				T_PLAYER(current->cont)->team->name);
 		cli_answer_to_graph(rqd->user, response);

@@ -5,7 +5,7 @@
 ** Login   <alcara_m@epitech.net>
 ** 
 ** Started on  Thu Jun 13 16:26:19 2013 Marin Alcaraz
-** Last update Mon Jul 08 13:49:14 2013 Marin Alcaraz
+** Last update Tue Jul 09 07:32:03 2013 Marin Alcaraz
 */
 
 #include        "main.h"
@@ -22,13 +22,9 @@
 static t_steps 	g_steps[]=
 {
 	{0, -1},
-	{-1, -1},
-	{-1, 0},
-	{-1, 1},
-	{0, 1},
-	{1, 1},
 	{1, 0},
-	{1, -1}
+	{0, 1},
+	{-1, 0}
 };
 
 static char     *g_objects[] = {
@@ -46,58 +42,34 @@ void    	cli_avance(t_request_data *rqd, t_server *t, t_world *w)
     char 	response[251];
 
     item_delete_by_content(w->surface[rqd->user->posy][rqd->user->posx].players, (void*)rqd->user);
-    rqd->user->posx = _MOD(rqd->user->posx + g_steps[rqd->user->direction].x, w->width);
-    rqd->user->posy = _MOD(rqd->user->posy + g_steps[rqd->user->direction].y, w->height);
+    rqd->user->posx = _MOD(rqd->user->posx + g_steps[rqd->user->orientation].x, w->width);
+    rqd->user->posy = _MOD(rqd->user->posy + g_steps[rqd->user->orientation].y, w->height);
     item_pf(w->surface[rqd->user->posy][rqd->user->posx].players, (void*)rqd->user, sizeof(t_user));
     cli_answer(rqd->user, t, "ok\n");
-    sprintf(response, "ppo %d %d %d %d\n", rqd->user->number, rqd->user->posx, rqd->user->posy, rqd->user->direction);
+    sprintf(response, "ppo %d %d %d %d\n", rqd->user->number, rqd->user->posx, rqd->user->posy, rqd->user->orientation + 1);
     cli_answer_to_all_graph(t, response);
 }
 
 void        cli_droite(t_request_data *rqd, t_server *t, t_world *w)
 {
     (void)  (w);
+    char 	response[251];
 
-	if (rqd->user->direction == TOP)
-        rqd->user->direction = MID_RIGHT;
-	else if (rqd->user->direction == MID_RIGHT)
-        rqd->user->direction = BOT_MID;
-	else if (rqd->user->direction == BOT_MID)
-        rqd->user->direction = MID_LEFT;
-	else if (rqd->user->direction == MID_LEFT)
-        rqd->user->direction = TOP;
-	else if (rqd->user->direction == TOP_RIGHT)
-        rqd->user->direction = BOT_RIGHT;
-	else if (rqd->user->direction == BOT_RIGHT)
-        rqd->user->direction = BOT_LEFT;
-	else if (rqd->user->direction == BOT_LEFT)
-        rqd->user->direction = TOP_LEFT;
-	else if (rqd->user->direction == TOP_LEFT)
-        rqd->user->direction = TOP_RIGHT;
+    rqd->user->orientation = _MOD(rqd->user->orientation + 1, 4);
     cli_answer(rqd->user, t, "ok\n");
+    sprintf(response, "ppo %d %d %d %d\n", rqd->user->number, rqd->user->posx, rqd->user->posy, rqd->user->orientation + 1);
+    cli_answer_to_all_graph(t, response);
 }
 
 void        cli_gauche(t_request_data *rqd, t_server *t, t_world *w)
 {
     (void) (w);
+    char 	response[251];
 
-	if (rqd->user->direction == TOP)
-        rqd->user->direction = MID_LEFT;
-	else if (rqd->user->direction == MID_RIGHT)
-        rqd->user->direction = TOP;
-	else if (rqd->user->direction == BOT_MID)
-        rqd->user->direction = MID_RIGHT;
-	else if (rqd->user->direction == MID_LEFT)
-        rqd->user->direction = BOT_MID;
-	else if (rqd->user->direction == TOP_RIGHT)
-        rqd->user->direction = TOP_LEFT;
-	else if (rqd->user->direction == BOT_RIGHT)
-        rqd->user->direction = TOP_RIGHT;
-	else if (rqd->user->direction == BOT_LEFT)
-        rqd->user->direction = BOT_RIGHT;
-	else if (rqd->user->direction == TOP_LEFT)
-        rqd->user->direction = BOT_LEFT;
+    rqd->user->orientation = _MOD(rqd->user->orientation - 1, 4);
     cli_answer(rqd->user, t, "ok\n");
+    sprintf(response, "ppo %d %d %d %d\n", rqd->user->number, rqd->user->posx, rqd->user->posy, rqd->user->orientation + 1);
+    cli_answer_to_all_graph(t, response);
 }
 
 void        cli_broadcast(t_request_data *rqd, t_server *t, t_world *w)
@@ -173,12 +145,12 @@ void        cli_voir(t_request_data *rqd, t_server *s, t_world *w)
         {
             cli_voir_players(answer, w->surface[obj_y][obj_x].players);
             cli_voir_resources(answer, w->surface[obj_y][obj_x].resources);
-            obj_x = _MOD(obj_x + g_steps[_MOD(rqd->user->direction - 2, 8)].x, w->width);
-            obj_y = _MOD(obj_y + g_steps[_MOD(rqd->user->direction - 2, 8)].y, w->height);
+            obj_x = _MOD(obj_x + g_steps[_MOD(rqd->user->orientation - 2, 8)].x, w->width);
+            obj_y = _MOD(obj_y + g_steps[_MOD(rqd->user->orientation - 2, 8)].y, w->height);
             ++i;
         }
-        x = _MOD(x + g_steps[_MOD(rqd->user->direction + 1, 8)].x, w->width);
-        y = _MOD(y + g_steps[_MOD(rqd->user->direction + 1, 8)].y, w->height);
+        x = _MOD(x + g_steps[_MOD(rqd->user->orientation + 1, 8)].x, w->width);
+        y = _MOD(y + g_steps[_MOD(rqd->user->orientation + 1, 8)].y, w->height);
         level_count += 2;
         ++level;
     }
