@@ -5,7 +5,7 @@
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Sat Apr 27 14:16:14 2013 ivan ignatiev
-** Last update Tue Jul 09 17:56:43 2013 ivan ignatiev
+** Last update Tue Jul 09 18:35:49 2013 ivan ignatiev
 */
 
 #include    "main.h"
@@ -73,7 +73,7 @@ t_user_egg      *user_egg_init(t_user_player *parent)
         egg->clientfd = -1;
         egg->posx = parent->posx;
         egg->posy = parent->posy;
-        egg->owner_number = parent->number;
+        egg->parent = parent;
         return (egg);
     }
     error_show("user_player_init", "malloc", "Unable allocate memory for eggs");
@@ -98,11 +98,11 @@ t_user_graph        *user_graph_init(t_user *user)
 void        user_destroy(t_user *user, t_server *s, t_world *w)
 {
     close(user->clientfd);
-    ++(s->players_slots);
     item_delete_by_content(s->client_list, (void*)user);
 
     if (user->protocol == CLI_PROTO)
     {
+        ++(T_PLAYER(user)->team->limit);
         item_delete_by_content(w->surface[T_PLAYER(user)->posy][T_PLAYER(user)->posx].players, (void*)user);
         log_show("user_destroy", "", "Player %d disconnected and removed", T_PLAYER(user)->number);
         free(user);
@@ -112,7 +112,7 @@ void        user_destroy(t_user *user, t_server *s, t_world *w)
     log_show("user_destroy", "", "Graph client disconnected and removed");
 }
 
-t_team      *team_create(char *name)
+t_team      *team_create(char *name, t_server *s)
 {
     t_team  *team;
 
@@ -120,6 +120,7 @@ t_team      *team_create(char *name)
     {
         strcpy(team->name, name);
         team->members = 0;
+        team->limit = s->options.cmax;
         log_show("team_create", "", "Team created : '%s'", team->name);
     }
     return (team);
@@ -139,20 +140,20 @@ t_team          *team_search(t_list *team_list, char *team_name)
     return (NULL);
 }
 
-t_list      *team_list_init(t_list *team_list, t_list *team_names)
+t_list      *team_list_init(t_server *s, t_list *team_names)
 {
     t_team  *team;
     t_item  *current;
 
-    team_list = list_init();
+    s->team_list = list_init();
     current = team_names->head;
     while (current != NULL)
     {
-        team = team_create((char*)(current->cont));
-        item_pf(team_list, (void*)team, sizeof(t_team));
+        team = team_create((char*)(current->cont), s);
+        item_pf(s->team_list, (void*)team, sizeof(t_team));
         current = current->next;
     }
-    return (team_list);
+    return (s->team_list);
 }
 
 void        team_destroy(t_team *team)

@@ -1,11 +1,11 @@
 /*
-** request.c for zappy in /home/hero/zappy
+** request.c for zappy in /home/ignatiev/Projects/zappy
 ** 
 ** Made by ivan ignatiev
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Thu Jun 20 20:00:46 2013 ivan ignatiev
-** Last update Tue Jul 09 07:35:37 2013 Marin Alcaraz
+** Last update Tue Jul 09 18:45:07 2013 ivan ignatiev
 */
 
 #include        "main.h"
@@ -63,7 +63,7 @@ t_request_data          *cli_request_data_init(char *message, unsigned int argc)
 t_request_type          *cli_request_type_init(void)
 {
     t_request_type      *type;
-    
+
     if ((type = (t_request_type*)malloc(sizeof(t_request_type))) != NULL)
     {
         return (type);
@@ -103,7 +103,7 @@ t_request               *cli_request_parse(t_server *s, t_user_player *user)
                     if ((request->data = request->type->parse(request->type, user, s)) != NULL)
                     {
                         log_show("cli_parse", "", "Request '%s' for player %d accepted on the %lluth tick, plan : %llu",
-                         request->data->message, user->number, s->tick, request->tick);
+                                request->data->message, user->number, s->tick, request->tick);
                         request->data->user = user;
                     }
                 }

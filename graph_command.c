@@ -1,11 +1,11 @@
 /*
-** graph_command.c for zappy in /home/hero/zappy
+** graph_command.c for zappy in /home/ignatiev/Projects/zappy
 ** 
 ** Made by Ivan Ignatiev
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Wed Jun 12 17:02:27 2013 Marin Alcaraz
-** Last update Tue Jul 09 08:02:01 2013 Marin Alcaraz
+** Last update Tue Jul 09 18:30:12 2013 ivan ignatiev
 */
 
 #include        "main.h"
@@ -274,19 +274,19 @@ int 			graph_display_users(t_server *s, t_graph_data *rqd)
 	return (0);
 }
 
-int             graph_display_eggs(t_server *s, t_graph_data *rqd) 
+int             graph_display_eggs(t_server *s, t_graph_data *rqd)
 {
     t_item      *current;
     char        response[STR_LIMIT];
 
     current = s->client_list->head;
-    while (current != NULL) 
+    while (current != NULL)
     {
-        if (T_USER(current->cont)->protocol == EGG_PROTO) 
+        if (T_USER(current->cont)->protocol == EGG_PROTO)
         {
             sprintf(response, "enw %d %d %d %d\n",
                     T_EGG(current->cont)->number,
-                    T_EGG(current->cont)->owner_number,
+                    T_EGG(current->cont)->parent->number,
                     T_EGG(current->cont)->posx,
                     T_EGG(current->cont)->posy);
             cli_answer_to_graph(rqd->user, response);

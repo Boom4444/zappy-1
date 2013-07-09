@@ -5,7 +5,7 @@
 ** Login   <alcara_m@epitech.net>
 ** 
 ** Started on  Thu Jun 13 16:31:20 2013 Marin Alcaraz
-** Last update Tue Jul 09 17:50:34 2013 ivan ignatiev
+** Last update Tue Jul 09 18:38:22 2013 ivan ignatiev
 */
 
 #include        "main.h"
@@ -55,8 +55,7 @@ void                    cli_hatch_egg(t_request_data *rqd,
 {
     char                response[ANSWER_SIZE];
 
-    (s->players_slots)++;
-    (s->options.cmax)++;
+    ++(T_EGG(rqd->user)->parent->team->limit);
     sprintf(response, "eht %d\n", T_EGG(rqd->user)->number);
     cli_answer_to_all_graph(s, response);
 
@@ -107,7 +106,7 @@ void        cli_connect_nbr(t_request_data *rqd, t_server *s, t_world *w)
     char    answer[ANSWER_SIZE];
 
     (void) (w);
-    sprintf(answer, "%u\n", (s->options.cmax - rqd->user->team->members));
+    sprintf(answer, "%u\n", rqd->user->team->limit);
     cli_answer(rqd->user, s, answer);
 }
 

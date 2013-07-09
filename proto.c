@@ -1,11 +1,11 @@
 /*
-** proto.c for zappy in /home/hero/zappy
+** proto.c for zappy in /home/ignatiev/Projects/zappy
 ** 
 ** Made by Marin Alcaraz
 ** Login   <alcara_m@epitech.net>
 ** 
 ** Started on  Wed Jun 12 16:34:40 2013 Marin Alcaraz
-** Last update Mon Jul 08 13:33:32 2013 Marin Alcaraz
+** Last update Tue Jul 09 18:45:38 2013 ivan ignatiev
 */
 
 #include        "main.h"
@@ -105,14 +105,14 @@ t_user          *proto_define(t_user *u, t_server *s, t_world *w)
 	    graph_client_init(T_GRAPH(u), s, w);
             return (u);
         }
-        if (s->players_slots > 0 && (team = team_search(s->team_list, buf)) != NULL)
+        if ((team = team_search(s->team_list, buf)) != NULL && team->limit > 0)
         {
             u = (t_user*)user_player_init(u, team, w, s);
-            T_PLAYER(u)->number = (s->players_count)++;
-            log_show("user_player_init", "", "Player %d created", T_PLAYER(u)->number);
-            (team->members)++;
-            (s->players_slots)--;
-            sprintf(answer, "%d\n", s->players_slots);
+            T_PLAYER(u)->number = ++(s->players_count);
+            log_show("user_player_init", "", "Player %d created in team '%s'", T_PLAYER(u)->number, T_PLAYER(u)->team->name);
+            ++(team->members);
+            --(team->limit);
+            sprintf(answer, "%d\n", team->limit);
             cli_answer((t_user_player*)u, s, answer);
             sprintf(answer, "%d %d\n", s->options.width, s->options.height);
             cli_answer((t_user_player*)u, s, answer);

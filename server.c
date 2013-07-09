@@ -5,7 +5,7 @@
 ** Login   <alcara_m@epitech.net>
 ** 
 ** Started on  Tue May 21 09:42:30 2013 Marin Alcaraz
-** Last update Mon Jul 08 18:02:54 2013 ivan ignatiev
+** Last update Tue Jul 09 18:34:59 2013 ivan ignatiev
 */
 
 #include                "main.h"
@@ -37,11 +37,10 @@ void                    server_init(t_server *s)
 {
     log_show("server_start", "", "Server start");
     s->client_list = list_init();
-    s->team_list = team_list_init(s->team_list, s->options.names);
+    s->team_list = team_list_init(s, s->options.names);
     s->request_list = list_init();
     s->answer_list = list_init();
     s->server_fd = create_socket();
-    s->players_slots = s->options.cmax;
     s->tick = 0;
     s->diff = 0;
     s->players_count = 0;

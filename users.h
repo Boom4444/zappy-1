@@ -5,7 +5,7 @@
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Sat Apr 27 17:03:35 2013 ivan ignatiev
-** Last update Tue Jul 09 17:28:27 2013 ivan ignatiev
+** Last update Tue Jul 09 18:30:33 2013 ivan ignatiev
 */
 
 #ifndef USERS_H_
@@ -46,6 +46,7 @@ typedef struct          s_team
 {
     char                name[NAME_LIMIT];
     int                 members;
+    int                 limit;
 }                       t_team;
 
 typedef struct		s_user
@@ -91,7 +92,7 @@ typedef struct          s_user_egg
   int                   posy;
   unsigned long long    tick;
   int                   number;
-  int                   owner_number;
+  t_user_player         *parent;
 }                       t_user_egg;
 
 typedef struct          s_user_graph
@@ -110,9 +111,9 @@ t_user_player   *user_player_init(t_user *user, t_team *team, t_world *w, t_serv
 t_user_graph    *user_graph_init(t_user *user);
 t_user_egg      *user_egg_init(t_user_player *parent);
 void            user_destroy(t_user *user, t_server *s, t_world *w);
-t_team          *team_create(char *name);
+t_team          *team_create(char *name, t_server *s);
 t_team          *team_search(t_list *team_list, char *team_name);
-t_list          *team_list_init(t_list *team_list, t_list *team_names);
+t_list          *team_list_init(t_server *s, t_list *team_names);
 void            team_destroy(t_team *team);
 
 #endif /* !USERS_H_ */
