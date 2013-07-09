@@ -5,7 +5,7 @@
 ** Login   <alcara_m@epitech.net>
 ** 
 ** Started on  Wed Jun 12 16:34:40 2013 Marin Alcaraz
-** Last update Tue Jul 09 18:45:38 2013 ivan ignatiev
+** Last update Tue Jul 09 19:46:51 2013 ivan ignatiev
 */
 
 #include        "main.h"
@@ -88,39 +88,46 @@ int         proto_parse(t_user *u, t_server *s, t_world *w)
     return (graph_parse((t_user_graph*)u, s, w));
 }
 
+void            user_player_connected(t_user_player *u, t_server *s, t_world *w)
+{
+    char        answer[PROTO_BUFFER + 1];
+
+    u->number = ++(s->players_count);
+    log_show("user_player_init", "", "Player %d created in team '%s'", u->number, u->team->name);
+    ++(u->team->members);
+    --(u->team->limit);
+    sprintf(answer, "%d\n", u->team->limit);
+    cli_answer(u, s, answer);
+    sprintf(answer, "%d %d\n", w->width, w->height);
+    cli_answer(u, s, answer);
+    sprintf(answer, "pnw %d %d %d %d %d %s\n", u->number, u->posx, u->posy, u->orientation, u->level, u->team->name);
+    cli_answer_to_all_graph(s, answer);
+}
+
 t_user          *proto_define(t_user *u, t_server *s, t_world *w)
 {
     t_team      *team;
     int         rb;
     char        buf[PROTO_BUFFER + 1];
-    char        answer[PROTO_BUFFER + 1];
 
-    (void) (w);
-    if ((rb = read(u->clientfd, buf, 256)) > 0)
+    if ((rb = recv(u->clientfd, buf, PROTO_BUFFER, MSG_DONTWAIT)) > 0)
     {
         buf[rb - 1] = '\0';
         if (strcmp(buf, "GRAPHIC") == 0)
         {
             u =  ((t_user*)user_graph_init(u));
-	    graph_client_init(T_GRAPH(u), s, w);
+            graph_client_init(T_GRAPH(u), s, w);
             return (u);
         }
         if ((team = team_search(s->team_list, buf)) != NULL && team->limit > 0)
         {
             u = (t_user*)user_player_init(u, team, w, s);
-            T_PLAYER(u)->number = ++(s->players_count);
-            log_show("user_player_init", "", "Player %d created in team '%s'", T_PLAYER(u)->number, T_PLAYER(u)->team->name);
-            ++(team->members);
-            --(team->limit);
-            sprintf(answer, "%d\n", team->limit);
-            cli_answer((t_user_player*)u, s, answer);
-            sprintf(answer, "%d %d\n", s->options.width, s->options.height);
-            cli_answer((t_user_player*)u, s, answer);
+            user_player_connected(T_PLAYER(u), s, w);
             return (u);
         }
         error_show("proto_define", "", "Limit of players or undefined team");
         cli_answer((t_user_player*)u, s, "mort\n");
     }
-   user_destroy(T_USER(u), s, w);
-   return (NULL);
+    user_destroy(T_USER(u), s, w);
+    return (NULL);
 }
