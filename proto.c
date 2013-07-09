@@ -108,6 +108,8 @@ t_user          *proto_define(t_user *u, t_server *s, t_world *w)
         if (s->players_slots > 0 && (team = team_search(s->team_list, buf)) != NULL)
         {
             u = (t_user*)user_player_init(u, team, w, s);
+            T_PLAYER(u)->number = (s->players_count)++;
+            log_show("user_player_init", "", "Player %d created", T_PLAYER(u)->number);
             (team->members)++;
             (s->players_slots)--;
             sprintf(answer, "%d\n", s->players_slots);

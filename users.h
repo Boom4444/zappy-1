@@ -31,10 +31,11 @@
 # define MID_RIGHT   6
 # define TOP_RIGHT   7
 
-# define T_USER(user) ((t_user *)(user))
+# define T_USER(user)   ((t_user *)(user))
 # define T_PLAYER(user) ((t_user_player*)(user))
-# define T_GRAPH(user) ((t_user_graph*)(user))
-# define T_TEAM(team) ((t_team*)((team)->cont))
+# define T_EGG(user)    ((t_user_egg*)(user))
+# define T_GRAPH(user)  ((t_user_graph*)(user))
+# define T_TEAM(team)   ((t_team*)((team)->cont))
 
 typedef struct          s_team
 {
@@ -44,18 +45,18 @@ typedef struct          s_team
 
 typedef struct		s_user
 {
-  int			        clientfd;
-  int			        connected;
+  int                   clientfd;
+  int                   connected;
   int                   protocol;
   struct sockaddr_in	addr;
-  socklen_t		        addrlen;
+  socklen_t		addrlen;
   char                  *request;
 }			            t_user;
 
 typedef struct          s_user_player
 {
-  int			        clientfd;
-  int			        connected;
+  int			clientfd;
+  int			connected;
   int                   protocol;
   struct sockaddr_in	addr;
   socklen_t		        addrlen;
@@ -72,24 +73,41 @@ typedef struct          s_user_player
   int                   number;
 }                       t_user_player;
 
-typedef struct          s_user_graph
+typedef struct          s_user_egg
 {
-  int			        clientfd;
-  int			        connected;
+  int			clientfd;
+  int			connected;
   int                   protocol;
   struct sockaddr_in	addr;
-  socklen_t		        addrlen;
+  socklen_t		addrlen;
+  char                  *request;
+
+  int                   posx;
+  int                   posy;
+  unsigned long long    tick;
+  int                   number;
+  int                   owner_number;
+}                       t_user_egg;
+
+typedef struct          s_user_graph
+{
+  int			clientfd;
+  int			connected;
+  int                   protocol;
+  struct sockaddr_in	addr;
+  socklen_t		addrlen;
   char                  *request;
 }                       t_user_graph;
 
 
-t_user              *user_create();
-t_user_player       *user_player_init(t_user *user, t_team *team, t_world *w, t_server *s);
-t_user_graph        *user_graph_init(t_user *user);
-void                user_destroy(t_user *user, t_server *s, t_world *w);
-t_team              *team_create(char *name);
-t_team              *team_search(t_list *team_list, char *team_name);
-t_list              *team_list_init(t_list *team_list, t_list *team_names);
-void                team_destroy(t_team *team);
+t_user          *user_create();
+t_user_player   *user_player_init(t_user *user, t_team *team, t_world *w, t_server *s);
+t_user_graph    *user_graph_init(t_user *user);
+t_user_egg      *user_egg_init(t_user_player *parent);
+void            user_destroy(t_user *user, t_server *s, t_world *w);
+t_team          *team_create(char *name);
+t_team          *team_search(t_list *team_list, char *team_name);
+t_list          *team_list_init(t_list *team_list, t_list *team_names);
+void            team_destroy(t_team *team);
 
 #endif /* !USERS_H_ */

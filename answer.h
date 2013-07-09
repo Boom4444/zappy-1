@@ -11,7 +11,8 @@
 #ifndef ANSWER_H_
 # define ANSWER_H_
 
-# define T_ANSWER(answer)           ((t_answer*)(answer->cont))
+# define T_ANSWER(answer)               ((t_answer*)(answer->cont))
+# define ANSWER_SIZE                    512
 
 typedef struct      s_answer
 {

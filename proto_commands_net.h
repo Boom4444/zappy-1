@@ -16,6 +16,7 @@ void    cli_expulse(t_request_data *rqd, t_server *t, t_world *w);
 void    cli_incantation(t_request_data *rqd, t_server *t, t_world *w);
 void    cli_fork_player(t_request_data *rqd, t_server *t, t_world *w);
 void    cli_connect_nbr(t_request_data *rqd, t_server *t, t_world *w);
-/* void    cli_death(t_server *t, t_world *w); */
+void                    cli_hatch_egg(t_request_data *rqd,
+                                        t_server *s, t_world *w);
 
 #endif /* !PROTO_COMMANDS_NET_H_ */

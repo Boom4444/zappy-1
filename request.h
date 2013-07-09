@@ -26,14 +26,14 @@ typedef struct          s_request_data
 typedef struct          s_request_type t_request_type;
 
 
-typedef         t_request_data *(*t_proto_func_parse)(t_request_type *type, char *message);
+typedef         t_request_data *(*t_proto_func_parse)(t_request_type *type, t_user_player *u, t_server *s);
 typedef         void (*t_proto_func)(t_request_data *rqd, t_server *s, t_world *w);
 
 typedef struct          s_request_type
 {
     char                *cmd;
-    int                 delay;
-    int                 argc;
+    unsigned int        delay;
+    unsigned int        argc;
 
     t_proto_func_parse  parse;
     t_proto_func        func;
@@ -46,8 +46,9 @@ typedef struct          s_request
     unsigned long long  tick;
 }                       t_request;
 
-t_request_data          *cli_request_data_init(char *message, int argc);
-t_request               *cli_request_init();
+t_request_type          *cli_request_type_init(void);
+t_request_data          *cli_request_data_init(char *message, unsigned int argc);
+t_request               *cli_request_init(void);
 t_request               *cli_request_parse(t_server *s, t_user_player *user);
 void                    cli_requests_process(t_server *s, t_world *w);
 

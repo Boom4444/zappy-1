@@ -11,17 +11,17 @@
 #ifndef CLI_COMMAND_PARSE_H_
 # define CLI_COMMAND_PARSE_H_
 
-t_request_data          *cli_parse_avance(t_request_type *type, char *message);
-t_request_data          *cli_parse_droite(t_request_type *type, char *message);
-t_request_data          *cli_parse_gauche(t_request_type *type, char *message);
-t_request_data          *cli_parse_voir(t_request_type *type, char *message);
-t_request_data          *cli_parse_inventaire(t_request_type *type, char *message);
-t_request_data          *cli_parse_prend(t_request_type *type, char *message);
-t_request_data          *cli_parse_pose(t_request_type *type, char *message);
-t_request_data          *cli_parse_expulse(t_request_type *type, char *message);
-t_request_data          *cli_parse_broadcast(t_request_type *type, char *message);
-t_request_data          *cli_parse_incantation(t_request_type *type, char *message);
-t_request_data          *cli_parse_fork(t_request_type *type, char *message);
-t_request_data          *cli_parse_connect_nbr(t_request_type *type, char *message);
+t_request_data          *cli_parse_avance(t_request_type *type, t_user_player *u, t_server *s);
+t_request_data          *cli_parse_droite(t_request_type *type, t_user_player *u, t_server *s);
+t_request_data          *cli_parse_gauche(t_request_type *type, t_user_player *u, t_server *s);
+t_request_data          *cli_parse_voir(t_request_type *type, t_user_player *u, t_server *s);
+t_request_data          *cli_parse_inventaire(t_request_type *type, t_user_player *u, t_server *s);
+t_request_data          *cli_parse_prend(t_request_type *type, t_user_player *u, t_server *s);
+t_request_data          *cli_parse_pose(t_request_type *type, t_user_player *u, t_server *s);
+t_request_data          *cli_parse_expulse(t_request_type *type, t_user_player *u, t_server *s);
+t_request_data          *cli_parse_broadcast(t_request_type *type, t_user_player *u, t_server *s);
+t_request_data          *cli_parse_incantation(t_request_type *type, t_user_player *u, t_server *s);
+t_request_data          *cli_parse_fork(t_request_type *type, t_user_player *u, t_server *s);
+t_request_data          *cli_parse_connect_nbr(t_request_type *type, t_user_player *u, t_server *s);
 
 #endif /* !CLI_COMMAND_PARSE_H_ */

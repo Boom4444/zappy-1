@@ -61,11 +61,27 @@ t_user_player       *user_player_init(t_user *user, t_team *team, t_world *w, t_
         }
         player->inventory[FOOD] = 10; //1260 * t sec
         item_pf(w->surface[player->posy][player->posx].players, (void*)player, sizeof(t_user_player));
-        player->number = s->players_count++;
-        log_show("user_player_init", "", "Player %d created", player->number);
         return (player);
     }
     error_show("user_player_init", "malloc", "Unable allocate memory for players");
+    return (NULL);
+}
+
+t_user_egg      *user_egg_init(t_user_player *parent) 
+{
+    t_user_egg  *egg;
+
+    if ((egg = malloc(sizeof(t_user_egg))) != NULL) 
+    {
+        egg->connected = DISCONNECTED;
+        egg->protocol = EGG_PROTO;
+        egg->clientfd = -1;
+        egg->posx = parent->posx;
+        egg->posy = parent->posy;
+        egg->owner_number = parent->number;
+        return (egg);
+    }
+    error_show("user_player_init", "malloc", "Unable allocate memory for eggs");
     return (NULL);
 }
 

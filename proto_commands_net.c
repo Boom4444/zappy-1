@@ -18,8 +18,9 @@
 #include        "answer.h"
 #include        "proto_commands_net.h"
 #include        "proto_commands_movement.h"
+#include        "item.h"
 
-static t_steps 	g_steps[]=
+static t_steps  g_steps[] =
 {
 	{0, -1},
 	{-1, -1},
@@ -30,6 +31,8 @@ static t_steps 	g_steps[]=
 	{1, 0},
 	{1, -1}
 };
+
+static t_request_type   g_hatch_type = {"egg_hatch", 600, 0, NULL, cli_hatch_egg };
 
 void        cli_expulse(t_request_data *rqd, t_server *s, t_world *w)
 {
@@ -44,24 +47,67 @@ void        cli_expulse(t_request_data *rqd, t_server *s, t_world *w)
     cli_answer(rqd->user,s , "ok\n");
 }
 
-void    cli_incantation(t_request_data *rqd, t_server *s, t_world *w)
+void                    cli_incantation(t_request_data *rqd, t_server *s, t_world *w)
 {
     (void) (w);
     printf("incantation\n");
     cli_answer(rqd->user, s, "ok\n");
 }
 
-void    cli_fork_player(t_request_data *rqd, t_server *s, t_world *w)
+void                    cli_hatch_egg(t_request_data *rqd,
+                                        t_server *s, t_world *w)
 {
-    (void) (w);
-    (void) (s);
-    (void) (rqd);
-    printf("fork_player\n");
+    char                response[ANSWER_SIZE];
+    
+    (s->players_slots)++;
+    sprintf(response, "eht %d\n", T_EGG(rqd->user)->number);
+    cli_answer_to_all_graph(s, response);
+    
+    item_delete_by_content(w->surface[T_EGG(rqd->user)->posy][T_EGG(rqd->user)->posx].players, 
+        (void*)rqd->user);
+    item_delete_by_content(s->client_list, 
+        (void*)rqd->user);
+    free(rqd->user);
+}
+
+void                    cli_fork_player(t_request_data *rqd,
+                                        t_server *s, t_world *w)
+{
+    t_user_egg         *user;
+    t_request          *egg_request; 
+    char               response[ANSWER_SIZE];
+    
+    if ((user = user_egg_init(rqd->user)) != NULL)
+    {
+        if ((egg_request = cli_request_init()) != NULL )
+        {
+            if ((egg_request->data = cli_request_data_init("", 0)) != NULL)
+            {
+                user->number = (s->eggs_count)++;
+                egg_request->data->message = strdup("egg_hatch");
+                egg_request->data->user = T_PLAYER(user);
+                egg_request->type = &g_hatch_type;            
+                egg_request->tick = s->tick + g_hatch_type.delay;
+                item_pf(s->request_list, (void*)egg_request, sizeof(t_request));
+                item_pf(s->client_list, user, sizeof(t_user_player));
+                item_pf(w->surface[user->posy][user->posx].players,
+                        user, sizeof(t_user_player));
+                sprintf(response, "enw %d %d %d %d\n", user->number, 
+                        rqd->user->number, rqd->user->posx, rqd->user->posy);
+                cli_answer_to_all_graph(s, response);
+                cli_answer(rqd->user, s, "ok\n");
+                return ;
+            }
+            free(egg_request);
+        }
+        free(user);
+    }
+    cli_answer(rqd->user, s, "ko\n");
 }
 
 void        cli_connect_nbr(t_request_data *rqd, t_server *s, t_world *w)
 {
-    char    answer[256];
+    char    answer[ANSWER_SIZE];
 
     (void) (w);
     sprintf(answer, "%u\n", (s->players_slots - rqd->user->team->members));

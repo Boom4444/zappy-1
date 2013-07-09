@@ -45,6 +45,7 @@ void                    server_init(t_server *s)
     s->tick = 0;
     s->diff = 0;
     s->players_count = 0;
+    s->eggs_count = 0;
 }
 
 void                    server_stop(t_server *s)

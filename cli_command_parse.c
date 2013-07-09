@@ -17,77 +17,79 @@
 #include        "proto.h"
 #include        "request.h"
 #include        "cli_command_parse.h"
+#include        "answer.h"
 
-t_request_data          *cli_parse_avance(t_request_type *type, char *message)
+t_request_data          *cli_parse_avance(t_request_type *type, t_user_player *u, t_server *s)
 {
     t_request_data      *rqd;
 
-    if ((rqd = cli_request_data_init(message, type->argc)) != NULL)
+    (void) s;
+    if ((rqd = cli_request_data_init(u->request, type->argc)) != NULL)
     {
 
     }
-
     return (rqd);
 }
 
-t_request_data          *cli_parse_droite(t_request_type *type, char *message)
+t_request_data          *cli_parse_droite(t_request_type *type, t_user_player *u, t_server *s)
 {
     t_request_data      *rqd;
 
-    if ((rqd = cli_request_data_init(message, type->argc)) != NULL)
+    (void) s;
+    if ((rqd = cli_request_data_init(u->request, type->argc)) != NULL)
     {
 
     }
-
     return (rqd);
 }
 
-t_request_data          *cli_parse_gauche(t_request_type *type, char *message)
+t_request_data          *cli_parse_gauche(t_request_type *type, t_user_player *u, t_server *s)
 {
     t_request_data      *rqd;
 
-    if ((rqd = cli_request_data_init(message, type->argc)) != NULL)
+    (void) s;
+    if ((rqd = cli_request_data_init(u->request, type->argc)) != NULL)
     {
 
     }
-
     return (rqd);
 }
 
-t_request_data          *cli_parse_voir(t_request_type *type, char *message)
+t_request_data          *cli_parse_voir(t_request_type *type, t_user_player *u, t_server *s)
 {
     t_request_data      *rqd;
 
-    if ((rqd = cli_request_data_init(message, type->argc)) != NULL)
+    (void) s;
+    if ((rqd = cli_request_data_init(u->request, type->argc)) != NULL)
     {
 
     }
-
     return (rqd);
 }
 
-t_request_data          *cli_parse_inventaire(t_request_type *type, char *message)
+t_request_data          *cli_parse_inventaire(t_request_type *type, t_user_player *u, t_server *s)
 {
     t_request_data      *rqd;
 
-    if ((rqd = cli_request_data_init(message, type->argc)) != NULL)
+    (void) s;
+    if ((rqd = cli_request_data_init(u->request, type->argc)) != NULL)
     {
 
     }
-
     return (rqd);
 }
 
-t_request_data          *cli_parse_prend(t_request_type *type, char *message)
+t_request_data          *cli_parse_prend(t_request_type *type, t_user_player *u, t_server *s)
 {
     t_request_data      *rqd;
     char                *object;
 
-    if ((rqd = cli_request_data_init(message, type->argc)) != NULL)
+    (void) s;
+    if ((rqd = cli_request_data_init(u->request, type->argc)) != NULL)
     {
-        if ((object = (char*)malloc(sizeof(char) * (strlen(message) - 5))) != NULL)
+        if ((object = (char*)malloc(sizeof(char) * (strlen(u->request) - 5))) != NULL)
         {
-            sscanf(message, "prend %s\n", object);
+            sscanf(u->request, "prend %s\n", object);
             rqd->argv[0] = (void*)object;
 
             printf("prend '%s'\n", (char*)rqd->argv[0]);
@@ -96,20 +98,20 @@ t_request_data          *cli_parse_prend(t_request_type *type, char *message)
         free(rqd);
         rqd = NULL;
     }
-
     return (rqd);
 }
 
-t_request_data          *cli_parse_pose(t_request_type *type, char *message)
+t_request_data          *cli_parse_pose(t_request_type *type, t_user_player *u, t_server *s)
 {
     t_request_data      *rqd;
     char                *object;
 
-    if ((rqd = cli_request_data_init(message, type->argc)) != NULL)
+    (void) s;
+    if ((rqd = cli_request_data_init(u->request, type->argc)) != NULL)
     {
-        if ((object = (char*)malloc(sizeof(char) * (strlen(message) - 4))) != NULL)
+        if ((object = (char*)malloc(sizeof(char) * (strlen(u->request) - 4))) != NULL)
         {
-            sscanf(message, "pose %s\n", object);
+            sscanf(u->request, "pose %s\n", object);
             rqd->argv[0] = (void*)object;
 
             printf("pose '%s'\n", (char*)rqd->argv[0]);
@@ -121,28 +123,29 @@ t_request_data          *cli_parse_pose(t_request_type *type, char *message)
     return (rqd);
 }
 
-t_request_data          *cli_parse_expulse(t_request_type *type, char *message)
+t_request_data          *cli_parse_expulse(t_request_type *type, t_user_player *u, t_server *s)
 {
     t_request_data      *rqd;
 
-    if ((rqd = cli_request_data_init(message, type->argc)) != NULL)
+    (void) s;
+    if ((rqd = cli_request_data_init(u->request, type->argc)) != NULL)
     {
 
     }
-
     return (rqd);
 }
 
-t_request_data          *cli_parse_broadcast(t_request_type *type, char *message)
+t_request_data          *cli_parse_broadcast(t_request_type *type, t_user_player *u, t_server *s)
 {
     t_request_data      *rqd;
     char                *text;
 
-    if ((rqd = cli_request_data_init(message, type->argc)) != NULL)
+    (void) s;
+    if ((rqd = cli_request_data_init(u->request, type->argc)) != NULL)
     {
-        if ((text = (char*)malloc(sizeof(char) * (strlen(message) - 9))) != NULL)
+        if ((text = (char*)malloc(sizeof(char) * (strlen(u->request) - 9))) != NULL)
         {
-            sscanf(message, "broadcast %s\n", text);
+            sscanf(u->request, "broadcast %s\n", text);
             rqd->argv[0] = (void*)text;
 
             printf("broadcast '%s'\n", (char*)rqd->argv[0]);
@@ -155,11 +158,12 @@ t_request_data          *cli_parse_broadcast(t_request_type *type, char *message
     return (rqd);
 }
 
-t_request_data          *cli_parse_incantation(t_request_type *type, char *message)
+t_request_data          *cli_parse_incantation(t_request_type *type, t_user_player *u, t_server *s)
 {
     t_request_data      *rqd;
 
-    if ((rqd = cli_request_data_init(message, type->argc)) != NULL)
+    (void) s;
+    if ((rqd = cli_request_data_init(u->request, type->argc)) != NULL)
     {
 
     }
@@ -167,26 +171,28 @@ t_request_data          *cli_parse_incantation(t_request_type *type, char *messa
     return (rqd);
 }
 
-t_request_data          *cli_parse_fork(t_request_type *type, char *message)
+t_request_data          *cli_parse_fork(t_request_type *type, t_user_player *u, t_server *s)
 {
     t_request_data      *rqd;
+    char                response[ANSWER_SIZE];
 
-    if ((rqd = cli_request_data_init(message, type->argc)) != NULL)
+    (void) s;
+    if ((rqd = cli_request_data_init(u->request, type->argc)) != NULL)
     {
-
+        sprintf(response, "pfk %d\n", u->number);
+        cli_answer_to_all_graph(s, response);
     }
-
     return (rqd);
 }
 
-t_request_data          *cli_parse_connect_nbr(t_request_type *type, char *message)
+t_request_data          *cli_parse_connect_nbr(t_request_type *type, t_user_player *u, t_server *s)
 {
     t_request_data      *rqd;
 
-    if ((rqd = cli_request_data_init(message, type->argc)) != NULL)
+    (void) s;
+    if ((rqd = cli_request_data_init(u->request, type->argc)) != NULL)
     {
 
     }
-
     return (rqd);
 }

@@ -8,28 +8,31 @@
 ** Last update Mon Jul 08 16:07:34 2013 ivan ignatiev
 */
 
-#include    "main.h"
-#include    "list.h"
-#include    "options.h"
-#include    "trantor.h"
-#include    "server.h"
-#include    "error.h"
-#include	"users.h"
-#include    "proto.h"
-#include    "select.h"
+#include        "main.h"
+#include        "list.h"
+#include        "options.h"
+#include        "trantor.h"
+#include        "server.h"
+#include        "error.h"
+#include        "users.h"
+#include        "proto.h"
+#include        "select.h"
 
 static int	select_create_fdset(t_server *s, fd_set *fdset, int maxfd)
 {
   int		outfd;
-  t_item    *current;
+  t_item        *current;
 
   current = (s->client_list)->head;
   while (current != NULL)
   {
-      if (maxfd < T_USER(current->cont)->clientfd)
-          maxfd = T_USER(current->cont)->clientfd;
-      outfd = T_USER(current->cont)->clientfd;
-      FD_SET(outfd, fdset);
+      if (T_USER(current->cont)->clientfd >= 0)
+      {
+        if (maxfd < T_USER(current->cont)->clientfd)
+                maxfd = T_USER(current->cont)->clientfd;
+        outfd = T_USER(current->cont)->clientfd;
+        FD_SET(outfd, fdset);
+      }
       current = current->next;
   }
   return (maxfd);

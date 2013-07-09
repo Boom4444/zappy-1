@@ -33,6 +33,7 @@ typedef  struct         s_server
   int                   result;
   unsigned int          players_slots;
   unsigned int          players_count;
+  unsigned int          eggs_count;
   unsigned long long    tick_size;
 }                       t_server;
 

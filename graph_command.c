@@ -274,6 +274,28 @@ int 			graph_display_users(t_server *s, t_graph_data *rqd)
 	return (0);
 }
 
+int             graph_display_eggs(t_server *s, t_graph_data *rqd) 
+{
+    t_item      *current;
+    char        response[STR_LIMIT];
+
+    current = s->client_list->head;
+    while (current != NULL) 
+    {
+        if (T_USER(current->cont)->protocol == EGG_PROTO) 
+        {
+            sprintf(response, "enw %d %d %d %d\n",
+                    T_EGG(current->cont)->number,
+                    T_EGG(current->cont)->owner_number,
+                    T_EGG(current->cont)->posx,
+                    T_EGG(current->cont)->posy);
+            cli_answer_to_graph(rqd->user, response);
+        }
+        current = current->next;
+    }
+    return (0);
+}
+
 int 		graph_client_init(t_user_graph *u, t_server *s, t_world *w)
 {
 	t_graph_data rqd;
@@ -284,6 +306,6 @@ int 		graph_client_init(t_user_graph *u, t_server *s, t_world *w)
 	graph_command_mct(&rqd, s, w);
 	graph_command_tna(&rqd, s, w);
 	graph_display_users(s, &rqd);
-	/** SEND ENW **/
+        graph_display_eggs(s, &rqd);
 	return (0);
 }

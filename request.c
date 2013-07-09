@@ -40,7 +40,7 @@ t_request_type  cli_commands[] =
     {NULL, 0, 0, NULL, NULL }
 };
 
-t_request_data          *cli_request_data_init(char *message, int argc)
+t_request_data          *cli_request_data_init(char *message, unsigned int argc)
 {
     t_request_data      *rqd;
 
@@ -60,7 +60,19 @@ t_request_data          *cli_request_data_init(char *message, int argc)
     return (rqd);
 }
 
-t_request               *cli_request_init()
+t_request_type          *cli_request_type_init(void)
+{
+    t_request_type      *type;
+    
+    if ((type = (t_request_type*)malloc(sizeof(t_request_type))) != NULL)
+    {
+        return (type);
+    }
+    error_show("cli_request_type_init", "malloc", "Unable allocate memory for requesti type");
+    return (NULL);
+}
+
+t_request               *cli_request_init(void)
 {
     t_request           *request;
 
@@ -88,7 +100,7 @@ t_request               *cli_request_parse(t_server *s, t_user_player *user)
                 request->tick = (user->tick > s->tick ? user->tick : s->tick) + request->type->delay;
                 if (request->type->parse != NULL)
                 {
-                    if ((request->data = request->type->parse(request->type, user->request)) != NULL)
+                    if ((request->data = request->type->parse(request->type, user, s)) != NULL)
                     {
                         log_show("cli_parse", "", "Request '%s' for player %d accepted on the %lluth tick, plan : %llu",
                          request->data->message, user->number, s->tick, request->tick);

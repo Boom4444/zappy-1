@@ -29,10 +29,7 @@ char     *server_getXY()
 
 int     server_welcome_msg(int fd)
 {
-    if (write(fd, "BIENVENUE\n", sizeof("BIENVENUE\n")) == -1)
-    {
-        error_show("server_welcome_msg", "write", strerror(errno));
-        return (-1);
-    }
+    if (server_send(fd, "BIENVENUE\n") == -1)
+        return (error_show("server_welcome_msg", "write", strerror(errno)));
     return (0);
 }

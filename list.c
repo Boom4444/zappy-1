@@ -5,44 +5,47 @@
 ** Login   <kuznet_o@epitech.net>
 **
 ** Started on  Wed Jun  05 19:21:23 2013 oleg kuznietsov
-** Last update Thu Jul 04 20:40:43 2013 ivan ignatiev
+** Last update Tue Jul 09 13:31:32 2013 ivan ignatiev
 */
 
-#include <stdlib.h>
-#include <string.h>
-#include "list.h"
+#include        <stdlib.h>
+#include        <string.h>
+#include        "list.h"
+#include        "error.h"
 
-t_list    *list_init()
+t_list          *list_init()
 {
-  t_list  *list;
+    t_list      *list;
 
-  if ((list = malloc(sizeof(t_list))) == NULL)
+    if ((list = malloc(sizeof(t_list))) != NULL)
+    {
+        list->len = 0;
+        list->head = NULL;
+        list->tail = NULL;
+        return (list);
+    }
+    error_show("list_init", "malloc", "Unable to allocate memory for list");
     return (NULL);
-  list->len = 0;
-  list->head = NULL;
-  list->tail = NULL;
-  return (list);
 }
 
-void      list_delete(t_list *list)
+void            list_delete(t_list *list)
 {
-  t_item  *item;
-  t_item  *current;
+    t_item      *item;
+    t_item      *current;
 
-  item = list->head;
-  current = item;
-  if (list != NULL)
-  {
+    if (list == NULL)
+        return ;
+    item = list->head;
+    current = item;
     while (current != NULL)
     {
-      if (item->cont != NULL)
-        free(item->cont);
-      free(item);
-      current = current->next;
-      item = current;
+        if (item->cont != NULL)
+            free(item->cont);
+        free(item);
+        current = current->next;
+        item = current;
     }
     free(list);
-  }
 }
 
 int       list_iter(t_list *list, void (*f)(void *, int))
@@ -51,14 +54,14 @@ int       list_iter(t_list *list, void (*f)(void *, int))
 
   current = NULL;
   if (list == NULL || f == NULL)
-    return -1;
+    return (-1);
   current = list->head;
   while (current != NULL)
   {
     f(current->cont, current->size);
     current = current->next;
   }
-  return 1;
+  return (1);
 }
 
 int       list_mem(t_list *list, void *content, int size)
@@ -69,7 +72,7 @@ int       list_mem(t_list *list, void *content, int size)
   i = 0;
   current = NULL;
   if (size <= 0 || content == NULL || list == NULL)
-    return -1;
+    return (-1);
   current = list->head;
   while (current != NULL)
   {
@@ -78,11 +81,11 @@ int       list_mem(t_list *list, void *content, int size)
       while (i < size)
       {
         if (((char*)content)[i] != ((char*)current->cont)[i])
-          return -1;
+          return (-1);
         ++i;
       }
     }
     current = current->next;
   }
-  return 1;
+  return (1);
 }
