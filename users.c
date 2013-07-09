@@ -1,11 +1,11 @@
 /*
-** users.c for zappy in /home/hero/zappy
+** users.c for zappy in /home/ignatiev/Projects/zappy
 ** 
 ** Made by ivan ignatiev
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Sat Apr 27 14:16:14 2013 ivan ignatiev
-** Last update Tue Jul 09 07:21:05 2013 Marin Alcaraz
+** Last update Tue Jul 09 17:56:43 2013 ivan ignatiev
 */
 
 #include    "main.h"
@@ -62,11 +62,11 @@ t_user_player       *user_player_init(t_user *user, t_team *team, t_world *w, t_
     return (NULL);
 }
 
-t_user_egg      *user_egg_init(t_user_player *parent) 
+t_user_egg      *user_egg_init(t_user_player *parent)
 {
     t_user_egg  *egg;
 
-    if ((egg = malloc(sizeof(t_user_egg))) != NULL) 
+    if ((egg = malloc(sizeof(t_user_egg))) != NULL)
     {
         egg->connected = DISCONNECTED;
         egg->protocol = EGG_PROTO;
@@ -98,6 +98,7 @@ t_user_graph        *user_graph_init(t_user *user)
 void        user_destroy(t_user *user, t_server *s, t_world *w)
 {
     close(user->clientfd);
+    ++(s->players_slots);
     item_delete_by_content(s->client_list, (void*)user);
 
     if (user->protocol == CLI_PROTO)

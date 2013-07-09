@@ -1,11 +1,11 @@
 /*
-** client.c for zappy in /home/hero/zappy
+** client.c for zappy in /home/ignatiev/Projects/zappy
 ** 
 ** Made by ivan ignatiev
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Fri May 24 19:45:50 2013 ivan ignatiev
-** Last update Wed Jun 12 14:58:18 2013 Marin Alcaraz
+** Last update Tue Jul 09 18:00:38 2013 ivan ignatiev
 */
 
 #include    <stdlib.h>
@@ -19,6 +19,8 @@
 #include    "socket.h"
 #include    "error.h"
 
+static int          g_connect = 0;
+
 int                 client_process(int sfd, fd_set *fdreadset)
 {
     char            buf[255];
@@ -26,6 +28,8 @@ int                 client_process(int sfd, fd_set *fdreadset)
 
     if (FD_ISSET(1, fdreadset))
     {
+        if (!g_connect)
+            return (1);
         if ((len = read(1, buf, 255)) <= 0)
             return (-1);
         buf[len] = '\0';
@@ -38,6 +42,7 @@ int                 client_process(int sfd, fd_set *fdreadset)
     {
         if ((len = read(sfd, buf, 255)) <= 0)
             return (-1);
+        g_connect = 1;
         buf[len] = '\0';
         printf("zappy(server)-->%s", buf);
     }
