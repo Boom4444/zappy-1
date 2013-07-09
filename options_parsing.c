@@ -1,11 +1,11 @@
 /*
-** options_parsing.c for zappy in /home/ignatiev/Projects/zappy
+** options_parsing.c for zappy in /home/hero/zappy
 **
 ** Made by oleg kuznietsov
 ** Login   <kuznet_o@epitech.eu>
 **
 ** Started on  Fri Jun  07 00:49:53 2013 oleg kuznietsov
-** Last update Mon Jul 08 15:09:35 2013 ivan ignatiev
+** Last update Tue Jul 09 12:58:02 2013 Marin Alcaraz
 */
 
 #include "main.h"
@@ -88,7 +88,7 @@ void    teams_fill(t_opt *opt, int n)
     i = 1;
     while (i <= n)
     {
-        sprintf(tmp, "Team %d", i);
+        sprintf(tmp, "Team%d", i);
         if (item_pb(opt->names, strdup(tmp), strlen(tmp)) == -1)
         {
             fprintf(stderr, "%s ERROR: %s\n", "item_pb", "teams_fill");
