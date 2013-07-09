@@ -5,7 +5,7 @@
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Sat Apr 27 14:16:14 2013 ivan ignatiev
-** Last update Tue Jul 09 18:35:49 2013 ivan ignatiev
+** Last update Tue Jul 09 19:52:55 2013 ivan ignatiev
 */
 
 #include    "main.h"
@@ -16,6 +16,7 @@
 #include	"users.h"
 #include    "error.h"
 #include    "item.h"
+#include    "answer.h"
 
 t_user      *user_create()
 {
@@ -97,11 +98,14 @@ t_user_graph        *user_graph_init(t_user *user)
 
 void        user_destroy(t_user *user, t_server *s, t_world *w)
 {
+    char    response[ANSWER_SIZE];
+
     close(user->clientfd);
     item_delete_by_content(s->client_list, (void*)user);
-
     if (user->protocol == CLI_PROTO)
     {
+        sprintf(response, "pdi %d\n", T_PLAYER(user)->number);
+        cli_answer_to_all_graph(s, response);
         ++(T_PLAYER(user)->team->limit);
         item_delete_by_content(w->surface[T_PLAYER(user)->posy][T_PLAYER(user)->posx].players, (void*)user);
         log_show("user_destroy", "", "Player %d disconnected and removed", T_PLAYER(user)->number);
