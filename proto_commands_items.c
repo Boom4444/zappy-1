@@ -5,7 +5,7 @@
 ** Login   <alcara_m@epitech.net>
 ** 
 ** Started on  Thu Jun 13 16:28:40 2013 Marin Alcaraz
-** Last update Tue Jul 09 09:43:25 2013 Marin Alcaraz
+** Last update Tue Jul 09 09:47:38 2013 Marin Alcaraz
 */
 
 #include "main.h"
@@ -37,15 +37,16 @@ void        cli_prend(t_request_data *rqd, t_server *t, t_world *w)
     int     item;
     int     index_item;
     (void) (t);
-    char    out[256];
+    /*char    out[256];*/
 
+    item = 0;
     index_item = atoi(rqd->argv[0]);
     if (index_item < 7)
     {
         item = (w->surface[rqd->user->posy]
-                [rqd->user->posx]).resources[]--;
+                [rqd->user->posx]).resources[item]--;
         rqd->user->inventory[item]++;
-        sprintf(out, "pgt %d %d\n", rqp->user->number, index_item);
+        /*sprintf(out, "pgt %d %d\n", rqp->user->number, index_item);*/
 
         cli_answer(rqd->user, t, "ok\n");
     }
