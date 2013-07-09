@@ -5,7 +5,7 @@
 ** Login   <alcara_m@epitech.net>
 ** 
 ** Started on  Thu Jun 13 16:31:20 2013 Marin Alcaraz
-** Last update Mon Jul 08 16:16:35 2013 Marin Alcaraz
+** Last update Tue Jul 09 07:32:47 2013 Marin Alcaraz
 */
 
 #include        "main.h"
@@ -23,13 +23,9 @@
 static t_steps  g_steps[] =
 {
 	{0, -1},
-	{-1, -1},
-	{-1, 0},
-	{-1, 1},
-	{0, 1},
-	{1, 1},
 	{1, 0},
-	{1, -1}
+	{0, 1},
+	{-1, 0}
 };
 
 static t_request_type   g_hatch_type = {"egg_hatch", 600, 0, NULL, cli_hatch_egg };
@@ -40,7 +36,7 @@ void        cli_expulse(t_request_data *rqd, t_server *s, t_world *w)
     int     new_position_y;
     int     current_dir;
 
-    current_dir = rqd->user->direction;
+    current_dir = rqd->user->orientation;
     new_position_x = _MOD(rqd->user->posx + g_steps[current_dir].x, w->width);
     new_position_y = _MOD(rqd->user->posy + g_steps[current_dir].y, w->height);
     expulse_square(new_position_x, new_position_y, rqd, w);

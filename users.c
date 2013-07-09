@@ -5,7 +5,7 @@
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Sat Apr 27 14:16:14 2013 ivan ignatiev
-** Last update Mon Jul 08 13:09:42 2013 Marin Alcaraz
+** Last update Tue Jul 09 07:21:05 2013 Marin Alcaraz
 */
 
 #include    "main.h"
@@ -43,12 +43,7 @@ t_user_player       *user_player_init(t_user *user, t_team *team, t_world *w, t_
         player->protocol = CLI_PROTO;
         player->posx = _MOD(rand(), w->width);
         player->posy = _MOD(rand(), w->height);
-        player->direction = _MOD(rand(), 8);
-        /** TEMPORAL **/
-        /*player->posx = 5;
-        player->posy = 5;
-        player->direction = 0;*/
-        /** END OF TEMPORAL **/
+        player->orientation = _MOD(rand(), 4);
         player->tick = 0;
         player->level = 1;
         player->request_counter = 0;
