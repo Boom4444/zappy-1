@@ -5,7 +5,7 @@
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Wed Jun 12 17:02:27 2013 Marin Alcaraz
-** Last update Wed Jul 10 10:46:49 2013 Marin Alcaraz
+** Last update Wed Jul 10 13:41:46 2013 Marin Alcaraz
 */
 
 #include        "main.h"
@@ -46,10 +46,12 @@ int             graph_command_exec(t_user_graph *u, t_server *s, t_world *w,
             rqd.message = message;
             rqd.user = u;
             graph_cmd[i].func(&rqd, s, w);
+            return (0);
         }
         ++i;
     }
-    return (0);
+    error_show("graph_command_exec", "", "GFX Command not found");
+    return (-1);
 }
 
 int             graph_command_msz(t_graph_data *rqd, t_server *s, t_world *w)
@@ -286,7 +288,7 @@ int             graph_display_eggs(t_server *s, t_graph_data *rqd)
         {
             sprintf(response, "enw %d %d %d %d\n",
                     T_EGG(current->cont)->number,
-                    T_EGG(current->cont)->parent->number,
+                    T_EGG(current->cont)->parent_number,
                     T_EGG(current->cont)->posx,
                     T_EGG(current->cont)->posy);
             cli_answer_to_graph(rqd->user, response);
@@ -306,6 +308,6 @@ int 		graph_client_init(t_user_graph *u, t_server *s, t_world *w)
 	graph_command_mct(&rqd, s, w);
 	graph_command_tna(&rqd, s, w);
 	graph_display_users(s, &rqd);
-        graph_display_eggs(s, &rqd);
+    graph_display_eggs(s, &rqd);
 	return (0);
 }

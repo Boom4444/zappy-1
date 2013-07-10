@@ -5,7 +5,7 @@
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Sat Apr 27 17:03:35 2013 ivan ignatiev
-** Last update Tue Jul 09 18:30:33 2013 ivan ignatiev
+** Last update Wed Jul 10 20:36:55 2013 ivan ignatiev
 */
 
 #ifndef USERS_H_
@@ -16,6 +16,7 @@
 # define DISCONNECTED	0
 # define NAME_LIMIT     256
 # define ARTICLES_LIMIT 7
+# define LIFE_UNIT      126
 
 # define GRAPHIC_PROTO  100
 # define CLI_PROTO      200
@@ -44,7 +45,7 @@
 
 typedef struct          s_team
 {
-    char                name[NAME_LIMIT];
+    char                name[NAME_LIMIT + 1];
     int                 members;
     int                 limit;
 }                       t_team;
@@ -55,19 +56,23 @@ typedef struct		s_user
   int                   connected;
   int                   protocol;
   struct sockaddr_in	addr;
-  socklen_t		addrlen;
+  socklen_t		        addrlen;
   char                  *request;
+  char                  *request_buf;
 }			            t_user;
 
 typedef struct          s_user_player
 {
-  int			clientfd;
-  int			connected;
+  int			        clientfd;
+  int			        connected;
   int                   protocol;
   struct sockaddr_in	addr;
   socklen_t		        addrlen;
   char                  *request;
+  char                  *request_buf;
 
+  int                   request_counter;
+  int                   life;
   int                   posx;
   int                   posy;
   int                   level;
@@ -75,42 +80,49 @@ typedef struct          s_user_player
   unsigned long long    tick;
   t_team                *team;
   int                   inventory[ARTICLES_LIMIT];
-  int                   request_counter;
   int                   number;
 }                       t_user_player;
 
 typedef struct          s_user_egg
 {
-  int			clientfd;
-  int			connected;
+  int			        clientfd;
+  int			        connected;
   int                   protocol;
   struct sockaddr_in	addr;
-  socklen_t		addrlen;
+  socklen_t		        addrlen;
   char                  *request;
+  char                  *request_buf;
 
+  int                   request_counter;
+  int                   life;
   int                   posx;
   int                   posy;
   unsigned long long    tick;
   int                   number;
-  t_user_player         *parent;
+  int                   parent_number;
+  t_team                *team;
+  int                   hatched;
 }                       t_user_egg;
 
 typedef struct          s_user_graph
 {
-  int			clientfd;
-  int			connected;
+  int			        clientfd;
+  int			        connected;
   int                   protocol;
   struct sockaddr_in	addr;
-  socklen_t		addrlen;
+  socklen_t		        addrlen;
   char                  *request;
+  char                  *request_buf;
 }                       t_user_graph;
 
 
 t_user          *user_create();
 t_user_player   *user_player_init(t_user *user, t_team *team, t_world *w, t_server *s);
 t_user_graph    *user_graph_init(t_user *user);
-t_user_egg      *user_egg_init(t_user_player *parent);
+t_user_player   *user_player_egg(t_user *user, t_team *team, t_world *w, t_server *s);
+t_user_egg      *user_egg_init(t_user_player *parent, t_server *s);
 void            user_destroy(t_user *user, t_server *s, t_world *w);
+void            users_life_proccess(t_server *s, t_world *w);
 t_team          *team_create(char *name, t_server *s);
 t_team          *team_search(t_list *team_list, char *team_name);
 t_list          *team_list_init(t_server *s, t_list *team_names);

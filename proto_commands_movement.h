@@ -5,17 +5,11 @@
 ** Login   <alcara_m@epitech.net>
 ** 
 ** Started on  Thu Jun 13 16:36:15 2013 Marin Alcaraz
-** Last update Thu Jul 04 21:24:07 2013 ivan ignatiev
+** Last update Wed Jul 10 15:27:50 2013 ivan ignatiev
 */
 
 #ifndef PROTO_COMMANDS_MOVEMENT_H_
 # define PROTO_COMMANDS_MOVEMENT_H_
-
-typedef struct 		s_steps
-{
-    int 			x;
-    int 			y;
-} 					t_steps;
 
 void    cli_avance(t_request_data *d, t_server *t, t_world *w);
 void    cli_droite(t_request_data *rqd, t_server *t, t_world *w);

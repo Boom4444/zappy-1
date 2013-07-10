@@ -5,7 +5,7 @@
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Thu Jun 20 20:02:59 2013 ivan ignatiev
-** Last update Mon Jul 08 20:21:47 2013 ivan ignatiev
+** Last update Wed Jul 10 16:30:32 2013 ivan ignatiev
 */
 
 #include        "main.h"
@@ -23,9 +23,11 @@ t_answer        *cli_answer_create(t_user_player *user, char *message)
 
     if ((answer = (t_answer*)malloc(sizeof(t_answer))) != NULL)
     {
-        answer->message = strdup(message);
-        answer->user = user;
-        return (answer);
+        if ((answer->message = strdup(message)) != NULL)
+        {
+            answer->user = user;
+            return (answer);
+        }
     }
     error_show("cli_answer_create", "malloc", "Unable allocate memory for answer");
     return (NULL);

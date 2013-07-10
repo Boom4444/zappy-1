@@ -5,7 +5,7 @@
 ## Login   <alcara_m@epitech.net>
 ##
 ## Started on  Fri Mar 01 09:38:17 2013 Marin Alcaraz
-## Last update Wed Jul 10 13:38:09 2013 Marin Alcaraz
+## Last update Wed Jul 10 13:42:13 2013 Marin Alcaraz
 ##
 
 SNAME	=	server
@@ -18,7 +18,6 @@ SSRC	=	server.c 						\
 			expulse.c 						\
 			options_parsing.c 				\
 			item.c 							\
-			server_functions.c 				\
 			graph_command.c 				\
 			cli_command_parse.c 			\
 			list.c 							\
@@ -32,6 +31,7 @@ SSRC	=	server.c 						\
 			trantor.c 						\
 			request.c 						\
 			answer.c 						\
+			str.c 							\
 			main.c
 
 SOBJ	=	$(SSRC:.c=.o)
