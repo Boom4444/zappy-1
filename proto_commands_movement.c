@@ -5,7 +5,7 @@
 ** Login   <alcara_m@epitech.net>
 ** 
 ** Started on  Thu Jun 13 16:26:19 2013 Marin Alcaraz
-** Last update Tue Jul 09 07:32:03 2013 Marin Alcaraz
+** Last update Wed Jul 10 09:16:20 2013 Marin Alcaraz
 */
 
 #include        "main.h"
@@ -44,7 +44,7 @@ void    	cli_avance(t_request_data *rqd, t_server *t, t_world *w)
     item_delete_by_content(w->surface[rqd->user->posy][rqd->user->posx].players, (void*)rqd->user);
     rqd->user->posx = _MOD(rqd->user->posx + g_steps[rqd->user->orientation].x, w->width);
     rqd->user->posy = _MOD(rqd->user->posy + g_steps[rqd->user->orientation].y, w->height);
-    item_pf(w->surface[rqd->user->posy][rqd->user->posx].players, (void*)rqd->user, sizeof(t_user));
+    item_pb(w->surface[rqd->user->posy][rqd->user->posx].players, (void*)rqd->user, sizeof(t_user));
     cli_answer(rqd->user, t, "ok\n");
     sprintf(response, "ppo %d %d %d %d\n", rqd->user->number, rqd->user->posx, rqd->user->posy, rqd->user->orientation + 1);
     cli_answer_to_all_graph(t, response);
@@ -76,16 +76,27 @@ void        cli_broadcast(t_request_data *rqd, t_server *t, t_world *w)
 {
     (void)  w;
     t_item  *current_item;
+    char    response[ANSWER_SIZE];
+    int     direction;
 
     current_item = t->client_list->head;
     while (current_item != NULL)
     {
         if ((T_PLAYER(current_item->cont)->protocol == CLI_PROTO)
             && T_PLAYER(current_item->cont) != rqd->user)
-            broadcast_to(T_PLAYER(current_item->cont), rqd, t);
+        {
+            direction = broadcast_to(T_PLAYER(current_item->cont), rqd, t);
+            sprintf(response, "broadcast %d, %s",
+                    direction, (char *)rqd->argv[0]);
+            cli_answer(rqd->user, t, response);
+            response[0] = '\0';
+        }
         current_item = current_item->next;
     }
-    cli_answer(rqd->user, t, rqd->argv[0]);
+    response[0] = '\0';
+    sprintf(response, "pbc %d %s\n", rqd->user->number,
+            (char *)rqd->argv[0]);
+    cli_answer_to_all_graph(t, response);
 }
 
 void        cli_voir_players(char *answer, t_list *players)
@@ -113,9 +124,9 @@ void        cli_voir_resources(char *answer, int *resources)
         {
             strcat(answer, " ");
             strcat(answer, g_objects[i]);
-            j++;
+            j = j + 1;
         }
-        i++;
+        i = i + 1;
     }
     strcat(answer, ",");
 }

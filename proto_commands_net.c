@@ -5,7 +5,7 @@
 ** Login   <alcara_m@epitech.net>
 ** 
 ** Started on  Thu Jun 13 16:31:20 2013 Marin Alcaraz
-** Last update Tue Jul 09 13:25:51 2013 Marin Alcaraz
+** Last update Wed Jul 10 13:40:39 2013 Marin Alcaraz
 */
 
 #include        "main.h"
@@ -19,6 +19,8 @@
 #include        "proto_commands_net.h"
 #include        "proto_commands_movement.h"
 #include        "item.h"
+#include        "incantation.h"
+#include        "error.h"
 
 static t_steps  g_steps[] =
 {
@@ -35,8 +37,12 @@ void        cli_expulse(t_request_data *rqd, t_server *s, t_world *w)
     int     new_position_x;
     int     new_position_y;
     int     current_dir;
+    char    response[ANSWER_SIZE];
 
     current_dir = rqd->user->orientation;
+    sprintf(response, "pex %d\n", rqd->user->number);
+    cli_answer_to_all_graph(s, response);
+    response[0] = '\0';
     new_position_x = _MOD(rqd->user->posx + g_steps[current_dir].x, w->width);
     new_position_y = _MOD(rqd->user->posy + g_steps[current_dir].y, w->height);
     expulse_square(new_position_x, new_position_y, rqd, w, s);
@@ -45,9 +51,18 @@ void        cli_expulse(t_request_data *rqd, t_server *s, t_world *w)
 
 void                    cli_incantation(t_request_data *rqd, t_server *s, t_world *w)
 {
-    (void) (w);
-    printf("incantation\n");
-    cli_answer(rqd->user, s, "ok\n");
+    (void) rqd;
+    (void) s;
+    (void) w;
+    /*init_incantation(rqd, s, w);*/
+    /*if ((st = incantate(T_PLAYER(rqd->user), s, w)) != 0)*/
+    /*{*/
+        /*error_show("incantation", "cli",*/
+                /*"Incantation failed!");*/
+        /*cli_answer(rqd->user,s , "ko\n");*/
+    /*}*/
+    /*end_incantation(rqd, s, w);*/
+    return ;
 }
 
 void                    cli_hatch_egg(t_request_data *rqd,
