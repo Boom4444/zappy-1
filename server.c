@@ -5,14 +5,13 @@
 ** Login   <alcara_m@epitech.net>
 ** 
 ** Started on  Tue May 21 09:42:30 2013 Marin Alcaraz
-** Last update Tue Jul 09 18:34:59 2013 ivan ignatiev
+** Last update Wed Jul 10 18:18:12 2013 ivan ignatiev
 */
 
 #include                "main.h"
 #include                "list.h"
 #include                "options.h"
 #include                "connection_utils.h"
-#include                "server_functions.h"
 #include                "error.h"
 #include                "trantor.h"
 #include                "server.h"
@@ -23,8 +22,9 @@
 
 int                     server_handshake(int fd)
 {
-    server_welcome_msg(fd);
-    return (1);
+    if (server_send(fd, "BIENVENUE\n") == -1)
+        return (error_show("server_welcome_msg", "write", strerror(errno)));
+    return (0);
 }
 
 int                     server_send(int clientfd, char *message)
@@ -54,7 +54,8 @@ void                    server_stop(t_server *s)
     current = s->client_list->head;
     while (current != NULL)
     {
-        close(T_USER(current->cont)->clientfd);
+        if (T_USER(current->cont)->clientfd >= 0)
+            close(T_USER(current->cont)->clientfd);
         current = current->next;
     }
     close(s->server_fd);

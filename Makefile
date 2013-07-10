@@ -1,11 +1,11 @@
 ##
-## Makefile for zappy in /home/hero/zappy
+## Makefile for zappy in /home/ignatiev/Projects/zappy
 ##
 ## Made by Marin Alcaraz
 ## Login   <alcara_m@epitech.net>
 ##
 ## Started on  Fri Mar 01 09:38:17 2013 Marin Alcaraz
-## Last update Thu Jul 04 10:35:30 2013 Marin Alcaraz
+## Last update Wed Jul 10 18:18:00 2013 ivan ignatiev
 ##
 
 SNAME	=	server
@@ -18,7 +18,6 @@ SSRC	=	server.c 						\
 			expulse.c 						\
 			options_parsing.c 				\
 			item.c 							\
-			server_functions.c 				\
 			graph_command.c 				\
 			cli_command_parse.c 			\
 			list.c 							\
@@ -32,6 +31,7 @@ SSRC	=	server.c 						\
 			trantor.c 						\
 			request.c 						\
 			answer.c 						\
+			str.c 							\
 			main.c
 
 SOBJ	=	$(SSRC:.c=.o)

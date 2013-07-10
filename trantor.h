@@ -5,7 +5,7 @@
 ** Login   <alcara_m@epitech.net>
 ** 
 ** Started on  Thu Jun 20 17:38:38 2013 Marin Alcaraz
-** Last update Mon Jul 08 18:42:55 2013 ivan ignatiev
+** Last update Wed Jul 10 15:28:12 2013 ivan ignatiev
 */
 
 #ifndef TRANTOR_H_
@@ -21,6 +21,12 @@
 # define RES_TYPES_COUNT 7
 
 # define _MOD(x,d) (((x) < 0) ? ((d) - ((-(x)) % (d))) : ((x) % (d)))
+
+typedef struct 		s_point
+{
+    int 			x;
+    int 			y;
+} 					t_point;
 
 typedef struct  s_square_unit
 {

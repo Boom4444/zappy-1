@@ -5,7 +5,7 @@
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Sat Apr 27 14:16:14 2013 ivan ignatiev
-** Last update Tue Jul 09 19:52:55 2013 ivan ignatiev
+** Last update Wed Jul 10 18:20:22 2013 ivan ignatiev
 */
 
 #include    "main.h"
@@ -27,40 +27,90 @@ t_user      *user_create()
         user->protocol = NONE_PROTO;
         user->connected = PRE_CONNECTED;
         user->request = NULL;
+        user->request_buf = NULL;
         user->addrlen = sizeof(struct sockaddr_in);
     }
     return (user);
 }
 
+void                user_player_place(t_user_player *player, int x, int y, int orientation)
+{
+    int             i;
+
+    player->connected = CONNECTED;
+    player->protocol = CLI_PROTO;
+    player->posx = x;
+    player->posy = y;
+    player->orientation = orientation;
+    player->tick = 0;
+    player->level = 1;
+    player->request_counter = 0;
+    player->inventory[FOOD] = 10; //1260 * t sec 1 FOOD = 126 sec
+    i = 0;
+    while (i < ARTICLES_LIMIT)
+    {
+        player->inventory[i] = 0;
+        ++i;
+    }
+}
+
 t_user_player       *user_player_init(t_user *user, t_team *team, t_world *w, t_server *s)
 {
     (void) s;
-    int             i;
     t_user_player   *player;
 
-    if ((player = realloc(user, sizeof(t_user_player))) != NULL)
+    if ((player = T_PLAYER(realloc(user, sizeof(t_user_player)))) != NULL)
     {
-        player->connected = CONNECTED;
-        player->protocol = CLI_PROTO;
-        player->posx = _MOD(rand(), w->width);
-        player->posy = _MOD(rand(), w->height);
-        player->orientation = _MOD(rand(), 4);
-        player->tick = 0;
-        player->level = 1;
-        player->request_counter = 0;
+        user_player_place(player,
+                _MOD(rand(), w->width),
+                _MOD(rand(), w->height),
+                _MOD(rand(), 4)
+                );
         player->team = team;
-        i = 0;
-        while (i < ARTICLES_LIMIT)
-        {
-            player->inventory[i] = 0;
-            ++i;
-        }
-        player->inventory[FOOD] = 10; //1260 * t sec
-        item_pf(w->surface[player->posy][player->posx].players, (void*)player, sizeof(t_user_player));
+        item_pf(w->surface[player->posy][player->posx].players,
+                (void*)player, sizeof(t_user_player));
         return (player);
     }
     error_show("user_player_init", "malloc", "Unable allocate memory for players");
     return (NULL);
+}
+
+t_user_player       *user_player_egg(t_user *user, t_team *team, t_world *w, t_server *s)
+{
+    t_user_egg      *egg;
+    t_user_player   *player;
+    t_item          *current;
+
+    current = s->client_list->head;
+    while (current != NULL)
+    {
+        if (T_USER(current->cont)->protocol == EGG_PROTO
+                && T_EGG(current->cont)->hatched
+                && T_EGG(current->cont)->team == team)
+        {
+            if ((player = realloc(user, sizeof(t_user_player))) != NULL)
+            {
+                user_player_place(player,
+                        T_EGG(current->cont)->posx,
+                        T_EGG(current->cont)->posy,
+                        _MOD(rand(), 4)
+                        );
+                player->team = T_EGG(current->cont)->team;
+                item_pf(w->surface[player->posy][player->posx].players,
+                        (void*)player, sizeof(t_user_player));
+                egg = T_EGG(current->cont);
+                item_delete(s->client_list, current);
+                log_show("user_player_egg", "", "Egg %d become a player", egg->number);
+                free(egg);
+                return (player);
+            }
+            error_show("user_player_init", "malloc", "Unable allocate memory for players");
+            return (NULL);
+        }
+        current = current->next;
+    }
+    return (NULL);
+
 }
 
 t_user_egg      *user_egg_init(t_user_player *parent)
@@ -72,9 +122,11 @@ t_user_egg      *user_egg_init(t_user_player *parent)
         egg->connected = DISCONNECTED;
         egg->protocol = EGG_PROTO;
         egg->clientfd = -1;
+        egg->hatched = 0;
         egg->posx = parent->posx;
         egg->posy = parent->posy;
-        egg->parent = parent;
+        egg->parent_number = parent->number;
+        egg->team = parent->team;
         return (egg);
     }
     error_show("user_player_init", "malloc", "Unable allocate memory for eggs");
@@ -112,8 +164,14 @@ void        user_destroy(t_user *user, t_server *s, t_world *w)
         free(user);
         return ;
     }
+    else if (user->protocol == GRAPHIC_PROTO)
+    {
+        free(user);
+        log_show("user_destroy", "", "GFX Client disconnected and removed");
+        return ;
+    }
     free(user);
-    log_show("user_destroy", "", "Graph client disconnected and removed");
+    log_show("user_destroy", "", "Client disconnected and removed");
 }
 
 t_team      *team_create(char *name, t_server *s)
@@ -122,7 +180,8 @@ t_team      *team_create(char *name, t_server *s)
 
     if ((team = (t_team*)malloc(sizeof(t_team))) != NULL)
     {
-        strcpy(team->name, name);
+        strncpy(team->name, name, NAME_LIMIT);
+        team->name[NAME_LIMIT] = '\0';
         team->members = 0;
         team->limit = s->options.cmax;
         log_show("team_create", "", "Team created : '%s'", team->name);

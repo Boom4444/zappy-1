@@ -1,11 +1,11 @@
 /*
-** proto_commands_net.c for zappy in /home/hero/zappy
+** proto_commands_net.c for zappy in /home/ignatiev/Projects/zappy
 ** 
 ** Made by Marin Alcaraz
 ** Login   <alcara_m@epitech.net>
 ** 
 ** Started on  Thu Jun 13 16:31:20 2013 Marin Alcaraz
-** Last update Tue Jul 09 13:25:51 2013 Marin Alcaraz
+** Last update Wed Jul 10 18:11:12 2013 ivan ignatiev
 */
 
 #include        "main.h"
@@ -20,7 +20,7 @@
 #include        "proto_commands_movement.h"
 #include        "item.h"
 
-static t_steps  g_steps[] =
+static t_point  g_steps[] =
 {
 	{0, -1},
 	{1, 0},
@@ -55,15 +55,11 @@ void                    cli_hatch_egg(t_request_data *rqd,
 {
     char                response[ANSWER_SIZE];
 
-    ++(T_EGG(rqd->user)->parent->team->limit);
+    (void) w;
+    ++(T_EGG(rqd->user)->team->limit);
+    T_EGG(rqd->user)->hatched = 1;
     sprintf(response, "eht %d\n", T_EGG(rqd->user)->number);
     cli_answer_to_all_graph(s, response);
-
-    item_delete_by_content(w->surface[T_EGG(rqd->user)->posy][T_EGG(rqd->user)->posx].players,
-        (void*)rqd->user);
-    item_delete_by_content(s->client_list,
-        (void*)rqd->user);
-    free(rqd->user);
 }
 
 void                    cli_fork_player(t_request_data *rqd,
@@ -73,23 +69,21 @@ void                    cli_fork_player(t_request_data *rqd,
     t_request          *egg_request;
     char               response[ANSWER_SIZE];
 
+    (void) w;
     if ((user = user_egg_init(rqd->user)) != NULL)
     {
         if ((egg_request = cli_request_init()) != NULL )
         {
-            if ((egg_request->data = cli_request_data_init("", 0)) != NULL)
+            if ((egg_request->data = cli_request_data_init(strdup("egg_hatch"), 0)) != NULL)
             {
                 user->number = (s->eggs_count)++;
-                egg_request->data->message = strdup("egg_hatch");
                 egg_request->data->user = T_PLAYER(user);
                 egg_request->type = &g_hatch_type;
                 egg_request->tick = s->tick + g_hatch_type.delay;
                 item_pf(s->request_list, (void*)egg_request, sizeof(t_request));
-                item_pf(s->client_list, user, sizeof(t_user_player));
-                item_pf(w->surface[user->posy][user->posx].players,
-                        user, sizeof(t_user_player));
+                item_pf(s->client_list, (void*)user, sizeof(t_user_egg));
                 sprintf(response, "enw %d %d %d %d\n", user->number,
-                        rqd->user->number, rqd->user->posx, rqd->user->posy);
+                        user->parent_number, user->posx, user->posy);
                 cli_answer_to_all_graph(s, response);
                 cli_answer(rqd->user, s, "ok\n");
                 return ;

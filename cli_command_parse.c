@@ -5,7 +5,7 @@
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Thu Jun 13 17:27:55 2013 ivan ignatiev
-** Last update Thu Jul 04 21:21:31 2013 ivan ignatiev
+** Last update Wed Jul 10 17:04:19 2013 ivan ignatiev
 */
 
 #include        "main.h"
@@ -89,10 +89,9 @@ t_request_data          *cli_parse_prend(t_request_type *type, t_user_player *u,
     {
         if ((object = (char*)malloc(sizeof(char) * (strlen(u->request) - 5))) != NULL)
         {
+            *object = 0;
             sscanf(u->request, "prend %s\n", object);
             rqd->argv[0] = (void*)object;
-
-            printf("prend '%s'\n", (char*)rqd->argv[0]);
             return (rqd);
         }
         free(rqd);
@@ -111,10 +110,9 @@ t_request_data          *cli_parse_pose(t_request_type *type, t_user_player *u, 
     {
         if ((object = (char*)malloc(sizeof(char) * (strlen(u->request) - 4))) != NULL)
         {
+            *object = 0;
             sscanf(u->request, "pose %s\n", object);
             rqd->argv[0] = (void*)object;
-
-            printf("pose '%s'\n", (char*)rqd->argv[0]);
             return (rqd);
         }
         free(rqd);
@@ -145,10 +143,9 @@ t_request_data          *cli_parse_broadcast(t_request_type *type, t_user_player
     {
         if ((text = (char*)malloc(sizeof(char) * (strlen(u->request) - 9))) != NULL)
         {
+            *text = 0;
             sscanf(u->request, "broadcast %s\n", text);
             rqd->argv[0] = (void*)text;
-
-            printf("broadcast '%s'\n", (char*)rqd->argv[0]);
             return (rqd);
         }
         free(rqd);
@@ -179,7 +176,6 @@ t_request_data          *cli_parse_fork(t_request_type *type, t_user_player *u, 
     (void) s;
     if ((rqd = cli_request_data_init(u->request, type->argc)) != NULL)
     {
-        sprintf(response, "pfk %d\n", u->number);
         cli_answer_to_all_graph(s, response);
     }
     return (rqd);

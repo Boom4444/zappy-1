@@ -1,11 +1,11 @@
 /*
-** proto_commands_movement.c for zappy in /home/hero/zappy
+** proto_commands_movement.c for zappy in /home/ignatiev/Projects/zappy
 ** 
 ** Made by Marin Alcaraz
 ** Login   <alcara_m@epitech.net>
 ** 
 ** Started on  Thu Jun 13 16:26:19 2013 Marin Alcaraz
-** Last update Tue Jul 09 07:32:03 2013 Marin Alcaraz
+** Last update Wed Jul 10 16:48:56 2013 ivan ignatiev
 */
 
 #include        "main.h"
@@ -18,8 +18,9 @@
 #include        "answer.h"
 #include        "item.h"
 #include        "proto_commands_movement.h"
+#include        "str.h"
 
-static t_steps 	g_steps[]=
+static t_point 	g_steps[]=
 {
 	{0, -1},
 	{1, 0},
@@ -35,6 +36,14 @@ static char     *g_objects[] = {
     "mendiane",
     "phiras",
     "thystame"
+};
+
+static t_point 	g_voir[]=
+{
+	{-1, -1},
+	{1, -1},
+	{1, 1},
+	{-1, 1}
 };
 
 void    	cli_avance(t_request_data *rqd, t_server *t, t_world *w)
@@ -88,19 +97,20 @@ void        cli_broadcast(t_request_data *rqd, t_server *t, t_world *w)
     cli_answer(rqd->user, t, rqd->argv[0]);
 }
 
-void        cli_voir_players(char *answer, t_list *players)
+char        *cli_voir_players(char *response, t_list *players)
 {
     t_item  *current;
 
     current = players->head;
     while (current != NULL)
     {
-        strcat(answer, " player");
+        stralloccat(response, " player");
         current = current->next;
     }
+    return (response);
 }
 
-void        cli_voir_resources(char *answer, int *resources)
+char        *cli_voir_resources(char *response, int *resources)
 {
     int     i;
     int     j;
@@ -111,49 +121,59 @@ void        cli_voir_resources(char *answer, int *resources)
         j = 0;
         while (j < resources[i])
         {
-            strcat(answer, " ");
-            strcat(answer, g_objects[i]);
+            stralloccat(response, " ");
+            stralloccat(response, g_objects[i]);
             j++;
         }
         i++;
     }
-    strcat(answer, ",");
+    stralloccat(response, ",");
+    return (response);
+}
+
+char        *cli_voir_level(char *response, t_request_data *rqd,  t_world *w)
+{
+    int     level;
+    int     level_count;
+    t_point v;
+    t_point obj;
+    int     i;
+
+    level = 0;
+    v.x = rqd->user->posx;
+    v.y = rqd->user->posy;
+    level_count = 1;
+    while (level <= rqd->user->level)
+    {
+        obj.x = v.x;
+        obj.y = v.y;
+        i = 0;
+        while (i < level_count)
+        {
+            response = cli_voir_players(response, w->surface[obj.y][obj.x].players);
+            response = cli_voir_resources(response, w->surface[obj.y][obj.x].resources);
+            obj.x = _MOD(obj.x + g_steps[_MOD(rqd->user->orientation + 1, 4)].x, w->width);
+            obj.y = _MOD(obj.y + g_steps[_MOD(rqd->user->orientation + 1, 4)].y, w->height);
+            ++i;
+        }
+        v.x = _MOD(v.x + g_voir[_MOD(rqd->user->orientation, 4)].x, w->width);
+        v.y = _MOD(v.y + g_voir[_MOD(rqd->user->orientation, 4)].y, w->height);
+        level_count += 2;
+        ++(level);
+    }
+    return (response);
 }
 
 void        cli_voir(t_request_data *rqd, t_server *s, t_world *w)
 {
-    int     level;
-    int     level_count;
-    int     obj_x;
-    int     obj_y;
-    int     x;
-    int     y;
-    int     i;
-    char    answer[2048];
+   char    *response;
 
-    level = 0;
-    x = rqd->user->posx;
-    y = rqd->user->posy;
-    strcpy(answer, "{");
-    level_count = 1;
-    while (level < rqd->user->level)
-    {
-        obj_x = x;
-        obj_y = y;
-        i = 0;
-        while (i < level_count)
-        {
-            cli_voir_players(answer, w->surface[obj_y][obj_x].players);
-            cli_voir_resources(answer, w->surface[obj_y][obj_x].resources);
-            obj_x = _MOD(obj_x + g_steps[_MOD(rqd->user->orientation - 2, 8)].x, w->width);
-            obj_y = _MOD(obj_y + g_steps[_MOD(rqd->user->orientation - 2, 8)].y, w->height);
-            ++i;
-        }
-        x = _MOD(x + g_steps[_MOD(rqd->user->orientation + 1, 8)].x, w->width);
-        y = _MOD(y + g_steps[_MOD(rqd->user->orientation + 1, 8)].y, w->height);
-        level_count += 2;
-        ++level;
-    }
-    strcat(answer, "}\n");
-    cli_answer(rqd->user, s, answer);
+    response = NULL;
+   response = stralloccat(response, "{");
+   cli_voir_level(response, rqd, w);
+   response = stralloccat(response, "}\n");
+    if (response)
+        cli_answer(rqd->user, s, response);
+    else
+        cli_answer(rqd->user, s, "ko\n");
 }
