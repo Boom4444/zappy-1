@@ -5,7 +5,7 @@
 ** Login   <alcara_m@epitech.net>
 ** 
 ** Started on  Wed Jun 12 16:34:40 2013 Marin Alcaraz
-** Last update Wed Jul 10 18:09:57 2013 ivan ignatiev
+** Last update Wed Jul 10 20:38:00 2013 ivan ignatiev
 */
 
 #include        "main.h"
@@ -111,6 +111,7 @@ void            user_player_connected(t_user_player *u, t_server *s, t_world *w)
     log_show("user_player_init", "", "Player %d created in team '%s'", u->number, u->team->name);
     ++(u->team->members);
     --(u->team->limit);
+    u->life = LIFE_UNIT * s->options.tdelay;
     sprintf(answer, "%d\n", u->team->limit);
     cli_answer(u, s, answer);
     sprintf(answer, "%d %d\n", w->width, w->height);

@@ -5,7 +5,7 @@
 ** Login   <alcara_m@epitech.net>
 ** 
 ** Started on  Thu Jun 13 16:31:20 2013 Marin Alcaraz
-** Last update Wed Jul 10 18:11:12 2013 ivan ignatiev
+** Last update Wed Jul 10 20:10:59 2013 ivan ignatiev
 */
 
 #include        "main.h"
@@ -70,7 +70,7 @@ void                    cli_fork_player(t_request_data *rqd,
     char               response[ANSWER_SIZE];
 
     (void) w;
-    if ((user = user_egg_init(rqd->user)) != NULL)
+    if ((user = user_egg_init(rqd->user, s)) != NULL)
     {
         if ((egg_request = cli_request_init()) != NULL )
         {

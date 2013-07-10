@@ -5,7 +5,7 @@
 ** Login   <alcara_m@epitech.net>
 ** 
 ** Started on  Thu Jun 13 16:26:19 2013 Marin Alcaraz
-** Last update Wed Jul 10 16:48:56 2013 ivan ignatiev
+** Last update Wed Jul 10 18:50:31 2013 ivan ignatiev
 */
 
 #include        "main.h"
@@ -168,12 +168,12 @@ void        cli_voir(t_request_data *rqd, t_server *s, t_world *w)
 {
    char    *response;
 
-    response = NULL;
+   response = NULL;
    response = stralloccat(response, "{");
    cli_voir_level(response, rqd, w);
    response = stralloccat(response, "}\n");
-    if (response)
-        cli_answer(rqd->user, s, response);
-    else
-        cli_answer(rqd->user, s, "ko\n");
+   if (response)
+       cli_answer(rqd->user, s, response);
+   else
+       cli_answer(rqd->user, s, "ko\n");
 }

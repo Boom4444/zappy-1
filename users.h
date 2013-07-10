@@ -5,7 +5,7 @@
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Sat Apr 27 17:03:35 2013 ivan ignatiev
-** Last update Wed Jul 10 18:04:42 2013 ivan ignatiev
+** Last update Wed Jul 10 20:36:55 2013 ivan ignatiev
 */
 
 #ifndef USERS_H_
@@ -16,6 +16,7 @@
 # define DISCONNECTED	0
 # define NAME_LIMIT     256
 # define ARTICLES_LIMIT 7
+# define LIFE_UNIT      126
 
 # define GRAPHIC_PROTO  100
 # define CLI_PROTO      200
@@ -71,6 +72,7 @@ typedef struct          s_user_player
   char                  *request_buf;
 
   int                   request_counter;
+  int                   life;
   int                   posx;
   int                   posy;
   int                   level;
@@ -92,6 +94,7 @@ typedef struct          s_user_egg
   char                  *request_buf;
 
   int                   request_counter;
+  int                   life;
   int                   posx;
   int                   posy;
   unsigned long long    tick;
@@ -117,8 +120,9 @@ t_user          *user_create();
 t_user_player   *user_player_init(t_user *user, t_team *team, t_world *w, t_server *s);
 t_user_graph    *user_graph_init(t_user *user);
 t_user_player   *user_player_egg(t_user *user, t_team *team, t_world *w, t_server *s);
-t_user_egg      *user_egg_init(t_user_player *parent);
+t_user_egg      *user_egg_init(t_user_player *parent, t_server *s);
 void            user_destroy(t_user *user, t_server *s, t_world *w);
+void            users_life_proccess(t_server *s, t_world *w);
 t_team          *team_create(char *name, t_server *s);
 t_team          *team_search(t_list *team_list, char *team_name);
 t_list          *team_list_init(t_server *s, t_list *team_names);

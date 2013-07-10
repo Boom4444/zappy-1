@@ -5,7 +5,7 @@
 ** Login   <alcara_m@epitech.net>
 ** 
 ** Started on  Tue May 21 09:42:30 2013 Marin Alcaraz
-** Last update Wed Jul 10 18:18:12 2013 ivan ignatiev
+** Last update Wed Jul 10 20:00:00 2013 ivan ignatiev
 */
 
 #include                "main.h"
@@ -84,6 +84,7 @@ int                     server_start(t_server *s, t_world *w)
         gettimeofday(&start_loop, NULL);
         select_do(s, w);
         cli_requests_process(s, w);
+        users_life_proccess(s, w);
         cli_answers_process(s, w, &start_loop, s->tick_size);
         gettimeofday(&stop_loop, NULL);
         elapsedTime = (stop_loop.tv_sec - start_loop.tv_sec) * 1000000;

@@ -5,7 +5,7 @@
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Sat Apr 27 14:16:14 2013 ivan ignatiev
-** Last update Wed Jul 10 18:20:22 2013 ivan ignatiev
+** Last update Wed Jul 10 20:37:39 2013 ivan ignatiev
 */
 
 #include    "main.h"
@@ -45,8 +45,8 @@ void                user_player_place(t_user_player *player, int x, int y, int o
     player->tick = 0;
     player->level = 1;
     player->request_counter = 0;
-    player->inventory[FOOD] = 10; //1260 * t sec 1 FOOD = 126 sec
-    i = 0;
+    player->inventory[FOOD] = 10;
+    i = 1;
     while (i < ARTICLES_LIMIT)
     {
         player->inventory[i] = 0;
@@ -113,7 +113,7 @@ t_user_player       *user_player_egg(t_user *user, t_team *team, t_world *w, t_s
 
 }
 
-t_user_egg      *user_egg_init(t_user_player *parent)
+t_user_egg      *user_egg_init(t_user_player *parent, t_server *s)
 {
     t_user_egg  *egg;
 
@@ -123,6 +123,7 @@ t_user_egg      *user_egg_init(t_user_player *parent)
         egg->protocol = EGG_PROTO;
         egg->clientfd = -1;
         egg->hatched = 0;
+        egg->life = LIFE_UNIT * 10 * s->options.tdelay;
         egg->posx = parent->posx;
         egg->posy = parent->posy;
         egg->parent_number = parent->number;
@@ -152,26 +153,67 @@ void        user_destroy(t_user *user, t_server *s, t_world *w)
 {
     char    response[ANSWER_SIZE];
 
-    close(user->clientfd);
     item_delete_by_content(s->client_list, (void*)user);
     if (user->protocol == CLI_PROTO)
     {
+        cli_answer(T_PLAYER(user), s, "mort\n");
         sprintf(response, "pdi %d\n", T_PLAYER(user)->number);
         cli_answer_to_all_graph(s, response);
         ++(T_PLAYER(user)->team->limit);
         item_delete_by_content(w->surface[T_PLAYER(user)->posy][T_PLAYER(user)->posx].players, (void*)user);
         log_show("user_destroy", "", "Player %d disconnected and removed", T_PLAYER(user)->number);
+        close(user->clientfd);
         free(user);
         return ;
     }
     else if (user->protocol == GRAPHIC_PROTO)
     {
+        close(user->clientfd);
         free(user);
         log_show("user_destroy", "", "GFX Client disconnected and removed");
         return ;
     }
+    close(user->clientfd);
     free(user);
     log_show("user_destroy", "", "Client disconnected and removed");
+}
+
+void        users_life_proccess(t_server *s, t_world *w)
+{
+    t_item  *current;
+    t_item  *next;
+
+    current = s->client_list->head;
+    while (current != NULL)
+    {
+        next = current->next;
+        if (T_USER(current->cont)->protocol == CLI_PROTO)
+        {
+            --(T_PLAYER(current->cont)->life);
+            if (T_PLAYER(current->cont)->life <= 0)
+            {
+                T_PLAYER(current->cont)->life = LIFE_UNIT * s->options.tdelay;
+                --(T_PLAYER(current->cont)->inventory[FOOD]);
+                if (T_PLAYER(current->cont)->inventory[FOOD] <= 0)
+                {
+                    log_show("users_life_process", "", "PLayer %d finished his food", T_PLAYER(current->cont)->number);
+                    user_destroy(T_USER(current->cont), s, w);
+                }
+            }
+        }
+        else if (T_USER(current->cont)->protocol == EGG_PROTO)
+        {
+            --(T_EGG(current->cont)->life);
+            if (T_EGG(current->cont)->life <= 0)
+            {
+                --(T_EGG(current->cont)->team->limit);
+                log_show("users_life_process", "", "Egg's spirit %d goes away", T_EGG(current->cont)->number);
+                free(current->cont);
+                item_delete(s->client_list, current);
+            }
+        }
+        current = next;
+    }
 }
 
 t_team      *team_create(char *name, t_server *s)
