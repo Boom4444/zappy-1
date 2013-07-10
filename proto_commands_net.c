@@ -1,11 +1,11 @@
 /*
-** proto_commands_net.c for zappy in /home/ignatiev/Projects/zappy
+** proto_commands_net.c for zappy in /home/hero/zappy
 ** 
 ** Made by Marin Alcaraz
 ** Login   <alcara_m@epitech.net>
 ** 
 ** Started on  Thu Jun 13 16:31:20 2013 Marin Alcaraz
-** Last update Tue Jul 09 18:38:22 2013 ivan ignatiev
+** Last update Tue Jul 09 13:25:51 2013 Marin Alcaraz
 */
 
 #include        "main.h"
@@ -39,7 +39,7 @@ void        cli_expulse(t_request_data *rqd, t_server *s, t_world *w)
     current_dir = rqd->user->orientation;
     new_position_x = _MOD(rqd->user->posx + g_steps[current_dir].x, w->width);
     new_position_y = _MOD(rqd->user->posy + g_steps[current_dir].y, w->height);
-    expulse_square(new_position_x, new_position_y, rqd, w);
+    expulse_square(new_position_x, new_position_y, rqd, w, s);
     cli_answer(rqd->user,s , "ok\n");
 }
 

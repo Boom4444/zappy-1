@@ -5,7 +5,7 @@
 ** Login   <alcara_m@epitech.net>
 ** 
 ** Started on  Thu Jun 13 16:28:40 2013 Marin Alcaraz
-** Last update Tue Jul 09 12:42:38 2013 Marin Alcaraz
+** Last update Wed Jul 10 05:29:36 2013 Marin Alcaraz
 */
 
 #include "main.h"
@@ -23,7 +23,7 @@
 void        cli_inventaire(t_request_data *rqd, t_server *t, t_world *w)
 {
     (void)  (w);
-    char    out[256];
+    char    out[ANSWER_SIZE];
     int     *inv;
 
     inv = (rqd->user)->inventory;
@@ -74,7 +74,7 @@ void        cli_prend(t_request_data *rqd, t_server *t, t_world *w)
 {
     int     index_item;
     (void) (t);
-    char    out[256];
+    char    out[ANSWER_SIZE];
 
     index_item = atoi(rqd->argv[0]);
     if (index_item < RES_TYPES_COUNT
@@ -103,10 +103,28 @@ void        cli_prend(t_request_data *rqd, t_server *t, t_world *w)
 void    cli_pose(t_request_data *rqd, t_server *t, t_world *w)
 {
     int     item;
+    int     item_index;
     (void) (t);
+    char    out[ANSWER_SIZE];
 
-    item = (rqd->user)->inventory[atoi(rqd->argv[0])]--;
-    (w->surface[rqd->user->posy]
-               [rqd->user->posx]).resources[item]++;
-    cli_answer(rqd->user, t, "OK\n");
+    item = (rqd->user)->inventory[atoi(rqd->argv[0])];
+    item_index = atoi(rqd->argv[0]);
+    if (item > 0 && item_index >= 0 && item_index < RES_TYPES_COUNT)
+    {
+        (rqd->user)->inventory[item_index]--;
+        (w->surface[rqd->user->posy]
+                   [rqd->user->posx]).resources[item_index]++;
+        sprintf(out, "pdr %d %d\n", rqd->user->number, item_index);
+        cli_answer_to_all_graph(t, out);
+        out[0] = '\0';
+        cli_pin(out, rqd->user);
+        cli_answer_to_all_graph(t, out);
+        out[0] = '\0';
+        cli_command_bct(out, rqd->user->posx, rqd->user->posy, w);
+        cli_answer_to_all_graph(t, out);
+        cli_answer(rqd->user, t, "ok\n");
+        return ;
+   }
+    error_show("cli_pose", "", "Invalid mineral requested from player %d", rqd->user->number);
+    cli_answer(rqd->user, t, "ko\n");
 }
