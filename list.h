@@ -5,7 +5,7 @@
 ** Login   <kuznet_o@epitech.net>
 **
 ** Started on  Wed Jun  05 18:48:34 2013 oleg kuznietsov
-** Last update Thu Jul 04 20:40:02 2013 ivan ignatiev
+** Last update Thu Jul 11 18:39:34 2013 ivan ignatiev
 */
 
 #ifndef LIST_H_
@@ -35,5 +35,7 @@ t_list  *list_init();
 void    list_delete(t_list *list);
 int     list_iter(t_list *list, void (*f)(void *, int));
 int     list_mem(t_list *list, void *content, int size);
+t_item  *list_get_head(t_list *list);
+t_item  *list_get_tail(t_list *list);
 
 #endif /* LIST_H_ */

@@ -5,7 +5,7 @@
 ** Login   <alcara_m@epitech.net>
 ** 
 ** Started on  Wed Jun 12 16:34:40 2013 Marin Alcaraz
-** Last update Thu Jul 11 12:43:57 2013 ivan ignatiev
+** Last update Thu Jul 11 20:26:04 2013 ivan ignatiev
 */
 
 #include        "main.h"
@@ -24,12 +24,12 @@
 #include        "str.h"
 
 
-int             proto_flud_detect(t_user *u, t_world *w, t_server *s, char *buf)
+int             proto_flud_detect(t_user *u, char *buf)
 {
     if (strchr(buf, '\n') == NULL)
     {
         error_show("clu_parse", "", "Flud client detected");
-        user_destroy(T_USER(u), s, w);
+        u->connected = DISCONNECTED;
         return (-1);
     }
     return (0);
@@ -41,10 +41,11 @@ int             cli_parse(t_user_player *u, t_server *s, t_world *w)
     int         rb;
     char        buf[PROTO_BUFFER + 1];
 
+    (void) w;
     if ((rb = recv(u->clientfd, buf, PROTO_BUFFER, MSG_DONTWAIT)) > 0)
     {
         buf[rb] = '\0';
-        if (proto_flud_detect(T_USER(u), w, s, buf) < 0)
+        if (proto_flud_detect(T_USER(u), buf) < 0)
             return (-1);
         u->request_buf = stralloccat(u->request_buf, buf);
         while ((u->request = getnextline(u->request_buf)) != NULL)
@@ -69,7 +70,7 @@ int             cli_parse(t_user_player *u, t_server *s, t_world *w)
         }
         return (0);
     }
-    user_destroy(T_USER(u), s, w);
+    u->connected = DISCONNECTED;
     return (-1);
 }
 
@@ -81,7 +82,7 @@ int        graph_parse(t_user_graph *u, t_server *s, t_world *w)
     if ((rb = recv(u->clientfd, buf, PROTO_BUFFER, MSG_DONTWAIT)) > 0)
     {
         buf[rb] = '\0';
-        if (proto_flud_detect(T_USER(u),w, s, buf) < 0)
+        if (proto_flud_detect(T_USER(u), buf) < 0)
             return (-1);
         u->request_buf = stralloccat(u->request_buf, buf);
         while ((u->request = getnextline(u->request_buf)) != NULL)
@@ -92,7 +93,7 @@ int        graph_parse(t_user_graph *u, t_server *s, t_world *w)
         }
         return (0);
     }
-    user_destroy(T_USER(u), s, w);
+    u->connected = DISCONNECTED;
     return (-1);
 }
 
@@ -111,7 +112,7 @@ void            user_player_connected(t_user_player *u, t_server *s, t_world *w)
     log_show("user_player_init", "", "Player %d created in team '%s'", u->number, u->team->name);
     ++(u->team->members);
     --(u->team->limit);
-    u->life = LIFE_UNIT * s->options.tdelay;
+    u->life = 0;
     sprintf(answer, "%d\n", u->team->limit);
     cli_answer(u, s, answer);
     sprintf(answer, "%d %d\n", w->width, w->height);
@@ -129,23 +130,32 @@ t_user              *proto_define(t_user *u, t_server *s, t_world *w)
 
     if ((rb = recv(u->clientfd, buf, PROTO_BUFFER, MSG_DONTWAIT)) > 0)
     {
-        buf[rb - 1] = '\0';
-        if (strcmp(buf, "GRAPHIC") == 0)
+        buf[rb] = '\0';
+        if (proto_flud_detect(u, buf) < 0)
+            return (NULL);
+        u->request_buf = stralloccat(u->request_buf, buf);
+        if ((u->request = getnextline(u->request_buf)) != NULL)
         {
-            u =  ((t_user*)user_graph_init(u));
-            graph_client_init(T_GRAPH(u), s, w);
-            return (u);
-        }
-        if ((team = team_search(s->team_list, buf)) != NULL && team->limit > 0)
-        {
-            tmp = user_player_egg(u, team, w, s);
-            u = T_USER(tmp == NULL ? user_player_init(u, team, w, s) : tmp);
-            user_player_connected(T_PLAYER(u), s, w);
-            return (u);
+            if (strcmp(u->request, "GRAPHIC") == 0)
+            {
+                u =  ((t_user*)user_graph_init(u));
+                graph_client_init(T_GRAPH(u), s, w);
+                free(u->request);
+                return (u);
+            }
+            else if ((team = team_search(s->team_list, u->request)) != NULL
+                    && team->limit > 0)
+            {
+                tmp = user_player_egg(u, team, w, s);
+                u = T_USER(tmp == NULL ? user_player_init(u, team, w, s) : tmp);
+                user_player_connected(T_PLAYER(u), s, w);
+                free(u->request);
+                return (u);
+            }
         }
         error_show("proto_define", "", "Limit of players or undefined team");
-        cli_answer((t_user_player*)u, s, "mort\n");
+        server_send(u->clientfd, "ko\n");
     }
-    user_destroy(T_USER(u), s, w);
+    u->connected = DISCONNECTED;
     return (NULL);
 }

@@ -1,11 +1,11 @@
 /*
-** expulse.c for zappy in /home/hero/zappy
+** expulse.c for zappy in /home/ignatiev/Projects/zappy
 ** 
 ** Made by Marin Alcaraz
 ** Login   <alcara_m@epitech.net>
 ** 
 ** Started on  Thu Jul 04 09:57:07 2013 Marin Alcaraz
-** Last update Wed Jul 10 07:02:28 2013 Marin Alcaraz
+** Last update Thu Jul 11 18:42:05 2013 ivan ignatiev
 */
 
 #include "main.h"
@@ -27,7 +27,7 @@ void                expulse_square(int nx, int ny, t_request_data *rqd, t_world 
     char            response[ANSWER_SIZE];
 
     current_item =
-        (w->surface[rqd->user->posy][rqd->user->posx]).players->head;
+        list_get_head((w->surface[rqd->user->posy][rqd->user->posx]).players);
     while (current_item != NULL)
     {
         tmp_play = T_PLAYER(current_item->cont);

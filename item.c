@@ -5,12 +5,13 @@
 ** Login   <kuznet_o@epitech.net>
 **
 ** Started on  Wed Jun  05 19:21:34 2013 oleg kuznietsov
-** Last update Tue Jul 09 13:35:00 2013 ivan ignatiev
+** Last update Thu Jul 11 18:28:15 2013 ivan ignatiev
 */
 
 #include    "main.h"
 #include    "list.h"
 #include    "error.h"
+
 
 t_item    *item_init()
 {

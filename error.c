@@ -5,7 +5,7 @@
 ** Login   <alcara_m@epitech.net>
 * 
 ** Started on  Fri Mar 15 16:42:14 2013 Marin Alcaraz
-** Last update Mon Jul 08 16:50:41 2013 ivan ignatiev
+** Last update Thu Jul 11 19:03:43 2013 ivan ignatiev
 **/
 
 #include "main.h"
@@ -44,9 +44,9 @@ int         log_show(char *loc, char *func, char *msg, ...)
     time(&log_time);
     ctime_r(&log_time, str_time);
     str_time[strlen(str_time) - 1] = '\0';
-    fprintf(stderr, "\e[1;36mINFO  [%s %s in %s] : ", str_time, func, loc);
-    vfprintf(stderr, msg, ap);
-    fprintf(stderr, "\e[m\n");
+    fprintf(stdout, "\e[1;36mINFO  [%s %s in %s] : ", str_time, func, loc);
+    vfprintf(stdout, msg, ap);
+    fprintf(stdout, "\e[m\n");
     va_end(ap);
     return (0);
 }

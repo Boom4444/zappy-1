@@ -5,7 +5,7 @@
 ** Login   <alcara_m@epitech.net>
 ** 
 ** Started on  Sun May 26 18:53:05 2013 Marin Alcaraz
-** Last update Tue Jul 09 18:33:53 2013 ivan ignatiev
+** Last update Thu Jul 11 20:07:26 2013 ivan ignatiev
 ** Last update Tue Jun 25 16:25:00 2013 Marin Alcaraz
 */
 
@@ -36,7 +36,6 @@ typedef  struct         s_server
   unsigned int          eggs_count;
 }                       t_server;
 
-int         server_handshake(int);
 void        server_handleclient(struct sockaddr_in *s_client, int *);
 int         server_start(t_server *s, t_world *w);
 int         server_send(int clientfd, char *message);

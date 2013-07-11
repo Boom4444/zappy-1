@@ -1,11 +1,11 @@
 /*
-** trantor.c for zappy in /home/hero/zappy
+** trantor.c for zappy in /home/ignatiev/Projects/zappy
 ** 
 ** Made by Marin Alcaraz
 ** Login   <alcara_m@epitech.net>
 ** 
 ** Started on  Thu Jun 20 17:33:58 2013 Marin Alcaraz
-** Last update Mon Jul 08 13:44:23 2013 Marin Alcaraz
+** Last update Thu Jul 11 20:20:29 2013 ivan ignatiev
 */
 
 #include    "main.h"
@@ -32,10 +32,10 @@ int        init_world(t_world *w, int width, int height)
 
     i = 0;
     j = 0;
-    w->surface = (t_square_unit **) malloc(sizeof(t_square_unit *) * height);
+    w->surface = (t_square_unit **) calloc(height, sizeof(t_square_unit *));
     while (i < height)
     {
-        if ((w->surface[i] = malloc(sizeof(t_square_unit) * width)) == NULL)
+        if ((w->surface[i] = calloc(width, sizeof(t_square_unit))) == NULL)
         {
             error_show("init_world", "init_world", "Error: can't allocate (width) game board\n");
             return (EXIT_FAILURE);
@@ -81,7 +81,7 @@ int          display_world(t_world *w, int width, int height)
         {
             if (mineral_checker(&w->surface[i][j]) != 0)
                 printf(" R ");
-            else if ((w->surface[i][j]).players->head != NULL)
+            else if (list_get_head((w->surface[i][j]).players) != NULL)
                 printf(" P ");
             else
                 printf(" * ");

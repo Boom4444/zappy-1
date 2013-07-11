@@ -1,12 +1,12 @@
 /*
-** proto_commands_movement.c for zappy in /home/hero/zappy
+** proto_commands_movement.c for zappy in /home/ignatiev/Projects/zappy
 ** 
 ** Made by Marin Alcaraz
 ** Login   <alcara_m@epitech.net>
 ** 
 ** Started on  Thu Jun 13 16:26:19 2013 Marin Alcaraz
 <<<<<<< HEAD
-** Last update Thu Jul 11 12:47:54 2013 ivan ignatiev
+** Last update Thu Jul 11 18:46:30 2013 ivan ignatiev
 =======
 ** Last update Wed Jul 10 13:43:10 2013 Marin Alcaraz
 >>>>>>> e210535e5cf8f42270333115d0d744e74a9fe07f
@@ -92,7 +92,7 @@ void        cli_broadcast(t_request_data *rqd, t_server *t, t_world *w)
     char    response[ANSWER_SIZE];
     int     direction;
 
-    current_item = t->client_list->head;
+    current_item = list_get_head(t->client_list);
     while (current_item != NULL)
     {
         if ((T_PLAYER(current_item->cont)->protocol == CLI_PROTO)
@@ -116,7 +116,7 @@ char        *cli_voir_players(char *response, t_list *players)
 {
     t_item  *current;
 
-    current = players->head;
+    current = list_get_head(players);
     while (current != NULL)
     {
         response = stralloccat(response, " player");
