@@ -5,7 +5,7 @@
 ** Login   <alcara_m@epitech.net>
 ** 
 ** Started on  Tue May 21 09:42:30 2013 Marin Alcaraz
-** Last update Wed Jul 10 20:00:00 2013 ivan ignatiev
+** Last update Thu Jul 11 17:44:17 2013 ivan ignatiev
 */
 
 #include                "main.h"
@@ -29,7 +29,11 @@ int                     server_handshake(int fd)
 
 int                     server_send(int clientfd, char *message)
 {
-    send(clientfd, message, strlen(message), MSG_DONTWAIT);
+    char                test[1];
+
+    if (recv(clientfd, test, 0, MSG_DONTWAIT) == -1
+        && errno == 11)
+        send(clientfd, message, strlen(message), MSG_DONTWAIT);
     return (1);
 }
 
