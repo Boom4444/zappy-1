@@ -5,11 +5,7 @@
 ** Login   <alcara_m@epitech.net>
 ** 
 ** Started on  Thu Jun 13 16:26:19 2013 Marin Alcaraz
-<<<<<<< HEAD
-** Last update Thu Jul 11 12:47:54 2013 ivan ignatiev
-=======
-** Last update Wed Jul 10 13:43:10 2013 Marin Alcaraz
->>>>>>> e210535e5cf8f42270333115d0d744e74a9fe07f
+** Last update Thu Jul 11 09:06:10 2013 Marin Alcaraz
 */
 
 #include        "main.h"
@@ -99,16 +95,19 @@ void        cli_broadcast(t_request_data *rqd, t_server *t, t_world *w)
             && T_PLAYER(current_item->cont) != rqd->user)
         {
             direction = broadcast_to(T_PLAYER(current_item->cont), rqd, t);
-            sprintf(response, "broadcast %d, %s",
+            sprintf(response, "broadcast %d, %s\n",
                     direction, (char *)rqd->argv[0]);
-            cli_answer(rqd->user, t, response);
+            cli_answer(T_PLAYER(current_item->cont), t, response);
             response[0] = '\0';
         }
         current_item = current_item->next;
     }
     response[0] = '\0';
+    cli_answer(rqd->user, t, "ok\n");
     sprintf(response, "pbc %d %s\n", rqd->user->number,
             (char *)rqd->argv[0]);
+    free(rqd->argv[0]);
+    free(rqd->argv);
     cli_answer_to_all_graph(t, response);
 }
 

@@ -5,7 +5,7 @@
 ** Login   <alcara_m@epitech.net>
 ** 
 ** Started on  Thu Jun 13 16:31:20 2013 Marin Alcaraz
-** Last update Wed Jul 10 13:43:28 2013 Marin Alcaraz
+** Last update Thu Jul 11 13:56:27 2013 Marin Alcaraz
 */
 
 #include        "main.h"
@@ -51,17 +51,16 @@ void        cli_expulse(t_request_data *rqd, t_server *s, t_world *w)
 
 void                    cli_incantation(t_request_data *rqd, t_server *s, t_world *w)
 {
-    (void) rqd;
-    (void) s;
-    (void) w;
-    /*init_incantation(rqd, s, w);*/
-    /*if ((st = incantate(T_PLAYER(rqd->user), s, w)) != 0)*/
-    /*{*/
-        /*error_show("incantation", "cli",*/
-                /*"Incantation failed!");*/
-        /*cli_answer(rqd->user,s , "ko\n");*/
-    /*}*/
-    /*end_incantation(rqd, s, w);*/
+    int                 st;
+    if (rqd->argv[0] == NULL)
+        return ;
+    if ((st = incantate(rqd->argv[0], T_PLAYER(rqd->user), s, w)) != 0)
+    {
+        fail_incantation(rqd, s);
+        cli_answer(rqd->user,s , "ko\n");
+        return ;
+    }
+    end_incantation(rqd->argv[0], rqd, s, w);
     return ;
 }
 

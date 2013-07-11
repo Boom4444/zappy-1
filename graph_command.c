@@ -5,7 +5,7 @@
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Wed Jun 12 17:02:27 2013 Marin Alcaraz
-** Last update Wed Jul 10 13:41:46 2013 Marin Alcaraz
+** Last update Thu Jul 11 05:41:38 2013 Marin Alcaraz
 */
 
 #include        "main.h"
@@ -73,17 +73,23 @@ int             graph_command_bct(t_graph_data *rqd, t_server *s, t_world *w)
     int         x;
     int         y;
     char        response[STR_LIMIT];
+    char        aux_response[STR_LIMIT];
 
     i = 0;
     sscanf(rqd->message, "bct %d %d\n", &x, &y);
+    x = _MOD(x, w->width);
+    y = _MOD(y, w->height);
+    sprintf(response, "bct %d %d", x, y);
     while (i < 7)
     {
-        if  ((w->surface[y][x]).resources[i] != 0)
-                sprintf(response, "%s %d ", response, i);
+        sprintf(aux_response, " %d",
+                w->surface[y][x].resources[i]);
+        strcat(response, aux_response);
+        aux_response[0] = '\0';
         i = i + 1;
     }
-    sprintf(response, "%s/n", response);
-    printf("Response: %s", response);
+    strcat(response, "\n");
+    printf("Response: %s\n", response);
     cli_answer_to_graph(rqd->user, response);
     return (0);
 }

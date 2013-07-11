@@ -1,11 +1,11 @@
 /*
-** proto.c for zappy in /home/ignatiev/Projects/zappy
+** proto.c for zappy in /home/hero/zappy
 ** 
 ** Made by Marin Alcaraz
 ** Login   <alcara_m@epitech.net>
 ** 
 ** Started on  Wed Jun 12 16:34:40 2013 Marin Alcaraz
-** Last update Thu Jul 11 12:43:57 2013 ivan ignatiev
+** Last update Thu Jul 11 13:36:29 2013 Marin Alcaraz
 */
 
 #include        "main.h"
@@ -55,7 +55,7 @@ int             cli_parse(t_user_player *u, t_server *s, t_world *w)
                 cli_answer(u, s, "ko\n");
                 error_show("cli_parse", "", "Player %d request limit", u->number);
             }
-            if ((request = cli_request_parse(s, u)) != NULL)
+            if ((request = cli_request_parse(s, u, w)) != NULL)
             {
                 request->data->user->request_counter++;
                 item_pb(s->request_list, (void*)request, sizeof(t_request));
@@ -116,7 +116,7 @@ void            user_player_connected(t_user_player *u, t_server *s, t_world *w)
     cli_answer(u, s, answer);
     sprintf(answer, "%d %d\n", w->width, w->height);
     cli_answer(u, s, answer);
-    sprintf(answer, "pnw %d %d %d %d %d %s\n", u->number, u->posx, u->posy, u->orientation, u->level, u->team->name);
+    sprintf(answer, "pnw %d %d %d %d %d %s\n", u->number, u->posx, u->posy, u->orientation + 1, u->level, u->team->name);
     cli_answer_to_all_graph(s, answer);
 }
 

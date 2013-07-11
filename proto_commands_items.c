@@ -5,7 +5,7 @@
 ** Login   <alcara_m@epitech.net>
 ** 
 ** Started on  Thu Jun 13 16:28:40 2013 Marin Alcaraz
-** Last update Wed Jul 10 05:29:36 2013 Marin Alcaraz
+** Last update Thu Jul 11 06:41:08 2013 Marin Alcaraz
 */
 
 #include "main.h"
@@ -73,7 +73,6 @@ int             cli_command_bct(char *response, int x, int y, t_world *w)
 void        cli_prend(t_request_data *rqd, t_server *t, t_world *w)
 {
     int     index_item;
-    (void) (t);
     char    out[ANSWER_SIZE];
 
     index_item = atoi(rqd->argv[0]);
@@ -94,6 +93,8 @@ void        cli_prend(t_request_data *rqd, t_server *t, t_world *w)
         cli_command_bct(out, rqd->user->posx, rqd->user->posy, w);
         cli_answer_to_all_graph(t, out);
         cli_answer(rqd->user, t, "ok\n");
+        free(rqd->argv[0]);
+        free(rqd->argv);
         return ;
     }
     error_show("cli_prend", "", "Invalid mineral requested from player %d", rqd->user->number);
@@ -123,6 +124,8 @@ void    cli_pose(t_request_data *rqd, t_server *t, t_world *w)
         cli_command_bct(out, rqd->user->posx, rqd->user->posy, w);
         cli_answer_to_all_graph(t, out);
         cli_answer(rqd->user, t, "ok\n");
+        free(rqd->argv[0]);
+        free(rqd->argv);
         return ;
    }
     error_show("cli_pose", "", "Invalid mineral requested from player %d", rqd->user->number);

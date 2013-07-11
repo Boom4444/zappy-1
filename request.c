@@ -1,11 +1,11 @@
 /*
-** request.c for zappy in /home/ignatiev/Projects/zappy
+** request.c for zappy in /home/hero/zappy
 ** 
 ** Made by ivan ignatiev
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Thu Jun 20 20:00:46 2013 ivan ignatiev
-** Last update Wed Jul 10 16:11:37 2013 ivan ignatiev
+** Last update Thu Jul 11 12:52:55 2013 Marin Alcaraz
 */
 
 #include        "main.h"
@@ -84,7 +84,7 @@ t_request               *cli_request_init(void)
     return (NULL);
 }
 
-t_request               *cli_request_parse(t_server *s, t_user_player *user)
+t_request               *cli_request_parse(t_server *s, t_user_player *user, t_world *w)
 {
     t_request           *request;
     int                 i;
@@ -100,11 +100,10 @@ t_request               *cli_request_parse(t_server *s, t_user_player *user)
                 request->tick = (user->tick > s->tick ? user->tick : s->tick) + request->type->delay;
                 if (request->type->parse != NULL)
                 {
-                    if ((request->data = request->type->parse(request->type, user, s)) != NULL)
+                    if ((request->data = request->type->parse(request->type, user, s, w)) != NULL)
                     {
                         log_show("cli_parse", "", "Request '%s' for player %d accepted on the %lluth tick, plan : %llu",
                                 request->data->message, user->number, s->tick, request->tick);
-                        request->data->user = user;
                     }
                 }
                 else
