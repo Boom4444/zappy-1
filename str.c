@@ -5,7 +5,7 @@
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Wed Jul 10 15:46:40 2013 ivan ignatiev
-** Last update Wed Jul 10 16:47:19 2013 ivan ignatiev
+** Last update Thu Jul 11 12:48:53 2013 ivan ignatiev
 */
 
 #include        "main.h"
@@ -16,17 +16,21 @@ char            *stralloccat(char *dest, char *src)
 {
     int         use;
     int         len;
+    char        *dest_new;
 
     len = dest == NULL ? 0 : strlen(dest);
     use = len;
     len += (src == NULL ? 0 : strlen(src)) + 1;
-    if ((dest = realloc(dest, sizeof(char) * len)) != NULL)
+    if ((dest_new = realloc(dest, sizeof(char) * len)) != NULL)
     {
         if (!use)
-            strcpy(dest, src);
+        {
+            *dest_new = 0;
+            strcpy(dest_new, src);
+        }
         else
-            strcat(dest, src);
-        return (dest);
+            strcat(dest_new, src);
+        return (dest_new);
     }
     error_show("stralloccat", "realloc", "Unable to allocate memory");
     return (NULL);

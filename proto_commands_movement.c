@@ -5,7 +5,7 @@
 ** Login   <alcara_m@epitech.net>
 ** 
 ** Started on  Thu Jun 13 16:26:19 2013 Marin Alcaraz
-** Last update Wed Jul 10 18:50:31 2013 ivan ignatiev
+** Last update Thu Jul 11 12:47:54 2013 ivan ignatiev
 */
 
 #include        "main.h"
@@ -104,7 +104,7 @@ char        *cli_voir_players(char *response, t_list *players)
     current = players->head;
     while (current != NULL)
     {
-        stralloccat(response, " player");
+        response = stralloccat(response, " player");
         current = current->next;
     }
     return (response);
@@ -121,13 +121,13 @@ char        *cli_voir_resources(char *response, int *resources)
         j = 0;
         while (j < resources[i])
         {
-            stralloccat(response, " ");
-            stralloccat(response, g_objects[i]);
+            response = stralloccat(response, " ");
+            response = stralloccat(response, g_objects[i]);
             j++;
         }
         i++;
     }
-    stralloccat(response, ",");
+    response = stralloccat(response, ",");
     return (response);
 }
 
@@ -170,10 +170,13 @@ void        cli_voir(t_request_data *rqd, t_server *s, t_world *w)
 
    response = NULL;
    response = stralloccat(response, "{");
-   cli_voir_level(response, rqd, w);
+   response = cli_voir_level(response, rqd, w);
    response = stralloccat(response, "}\n");
-   if (response)
+   if (response != NULL)
+   {
        cli_answer(rqd->user, s, response);
+       free(response);
+   }
    else
        cli_answer(rqd->user, s, "ko\n");
 }

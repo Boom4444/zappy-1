@@ -5,13 +5,13 @@
 ** Login   <alcara_m@epitech.net>
 ** 
 ** Started on  Wed Jun 12 17:02:27 2013 Marin Alcaraz
-** Last update Thu Jul 04 21:07:08 2013 ivan ignatiev
+** Last update Thu Jul 11 12:43:53 2013 ivan ignatiev
 */
 
 #ifndef PROTO_H_
 # define PROTO_H_
 
-# define PROTO_BUFFER               1024
+# define PROTO_BUFFER               2048
 
 int         cli_parse(t_user_player *u, t_server *s, t_world *);
 int         graph_parse(t_user_graph *u, t_server *s, t_world *);
