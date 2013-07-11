@@ -5,7 +5,7 @@
 ## Login   <liu_q@epitech.net>
 ## 
 ## Started on  Wed Jul 10 19:24:38 2013 qiuyan liu
-## Last update Wed Jul 10 19:36:33 2013 qiuyan liu
+## Last update Thu Jul 11 14:57:05 2013 Oleg Kuznietsov
 ##
 
 NAME	=	Trantor
@@ -17,6 +17,7 @@ RM	=	rm -rf
 SRC	=	clip_ressources.c \
 		commands.c \
 		list.c \
+		error.c \
 		sdl_init.c \
 		show_map.c \
 		main.c
