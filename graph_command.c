@@ -1,11 +1,11 @@
 /*
-** graph_command.c for zappy in /home/ignatiev/Projects/zappy
+** graph_command.c for zappy in /home/hero/zappy
 ** 
 ** Made by Ivan Ignatiev
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Wed Jun 12 17:02:27 2013 Marin Alcaraz
-** Last update Wed Jul 10 17:57:43 2013 ivan ignatiev
+** Last update Wed Jul 10 13:41:46 2013 Marin Alcaraz
 */
 
 #include        "main.h"

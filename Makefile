@@ -1,11 +1,11 @@
 ##
-## Makefile for zappy in /home/ignatiev/Projects/zappy
+## Makefile for zappy in /home/hero/zappy
 ##
 ## Made by Marin Alcaraz
 ## Login   <alcara_m@epitech.net>
 ##
 ## Started on  Fri Mar 01 09:38:17 2013 Marin Alcaraz
-## Last update Wed Jul 10 18:18:00 2013 ivan ignatiev
+## Last update Wed Jul 10 13:42:13 2013 Marin Alcaraz
 ##
 
 SNAME	=	server

@@ -5,7 +5,7 @@
 ** Login   <alcara_m@epitech.net>
 ** 
 ** Started on  Thu Jul 04 09:57:07 2013 Marin Alcaraz
-** Last update Tue Jul 09 13:28:53 2013 Marin Alcaraz
+** Last update Wed Jul 10 07:02:28 2013 Marin Alcaraz
 */
 
 #include "main.h"
@@ -24,7 +24,7 @@ void                expulse_square(int nx, int ny, t_request_data *rqd, t_world 
     t_item          *tmp;
     t_item          *current_item;
     t_user_player   *tmp_play;
-    char            out[ANSWER_SIZE];
+    char            response[ANSWER_SIZE];
 
     current_item =
         (w->surface[rqd->user->posy][rqd->user->posx]).players->head;
@@ -33,16 +33,18 @@ void                expulse_square(int nx, int ny, t_request_data *rqd, t_world 
         tmp_play = T_PLAYER(current_item->cont);
         if (current_item->cont != rqd->user)
         {
-            sprintf(out, "deplacement: %d\n", rqd->user->orientation + 1);
+            sprintf(response, "deplacement: %d\n", rqd->user->orientation + 1);
             tmp = current_item->next;
-            cli_answer(tmp_play, s, out);
+            cli_answer(tmp_play, s, response);
             item_delete_by_content(
                 w->surface[rqd->user->posy][rqd->user->posx].players,
                 tmp_play);
            tmp_play->posx = nx;
            tmp_play->posy = ny;
-            item_pf(w->surface[ny][nx].players, tmp_play, sizeof(t_user));
-            current_item = tmp;
+           sprintf(response, "ppo %d %d %d %d\n", tmp_play->number, nx, ny, tmp_play->orientation + 1);
+           cli_answer_to_all_graph(s, response);
+           item_pb(w->surface[ny][nx].players, tmp_play, sizeof(t_user_player));
+           current_item = tmp;
         }
         else
             current_item = current_item->next;
