@@ -5,7 +5,7 @@
 ** Login   <alcara_m@epitech.net>
 ** 
 ** Started on  Thu Jun 13 16:26:19 2013 Marin Alcaraz
-** Last update Thu Jul 11 09:06:10 2013 Marin Alcaraz
+** Last update Thu Jul 11 14:11:38 2013 Marin Alcaraz
 */
 
 #include        "main.h"
@@ -88,7 +88,7 @@ void        cli_broadcast(t_request_data *rqd, t_server *t, t_world *w)
     char    response[ANSWER_SIZE];
     int     direction;
 
-    current_item = t->client_list->head;
+    current_item = list_get_head(t->client_list);
     while (current_item != NULL)
     {
         if ((T_PLAYER(current_item->cont)->protocol == CLI_PROTO)
@@ -115,7 +115,7 @@ char        *cli_voir_players(char *response, t_list *players)
 {
     t_item  *current;
 
-    current = players->head;
+    current = list_get_head(players);
     while (current != NULL)
     {
         response = stralloccat(response, " player");

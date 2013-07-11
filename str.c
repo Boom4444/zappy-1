@@ -5,7 +5,7 @@
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Wed Jul 10 15:46:40 2013 ivan ignatiev
-** Last update Thu Jul 11 12:48:53 2013 ivan ignatiev
+** Last update Thu Jul 11 19:36:18 2013 ivan ignatiev
 */
 
 #include        "main.h"
@@ -21,7 +21,7 @@ char            *stralloccat(char *dest, char *src)
     len = dest == NULL ? 0 : strlen(dest);
     use = len;
     len += (src == NULL ? 0 : strlen(src)) + 1;
-    if ((dest_new = realloc(dest, sizeof(char) * len)) != NULL)
+    if ((dest_new = (char*)realloc(dest, sizeof(char) * len)) != NULL)
     {
         if (!use)
         {
@@ -46,8 +46,8 @@ char            *getnextline(char *str)
         return (NULL);
     eol = strchr(str, '\n');
     linelen = (eol - str) + 1;
-    if (linelen > 0
-            && (line = (char*)malloc(sizeof(char) * linelen)) != NULL)
+    if (linelen > 1
+            && (line = (char*)calloc(linelen, sizeof(char))) != NULL)
     {
         strncpy(line, str, linelen - 1);
         strcpy(str, eol + 1);

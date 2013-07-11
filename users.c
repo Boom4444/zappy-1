@@ -5,7 +5,7 @@
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Sat Apr 27 14:16:14 2013 ivan ignatiev
-** Last update Wed Jul 10 20:37:39 2013 ivan ignatiev
+** Last update Thu Jul 11 20:18:36 2013 ivan ignatiev
 */
 
 #include    "main.h"
@@ -81,7 +81,7 @@ t_user_player       *user_player_egg(t_user *user, t_team *team, t_world *w, t_s
     t_user_player   *player;
     t_item          *current;
 
-    current = s->client_list->head;
+    current = list_get_head(s->client_list);
     while (current != NULL)
     {
         if (T_USER(current->cont)->protocol == EGG_PROTO
@@ -119,7 +119,7 @@ t_user_egg      *user_egg_init(t_user_player *parent, t_server *s)
 
     if ((egg = malloc(sizeof(t_user_egg))) != NULL)
     {
-        egg->connected = DISCONNECTED;
+        egg->connected = PRE_CONNECTED;
         egg->protocol = EGG_PROTO;
         egg->clientfd = -1;
         egg->hatched = 0;
@@ -156,7 +156,6 @@ void        user_destroy(t_user *user, t_server *s, t_world *w)
     item_delete_by_content(s->client_list, (void*)user);
     if (user->protocol == CLI_PROTO)
     {
-        cli_answer(T_PLAYER(user), s, "mort\n");
         sprintf(response, "pdi %d\n", T_PLAYER(user)->number);
         cli_answer_to_all_graph(s, response);
         ++(T_PLAYER(user)->team->limit);
@@ -183,7 +182,8 @@ void        users_life_proccess(t_server *s, t_world *w)
     t_item  *current;
     t_item  *next;
 
-    current = s->client_list->head;
+    (void) w;
+    current = list_get_head(s->client_list);
     while (current != NULL)
     {
         next = current->next;
@@ -196,8 +196,9 @@ void        users_life_proccess(t_server *s, t_world *w)
                 --(T_PLAYER(current->cont)->inventory[FOOD]);
                 if (T_PLAYER(current->cont)->inventory[FOOD] <= 0)
                 {
+                    server_send(T_PLAYER(current->cont)->clientfd, "mort\n");
                     log_show("users_life_process", "", "PLayer %d finished his food", T_PLAYER(current->cont)->number);
-                    user_destroy(T_USER(current->cont), s, w);
+                    T_USER(current->cont)->connected = DISCONNECTED;
                 }
             }
         }
@@ -235,7 +236,7 @@ t_team          *team_search(t_list *team_list, char *team_name)
 {
     t_item      *current;
 
-    current = team_list->head;
+    current = list_get_head(team_list);
     while (current != NULL)
     {
         if (strcmp(T_TEAM(current)->name, team_name) == 0)
@@ -251,7 +252,7 @@ t_list      *team_list_init(t_server *s, t_list *team_names)
     t_item  *current;
 
     s->team_list = list_init();
-    current = team_names->head;
+    current = list_get_head(team_names);
     while (current != NULL)
     {
         team = team_create((char*)(current->cont), s);

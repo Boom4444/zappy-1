@@ -5,7 +5,7 @@
 ** Login   <alcara_m@epitech.net>
 ** 
 ** Started on  Thu Jun 20 17:38:38 2013 Marin Alcaraz
-** Last update Wed Jul 10 15:28:12 2013 ivan ignatiev
+** Last update Thu Jul 11 20:22:18 2013 ivan ignatiev
 */
 
 #ifndef TRANTOR_H_
@@ -31,7 +31,7 @@ typedef struct 		s_point
 typedef struct  s_square_unit
 {
     t_list      *players;
-    int         resources[RES_TYPES_COUNT];
+    int         resources[RES_TYPES_COUNT + 1];
 }               t_square_unit;
 
 typedef struct      s_world

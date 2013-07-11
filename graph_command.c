@@ -5,7 +5,7 @@
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Wed Jun 12 17:02:27 2013 Marin Alcaraz
-** Last update Thu Jul 11 05:41:38 2013 Marin Alcaraz
+** Last update Thu Jul 11 14:10:30 2013 Marin Alcaraz
 */
 
 #include        "main.h"
@@ -89,7 +89,6 @@ int             graph_command_bct(t_graph_data *rqd, t_server *s, t_world *w)
         i = i + 1;
     }
     strcat(response, "\n");
-    printf("Response: %s\n", response);
     cli_answer_to_graph(rqd->user, response);
     return (0);
 }
@@ -138,7 +137,7 @@ int             graph_command_tna(t_graph_data *rqd, t_server *s, t_world *w)
     char        response[STR_LIMIT];
     t_item      *current_team;
 
-    current_team = s->options.names->head;
+    current_team = list_get_head(s->options.names);
     while (current_team != NULL)
     {
         sprintf(response, "tna %s\n", (char *)(current_team->cont));
@@ -158,7 +157,7 @@ int             graph_command_ppo(t_graph_data *rqd, t_server *s, t_world *w)
     int         p_number;
 
     sscanf(rqd->message, "ppo %d\n", &p_number);
-    current_player = s->client_list->head;
+    current_player = list_get_head(s->client_list);
     while (current_player != NULL)
     {
         if (T_PLAYER(current_player->cont)->number == p_number)
@@ -183,7 +182,7 @@ int             graph_command_piv(t_graph_data *rqd, t_server *s, t_world *w)
     int         p_number;
 
     sscanf(rqd->message, "piv %d\n", &p_number);
-    current_player = s->client_list->head;
+    current_player = list_get_head(s->client_list);
     while (current_player != NULL)
     {
         if (T_PLAYER(current_player->cont)->number == p_number)
@@ -207,7 +206,7 @@ int             graph_command_pin(t_graph_data *rqd, t_server *s, t_world *w)
     int         p_number;
 
     sscanf(rqd->message, "pin %d\n", &p_number);
-    current_player = s->client_list->head;
+    current_player = list_get_head(s->client_list);
     while (current_player != NULL)
     {
         if (T_PLAYER(current_player->cont)->number == p_number)
@@ -263,7 +262,7 @@ int 			graph_display_users(t_server *s, t_graph_data *rqd)
 	t_item 	*current;
 	char 	response[STR_LIMIT];
 
-	current = s->client_list->head;
+	current = list_get_head(s->client_list);
 	while (current != NULL)
 	{
 		if (T_USER(current->cont)->protocol == CLI_PROTO)
@@ -287,7 +286,7 @@ int             graph_display_eggs(t_server *s, t_graph_data *rqd)
     t_item      *current;
     char        response[STR_LIMIT];
 
-    current = s->client_list->head;
+    current = list_get_head(s->client_list);
     while (current != NULL)
     {
         if (T_USER(current->cont)->protocol == EGG_PROTO)

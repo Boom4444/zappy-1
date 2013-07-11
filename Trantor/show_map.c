@@ -5,7 +5,7 @@
 ** Login   <liu_q@epitech.net>
 ** 
 ** Started on  Tue Jul  9 19:28:47 2013 qiuyan liu
-** Last update Wed Jul 10 19:01:37 2013 qiuyan liu
+** Last update Thu Jul 11 16:55:50 2013 qiuyan liu
 */
 
 #include "SDL/SDL.h"
@@ -51,7 +51,7 @@ void	handle_input(t_graphic *g)
         g->yVel += SPEED;
       else if (g->event.key.keysym.sym == SDLK_LEFT)
 	g->xVel += SPEED;
-      else
+      else if (g->event.key.keysym.sym == SDLK_RIGHT)
 	g->xVel -= SPEED;
     }
   else if ( g->event.type == SDL_KEYUP )

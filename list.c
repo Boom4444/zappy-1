@@ -5,7 +5,7 @@
 ** Login   <kuznet_o@epitech.net>
 **
 ** Started on  Wed Jun  05 19:21:23 2013 oleg kuznietsov
-** Last update Tue Jul 09 13:31:32 2013 ivan ignatiev
+** Last update Thu Jul 11 18:28:33 2013 ivan ignatiev
 */
 
 #include        <stdlib.h>
@@ -25,6 +25,20 @@ t_list          *list_init()
         return (list);
     }
     error_show("list_init", "malloc", "Unable to allocate memory for list");
+    return (NULL);
+}
+
+t_item      *list_get_head(t_list *list)
+{
+    if (list != NULL)
+        return (list->head);
+    return (NULL);
+}
+
+t_item      *list_get_tail(t_list *list)
+{
+    if (list != NULL)
+        return (list->tail);
     return (NULL);
 }
 

@@ -5,7 +5,7 @@
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Sat Apr 27 14:58:48 2013 ivan ignatiev
-** Last update Wed Jul 10 18:24:11 2013 ivan ignatiev
+** Last update Thu Jul 11 20:07:16 2013 ivan ignatiev
 */
 
 #include        "main.h"
@@ -18,24 +18,28 @@
 #include        "proto.h"
 #include        "select.h"
 
-static int	select_create_fdset(t_server *s, fd_set *fdset, int maxfd)
+static int	    select_create_fdset(t_server *s, t_world *w, fd_set *fdset, int maxfd)
 {
-  int		outfd;
-  t_item        *current;
+    int		    outfd;
+    t_item        *next;
+    t_item        *current;
 
-  current = (s->client_list)->head;
-  while (current != NULL)
-  {
-      if (T_USER(current->cont)->clientfd >= 0)
-      {
-        if (maxfd < T_USER(current->cont)->clientfd)
+    current = list_get_head(s->client_list);
+    while (current != NULL)
+    {
+        next = current->next;
+        if (T_USER(current->cont)->connected == DISCONNECTED)
+            user_destroy(T_USER(current->cont), s, w);
+        else if (T_USER(current->cont)->clientfd >= 0)
+        {
+            if (maxfd < T_USER(current->cont)->clientfd)
                 maxfd = T_USER(current->cont)->clientfd;
-        outfd = T_USER(current->cont)->clientfd;
-        FD_SET(outfd, fdset);
-      }
-      current = current->next;
-  }
-  return (maxfd);
+            outfd = T_USER(current->cont)->clientfd;
+            FD_SET(outfd, fdset);
+        }
+        current = next;
+    }
+    return (maxfd);
 }
 
 static int	select_accept_connection(t_server *s)
@@ -51,7 +55,11 @@ static int	select_accept_connection(t_server *s)
     item_pf(s->client_list, (void*)user, sizeof(t_user));
     log_show("select_accept_connection", "accept",
             "User %s connected to the server", inet_ntoa(user->addr.sin_addr));
-    server_handshake(user->clientfd);
+    if (server_send(user->clientfd, "BIENVENUE\n") <= 0)
+    {
+        user->connected = DISCONNECTED;
+        return (error_show("server_welcome_msg", "write", strerror(errno)));
+    }
     return (0);
 }
 
@@ -59,7 +67,7 @@ static int	select_check_fdset(t_server *s, t_world *w, fd_set *fdset)
 {
   t_item    *current;
 
-  current = (s->client_list)->head;
+  current = list_get_head(s->client_list);
   while (current != NULL)
   {
       if (FD_ISSET((T_USER((current->cont))->clientfd), fdset))
@@ -84,7 +92,7 @@ int			        select_do(t_server *s, t_world *w)
   FD_SET(s->server_fd, &fdset);
   tv.tv_sec = 0;
   tv.tv_usec = 1;
-  maxfd = select_create_fdset(s, &fdset, s->server_fd);
+  maxfd = select_create_fdset(s, w, &fdset, s->server_fd);
   if (select(maxfd + 1, &fdset, NULL, NULL, &tv) < 0)
       return (error_show("select_do", "select", "Unable select current FDSET"));
   if (FD_ISSET(s->server_fd, &fdset))

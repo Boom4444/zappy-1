@@ -5,7 +5,7 @@
 ** Login   <alcara_m@epitech.net>
 ** 
 ** Started on  Tue May 21 09:42:30 2013 Marin Alcaraz
-** Last update Wed Jul 10 20:00:00 2013 ivan ignatiev
+** Last update Thu Jul 11 20:07:33 2013 ivan ignatiev
 */
 
 #include                "main.h"
@@ -20,17 +20,14 @@
 #include                "answer.h"
 #include                "select.h"
 
-int                     server_handshake(int fd)
-{
-    if (server_send(fd, "BIENVENUE\n") == -1)
-        return (error_show("server_welcome_msg", "write", strerror(errno)));
-    return (0);
-}
-
 int                     server_send(int clientfd, char *message)
 {
-    send(clientfd, message, strlen(message), MSG_DONTWAIT);
-    return (1);
+    char                test[1];
+
+    if (recv(clientfd, test, 0, MSG_DONTWAIT) == -1
+        && errno == 11)
+        return (send(clientfd, message, strlen(message), MSG_DONTWAIT));
+    return (-1);
 }
 
 void                    server_init(t_server *s)
@@ -51,7 +48,7 @@ void                    server_stop(t_server *s)
 {
     t_item              *current;
 
-    current = s->client_list->head;
+    current = list_get_head(s->client_list);
     while (current != NULL)
     {
         if (T_USER(current->cont)->clientfd >= 0)
@@ -85,7 +82,7 @@ int                     server_start(t_server *s, t_world *w)
         select_do(s, w);
         cli_requests_process(s, w);
         users_life_proccess(s, w);
-        cli_answers_process(s, w, &start_loop, s->tick_size);
+        cli_answers_process(s, &start_loop, s->tick_size);
         gettimeofday(&stop_loop, NULL);
         elapsedTime = (stop_loop.tv_sec - start_loop.tv_sec) * 1000000;
         elapsedTime = elapsedTime + (stop_loop.tv_usec - start_loop.tv_usec);

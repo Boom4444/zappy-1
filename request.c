@@ -5,7 +5,7 @@
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Thu Jun 20 20:00:46 2013 ivan ignatiev
-** Last update Thu Jul 11 12:52:55 2013 Marin Alcaraz
+** Last update Thu Jul 11 14:12:13 2013 Marin Alcaraz
 */
 
 #include        "main.h"
@@ -124,7 +124,7 @@ void            cli_requests_process(t_server *s, t_world *w)
     t_item      *current;
     t_item      *tmp;
 
-    current = s->request_list->head;
+    current = list_get_head(s->request_list);
     while (current != NULL)
     {
         if (T_REQUEST(current)->type->func != NULL

@@ -5,7 +5,7 @@
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Thu Jul 04 17:14:00 2013 ivan ignatiev
-** Last update Thu Jul 11 18:27:55 2013 ivan ignatiev
+** Last update Thu Jul 04 17:14:25 2013 ivan ignatiev
 */
 
 #ifndef ITEM_H_

@@ -5,13 +5,14 @@
 ** Login   <kuznet_o@epitech.net>
 **
 ** Started on  Wed Jun  05 19:21:34 2013 oleg kuznietsov
-** Last update Thu Jul 11 18:28:15 2013 ivan ignatiev
+** Last update Tue Jul 09 13:35:00 2013 ivan ignatiev
 */
 
-#include    "main.h"
+#include    <string.h>
+#include    <errno.h>
+#include    <stdlib.h>
 #include    "list.h"
 #include    "error.h"
-
 
 t_item    *item_init()
 {
@@ -25,7 +26,7 @@ t_item    *item_init()
       item->size = 0;
       return (item);
   }
-  error_show("item_init", "malloc", "Unable to allocate memory for item");
+  error_show("item_init", "malloc", strerror(errno));
   return (NULL);
 }
 

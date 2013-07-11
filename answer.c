@@ -5,7 +5,7 @@
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Thu Jun 20 20:02:59 2013 ivan ignatiev
-** Last update Wed Jul 10 16:30:32 2013 ivan ignatiev
+** Last update Thu Jul 11 20:26:59 2013 ivan ignatiev
 */
 
 #include        "main.h"
@@ -47,16 +47,13 @@ void            cli_answer_to_all_graph(t_server *server, char *message)
 {
     t_item      *current;
 
-    current = server->client_list->head;
+    current = list_get_head(server->client_list);
     while (current != NULL)
     {
-        if (T_GRAPH(current->cont)->protocol == GRAPHIC_PROTO
-             && T_GRAPH(current->cont)->connected == CONNECTED)
+        if (T_USER(current->cont)->protocol == GRAPHIC_PROTO)
          {
              if (server_send(T_GRAPH(current->cont)->clientfd, message) <= 0)
-             {
-                 //user_destroy(T_USER(current->cont), s)
-             }
+                 T_ANSWER(current)->user->connected = DISCONNECTED;
          }
         current = current->next;
     }
@@ -65,37 +62,33 @@ void            cli_answer_to_all_graph(t_server *server, char *message)
 void            cli_answer_to_graph(t_user_graph *u, char *message)
 {
     if (server_send(u->clientfd, message) <= 0)
-    {
-        //user_destroy(T_USER(current->cont), s)
-    }
+        u->connected = DISCONNECTED;
 }
 
-void                            cli_answers_process(t_server *s, t_world *w,
+void                            cli_answers_process(t_server *s,
                                         struct timeval *start,
                                         unsigned long long tick_size)
 {
-    t_item                      *tmp;
+    t_item                      *next;
     t_item                      *current;
     struct timeval              iter;
     unsigned long long          elapsedTime;
 
-    current = s->answer_list->head;
+    current = list_get_head(s->answer_list);
     elapsedTime = 0;
     while (elapsedTime < tick_size && current != NULL)
     {
+        next = current->next;
         if (server_send(T_ANSWER(current)->user->clientfd, T_ANSWER(current)->message) <= 0)
-        {
-              user_destroy(T_USER(T_ANSWER(current)->user), s, w);
-        }
+            T_ANSWER(current)->user->connected = DISCONNECTED;
         free(T_ANSWER(current)->message);
-        tmp = current;
-        current = current->next;
-        item_delete(s->answer_list, tmp);
+        free(current->cont);
+        item_delete(s->answer_list, current);
         gettimeofday(&iter, NULL);
         elapsedTime = (iter.tv_sec - start->tv_sec) * 1000000;
         elapsedTime = elapsedTime + (iter.tv_usec - start->tv_usec);
+        current = next;
     }
-
     if (elapsedTime < tick_size)
         usleep(tick_size - elapsedTime);
 }
