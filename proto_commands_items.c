@@ -5,7 +5,7 @@
 ** Login   <alcara_m@epitech.net>
 ** 
 ** Started on  Thu Jun 13 16:28:40 2013 Marin Alcaraz
-** Last update Fri Jul 12 14:23:04 2013 Marin Alcaraz
+** Last update Fri Jul 12 14:25:33 2013 Marin Alcaraz
 */
 
 #include "main.h"
@@ -134,7 +134,7 @@ void    cli_pose(t_request_data *rqd, t_server *t, t_world *w)
     char    out[ANSWER_SIZE];
 
     item = (rqd->user)->inventory[atoi(rqd->argv[0])];
-    item_index = atoi(rqd->argv[0]);
+    item_index = match_index(rqd->argv[0]);
     if (item > 0 && item_index >= 0 && item_index < RES_TYPES_COUNT)
     {
         (rqd->user)->inventory[item_index]--;
