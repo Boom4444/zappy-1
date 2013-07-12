@@ -5,7 +5,7 @@
 ** Login   <alcara_m@epitech.net>
 ** 
 ** Started on  Thu Jun 13 16:28:40 2013 Marin Alcaraz
-** Last update Thu Jul 11 06:41:08 2013 Marin Alcaraz
+** Last update Fri Jul 12 14:23:04 2013 Marin Alcaraz
 */
 
 #include "main.h"
@@ -19,6 +19,17 @@
 #include "answer.h"
 #include "error.h"
 #include "graph_command.h"
+
+char     g_resources[7][STR_LIMIT]=
+{
+    {"food"},
+    {"linemate"},
+    {"deraumere"},
+    {"sibur"},
+    {"mendiane"},
+    {"phiras"},
+    {"thystame"}
+};
 
 void        cli_inventaire(t_request_data *rqd, t_server *t, t_world *w)
 {
@@ -70,12 +81,26 @@ int             cli_command_bct(char *response, int x, int y, t_world *w)
     return (0);
 }
 
+int         match_index(char *str)
+{
+   int      i;
+
+   i = 0;
+   while (i < RES_TYPES_COUNT)
+   {
+       if (strcmp(g_resources[i], str) == 0)
+           return (i);
+       i = i + 1;
+   }
+   return (atoi(str));
+}
+
 void        cli_prend(t_request_data *rqd, t_server *t, t_world *w)
 {
     int     index_item;
     char    out[ANSWER_SIZE];
 
-    index_item = atoi(rqd->argv[0]);
+    index_item = match_index(rqd->argv[0]);
     if (index_item < RES_TYPES_COUNT
             && index_item >= 0
             && (w->surface[rqd->user->posy]
