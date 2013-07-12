@@ -5,7 +5,7 @@
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Wed Jun 12 17:02:27 2013 Marin Alcaraz
-** Last update Thu Jul 11 14:10:30 2013 Marin Alcaraz
+** Last update Fri Jul 12 11:57:24 2013 Marin Alcaraz
 */
 
 #include        "main.h"
@@ -243,9 +243,16 @@ int             graph_command_sgt(t_graph_data *rqd, t_server *s, t_world *w)
 
 int             graph_command_sst(t_graph_data *rqd, t_server *s, t_world *w)
 {
-    (void) rqd;
-    (void) s;
+    unsigned int    tmp_time;
+	char 		    response[STR_LIMIT];
+
     (void) w;
+    sscanf(rqd->message, "sst %u\n", &tmp_time);
+    if (tmp_time <= 100 && tmp_time >= 1)
+        s->options.tdelay = tmp_time;
+    s->tick_size = 1000000 / s->options.tdelay;
+	sprintf(response, "sgt %u\n", s->options.tdelay);
+	cli_answer_to_graph(rqd->user, response);
     return (0);
 }
 

@@ -5,7 +5,7 @@
 ** Login   <alcara_m@epitech.net>
 ** 
 ** Started on  Wed Jul 10 09:57:57 2013 Marin Alcaraz
-** Last update Thu Jul 11 13:59:14 2013 Marin Alcaraz
+** Last update Fri Jul 12 13:23:03 2013 Marin Alcaraz
 */
 
 #include        "main.h"
@@ -20,6 +20,7 @@
 #include        "proto_commands_items.h"
 #include        "item.h"
 #include        "error.h"
+#include        "incantation.h"
 
 int         g_level_combinations[7][7] =
 {
@@ -95,7 +96,6 @@ int         match_players(t_list *ps, t_list *currents)
         ps_current = ps_current->next;
         tmp_item = tmp_item->next;
     }
-    printf("Flag: %d\n", flag);
     return (flag);
 }
 
@@ -111,6 +111,8 @@ int        level_up(int eq_players, t_user_player *p, t_list *players, t_world *
     while (tmp_item != NULL)
     {
         T_PLAYER(tmp_item->cont)->level++;
+        if (T_PLAYER(tmp_item->cont)->level == 8)
+            T_PLAYER(tmp_item->cont)->team->v_flag++;
         tmp_item = tmp_item->next;
     }
     return (0);
@@ -184,4 +186,27 @@ int         fail_incantation(t_request_data *rqd, t_server *s)
     cli_answer_to_all_graph(s, response);
     return (error_show("fail_incantate", "",
                 "incantation failed"));
+}
+
+void        check_victory(t_server *t)
+{
+    char    response[ANSWER_SIZE];
+    t_item  *tmp_team;
+
+    tmp_team = list_get_head(t->team_list);
+    while (tmp_team != NULL)
+    {
+        printf("%s v_flag: %d\n",
+                T_TEAM(tmp_team)->name,
+                T_TEAM(tmp_team)->v_flag);
+        if (T_TEAM(tmp_team)->v_flag == VICTORY)
+        {
+            sprintf(response, "seg %s\n", T_TEAM(tmp_team)->name);
+            cli_answer_to_all_graph(t, response);
+            t->result = 0;
+            return ;
+        }
+        tmp_team = tmp_team->next;
+    }
+    return ;
 }

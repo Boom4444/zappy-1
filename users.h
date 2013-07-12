@@ -1,11 +1,11 @@
 /*
-** users.h for zappy in /home/ignatiev/Projects/zappy
+** users.h for zappy in /home/hero/zappy
 ** 
 ** Made by ivan ignatiev
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Sat Apr 27 17:03:35 2013 ivan ignatiev
-** Last update Wed Jul 10 20:36:55 2013 ivan ignatiev
+** Last update Fri Jul 12 12:13:42 2013 Marin Alcaraz
 */
 
 #ifndef USERS_H_
@@ -48,6 +48,7 @@ typedef struct          s_team
     char                name[NAME_LIMIT + 1];
     int                 members;
     int                 limit;
+    int                 v_flag;
 }                       t_team;
 
 typedef struct		s_user

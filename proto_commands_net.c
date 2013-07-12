@@ -5,7 +5,7 @@
 ** Login   <alcara_m@epitech.net>
 ** 
 ** Started on  Thu Jun 13 16:31:20 2013 Marin Alcaraz
-** Last update Thu Jul 11 13:56:27 2013 Marin Alcaraz
+** Last update Fri Jul 12 13:05:37 2013 Marin Alcaraz
 */
 
 #include        "main.h"
@@ -61,6 +61,7 @@ void                    cli_incantation(t_request_data *rqd, t_server *s, t_worl
         return ;
     }
     end_incantation(rqd->argv[0], rqd, s, w);
+    check_victory(s);
     return ;
 }
 
