@@ -1,11 +1,11 @@
 /*
-** graph_command.c for zappy in /home/hero/zappy
+** graph_command.c for zappy in /home/ignati_i/zappy/zappy
 ** 
 ** Made by Ivan Ignatiev
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Wed Jun 12 17:02:27 2013 Marin Alcaraz
-** Last update Fri Jul 12 22:34:42 2013 Marin Alcaraz
+** Last update Sat Jul 13 19:39:19 2013 ivan ignatiev
 */
 
 #include	"main.h"
@@ -70,12 +70,14 @@ int		graph_command_msz(t_graph_data *rqd, t_server *s, t_world *w)
 int		graph_command_bct(t_graph_data *rqd,
 				  t_server *s, t_world *w)
 {
+  int		i;
   int		x;
   int		y;
-  int       map_info[2];
   char		response[STR_LIMIT];
+  char		aux_response[STR_LIMIT];
 
   (void) s;
+  i = 0;
   x = -1;
   y = -1;
   sscanf(rqd->message, "bct %d %d\n", &x, &y);
@@ -83,10 +85,15 @@ int		graph_command_bct(t_graph_data *rqd,
     return (cli_answer_to_graph(rqd->user, "sbp\n"));
   x = _MOD(x, w->width);
   y = _MOD(y, w->height);
-  map_info[0] = x;
-  map_info[1] = y;
   sprintf(response, "bct %d %d", x, y);
-  get_content(map_info, response, w);
+  while (i < 7)
+    {
+      sprintf(aux_response, " %d",
+	      w->surface[y][x].resources[i]);
+      strcat(response, aux_response);
+      aux_response[0] = '\0';
+      i = i + 1;
+    }
   strcat(response, "\n");
   cli_answer_to_graph(rqd->user, response);
   return (0);
@@ -95,12 +102,36 @@ int		graph_command_bct(t_graph_data *rqd,
 int		graph_command_mct(t_graph_data *rqd,
 				  t_server *s, t_world *w)
 {
+  int		i;
+  int		j;
+  int		min;
   char		*response;
+  char		bct_line[STR_LIMIT];
 
   (void) s;
+  j = 0;
   if ((response  = malloc(STR_LIMIT * w->width)) == NULL)
     return (error_show("graph", "command_mct", "Unable to alloc resp"));
-  parse_and_answer(response, rqd, w);
+  while (j < w->height)
+    {
+      i = 0;
+      while (i < w->width)
+	{
+	  sprintf(response, "bct %d %d", i, j);
+	  min = 0;
+	  while (min < RES_TYPES_COUNT)
+	    {
+	      sprintf(bct_line, " %d",
+		      w->surface[j][i].resources[min++]);
+	      strcat(response, bct_line);
+	    }
+	  i = i + 1;
+	  strcat(response, "\n");
+	  cli_answer_to_graph(rqd->user, response);
+	}
+      j = j + 1;
+      response[0] = '\0';
+    }
   free(response);
   return (0);
 }

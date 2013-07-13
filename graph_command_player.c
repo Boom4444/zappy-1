@@ -1,11 +1,11 @@
 /*
-** graph_command_player.c for zappy in /home/ignati_i//zappy/zappy
+** graph_command_player.c for zappy in /home/hero/zappy
 ** 
 ** Made by ivan ignatiev
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Sat Jul 13 19:37:51 2013 ivan ignatiev
-** Last update Sat Jul 13 19:38:09 2013 ivan ignatiev
+** Last update Fri Jul 12 22:40:20 2013 Marin Alcaraz
 */
 
 #include	"main.h"
@@ -74,6 +74,22 @@ int		graph_command_piv(t_graph_data *rqd,
     return (0);
 }
 
+int     format_response(char *response,
+                        int p_number, t_user_player *player)
+{
+    sprintf(response, "pin %d %d %d %d %d %d %d %d %d %d\n",
+            p_number, player->posx,
+            player->posy,
+            player->inventory[0],
+            player->inventory[1],
+            player->inventory[2],
+            player->inventory[3],
+            player->inventory[4],
+            player->inventory[5],
+            player->inventory[6]);
+    return (0);
+}
+
 int		graph_command_pin(t_graph_data *rqd,
 				  t_server *s, t_world *w)
 {
@@ -91,18 +107,10 @@ int		graph_command_pin(t_graph_data *rqd,
     {
       if (T_PLAYER(current_player->cont)->number == p_number)
         {
-	  sprintf(response, "pin %d %d %d %d %d %d %d %d %d %d\n",
-		  p_number, T_PLAYER(current_player->cont)->posx,
-		  T_PLAYER(current_player->cont)->posy,
-		  T_PLAYER(current_player->cont)->inventory[0],
-		  T_PLAYER(current_player->cont)->inventory[1],
-		  T_PLAYER(current_player->cont)->inventory[2],
-		  T_PLAYER(current_player->cont)->inventory[3],
-		  T_PLAYER(current_player->cont)->inventory[4],
-		  T_PLAYER(current_player->cont)->inventory[5],
-		  T_PLAYER(current_player->cont)->inventory[6]);
-	  cli_answer_to_graph(rqd->user, response);
-	  return (0);
+            format_response(response,
+                    p_number, T_PLAYER(current_player->cont));
+            cli_answer_to_graph(rqd->user, response);
+            return (0);
         }
       current_player = current_player->next;
     }

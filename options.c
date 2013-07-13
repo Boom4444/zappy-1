@@ -1,11 +1,11 @@
 /*
-** options.c for zappy in /home/ignatiev/Projects/zappy
+** options.c for zappy in /home/hero/zappy
 **
 ** Made by oleg kuznietsov
 ** Login   <kuznet_o@epitech.net>
 **
 ** Started on  Fri Jun  07 00:47:46 2013 oleg kuznietsov
-** Last update Sat Jul 13 19:14:04 2013 ivan ignatiev
+** Last update Fri Jul 12 21:47:33 2013 Marin Alcaraz
 */
 
 #include	"main.h"
@@ -81,10 +81,12 @@ void    options_getopt(int argc, char *argv[], t_opt *g_opt)
   int   l_opt;
 
   opterr = 0;
-  while ((l_opt = getopt(argc, argv, ":p:x:y:n:c:t:")) != -1)
+  while ((l_opt = getopt(argc, argv, ":p:x:y:n:c:t:d")) != -1)
   {
     if (l_opt == 'p')
       options_get(argv, l_opt, &g_opt->port);
+    if (l_opt == 'd')
+        g_opt->mode = 1;
     if (l_opt == 'x')
       options_get(argv, l_opt, &g_opt->width);
     if (l_opt == 'y')

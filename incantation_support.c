@@ -1,11 +1,11 @@
 /*
-** incantation_support.c for zappy in /home/ignati_i//zappy/zappy
+** incantation_support.c for zappy in /home/hero/zappy
 ** 
 ** Made by ivan ignatiev
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Sat Jul 13 19:44:14 2013 ivan ignatiev
-** Last update Sat Jul 13 19:44:15 2013 ivan ignatiev
+** Last update Fri Jul 12 22:51:41 2013 Marin Alcaraz
 */
 
 #include	"main.h"
@@ -76,4 +76,47 @@ int		level_up(int eq_players, t_user_player *p,
         tmp_item = tmp_item->next;
       }
     return (0);
+}
+
+int     verify_enough_resources(t_user_player *p, t_world *w)
+{
+    int     i;
+
+    i = 1;
+      while (i < RES_TYPES_COUNT)
+	{
+	  if (w->surface[p->posy][p->posx].resources[i] <
+	      g_level_combinations[p->level - 1][i])
+	    {
+	      return (error_show("incantate", "",
+				 "Not enough resources to begin the incantation"));
+	    }
+	  w->surface[p->posy][p->posx].resources[i]-=
+	    g_level_combinations[p->level - 1][i];
+	  i = i + 1;
+	}
+    return (0);
+}
+
+void		check_victory(t_server *t)
+{
+  char		response[ANSWER_SIZE];
+  t_item	*tmp_team;
+
+  tmp_team = list_get_head(t->team_list);
+  while (tmp_team != NULL)
+    {
+      printf("%s v_flag: %d\n",
+	     T_TEAM(tmp_team)->name,
+	     T_TEAM(tmp_team)->v_flag);
+      if (T_TEAM(tmp_team)->v_flag == VICTORY)
+        {
+	  sprintf(response, "seg %s\n", T_TEAM(tmp_team)->name);
+	  cli_answer_to_all_graph(t, response);
+	  t->result = 0;
+	  return ;
+        }
+      tmp_team = tmp_team->next;
+    }
+  return ;
 }

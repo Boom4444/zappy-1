@@ -5,7 +5,7 @@
 ** Login   <alcara_m@epitech.net>
 ** 
 ** Started on  Wed Jul 10 09:57:57 2013 Marin Alcaraz
-** Last update Sat Jul 13 19:43:42 2013 ivan ignatiev
+** Last update Fri Jul 12 22:52:26 2013 Marin Alcaraz
 */
 
 #include	"main.h"
@@ -22,7 +22,7 @@
 #include	"error.h"
 #include	"incantation.h"
 
-static int	g_level_combinations[7][7] =
+int	g_level_combinations[7][7] =
   {
     {1, 1, 0, 0, 0, 0, 0},
     {2, 1, 1, 1, 0, 0, 0},
@@ -66,32 +66,20 @@ int		init_incantation(t_list *piv, t_request_data *rqd,
 int		incantate(t_list *players, t_user_player *p,
 			  t_server *t, t_world *w)
 {
-  int		i;
   int		eq_players;
 
-  i = 1;
   eq_players = count_players(w->surface[p->posy]
 			     [p->posx].players, p);
   if (eq_players >= g_level_combinations[p->level - 1][0])
     {
-      while (i < RES_TYPES_COUNT)
-	{
-	  if (w->surface[p->posy][p->posx].resources[i] <
-	      g_level_combinations[p->level - 1][i])
-	    {
-	      return (error_show("incantate", "",
-				 "Not enough resources to begin the incantation"));
-	    }
-	  w->surface[p->posy][p->posx].resources[i]-=
-	    g_level_combinations[p->level - 1][i];
-	  i = i + 1;
-	}
-      if (level_up(eq_players, p, players, w) != 0)
-	return (-1);
+        if (verify_enough_resources(p, w) == -1)
+            return (-1);
+        if (level_up(eq_players, p, players, w) != 0)
+            return (-1);
     }
   else
     return (error_show("incantate", "",
-		       "Not enough players to begin the incantation"));
+                "Not enough players to begin the incantation"));
   cli_answer(p, t, "ok\n");
   return (0);
 }
@@ -131,27 +119,4 @@ int		fail_incantation(t_request_data *rqd, t_server *s)
   cli_answer_to_all_graph(s, response);
   return (error_show("fail_incantate", "",
 		     "incantation failed"));
-}
-
-void		check_victory(t_server *t)
-{
-  char		response[ANSWER_SIZE];
-  t_item	*tmp_team;
-
-  tmp_team = list_get_head(t->team_list);
-  while (tmp_team != NULL)
-    {
-      printf("%s v_flag: %d\n",
-	     T_TEAM(tmp_team)->name,
-	     T_TEAM(tmp_team)->v_flag);
-      if (T_TEAM(tmp_team)->v_flag == VICTORY)
-        {
-	  sprintf(response, "seg %s\n", T_TEAM(tmp_team)->name);
-	  cli_answer_to_all_graph(t, response);
-	  t->result = 0;
-	  return ;
-        }
-      tmp_team = tmp_team->next;
-    }
-  return ;
 }

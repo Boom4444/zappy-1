@@ -8,18 +8,18 @@
 ** Last update Fri Jul 12 19:41:14 2013 Marin Alcaraz
 */
 
-#include "main.h"
-#include    "list.h"
-#include    "options.h"
-#include    "trantor.h"
-#include    "server.h"
-#include    "users.h"
-#include    "request.h"
-#include    "proto_commands_items.h"
+#include	"main.h"
+#include	"list.h"
+#include	"options.h"
+#include	"trantor.h"
+#include	"server.h"
+#include	"users.h"
+#include	"request.h"
+#include	"proto_commands_items.h"
 
-static int  *g_server_result;
+static int	*g_server_result;
 
-void        server_settings_init(t_opt *opt)
+void		server_settings_init(t_opt *opt)
 {
   opt->port = 3528;
   opt->width = 10;
@@ -29,7 +29,7 @@ void        server_settings_init(t_opt *opt)
   opt->names = list_init();
 }
 
-void        sigint_handler(int sig)
+void		sigint_handler(int sig)
 {
     (void) sig;
     *g_server_result = 1;

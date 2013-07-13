@@ -5,7 +5,7 @@
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Wed Jun 12 17:02:27 2013 Marin Alcaraz
-** Last update Sat Jul 13 20:26:02 2013 ivan ignatiev
+** Last update Fri Jul 12 22:41:13 2013 Marin Alcaraz
 */
 
 #ifndef GRAPH_COMMAND_H
@@ -40,5 +40,10 @@ int	graph_command_sgt(t_graph_data *, t_server *, t_world *);
 int	graph_command_sst(t_graph_data *, t_server *, t_world *);
 int	graph_command_display(t_graph_data *, t_server *,
 			      t_world *);
+int get_content(int *info, char *response, t_world *w);
+void parse_and_answer(char *response,
+        t_graph_data *rqd, t_world *w);
+int  format_response(char *response,
+        int p_number, t_user_player *player);
 
 #endif	/* GRAPH_COMMAND_H */

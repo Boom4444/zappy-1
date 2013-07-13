@@ -1,11 +1,11 @@
 ##
-## Makefile for zappy in /home/ignati_i/zappy/zappy
+## Makefile for zappy in /home/hero/zappy
 ##
 ## Made by Marin Alcaraz
 ## Login   <alcara_m@epitech.net>
 ##
 ## Started on  Fri Mar 01 09:38:17 2013 Marin Alcaraz
-## Last update Sat Jul 13 20:40:07 2013 marin alcarazcordova
+## Last update Fri Jul 12 22:51:51 2013 Marin Alcaraz
 ##
 
 SNAME	=	server
@@ -44,6 +44,7 @@ SSRC	=	server.c 				\
 		trantor.c 				\
 		request.c 				\
 		request_data.c 				\
+		graph_utils.c 				\
 		answer.c 				\
 		str.c 					\
 		main.c

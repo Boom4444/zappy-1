@@ -1,11 +1,11 @@
 /*
-** options.h for zappy in /home/ignatiev/Projects/zappy
+** options.h for zappy in /home/hero/zappy
 ** 
 ** Made by Marin Alcaraz
 ** Login   <alcara_m@epitech.net>
 ** 
 ** Started on  Fri Mar 15 16:48:12 2013 Marin Alcaraz
-** Last update Sat Jul 13 20:23:04 2013 ivan ignatiev
+** Last update Fri Jul 12 21:47:45 2013 Marin Alcaraz
 */
 
 #ifndef OPTIONS_H_
@@ -18,6 +18,7 @@ typedef struct	s_opt
   unsigned int	height;
   t_list	*names;
   unsigned int	cmax;
+  unsigned int  mode;
   unsigned int	tdelay;
 }		t_opt;
 

@@ -1,11 +1,11 @@
 /*
-** users_graph.c for zappy in /home/ignati_i//zappy/zappy
+** users_graph.c for zappy in /home/hero/zappy
 ** 
 ** Made by ivan ignatiev
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Sat Jul 13 12:20:54 2013 ivan ignatiev
-** Last update Sat Jul 13 18:53:50 2013 ivan ignatiev
+** Last update Fri Jul 12 22:30:12 2013 Marin Alcaraz
 */
 
 #include	"main.h"
@@ -22,15 +22,12 @@
 
 t_user_graph	*user_graph_init(t_user *user)
 {
-  char		response[ANSWER_SIZE];
   t_user_graph	*graph;
 
   if ((graph = realloc(user, sizeof(t_user_graph))) != NULL)
     {
       graph->protocol = GRAPHIC_PROTO;
       graph->connected = CONNECTED;
-      sprintf(response, "smg WELCOME TO TECH3SI ZAPPY SERVER!\n");
-      cli_answer_to_graph(graph, response);
       log_show("user_graph_init", "", "Graphic client created");
       return (graph);
     }
@@ -96,6 +93,7 @@ int             graph_display_eggs(t_server *s, t_graph_data *rqd)
 int 		graph_client_init(t_user_graph *u, t_server *s, t_world *w)
 {
   t_graph_data rqd;
+  char		response[ANSWER_SIZE];
 
   rqd.user = u;
   graph_command_msz(&rqd, s, w);
@@ -104,5 +102,7 @@ int 		graph_client_init(t_user_graph *u, t_server *s, t_world *w)
   graph_command_tna(&rqd, s, w);
   graph_display_users(s, &rqd);
   graph_display_eggs(s, &rqd);
+  sprintf(response, "smg WELCOME TO TECH3SI ZAPPY SERVER!\n");
+  cli_answer_to_graph(u, response);
   return (0);
 }
