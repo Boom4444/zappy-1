@@ -5,35 +5,39 @@
 ## Login   <alcara_m@epitech.net>
 ##
 ## Started on  Fri Mar 01 09:38:17 2013 Marin Alcaraz
-## Last update Thu Jul 11 09:11:37 2013 Marin Alcaraz
+## Last update Sat Jul 13 13:09:16 2013 ivan ignatiev
 ##
 
 SNAME	=	server
 
-SSRC	=	server.c 						\
-			select.c 						\
-			options_errors.c 				\
-			options.c 						\
-			proto.c 						\
-			expulse.c 						\
-			options_parsing.c 				\
-			item.c 							\
-			graph_command.c 				\
-			cli_command_parse.c 			\
-			list.c 							\
-			broadcast.c 				    \
-			incantation.c 				    \
-			error.c  						\
-			users.c 						\
-			connection_utils.c  			\
-			proto_commands_items.c 			\
-			proto_commands_net.c 			\
-			proto_commands_movement.c 		\
-			trantor.c 						\
-			request.c 						\
-			answer.c 						\
-			str.c 							\
-			main.c
+SSRC	=	server.c 				\
+		select.c 				\
+		options_errors.c			\
+		options.c 				\
+		proto.c 				\
+		expulse.c 				\
+		options_parsing.c 			\
+		item.c 					\
+		graph_command.c 			\
+		cli_command_parse.c 			\
+		list.c 					\
+		broadcast.c 				\
+		incantation.c 				\
+		error.c  				\
+		users.c 				\
+		users_cli.c 				\
+		users_eggs.c 				\
+		users_graph.c 				\
+		team.c					\
+		connection_utils.c  			\
+		proto_commands_items.c 			\
+		proto_commands_net.c 			\
+		proto_commands_movement.c 		\
+		trantor.c 				\
+		request.c 				\
+		answer.c 				\
+		str.c 					\
+		main.c
 
 SOBJ	=	$(SSRC:.c=.o)
 
@@ -43,12 +47,6 @@ WSRC	=	world.c
 
 WOBJ	=	$(WSRC:.c=.o)
 
-
-CAINAME = 	player
-
-CAISRC 	= 	player.c
-
-CAIOBJ 	= 	$(CAISRC:.c=.o)
 
 CNAME 	= 	client
 
@@ -68,7 +66,7 @@ ECHO	=	echo -e
 %.o: %.c
 	$(CC) -c -o $@ $< $(CFLAGS)
 
-all	: $(SNAME) $(CAINAME) $(CNAME) $(WNAME)
+all	: $(SNAME) $(CNAME) $(WNAME)
 
 $(SNAME) : $(SOBJ)
 	$(CC) $(SOBJ) $(CFLAGS) -o $(SNAME) -lm
@@ -76,28 +74,22 @@ $(SNAME) : $(SOBJ)
 
 $(CNAME) : $(COBJ)
 	$(CC) $(COBJ) $(CFLAGS) -o $(CNAME)
-	@$(ECHO) '\033[0;33m> Client Compiled\033[0m'
+	@$(ECHO) '\033[0;33m> CLI Client Compiled\033[0m'
 
 $(WNAME) : $(WOBJ)
 	$(CC) $(WOBJ) $(CFLAGS) -o $(WNAME) -lSDL -lSDL_image
-	@$(ECHO) '\033[0;33m> Word demo Compiled\033[0m'
-
-$(CAINAME) : $(CAIOBJ)
-	$(CC) $(CAIOBJ) $(CFLAGS) -o $(CAINAME)
-	@$(ECHO) '\033[0;33m> Client AI Compiled\033[0m'
+	@$(ECHO) '\033[0;33m> GUI Client Compiled\033[0m'
 
 clean	:
 	$(RM) $(SOBJ)
-	$(RM) $(CAIOBJ)
 	$(RM) $(COBJ)
 	$(RM) $(WOBJ)
 	@$(ECHO) '\033[0;33m> Directory cleaned\033[0m'
 
 fclean	: clean
 	$(RM) $(SNAME)
-	$(RM) $(CAINAME)
 	$(RM) $(CNAME)
 	$(RM) $(WNAME)
-	@$(ECHO) '\033[0;33m> Remove executables\033[0m'
+	@$(ECHO) '\033[0;33m> Removed executables\033[0m'
 
 re	: fclean all

@@ -5,7 +5,7 @@
 ** Login   <alcara_m@epitech.net>
 ** 
 ** Started on  Wed Jun 12 16:34:40 2013 Marin Alcaraz
-** Last update Sat Jul 13 11:51:46 2013 ivan ignatiev
+** Last update Sat Jul 13 14:03:01 2013 ivan ignatiev
 */
 
 #include        "main.h"
@@ -114,14 +114,13 @@ t_user              *proto_define(t_user *u, t_server *s, t_world *w)
     {
         buf[rb] = '\0';
         if (proto_flud_detect(u, buf) < 0)
-            return (NULL);
+            return (u);
         u->request_buf = stralloccat(u->request_buf, buf);
         if ((u->request = getnextline(u->request_buf)) != NULL)
         {
             if (strcmp(u->request, "GRAPHIC") == 0)
             {
                 u =  ((t_user*)user_graph_init(u));
-                graph_client_init(T_GRAPH(u), s, w);
                 free(u->request);
                 return (u);
             }
@@ -130,7 +129,6 @@ t_user              *proto_define(t_user *u, t_server *s, t_world *w)
             {
                 tmp = user_player_egg(u, team, w, s);
                 u = T_USER(tmp == NULL ? user_player_init(u, team, w, s) : tmp);
-                user_player_connected(T_PLAYER(u), s, w);
                 free(u->request);
                 return (u);
             }
@@ -139,5 +137,5 @@ t_user              *proto_define(t_user *u, t_server *s, t_world *w)
         server_send(u->clientfd, "ko\n");
     }
     u->connected = DISCONNECTED;
-    return (NULL);
+    return (u);
 }

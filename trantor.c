@@ -1,11 +1,11 @@
 /*
-** trantor.c for zappy in /home/ignatiev/Projects/zappy
+** trantor.c for zappy in /home/hero/zappy
 ** 
 ** Made by Marin Alcaraz
 ** Login   <alcara_m@epitech.net>
 ** 
 ** Started on  Thu Jun 20 17:33:58 2013 Marin Alcaraz
-** Last update Thu Jul 11 20:20:29 2013 ivan ignatiev
+** Last update Fri Jul 12 11:30:13 2013 Marin Alcaraz
 */
 
 #include    "main.h"
@@ -13,17 +13,6 @@
 #include    "error.h"
 #include    "trantor.h"
 #define     RESOURCE_LIMIT  256
-
-static      char g_resource[7][21]=
-{
-    {"Food"},
-    {"Linemate"},
-    {"Deraumere"},
-    {"Sibur"},
-    {"Mendiane"},
-    {"Phiras"},
-    {"Thystame"}
-};
 
 int        init_world(t_world *w, int width, int height)
 {
@@ -115,7 +104,6 @@ int         generate_resource(t_world *w, int width, int height)
         random_number(&minx, width);
         random_number(&miny, height);
         random_number(&resource, 7);
-        printf("Generated %s on %d, %d\n",g_resource[resource], minx, miny);
         (w->surface[miny][minx]).resources[resource]++;
         amount = amount + 1;
     }

@@ -5,7 +5,7 @@
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Sat Jul 13 12:33:06 2013 ivan ignatiev
-** Last update Sat Jul 13 12:59:31 2013 ivan ignatiev
+** Last update Sat Jul 13 13:17:11 2013 ivan ignatiev
 */
 
 #include	"main.h"
@@ -18,7 +18,8 @@
 #include	"item.h"
 #include	"answer.h"
 
-t_user_player	*user_player_replace_egg(t_user *user, t_user_egg *egg)
+t_user_player	*user_player_replace_egg(t_user *user, t_user_egg *egg,
+					 t_world *w)
 {
   t_user_player	*player;
 
@@ -43,17 +44,16 @@ t_user_player	*user_player_replace_egg(t_user *user, t_user_egg *egg)
 t_user_player	*user_player_egg(t_user *user, t_team *team,
 				 t_world *w, t_server *s)
 {
-  t_user_egg	*egg;
   t_item	*current;
 
   current = list_get_head(s->client_list);
   while (current != NULL)
     {
       if (T_USER(current->cont)->protocol == EGG_PROTO
-	  && T_USER(current->cont)->connected = PRE_CONNECTED
+	  && T_USER(current->cont)->connected == PRE_CONNECTED
 	  && T_EGG(current->cont)->hatched
 	  && T_EGG(current->cont)->team == team)
-	return (user_player_replace_egg(user, T_EGG(current->cont)));
+	return (user_player_replace_egg(user, T_EGG(current->cont), w));
       current = current->next;
     }
   return (NULL);

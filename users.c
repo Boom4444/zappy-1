@@ -5,7 +5,7 @@
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Sat Apr 27 14:16:14 2013 ivan ignatiev
-** Last update Sat Jul 13 12:53:40 2013 ivan ignatiev
+** Last update Sat Jul 13 13:33:59 2013 ivan ignatiev
 */
 
 #include	"main.h"
@@ -45,7 +45,7 @@ int		user_destroy(t_user *user, t_server *s, t_world *w)
   if (user->clientfd >= 0)
     close(user->clientfd);
   free(user);
-  log_show("user_destroy", "", "Client disconnected and removed");
+  return (log_show("user_destroy", "", "Client disconnected and removed"));
 }
 
 void		users_life_proccess(t_server *s, t_world *w)
@@ -76,12 +76,13 @@ void		users_life_proccess(t_server *s, t_world *w)
                 }
             }
         }
-      else if (T_USER(current->cont)->protocol == EGG_PROTO)
+      else if (T_USER(current->cont)->protocol == EGG_PROTO
+	       && T_USER(current->cont)->protocol == PRE_CONNECTED)
         {
 	  --(T_EGG(current->cont)->life);
 	  if (T_EGG(current->cont)->life <= 0)
 	    T_USER(current->cont)->connected = DISCONNECTED;
-        }
+	}
       current = next;
     }
 }

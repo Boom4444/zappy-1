@@ -1,11 +1,11 @@
 /*
-** users.h for zappy in /home/ignatiev/Projects/zappy
+** users.h for zappy in /home/ignati_i/zappy/zappy
 ** 
 ** Made by ivan ignatiev
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Sat Apr 27 17:03:35 2013 ivan ignatiev
-** Last update Sat Jul 13 12:57:19 2013 ivan ignatiev
+** Last update Sat Jul 13 14:17:25 2013 ivan ignatiev
 */
 
 #ifndef USERS_H_
@@ -33,6 +33,7 @@
 # define EAST		1
 # define SOUTH		2
 # define WEST		3
+
 # define T_USER(user)	((t_user *)(user))
 # define T_PLAYER(user)	((t_user_player*)(user))
 # define T_EGG(user)	((t_user_egg*)(user))
@@ -110,7 +111,6 @@ typedef struct		s_user_graph
   char			*request_buf;
 }			t_user_graph;
 
-
 t_user		*user_create(void);
 void		user_player_connected(t_user_player *u,
 				      t_server *s, t_world *w);
@@ -120,11 +120,17 @@ t_user_graph	*user_graph_init(t_user *user);
 t_user_player	*user_player_egg(t_user *user, t_team *team,
 				 t_world *w, t_server *s);
 t_user_egg	*user_egg_init(t_user_player *parent, t_server *s);
-void		user_destroy(t_user *user, t_server *s, t_world *w);
+int		user_destroy(t_user *user, t_server *s, t_world *w);
 void		users_life_proccess(t_server *s, t_world *w);
 t_team		*team_create(char *name, t_server *s);
 t_team		*team_search(t_list *team_list, char *team_name);
 t_list		*team_list_init(t_server *s, t_list *team_names);
 void		team_destroy(t_team *team);
+int		user_graph_destroy(t_user_graph *user);
+int		user_player_destroy(t_user_player *user,
+				    t_server *s, t_world *w);
+int		user_egg_destroy(t_user_egg *user, t_server *s);
+void		user_player_place(t_user_player *player, int x, int y,
+				  int orientation);
 
 #endif /* !USERS_H_ */

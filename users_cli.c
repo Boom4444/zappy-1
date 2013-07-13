@@ -5,7 +5,7 @@
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Sat Jul 13 12:26:14 2013 ivan ignatiev
-** Last update Sat Jul 13 12:59:02 2013 ivan ignatiev
+** Last update Sat Jul 13 13:15:05 2013 ivan ignatiev
 */
 
 #include	"main.h"
@@ -21,7 +21,7 @@
 void		user_player_connected(t_user_player *u,
 				      t_server *s, t_world *w)
 {
-  char		answer[PROTO_BUFFER + 1];
+  char		answer[ANSWER_SIZE];
 
   u->number = ++(s->players_count);
   log_show("user_player_init", "", "Player %d created in team '%s'",
@@ -83,7 +83,7 @@ t_user_player	*user_player_init(t_user *user, t_team *team,
   return (NULL);
 }
 
-int		user_player_destroy(t_use_player *user,
+int		user_player_destroy(t_user_player *user,
 				    t_server *s, t_world *w)
 {
   char		response[ANSWER_SIZE];
