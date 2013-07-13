@@ -5,7 +5,7 @@
 ** Login   <liu_q@epitech.net>
 ** 
 ** Started on  Tue Jul  9 14:47:14 2013 qiuyan liu
-** Last update Wed Jul 10 18:52:27 2013 qiuyan liu
+** Last update Sat Jul 13 12:46:16 2013 qiuyan liu
 */
 
 #include "map.h"
@@ -16,7 +16,7 @@ int	taille_carte(t_map *w, int x, int y)
   return (init_map(w, x, y));
 }
 
-int	contenu_une_carte(t_square_info *info, t_map *map) 
+int	contenu_une_carte(t_square_info *info, t_map *map)
 {
   int	n;
 

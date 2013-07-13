@@ -5,7 +5,7 @@
 ** Login   <alcara_m@epitech.net>
 * 
 ** Started on  Fri Mar 15 16:42:14 2013 Marin Alcaraz
-** Last update Thu Jun 06 15:51:18 2013 oleg kuznietsov
+** Last update Sat Jul 13 12:49:08 2013 qiuyan liu
 **/
 
 #include <sys/types.h>
@@ -21,9 +21,9 @@
 #include <errno.h>
 #include "error.h"
 
-void  error_put(char *s)
+void	error_put(char *s)
 {
-  int i;
+  int	i;
 
   i = 0;
   while (s[i] != 0)
@@ -33,11 +33,11 @@ void  error_put(char *s)
   }
 }
 
-int       error_log(char *loc, char *func, char *msg)
+int		error_log(char *loc, char *func, char *msg)
 {
-  FILE    *log_stream;
-  char    *slog_time;
-  time_t  log_time;
+  FILE		*log_stream;
+  char		*slog_time;
+  time_t	log_time;
 
   log_stream = fopen("error.log", "a");
   if (log_stream == NULL)
@@ -54,7 +54,7 @@ int       error_log(char *loc, char *func, char *msg)
   return (1);
 }
 
-int   error_show(char *loc, char *func, char *msg)
+int	error_show(char *loc, char *func, char *msg)
 {
   write(STDERR_FILENO, "Error: ", 7);
   error_put(msg);
@@ -64,11 +64,11 @@ int   error_show(char *loc, char *func, char *msg)
   return (1);
 }
 
-int       log_access(const char *ip)
+int		log_access(const char *ip)
 {
-  FILE    *log_stream;
-  char    *slog_time;
-  time_t  log_time;
+  FILE		*log_stream;
+  char		*slog_time;
+  time_t	log_time;
 
   log_stream = fopen("access.log", "a");
   if (log_stream == NULL)
@@ -79,7 +79,7 @@ int       log_access(const char *ip)
   time(&log_time);
   slog_time = ctime(&log_time);
   slog_time[strlen(slog_time) - 1] = 0;
-  fprintf(log_stream, "%s Connection accepted from %s\n",  slog_time, ip);
+  fprintf(log_stream, "%s Connection accepted from %s\n", slog_time, ip);
   fclose(log_stream);
   return (1);
 }

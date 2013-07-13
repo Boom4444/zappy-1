@@ -5,7 +5,7 @@
 ** Login   <liu_q@epitech.net>
 ** 
 ** Started on  Tue Jul  9 19:57:26 2013 qiuyan liu
-** Last update Tue Jul  9 20:00:12 2013 qiuyan liu
+** Last update Sat Jul 13 13:00:33 2013 qiuyan liu
 */
 
 #ifndef SDL_INIT_H_
@@ -13,7 +13,8 @@
 
 #include "map.h"
 
-void		apply_surface( int x, int y, SDL_Surface* source, SDL_Surface* destination, SDL_Rect* clip );
+void		apply_surface( int x, int y, SDL_Surface* source,\
+			       SDL_Surface* destination, SDL_Rect* clip );
 SDL_Surface	*load_image( char filename[10] );
 int		load_files(t_graphic *g);
 int		init(t_graphic *g);

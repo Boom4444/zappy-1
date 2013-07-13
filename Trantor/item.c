@@ -5,18 +5,18 @@
 ** Login   <kuznet_o@epitech.net>
 **
 ** Started on  Wed Jun  05 19:21:34 2013 oleg kuznietsov
-** Last update Tue Jul 09 13:35:00 2013 ivan ignatiev
+** Last update Sat Jul 13 12:52:18 2013 qiuyan liu
 */
 
-#include    <string.h>
-#include    <errno.h>
-#include    <stdlib.h>
-#include    "list.h"
-#include    "error.h"
+#include<string.h>
+#include<errno.h>
+#include<stdlib.h>
+#include"list.h"
+#include"error.h"
 
-t_item    *item_init()
+t_item		*item_init()
 {
-  t_item  *item;
+  t_item	*item;
 
   if ((item = malloc(sizeof(t_item))) != NULL)
   {
@@ -30,9 +30,9 @@ t_item    *item_init()
   return (NULL);
 }
 
-t_item    *item_create(void *src_content, int content_size)
+t_item		*item_create(void *src_content, int content_size)
 {
-    t_item  *item;
+    t_item	*item;
 
     if ((item = item_init()) != NULL)
     {
@@ -42,9 +42,9 @@ t_item    *item_create(void *src_content, int content_size)
     return (item);
 }
 
-int       item_pf(t_list *list, void *data, int size)
+int		item_pf(t_list *list, void *data, int size)
 {
-  t_item  *item;
+  t_item	*item;
 
   item = item_create(data, size);
   if (list == NULL || item == NULL)
@@ -60,9 +60,9 @@ int       item_pf(t_list *list, void *data, int size)
   return (1);
 }
 
-int       item_pb(t_list *list, void *data, int size)
+int		item_pb(t_list *list, void *data, int size)
 {
-  t_item  *item;
+  t_item	*item;
 
   item = item_create(data, size);
   if (list == NULL || item == NULL)
@@ -78,9 +78,9 @@ int       item_pb(t_list *list, void *data, int size)
   return (1);
 }
 
-void        item_delete(t_list *list, t_item *item)
+void		item_delete(t_list *list, t_item *item)
 {
-    t_item  *current;
+    t_item	*current;
 
     if (list != NULL && item != NULL)
     {
@@ -106,9 +106,9 @@ void        item_delete(t_list *list, t_item *item)
     }
 }
 
-void        item_delete_by_content(t_list *list, void *cont)
+void		item_delete_by_content(t_list *list, void *cont)
 {
-    t_item  *current;
+    t_item	*current;
 
     if (list != NULL && cont != NULL)
     {
