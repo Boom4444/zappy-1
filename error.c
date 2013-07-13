@@ -1,12 +1,12 @@
 /*
-** error.c for zappy in /home/ignati_i//zappy/zappy
+** error.c for zappy in /home/ignati_i/zappy/zappy
 ** 
-** Made by ivan ignatiev
-** Login   <ignati_i@epitech.net>
-** 
-** Started on  Sat Jul 13 16:31:25 2013 ivan ignatiev
-** Last update Sat Jul 13 16:31:48 2013 ivan ignatiev
-*/
+** Made by Marin Alcaraz
+** Login   <alcara_m@epitech.net>
+* 
+** Started on  Fri Mar 15 16:42:14 2013 Marin Alcaraz
+** Last update Sat Jul 13 20:32:29 2013 ivan ignatiev
+**/
 
 #include	"main.h"
 #include	"list.h"
