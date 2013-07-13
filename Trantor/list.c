@@ -5,19 +5,19 @@
 ** Login   <kuznet_o@epitech.net>
 **
 ** Started on  Wed Jun  05 19:21:23 2013 oleg kuznietsov
-** Last update Tue Jul 09 13:31:32 2013 ivan ignatiev
+** Last update Sat Jul 13 12:58:12 2013 qiuyan liu
 */
 
-#include        <stdlib.h>
-#include        <string.h>
-#include        <errno.h>
-#include        <stddef.h>
-#include        "error.h"
-#include        "list.h"
+#include <stdlib.h>
+#include <string.h>
+#include <errno.h>
+#include <stddef.h>
+#include "error.h"
+#include "list.h"
 
-t_list          *list_init()
+t_list		*list_init()
 {
-    t_list      *list;
+    t_list	*list;
 
     if ((list = malloc(sizeof(t_list))) != NULL)
     {
@@ -30,10 +30,10 @@ t_list          *list_init()
     return (NULL);
 }
 
-void            list_delete(t_list *list)
+void		list_delete(t_list *list)
 {
-    t_item      *item;
-    t_item      *current;
+    t_item	*item;
+    t_item	*current;
 
     if (list == NULL)
         return ;
@@ -50,9 +50,9 @@ void            list_delete(t_list *list)
     free(list);
 }
 
-int       list_iter(t_list *list, void (*f)(void *, int))
+int		list_iter(t_list *list, void (*f)(void *, int))
 {
-  t_item  *current;
+  t_item	*current;
 
   current = NULL;
   if (list == NULL || f == NULL)
@@ -66,10 +66,10 @@ int       list_iter(t_list *list, void (*f)(void *, int))
   return (1);
 }
 
-int       list_mem(t_list *list, void *content, int size)
+int		list_mem(t_list *list, void *content, int size)
 {
-  int     i;
-  t_item  *current;
+  int		i;
+  t_item	*current;
 
   i = 0;
   current = NULL;
