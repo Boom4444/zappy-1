@@ -1,11 +1,11 @@
 /*
-** error.c for zappy in /home/ignatiev/Projects/zappy
+** error.c for zappy in /home/hero/zappy
 ** 
 ** Made by Marin Alcaraz
 ** Login   <alcara_m@epitech.net>
 * 
 ** Started on  Fri Mar 15 16:42:14 2013 Marin Alcaraz
-** Last update Thu Jul 11 19:03:43 2013 ivan ignatiev
+** Last update Fri Jul 12 18:32:04 2013 Marin Alcaraz
 **/
 
 #include "main.h"
@@ -31,6 +31,7 @@ int         error_show(char *loc, char *func, char *msg, ...)
     fprintf(stderr, " (%d : %s) \e[m\n", errno, strerror(errno));
     errno = 0;
     va_end(ap);
+    fflush(stderr);
     return (-1);
 }
 
@@ -48,6 +49,7 @@ int         log_show(char *loc, char *func, char *msg, ...)
     vfprintf(stdout, msg, ap);
     fprintf(stdout, "\e[m\n");
     va_end(ap);
+    fflush(stdout);
     return (0);
 }
 

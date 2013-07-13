@@ -1,0 +1,105 @@
+[1;36mINFO  [Fri Jul 12 18:50:39 2013  in options_parse] : Options accepted : PORT = 5551, WIDTH = 10, HEIGHT = 11, CMAX = 10, T = 100[m
+[1;36mINFO  [Fri Jul 12 18:50:39 2013  in server_start] : Server start[m
+[1;36mINFO  [Fri Jul 12 18:50:39 2013  in team_create] : Team created : 'Team1'[m
+[1;36mINFO  [Fri Jul 12 18:50:39 2013  in team_create] : Team created : 'Team2'[m
+[1;36mINFO  [Fri Jul 12 18:50:42 2013 accept in select_accept_connection] : User 127.0.0.1 connected to the server[m
+[1;36mINFO  [Fri Jul 12 18:50:52 2013  in user_player_init] : Player 1 created in team 'Team1'[m
+[1;36mINFO  [Fri Jul 12 18:50:53 2013  in cli_parse] : Request 'avance' for player 1 accepted on the 1363th tick, plan : 1370[m
+[1;36mINFO  [Fri Jul 12 18:50:54 2013  in cli_requests_process] : Request 'avance' implemented on 1370th tick[m
+[1;36mINFO  [Fri Jul 12 18:50:54 2013  in server_start] : Last command time : 0.010796 sec. 1370 tick[m
+[1;36mINFO  [Fri Jul 12 18:51:01 2013  in cli_parse] : Request 'incantation' for player 1 accepted on the 2079th tick, plan : 2379[m
+[1;36mINFO  [Fri Jul 12 18:51:04 2013  in cli_requests_process] : Request 'incantation' implemented on 2379th tick[m
+[1;36mINFO  [Fri Jul 12 18:51:05 2013  in server_start] : Last command time : 0.010277 sec. 2379 tick[m
+[1;36mINFO  [Fri Jul 12 18:53:59 2013  in options_parse] : Options accepted : PORT = 3528, WIDTH = 10, HEIGHT = 11, CMAX = 10, T = 100[m
+[1;36mINFO  [Fri Jul 12 18:53:59 2013  in server_start] : Server start[m
+[1;36mINFO  [Fri Jul 12 18:53:59 2013  in team_create] : Team created : 'Team1'[m
+[1;36mINFO  [Fri Jul 12 18:53:59 2013  in team_create] : Team created : 'Team2'[m
+[1;36mINFO  [Fri Jul 12 19:26:02 2013  in options_parse] : Options accepted : PORT = 3528, WIDTH = 10, HEIGHT = 11, CMAX = 10, T = 100[m
+[1;36mINFO  [Fri Jul 12 19:26:02 2013  in server_start] : Server start[m
+[1;36mINFO  [Fri Jul 12 19:26:02 2013  in team_create] : Team created : 'Team1'[m
+[1;36mINFO  [Fri Jul 12 19:26:02 2013  in team_create] : Team created : 'Team2'[m
+[1;36mINFO  [Fri Jul 12 19:26:08 2013  in options_parse] : Options accepted : PORT = 1212, WIDTH = 10, HEIGHT = 11, CMAX = 10, T = 100[m
+[1;36mINFO  [Fri Jul 12 19:26:08 2013  in server_start] : Server start[m
+[1;36mINFO  [Fri Jul 12 19:26:08 2013  in team_create] : Team created : 'Team1'[m
+[1;36mINFO  [Fri Jul 12 19:26:08 2013  in team_create] : Team created : 'Team2'[m
+[1;36mINFO  [Fri Jul 12 19:35:00 2013  in options_parse] : Options accepted : PORT = 4242, WIDTH = 10, HEIGHT = 11, CMAX = 10, T = 100[m
+[1;36mINFO  [Fri Jul 12 19:35:00 2013  in server_start] : Server start[m
+[1;36mINFO  [Fri Jul 12 19:35:00 2013  in team_create] : Team created : 'Team1'[m
+[1;36mINFO  [Fri Jul 12 19:35:00 2013  in team_create] : Team created : 'Team2'[m
+[1;36mINFO  [Fri Jul 12 19:35:00 2013  in options_parse] : Options accepted : PORT = 4242, WIDTH = 10, HEIGHT = 11, CMAX = 10, T = 100[m
+[1;36mINFO  [Fri Jul 12 19:35:00 2013  in server_start] : Server start[m
+[1;36mINFO  [Fri Jul 12 19:35:00 2013  in team_create] : Team created : 'Team1'[m
+[1;36mINFO  [Fri Jul 12 19:35:00 2013  in team_create] : Team created : 'Team2'[m
+[1;36mINFO  [Fri Jul 12 19:35:04 2013  in server_stop] : Server stop[m
+[1;36mINFO  [Fri Jul 12 19:35:19 2013  in options_parse] : Options accepted : PORT = 4241, WIDTH = 10, HEIGHT = 11, CMAX = 10, T = 100[m
+[1;36mINFO  [Fri Jul 12 19:35:19 2013  in server_start] : Server start[m
+[1;36mINFO  [Fri Jul 12 19:35:19 2013  in team_create] : Team created : 'Team1'[m
+[1;36mINFO  [Fri Jul 12 19:35:19 2013  in team_create] : Team created : 'Team2'[m
+[1;36mINFO  [Fri Jul 12 19:39:17 2013  in options_parse] : Options accepted : PORT = 4242, WIDTH = 10, HEIGHT = 11, CMAX = 10, T = 100[m
+[1;36mINFO  [Fri Jul 12 19:39:17 2013  in server_start] : Server start[m
+[1;36mINFO  [Fri Jul 12 19:39:17 2013  in team_create] : Team created : 'Team1'[m
+[1;36mINFO  [Fri Jul 12 19:39:17 2013  in team_create] : Team created : 'Team2'[m
+[1;36mINFO  [Fri Jul 12 19:40:06 2013  in options_parse] : Options accepted : PORT = 4242, WIDTH = 10, HEIGHT = 11, CMAX = 10, T = 100[m
+[1;36mINFO  [Fri Jul 12 19:40:06 2013  in server_start] : Server start[m
+[1;36mINFO  [Fri Jul 12 19:40:06 2013  in team_create] : Team created : 'Team1'[m
+[1;36mINFO  [Fri Jul 12 19:40:06 2013  in team_create] : Team created : 'Team2'[m
+[1;36mINFO  [Fri Jul 12 19:40:13 2013  in options_parse] : Options accepted : PORT = 4242, WIDTH = 10, HEIGHT = 11, CMAX = 10, T = 100[m
+[1;36mINFO  [Fri Jul 12 19:40:13 2013  in server_start] : Server start[m
+[1;36mINFO  [Fri Jul 12 19:40:13 2013  in team_create] : Team created : 'Team1'[m
+[1;36mINFO  [Fri Jul 12 19:40:13 2013  in team_create] : Team created : 'Team2'[m
+[1;36mINFO  [Fri Jul 12 19:40:14 2013  in options_parse] : Options accepted : PORT = 4241, WIDTH = 10, HEIGHT = 11, CMAX = 10, T = 100[m
+[1;36mINFO  [Fri Jul 12 19:40:14 2013  in server_start] : Server start[m
+[1;36mINFO  [Fri Jul 12 19:40:14 2013  in team_create] : Team created : 'Team1'[m
+[1;36mINFO  [Fri Jul 12 19:40:14 2013  in team_create] : Team created : 'Team2'[m
+[1;36mINFO  [Fri Jul 12 19:40:26 2013  in options_parse] : Options accepted : PORT = 4240, WIDTH = 10, HEIGHT = 11, CMAX = 10, T = 100[m
+[1;36mINFO  [Fri Jul 12 19:40:26 2013  in server_start] : Server start[m
+[1;36mINFO  [Fri Jul 12 19:40:26 2013  in team_create] : Team created : 'Team1'[m
+[1;36mINFO  [Fri Jul 12 19:40:26 2013  in team_create] : Team created : 'Team2'[m
+[1;36mINFO  [Fri Jul 12 19:40:35 2013  in options_parse] : Options accepted : PORT = 4242, WIDTH = 10, HEIGHT = 11, CMAX = 10, T = 100[m
+[1;36mINFO  [Fri Jul 12 19:40:35 2013  in server_start] : Server start[m
+[1;36mINFO  [Fri Jul 12 19:40:35 2013  in team_create] : Team created : 'Team1'[m
+[1;36mINFO  [Fri Jul 12 19:40:35 2013  in team_create] : Team created : 'Team2'[m
+./server_daemon: option requires an argument -- 'p'
+Use "./server_daemon --help" to get more information.
+./server_daemon: option requires an argument -- 'p'
+Use "./server_daemon --help" to get more information.
+[1;36mINFO  [Fri Jul 12 20:16:35 2013  in options_parse] : Options accepted : PORT = 3528, WIDTH = 10, HEIGHT = 11, CMAX = 10, T = 100[m
+[1;36mINFO  [Fri Jul 12 20:16:35 2013  in server_start] : Server start[m
+[1;36mINFO  [Fri Jul 12 20:16:35 2013  in team_create] : Team created : 'Team1'[m
+[1;36mINFO  [Fri Jul 12 20:16:35 2013  in team_create] : Team created : 'Team2'[m
+[1;36mINFO  [Fri Jul 12 20:20:04 2013  in options_parse] : Options accepted : PORT = 3528, WIDTH = 10, HEIGHT = 11, CMAX = 10, T = 100[m
+[1;36mINFO  [Fri Jul 12 20:20:04 2013  in server_start] : Server start[m
+[1;36mINFO  [Fri Jul 12 20:20:04 2013  in team_create] : Team created : 'Team1'[m
+[1;36mINFO  [Fri Jul 12 20:20:04 2013  in team_create] : Team created : 'Team2'[m
+[1;36mINFO  [Fri Jul 12 20:21:49 2013  in options_parse] : Options accepted : PORT = 3528, WIDTH = 10, HEIGHT = 11, CMAX = 10, T = 100[m
+[1;36mINFO  [Fri Jul 12 20:21:49 2013  in server_start] : Server start[m
+[1;36mINFO  [Fri Jul 12 20:21:49 2013  in team_create] : Team created : 'Team1'[m
+[1;36mINFO  [Fri Jul 12 20:21:49 2013  in team_create] : Team created : 'Team2'[m
+[1;36mINFO  [Fri Jul 12 20:22:15 2013  in options_parse] : Options accepted : PORT = 3528, WIDTH = 10, HEIGHT = 11, CMAX = 10, T = 100[m
+[1;36mINFO  [Fri Jul 12 20:22:15 2013  in server_start] : Server start[m
+[1;36mINFO  [Fri Jul 12 20:22:15 2013  in team_create] : Team created : 'Team1'[m
+[1;36mINFO  [Fri Jul 12 20:22:15 2013  in team_create] : Team created : 'Team2'[m
+[1;36mINFO  [Fri Jul 12 20:27:12 2013  in options_parse] : Options accepted : PORT = 3528, WIDTH = 10, HEIGHT = 11, CMAX = 10, T = 100[m
+[1;36mINFO  [Fri Jul 12 20:27:12 2013  in server_start] : Server start[m
+[1;36mINFO  [Fri Jul 12 20:27:12 2013  in team_create] : Team created : 'Team1'[m
+[1;36mINFO  [Fri Jul 12 20:27:12 2013  in team_create] : Team created : 'Team2'[m
+[1;36mINFO  [Fri Jul 12 20:28:54 2013  in options_parse] : Options accepted : PORT = 3528, WIDTH = 10, HEIGHT = 11, CMAX = 10, T = 100[m
+[1;36mINFO  [Fri Jul 12 20:28:54 2013  in server_start] : Server start[m
+[1;36mINFO  [Fri Jul 12 20:28:54 2013  in team_create] : Team created : 'Team1'[m
+[1;36mINFO  [Fri Jul 12 20:28:54 2013  in team_create] : Team created : 'Team2'[m
+[1;36mINFO  [Fri Jul 12 20:29:57 2013  in options_parse] : Options accepted : PORT = 3528, WIDTH = 10, HEIGHT = 11, CMAX = 10, T = 100[m
+[1;36mINFO  [Fri Jul 12 20:29:57 2013  in server_start] : Server start[m
+[1;36mINFO  [Fri Jul 12 20:29:57 2013  in team_create] : Team created : 'Team1'[m
+[1;36mINFO  [Fri Jul 12 20:29:57 2013  in team_create] : Team created : 'Team2'[m
+[1;36mINFO  [Fri Jul 12 20:30:46 2013  in options_parse] : Options accepted : PORT = 3528, WIDTH = 10, HEIGHT = 11, CMAX = 10, T = 100[m
+[1;36mINFO  [Fri Jul 12 20:30:46 2013  in server_start] : Server start[m
+[1;36mINFO  [Fri Jul 12 20:30:46 2013  in team_create] : Team created : 'Team1'[m
+[1;36mINFO  [Fri Jul 12 20:30:46 2013  in team_create] : Team created : 'Team2'[m
+[1;36mINFO  [Fri Jul 12 20:31:35 2013  in options_parse] : Options accepted : PORT = 3528, WIDTH = 10, HEIGHT = 11, CMAX = 10, T = 100[m
+[1;36mINFO  [Fri Jul 12 20:31:35 2013  in server_start] : Server start[m
+[1;36mINFO  [Fri Jul 12 20:31:35 2013  in team_create] : Team created : 'Team1'[m
+[1;36mINFO  [Fri Jul 12 20:31:35 2013  in team_create] : Team created : 'Team2'[m
+[1;36mINFO  [Fri Jul 12 20:31:56 2013  in options_parse] : Options accepted : PORT = 3528, WIDTH = 10, HEIGHT = 11, CMAX = 10, T = 100[m
+[1;36mINFO  [Fri Jul 12 20:31:56 2013  in server_start] : Server start[m
+[1;36mINFO  [Fri Jul 12 20:31:56 2013  in team_create] : Team created : 'Team1'[m
+[1;36mINFO  [Fri Jul 12 20:31:56 2013  in team_create] : Team created : 'Team2'[m

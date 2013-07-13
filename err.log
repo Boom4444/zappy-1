@@ -1,0 +1,12 @@
+[1;31mERROR [Fri Jul 12 18:50:57 2013  in cli_parse] : Player 1 wrong request (11 : Resource temporarily unavailable) [m
+[1;31mERROR [Fri Jul 12 18:50:58 2013  in cli_parse] : Player 1 wrong request (11 : Resource temporarily unavailable) [m
+[1;31mERROR [Fri Jul 12 18:51:04 2013  in incantate] : Not enough resources to begin the incantation (11 : Resource temporarily unavailable) [m
+[1;31mERROR [Fri Jul 12 18:51:04 2013  in fail_incantate] : incantation failed (0 : Success) [m
+[1;31mERROR [Fri Jul 12 19:35:00 2013 bind in server_start] : Unable to bind the server socket (98 : Address already in use) [m
+[1;31mERROR [Fri Jul 12 19:35:19 2013 bind in server_start] : Unable to bind the server socket (98 : Address already in use) [m
+[1;31mERROR [Fri Jul 12 19:40:06 2013 bind in server_start] : Unable to bind the server socket (98 : Address already in use) [m
+[1;31mERROR [Fri Jul 12 19:40:13 2013 bind in server_start] : Unable to bind the server socket (98 : Address already in use) [m
+[1;31mERROR [Fri Jul 12 19:40:35 2013 bind in server_start] : Unable to bind the server socket (98 : Address already in use) [m
+[1;31mERROR [Fri Jul 12 20:20:04 2013 bind in server_start] : Unable to bind the server socket (98 : Address already in use) [m
+[1;31mERROR [Fri Jul 12 20:22:15 2013 bind in server_start] : Unable to bind the server socket (98 : Address already in use) [m
+[1;31mERROR [Fri Jul 12 20:29:57 2013 bind in server_start] : Unable to bind the server socket (98 : Address already in use) [m
