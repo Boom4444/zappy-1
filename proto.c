@@ -5,7 +5,7 @@
 ** Login   <alcara_m@epitech.net>
 ** 
 ** Started on  Wed Jun 12 16:34:40 2013 Marin Alcaraz
-** Last update Thu Jul 11 14:11:09 2013 Marin Alcaraz
+** Last update Sat Jul 13 11:51:46 2013 ivan ignatiev
 */
 
 #include        "main.h"
@@ -101,23 +101,6 @@ int         proto_parse(t_user *u, t_server *s, t_world *w)
     if (u->protocol == CLI_PROTO)
         return (cli_parse((t_user_player*)u, s, w));
     return (graph_parse((t_user_graph*)u, s, w));
-}
-
-void            user_player_connected(t_user_player *u, t_server *s, t_world *w)
-{
-    char        answer[PROTO_BUFFER + 1];
-
-    u->number = ++(s->players_count);
-    log_show("user_player_init", "", "Player %d created in team '%s'", u->number, u->team->name);
-    ++(u->team->members);
-    --(u->team->limit);
-    u->life = 0;
-    sprintf(answer, "%d\n", u->team->limit);
-    cli_answer(u, s, answer);
-    sprintf(answer, "%d %d\n", w->width, w->height);
-    cli_answer(u, s, answer);
-    sprintf(answer, "pnw %d %d %d %d %d %s\n", u->number, u->posx, u->posy, u->orientation + 1, u->level, u->team->name);
-    cli_answer_to_all_graph(s, answer);
 }
 
 t_user              *proto_define(t_user *u, t_server *s, t_world *w)
