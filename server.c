@@ -5,7 +5,7 @@
 ** Login   <alcara_m@epitech.net>
 ** 
 ** Started on  Tue May 21 09:42:30 2013 Marin Alcaraz
-** Last update Sat Jul 13 13:28:38 2013 ivan ignatiev
+** Last update Sat Jul 13 19:00:48 2013 ivan ignatiev
 */
 
 #include	"main.h"
@@ -49,7 +49,8 @@ int		server_init(t_server *s)
 	   sizeof(s_in)) == -1)
     {
       close(s->server_fd);
-      return (error_show("server_start", "bind", "Unable to bind the server socket"));
+      return (error_show("server_start", "bind",
+			 "Unable to bind the server socket"));
     }
   return (listen(s->server_fd, QUEUE_LIMIT));
 }
@@ -78,7 +79,7 @@ int			server_start(t_server *s, t_world *w)
   unsigned long long	elapsedTime;
 
   s->tick_size = 1000000 / s->options.tdelay;
-  while(s->result == 0)
+  while (s->result == 0)
     {
       gettimeofday(&start_loop, NULL);
       users_life_proccess(s, w);

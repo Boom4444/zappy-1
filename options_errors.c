@@ -5,28 +5,28 @@
 ** Login   <kuznet_o@epitech.net>
 **
 ** Started on  Thu Jun  06 22:43:10 2013 oleg kuznietsov
-** Last update Thu Jul 04 20:49:28 2013 ivan ignatiev
+** Last update Sat Jul 13 17:37:06 2013 ivan ignatiev
 */
 
-#include "main.h"
-#include "list.h"
-#include "options.h"
+#include	"main.h"
+#include	"list.h"
+#include	"options.h"
 
-void  negative_error(char *str, char *ptr)
+void		negative_error(char *str, char *ptr)
 {
   printf("%s: syntax error -- \"%s\"\n", str, ptr);
   printf("Argument values can only be positive.\n");
   exit(EXIT_SUCCESS);
 }
 
-void  eagle_error(char *str)
+void		eagle_error(char *str)
 {
   printf("%s: option requires an argument -- '%c'\n", str, optopt);
   printf("Use \"%s --help\" to get more information.\n", str);
   exit(EXIT_SUCCESS);
 }
 
-void  lparse_error_1(char *str)
+void		lparse_error_1(char *str)
 {
   printf("%s: illegal characters -- \'\\n\'\n", str);
   printf("Server options should contain only '-' combined with a letter.\n");
@@ -36,7 +36,7 @@ void  lparse_error_1(char *str)
 
 }
 
-void  lparse_error_2(char *str, char c)
+void		lparse_error_2(char *str, char c)
 {
   printf("%s: illegal characters -- '%c'\n", str, c);
   printf("Server options should contain only '-' combined with a letter.\n");
@@ -45,7 +45,7 @@ void  lparse_error_2(char *str, char c)
   exit(EXIT_SUCCESS);
 }
 
-void  syntax_error(char *str, char *ptr)
+void		syntax_error(char *str, char *ptr)
 {
   printf("%s: syntax error -- '%s'\n", str, ptr);
   printf("Use \"%s --help\" to get more information.\n", str);

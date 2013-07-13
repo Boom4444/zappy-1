@@ -5,7 +5,7 @@
 ## Login   <alcara_m@epitech.net>
 ##
 ## Started on  Fri Mar 01 09:38:17 2013 Marin Alcaraz
-## Last update Sat Jul 13 13:09:16 2013 ivan ignatiev
+## Last update Sat Jul 13 20:17:52 2013 ivan ignatiev
 ##
 
 SNAME	=	server
@@ -15,14 +15,20 @@ SSRC	=	server.c 				\
 		options_errors.c			\
 		options.c 				\
 		proto.c 				\
+		proto_cli.c 				\
 		expulse.c 				\
 		options_parsing.c 			\
 		item.c 					\
 		graph_command.c 			\
+		graph_command_player.c 			\
+		graph_command_server.c 			\
 		cli_command_parse.c 			\
+		cli_command_parse_items.c		\
+		cli_command_parse_net.c 		\
 		list.c 					\
 		broadcast.c 				\
 		incantation.c 				\
+		incantation_support.c			\
 		error.c  				\
 		users.c 				\
 		users_cli.c 				\
@@ -33,37 +39,33 @@ SSRC	=	server.c 				\
 		proto_commands_items.c 			\
 		proto_commands_net.c 			\
 		proto_commands_movement.c 		\
+		proto_commands_voir.c 			\
+		proto_commands_res.c 			\
 		trantor.c 				\
 		request.c 				\
+		request_data.c 				\
 		answer.c 				\
 		str.c 					\
 		main.c
 
 SOBJ	=	$(SSRC:.c=.o)
 
-WNAME	=   world
-
-WSRC	=	world.c
-
-WOBJ	=	$(WSRC:.c=.o)
-
-
 CNAME 	= 	client
 
 CSRC 	= 	client.c 	\
-			error.c 	\
-			socket.c
+		error.c 	\
+		socket.c
 
 COBJ 	= 	$(CSRC:.c=.o)
 
 CFLAGS	=	-Wall -Wextra -Werror -g3
 
-CC		=	cc
+CC	=	cc
 
-RM		=	rm -f
+RM	=	rm -f
 ECHO	=	echo -e
 
-%.o: %.c
+%.o: 	%.c
 	$(CC) -c -o $@ $< $(CFLAGS)
 
 all	: $(SNAME) $(CNAME) $(WNAME)
@@ -76,20 +78,14 @@ $(CNAME) : $(COBJ)
 	$(CC) $(COBJ) $(CFLAGS) -o $(CNAME)
 	@$(ECHO) '\033[0;33m> CLI Client Compiled\033[0m'
 
-$(WNAME) : $(WOBJ)
-	$(CC) $(WOBJ) $(CFLAGS) -o $(WNAME) -lSDL -lSDL_image
-	@$(ECHO) '\033[0;33m> GUI Client Compiled\033[0m'
-
 clean	:
 	$(RM) $(SOBJ)
 	$(RM) $(COBJ)
-	$(RM) $(WOBJ)
 	@$(ECHO) '\033[0;33m> Directory cleaned\033[0m'
 
 fclean	: clean
 	$(RM) $(SNAME)
 	$(RM) $(CNAME)
-	$(RM) $(WNAME)
 	@$(ECHO) '\033[0;33m> Removed executables\033[0m'
 
-re	: fclean all
+re	: fclean clean re all

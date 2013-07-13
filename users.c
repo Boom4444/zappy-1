@@ -5,7 +5,7 @@
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Sat Apr 27 14:16:14 2013 ivan ignatiev
-** Last update Sat Jul 13 13:33:59 2013 ivan ignatiev
+** Last update Sat Jul 13 19:06:43 2013 ivan ignatiev
 */
 
 #include	"main.h"
@@ -48,34 +48,36 @@ int		user_destroy(t_user *user, t_server *s, t_world *w)
   return (log_show("user_destroy", "", "Client disconnected and removed"));
 }
 
+void		users_player_life(t_user_player *user, t_server *s)
+{
+  --(user->life);
+  if (user->life <= 0)
+    {
+      user->life = LIFE_UNIT * s->options.tdelay;
+      --(user->inventory[FOOD]);
+      if (user->inventory[FOOD] <= 0)
+	{
+	  server_send(user->clientfd, "mort\n");
+	  log_show("users_life_process", "", "PLayer %d finished his food",
+		   user->number);
+	  user->connected = DISCONNECTED;
+	}
+    }
+}
+
 void		users_life_proccess(t_server *s, t_world *w)
 {
   t_item	*current;
   t_item	*next;
 
   (void) w;
-  //SEGFLT
   current = list_get_head(s->client_list);
   while (current != NULL)
     {
       next = current->next;
       if (T_USER(current->cont)->protocol == CLI_PROTO
 	  && T_USER(current->cont)->connected == CONNECTED)
-	{
-	  --(T_PLAYER(current->cont)->life);
-	  if (T_PLAYER(current->cont)->life <= 0)
-            {
-	      T_PLAYER(current->cont)->life = LIFE_UNIT * s->options.tdelay;
-	      --(T_PLAYER(current->cont)->inventory[FOOD]);
-	      if (T_PLAYER(current->cont)->inventory[FOOD] <= 0)
-                {
-		  server_send(T_PLAYER(current->cont)->clientfd, "mort\n");
-		  log_show("users_life_process", "", "PLayer %d finished his food",
-			   T_PLAYER(current->cont)->number);
-		  T_USER(current->cont)->connected = DISCONNECTED;
-                }
-            }
-        }
+	users_player_life(T_PLAYER(current->cont), s);
       else if (T_USER(current->cont)->protocol == EGG_PROTO
 	       && T_USER(current->cont)->protocol == PRE_CONNECTED)
         {

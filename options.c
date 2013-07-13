@@ -5,17 +5,18 @@
 ** Login   <kuznet_o@epitech.net>
 **
 ** Started on  Fri Jun  07 00:47:46 2013 oleg kuznietsov
-** Last update Mon Jul 08 16:54:09 2013 ivan ignatiev
+** Last update Sat Jul 13 19:14:04 2013 ivan ignatiev
 */
 
-#include "main.h"
-#include "list.h"
-#include "error.h"
-#include "options.h"
+#include	"main.h"
+#include	"list.h"
+#include	"item.h"
+#include	"error.h"
+#include	"options.h"
 
-void    default_error(char *argv[])
+void		default_error(char *argv[])
 {
-  char  *curr;
+  char		*curr;
 
   curr = argv[optind - 1];
   if (optopt == curr[1])
@@ -24,59 +25,55 @@ void    default_error(char *argv[])
     printf("Use \"%s --help\" to get more information.\n", argv[0]);
     exit(EXIT_SUCCESS);
   }
-  else
-  {
-    curr = argv[optind];
-    printf("%s: invalid option -- '%c'\n", argv[0], curr[1]);
-    printf("Use \"%s --help\" to get more information.\n", argv[0]);
-    exit(EXIT_SUCCESS);
-  }
+  curr = argv[optind];
+  printf("%s: invalid option -- '%c'\n", argv[0], curr[1]);
+  printf("Use \"%s --help\" to get more information.\n", argv[0]);
+  exit(EXIT_SUCCESS);
 }
 
-void  names_parse(char *argv[], char c, int argc, t_opt *opt)
+void		names_parse(char *argv[], char c, int argc, t_opt *opt)
 {
   if (*optarg == '-')
-  {
-    printf("%s: option requires an argument -- '%c'\n", argv[0], c);
-    printf("Use \"%s --help\" to get more information.\n", argv[0]);
-    exit(EXIT_SUCCESS);
-  }
-  else if (*argv[optind - 1] == '-')
-  {
-    if (item_pb(opt->names, optarg, (strlen(optarg) + 1)) == -1)
+    {
+      printf("%s: option requires an argument -- '%c'\n", argv[0], c);
+      printf("Use \"%s --help\" to get more information.\n", argv[0]);
+      exit(EXIT_SUCCESS);
+    }
+  else if (*argv[optind - 1] == '-'
+	   && item_pb(opt->names, optarg, (strlen(optarg) + 1)) == -1)
     {
       fprintf(stderr, "%s ERROR: %s\n", "item_pb", "names_parse");
       exit(EXIT_FAILURE);
     }
-  }
   else
     --optind;
   while ((optind < argc) && (*argv[optind] != '-'))
-  {
-    if (item_pb(opt->names, argv[optind], (strlen(argv[optind]) + 1)) == -1)
     {
-      fprintf(stderr, "%s ERROR: %s\n", "item_pb", "names_parse");
-      exit(EXIT_FAILURE);
+      if (item_pb(opt->names, argv[optind],
+		  (strlen(argv[optind]) + 1)) == -1)
+	{
+	  fprintf(stderr, "%s ERROR: %s\n", "item_pb", "names_parse");
+	  exit(EXIT_FAILURE);
+	}
+      ++optind;
     }
-    ++optind;
-  }
 }
 
-void  options_get(char *argv[], char c, unsigned int *opt)
+void		options_get(char *argv[], char c, unsigned int *opt)
 {
   if (*optarg == '-')
-  {
-    printf("%s: option requires an argument -- '%c'\n", argv[0], c);
-    printf("Use \"%s --help\" to get more information.\n", argv[0]);
-    exit(EXIT_SUCCESS);
-  }
+    {
+      printf("%s: option requires an argument -- '%c'\n", argv[0], c);
+      printf("Use \"%s --help\" to get more information.\n", argv[0]);
+      exit(EXIT_SUCCESS);
+    }
   *opt = atoi(optarg);
   if (optarg[0] != '0' && *opt == 0)
-  {
-    printf("%s: invalid argument -- \"%s\"\n", argv[0], optarg);
-    printf("Use \"%s --help\" to get more information.\n", argv[0]);
-    exit(EXIT_SUCCESS);
-  }
+    {
+      printf("%s: invalid argument -- \"%s\"\n", argv[0], optarg);
+      printf("Use \"%s --help\" to get more information.\n", argv[0]);
+      exit(EXIT_SUCCESS);
+    }
 }
 
 void    options_getopt(int argc, char *argv[], t_opt *g_opt)
@@ -122,6 +119,7 @@ void  options_parse(int argc, char *argv[], t_opt *g_opt)
   teams_fill(g_opt, 2);
 
   log_show("options_parse", "", "Options accepted : "
-                                "PORT = %d, WIDTH = %d, HEIGHT = %d, CMAX = %d, T = %d",
-                                g_opt->port, g_opt->width, g_opt->height, g_opt->cmax, g_opt->tdelay);
+	   "PORT = %d, WIDTH = %d, HEIGHT = %d, CMAX = %d, T = %d",
+	   g_opt->port, g_opt->width,
+	   g_opt->height, g_opt->cmax, g_opt->tdelay);
 }

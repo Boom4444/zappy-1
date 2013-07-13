@@ -5,14 +5,15 @@
 ** Login   <kuznet_o@epitech.net>
 **
 ** Started on  Wed Jun  05 19:21:34 2013 oleg kuznietsov
-** Last update Sat Jul 13 13:43:19 2013 ivan ignatiev
+** Last update Sat Jul 13 18:40:25 2013 ivan ignatiev
 */
 
 #include	"main.h"
 #include	"list.h"
+#include	"item.h"
 #include	"error.h"
 
-t_item		*item_init(void)
+t_item		*item_create(void *src_content, int content_size)
 {
   t_item	*item;
 
@@ -21,23 +22,12 @@ t_item		*item_init(void)
       item->cont = NULL;
       item->prev = NULL;
       item->next = NULL;
-      item->size = 0;
+      item->cont = src_content;
+      item->size = content_size;
       return (item);
     }
   error_show("item_init", "malloc", "Unable to allocate memory for item");
   return (NULL);
-}
-
-t_item		*item_create(void *src_content, int content_size)
-{
-  t_item	*item;
-
-  if ((item = item_init()) != NULL)
-    {
-      item->cont = src_content;
-      item->size = content_size;
-    }
-  return (item);
 }
 
 int		item_pf(t_list *list, void *data, int size)
@@ -76,12 +66,12 @@ int		item_pb(t_list *list, void *data, int size)
   return (1);
 }
 
-void		item_delete(t_list *list, t_item *item)
+int		item_delete(t_list *list, t_item *item)
 {
   t_item	*current;
 
   if (list == NULL || item == NULL)
-    return ;
+    return (-1);
   current = list_get_head(list);
   while (current != NULL)
     {
@@ -97,18 +87,19 @@ void		item_delete(t_list *list, t_item *item)
 	    current->next->prev = current->prev;
 	  free(item);
 	  list->len -= 1;
-	  return ;
+	  return (0);
 	}
       current = current->next;
     }
+  return (-1);
 }
 
-void		item_delete_by_content(t_list *list, void *cont)
+int		item_delete_by_content(t_list *list, void *cont)
 {
   t_item	*current;
 
   if (list == NULL || cont == NULL)
-    return ;
+    return (-1);
   current = list_get_head(list);
   while (current != NULL)
     {
@@ -124,8 +115,9 @@ void		item_delete_by_content(t_list *list, void *cont)
 	    current->next->prev = current->prev;
 	  free(current);
 	  list->len -= 1;
-	  return ;
+	  return (0);
 	}
       current = current->next;
     }
+  return (-1);
 }

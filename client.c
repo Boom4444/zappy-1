@@ -5,104 +5,102 @@
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Fri May 24 19:45:50 2013 ivan ignatiev
-** Last update Tue Jul 09 18:00:38 2013 ivan ignatiev
+** Last update Sat Jul 13 17:54:49 2013 ivan ignatiev
 */
 
-#include    <stdlib.h>
-#include    <stdio.h>
-#include    <sys/time.h>
-#include    <sys/types.h>
-#include    <signal.h>
-#include    <unistd.h>
+#include	<stdlib.h>
+#include	<stdio.h>
+#include	<sys/time.h>
+#include	<sys/types.h>
+#include	<signal.h>
+#include	<unistd.h>
+#include	"client.h"
+#include	"socket.h"
+#include	"error.h"
 
-#include    "client.h"
-#include    "socket.h"
-#include    "error.h"
+static int	g_connect = 0;
 
-static int          g_connect = 0;
-
-int                 client_process(int sfd, fd_set *fdreadset)
+int		client_process(int sfd, fd_set *fdreadset)
 {
-    char            buf[255];
-    int             len;
+  char		buf[255];
+  int		len;
 
-    if (FD_ISSET(1, fdreadset))
+  if (FD_ISSET(1, fdreadset))
     {
-        if (!g_connect)
-            return (1);
-        if ((len = read(1, buf, 255)) <= 0)
-            return (-1);
-        buf[len] = '\0';
-        printf("#zappy(client)<--%s", buf);
-        if (write(sfd, buf, len) < 0)
-            return (-1);
+      if (!g_connect)
+	return (1);
+      if ((len = read(1, buf, 255)) <= 0)
+	return (-1);
+      buf[len] = '\0';
+      printf("#zappy(client)<--%s", buf);
+      if (write(sfd, buf, len) < 0)
+	return (-1);
     }
-
-    if (FD_ISSET(sfd, fdreadset))
+  if (FD_ISSET(sfd, fdreadset))
     {
-        if ((len = read(sfd, buf, 255)) <= 0)
-            return (-1);
-        g_connect = 1;
-        buf[len] = '\0';
-        printf("zappy(server)-->%s", buf);
+      if ((len = read(sfd, buf, 255)) <= 0)
+	return (-1);
+      g_connect = 1;
+      buf[len] = '\0';
+      printf("zappy(server)-->%s", buf);
     }
-
-    return (1);
+  return (1);
 }
 
-int                 client_prompt(int sfd)
+int		client_prompt(int sfd)
 {
-    int             prompt;
-    int             rs;
-    fd_set          fdreadset;
-    char            delim;
+  int		prompt;
+  int		rs;
+  fd_set	fdreadset;
+  char		delim;
 
-    prompt = 1;
-    delim = '#';
-    while (prompt > 0)
+  prompt = 1;
+  delim = '#';
+  while (prompt > 0)
     {
-        FD_ZERO(&fdreadset);
-        FD_SET(1, &fdreadset);
-        FD_SET(sfd, &fdreadset);
-        write(0, &delim, 1);
-        if ((rs = select(sfd + 1, &fdreadset, NULL, NULL, NULL)) < 0)
+      FD_ZERO(&fdreadset);
+      FD_SET(1, &fdreadset);
+      FD_SET(sfd, &fdreadset);
+      write(0, &delim, 1);
+      if ((rs = select(sfd + 1, &fdreadset, NULL, NULL, NULL)) < 0)
             prompt = -1;
-        else
-            prompt = client_process(sfd, &fdreadset);
+      else
+	prompt = client_process(sfd, &fdreadset);
     }
-    close(sfd);
-    return (prompt == 0 ? EXIT_SUCCESS : EXIT_FAILURE);
+  close(sfd);
+  return (prompt == 0 ? EXIT_SUCCESS : EXIT_FAILURE);
 }
 
-int                 client_options(int argc, char **argv, t_options *options)
+int		client_options(int argc, char **argv,
+			       t_options *options)
 {
-    options->host = NULL;
-    options->port = NULL;
-    while (-1 != (options->current = getopt(argc, argv, "h:" "p:" )))
+  options->host = NULL;
+  options->port = NULL;
+  while (-1 != (options->current = getopt(argc, argv, "h:" "p:" )))
     {
-        if (options->current == 'h')
-            options->host = optarg;
-        else if (options->current == 'p')
-            options->port = optarg;
+      if (options->current == 'h')
+	options->host = optarg;
+      else if (options->current == 'p')
+	options->port = optarg;
     }
-    if (!options->host || !options->port)
+  if (!options->host || !options->port)
     {
-        printf("%s: Too few arguments\n\t-h [host] %%s\n\t-p [port] %%s\n",
+      printf("%s: Too few arguments\n\t-h [host] %%s\n\t-p [port] %%s\n",
              argv[0]);
-        return (EXIT_FAILURE);
+      return (EXIT_FAILURE);
     }
-    return (EXIT_SUCCESS);
+  return (EXIT_SUCCESS);
 }
 
-void                sigint_handler(int sig)
+void		sigint_handler(int sig)
 {
-    (void) sig;
+  (void) sig;
 }
 
-int                 main(int argc, char **argv)
+int		main(int argc, char **argv)
 {
-    int             sfd;
-    t_options       options;
+  int		sfd;
+  t_options	options;
 
     signal(SIGINT, sigint_handler);
     printf("Welcome to ZAPPY Smart Prompt!\n");

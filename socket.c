@@ -5,15 +5,10 @@
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Sun Apr 14 03:49:32 2013 ivan ignatiev
-** Last update Wed May 29 18:30:04 2013 ivan ignatiev
+** Last update Sat Jul 13 17:30:19 2013 ivan ignatiev
 */
 
-#include		<stdlib.h>
-#include		<sys/types.h>
-#include		<sys/socket.h>
-#include		<string.h>
-#include		<netdb.h>
-#include		<unistd.h>
+#include		"main.h"
 #include		"error.h"
 #include		"socket.h"
 

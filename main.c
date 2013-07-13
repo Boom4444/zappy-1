@@ -5,7 +5,7 @@
 ** Login   <alcara_m@epitech.net>
 ** 
 ** Started on  Fri Mar 15 16:48:12 2013 Marin Alcaraz
-** Last update Sat Jul 13 13:17:50 2013 ivan ignatiev
+** Last update Sat Jul 13 18:41:25 2013 ivan ignatiev
 */
 
 #include	"main.h"
@@ -46,8 +46,8 @@ int		main(int argc, char *argv[])
   signal(SIGINT, sigint_handler);
   server_settings_init(&(s.options));
   options_parse(argc, argv, &(s.options));
-  init_world(&w,s.options.width, s.options.height);
-  generate_resource(&w,s.options.width, s.options.height);
+  init_world(&w, s.options.width, s.options.height);
+  generate_resource(&w, s.options.width, s.options.height);
   if (server_init(&s) != 0)
     {
       error_show("server_start", "server_init",

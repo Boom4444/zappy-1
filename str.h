@@ -5,13 +5,14 @@
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Wed Jul 10 16:12:27 2013 ivan ignatiev
-** Last update Wed Jul 10 16:12:33 2013 ivan ignatiev
+** Last update Sat Jul 13 20:21:00 2013 ivan ignatiev
 */
 
 #ifndef STR_H_
 # define STR_H_
 
-char            *stralloccat(char *dest, char *src);
-char            *getnextline(char *str);
+char	*stralloccat(char *dest, char *src);
+char	*getnextline(char *str);
+int	is_numeric(char *str);
 
 #endif /* !STR_H_ */

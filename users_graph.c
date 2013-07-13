@@ -5,7 +5,7 @@
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Sat Jul 13 12:20:54 2013 ivan ignatiev
-** Last update Sat Jul 13 14:18:30 2013 ivan ignatiev
+** Last update Sat Jul 13 18:53:50 2013 ivan ignatiev
 */
 
 #include	"main.h"
@@ -38,7 +38,6 @@ t_user_graph	*user_graph_init(t_user *user)
 	     "Unable allocate memory for GFX clients");
   return (NULL);
 }
-
 
 int		user_graph_destroy(t_user_graph *user)
 {

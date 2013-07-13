@@ -5,11 +5,12 @@
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Sat Apr 27 14:58:48 2013 ivan ignatiev
-** Last update Sat Jul 13 14:19:35 2013 ivan ignatiev
+** Last update Sat Jul 13 19:00:02 2013 ivan ignatiev
 */
 
 #include	"main.h"
 #include	"list.h"
+#include	"item.h"
 #include	"options.h"
 #include	"trantor.h"
 #include	"server.h"
@@ -75,22 +76,22 @@ static int	select_check_fdset(t_server *s, t_world *w, fd_set *fdset)
 
   current = list_get_head(s->client_list);
   while (current != NULL)
-  {
-    if (FD_ISSET((T_USER((current->cont))->clientfd), fdset))
-      {
-	if(T_USER(current->cont)->connected == PRE_CONNECTED)
-	  {
-	    current->cont = (void*)proto_define(T_USER(current->cont), s, w);
-	    if (T_USER(current->cont)->protocol == CLI_PROTO)
-	      user_player_connected(T_PLAYER(current->cont), s, w);
-	    else if (T_USER(current->cont)->protocol == GRAPHIC_PROTO)
-	      graph_client_init(T_GRAPH(current->cont), s, w);
-	  }
-	else if(T_USER(current->cont)->connected == CONNECTED)
-	  proto_parse(T_USER(current->cont), s, w);
-      }
-    current = current->next;
-  }
+    {
+      if (FD_ISSET((T_USER((current->cont))->clientfd), fdset))
+	{
+	  if (T_USER(current->cont)->connected == PRE_CONNECTED)
+	    {
+	      current->cont = (void*)proto_define(T_USER(current->cont), s, w);
+	      if (T_USER(current->cont)->protocol == CLI_PROTO)
+		user_player_connected(T_PLAYER(current->cont), s, w);
+	      else if (T_USER(current->cont)->protocol == GRAPHIC_PROTO)
+		graph_client_init(T_GRAPH(current->cont), s, w);
+	    }
+	  else if (T_USER(current->cont)->connected == CONNECTED)
+	    proto_parse(T_USER(current->cont), s, w);
+	}
+      current = current->next;
+    }
   return (0);
 }
 

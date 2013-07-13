@@ -5,7 +5,7 @@
 ** Login   <liu_q@epitech.net>
 ** 
 ** Started on  Tue Jul  9 19:23:05 2013 qiuyan liu
-** Last update Wed Jul 10 19:00:16 2013 qiuyan liu
+** Last update Sat Jul 13 13:05:54 2013 qiuyan liu
 */
 
 #include "SDL/SDL.h"
@@ -13,7 +13,8 @@
 #include "clip_ressources.h"
 #include "map.h"
 
-void		apply_surface( int x, int y, SDL_Surface* source, SDL_Surface* destination, SDL_Rect* clip )
+void		apply_surface( int x, int y, SDL_Surface* source,\
+			       SDL_Surface* destination, SDL_Rect* clip )
 {
   SDL_Rect	offset;
 
@@ -33,8 +34,8 @@ SDL_Surface	*load_image( char filename[10] )
       optimizedImage = SDL_DisplayFormat( loadedImage );
       SDL_FreeSurface( loadedImage );
       if( optimizedImage != NULL )
-	SDL_SetColorKey( optimizedImage, SDL_SRCCOLORKEY, SDL_MapRGB( optimizedImage->format, 0xFF,\
-								      0xFF, 0xFF ) );
+	SDL_SetColorKey( optimizedImage, SDL_SRCCOLORKEY,\
+			 SDL_MapRGB( optimizedImage->format, 0xFF, 0xFF, 0xFF ) );
     }
   return (optimizedImage);
 }
@@ -52,7 +53,8 @@ int	init(t_graphic *g)
 {
   if( SDL_Init( SDL_INIT_EVERYTHING ) == -1 )
     return (0);
-  g->screen = SDL_SetVideoMode( SCREEN_WIDTH * SQUARE_SIZE, SCREEN_HEIGHT * SQUARE_SIZE, SCREEN_BPP, SDL_SWSURFACE );
+  g->screen = SDL_SetVideoMode( SCREEN_WIDTH * SQUARE_SIZE,\
+				SCREEN_HEIGHT * SQUARE_SIZE, SCREEN_BPP, SDL_SWSURFACE );
   if( g->screen == NULL )
     return (0);
   SDL_WM_SetCaption( "Trantor", NULL );
