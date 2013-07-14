@@ -11,7 +11,7 @@
 
 verify_file()
 {
-    FILE_STAT=`cat zappy.pid 2>&1 /tmp/manager.log` 
+    FILE_STAT=`cat zappy.pid 2>&1 /tmp/manager.log`
     if [ $? -eq 1 ]
     then
 	FILE_STAT=1

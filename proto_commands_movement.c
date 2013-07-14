@@ -39,7 +39,8 @@ void		cli_avance(t_request_data *rqd, t_server *t, t_world *w)
 	     w->height);
   if (n.x != rqd->user->posx || n.y != rqd->user->posy)
     {
-      item_delete_by_content(w->surface[rqd->user->posy][rqd->user->posx].players,
+      item_delete_by_content(w->surface[rqd->user->posy]
+			     [rqd->user->posx].players,
 			     (void*)rqd->user);
       rqd->user->posx = n.x;
       rqd->user->posy = n.y;
