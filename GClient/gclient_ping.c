@@ -53,7 +53,7 @@ void      *ping(void *arg)
       sleep(3);
       if (p->pm->auth == 0)
       {
-        error_show("ping", "pm->auth == 0", "Connection is lost");
+        error_show("ping", "pm->auth == 0", "Server is not responding");
         pthread_mutex_lock(&p->pm->lock);
         my_exit(p->pm, 1);
       }
