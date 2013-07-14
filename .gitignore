@@ -35,3 +35,4 @@ access.log
 /nbproject/private/
 nbproject
 /nbproject
+*.log
