@@ -9,7 +9,9 @@
 */
 
 #include "gclient_ctimeout.h"
+#include "gclient_errors.h"
 #include "tools.h"
+#include "error.h"
 #include <pthread.h>
 #include <stdlib.h>
 
@@ -25,6 +27,7 @@ void      *ctimeout(void *arg)
     str_put("GClient stop\n");
     exit(EXIT_SUCCESS);
   }
+  pthread_exit(NULL);
 }
 
 void  ctimeout_start(t_pm *pm, t_cto *c)

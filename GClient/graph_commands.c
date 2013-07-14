@@ -9,6 +9,9 @@
 */
 
 #include "graph_commands.h"
+#include "gclient_auth.h"
+#include "gclient_ping.h"
+#include "gclient_funcs.h"
 #include <string.h>
 
 static t_gcmd   graph_cmd[] =

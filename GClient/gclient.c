@@ -13,6 +13,9 @@
 #include "tools.h"
 #include "gclient_auth.h"
 #include "gclient_ping.h"
+#include "graph_commands.h"
+#include "gclient_funcs.h"
+#include "gclient_parser.h"
 #include "gclient_exit.h"
 #include "gclient_ctimeout.h"
 #include "socket.h"
@@ -122,6 +125,5 @@ int         main(int argc, char **argv)
   }
   c.cto = 1;
   client_prompt(&pm);
-  str_put("GClient stop\n");
   return (EXIT_FAILURE);
 }

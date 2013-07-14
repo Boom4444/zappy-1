@@ -9,6 +9,9 @@
 */
 
 #include "gclient_auth.h"
+#include "gclient_exit.h"
+#include "gclient_funcs.h"
+#include "gclient_errors.h"
 #include "error.h"
 #include "tools.h"
 #include <pthread.h>
@@ -37,6 +40,7 @@ void      *auth(void *arg)
   error_show("auth", "timeout", "Authentication failed");
   pthread_mutex_lock(&a->pm->lock);
   my_exit(a->pm, 1);
+  pthread_exit(NULL);
 }
 
 int   ll_auth(char *cmd, t_pm *pm)

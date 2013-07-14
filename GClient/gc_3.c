@@ -9,6 +9,9 @@
 */
 
 #include "graph_commands.h"
+#include "gclient_funcs.h"
+#include "gclient_ping.h"
+
 
 int   gcmd_pdi(char *cmd, t_pm *pm)
 {

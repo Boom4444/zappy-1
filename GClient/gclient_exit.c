@@ -10,6 +10,7 @@
 
 #include "gclient_exit.h"
 #include "tools.h"
+#include "gclient_errors.h"
 #include <pthread.h>
 #include <stdlib.h>
 #include <unistd.h>

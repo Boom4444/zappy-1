@@ -43,7 +43,7 @@ GOBJ		=	$(GSRC:.c=.o)
 
 TOBJ		=	$(TSRC:.c=.o)
 
-# FLAGS		=	-Wall -Wextra -Werror -g3
+FLAGS		=	-Wall -Wextra -Werror -g3
 
 CC		=	cc
 

@@ -9,6 +9,8 @@
 */
 
 #include "gclient_funcs.h"
+#include "gclient_exit.h"
+#include "gclient_errors.h"
 #include "socket.h"
 #include "error.h"
 #include "tools.h"

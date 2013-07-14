@@ -9,6 +9,8 @@
 */
 
 #include "graph_commands.h"
+#include "gclient_funcs.h"
+#include "gclient_ping.h"
 
 int   gcmd_pic(char *cmd, t_pm *pm)
 {

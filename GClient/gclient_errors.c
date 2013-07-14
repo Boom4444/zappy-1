@@ -9,6 +9,8 @@
 */
 
 #include "gclient_errors.h"
+#include "gclient_funcs.h"
+#include "gclient_exit.h"
 #include "error.h"
 
 void  cp_error(t_pm *pm, char *loc, char *msg)
