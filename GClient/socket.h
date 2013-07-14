@@ -1,5 +1,5 @@
 /*
-** socket.h for my_ftp in /home/ignati_i//projects/my_ftp/common
+** socket.h for my_ftp in /home/ignati_i/projects/my_ftp/common
 ** 
 ** Made by ivan ignatiev
 ** Login   <ignati_i@epitech.net>
