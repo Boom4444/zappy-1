@@ -5,7 +5,7 @@
 ** Login   <alcara_m@epitech.net>
 ** 
 ** Started on  Thu Jun 13 16:26:19 2013 Marin Alcaraz
-** Last update Sun Jul 14 17:06:15 2013 ivan ignatiev
+** Last update Sun Jul 14 18:55:18 2013 ivan ignatiev
 */
 
 #include	"main.h"
@@ -39,12 +39,13 @@ void		cli_avance(t_request_data *rqd, t_server *t, t_world *w)
 	     w->height);
   if (n.x != rqd->user->posx || n.y != rqd->user->posy)
     {
-      item_delete_by_content(w->surface[rqd->user->posy][rqd->user->posx].players,
-			     (void*)rqd->user);
+      item_delete_by_content(w->surface[rqd->user->posy]
+			     [rqd->user->posx].players,
+			     (void*)(rqd->user));
       rqd->user->posx = n.x;
       rqd->user->posy = n.y;
       item_pf(w->surface[rqd->user->posy][rqd->user->posx].players,
-	      (void*)rqd->user, sizeof(t_user_player));
+	      (void*)(rqd->user), sizeof(t_user_player));
     }
   cli_answer(rqd->user, t, "ok\n");
   sprintf(response, "ppo %d %d %d %d\n", rqd->user->number,

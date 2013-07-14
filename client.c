@@ -5,7 +5,7 @@
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Fri May 24 19:45:50 2013 ivan ignatiev
-** Last update Sun Jul 14 14:44:23 2013 ivan ignatiev
+** Last update Sun Jul 14 18:06:55 2013 ivan ignatiev
 */
 
 #include	<stdlib.h>
@@ -102,12 +102,12 @@ int		main(int argc, char **argv)
   int		sfd;
   t_options	options;
 
-  //    signal(SIGINT, sigint_handler);
-    printf("Welcome to ZAPPY Smart Prompt!\n");
-    if (client_options(argc, argv, &options) == EXIT_FAILURE)
-        return (EXIT_FAILURE);
-    printf("Trying to connect %s : %s\n", options.host, options.port);
-    if ((sfd = socket_connect(options.host, options.port)) < 0)
-        return (error_show("main", "socket_connect", "Connection failed"));
-    return (client_prompt(sfd));
+  signal(SIGINT, sigint_handler);
+  printf("Welcome to ZAPPY Smart Prompt!\n");
+  if (client_options(argc, argv, &options) == EXIT_FAILURE)
+    return (EXIT_FAILURE);
+  printf("Trying to connect %s : %s\n", options.host, options.port);
+  if ((sfd = socket_connect(options.host, options.port)) < 0)
+    return (error_show("main", "socket_connect", "Connection failed"));
+  return (client_prompt(sfd));
 }

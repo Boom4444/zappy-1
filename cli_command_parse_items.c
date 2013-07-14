@@ -5,7 +5,7 @@
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Sat Jul 13 18:19:07 2013 ivan ignatiev
-** Last update Sat Jul 13 18:23:34 2013 ivan ignatiev
+** Last update Sun Jul 14 19:39:54 2013 ivan ignatiev
 */
 
 #include	"main.h"
@@ -61,18 +61,19 @@ t_request_data		*cli_parse_prend(t_request_type *type,
   if ((rqd = cli_request_data_init(u->request, type->argc)) != NULL)
     {
       rqd->user = u;
-      if ((object = (char*)malloc(sizeof(char)
-				  * (strlen(u->request) - 5))) != NULL)
+      if (strlen(u->request) > 6
+	  && (object = (char*)malloc(sizeof(char)
+				     * (strlen(u->request) - 5))) != NULL)
         {
 	  *object = 0;
 	  sscanf(u->request, "prend %s\n", object);
 	  rqd->argv[0] = (void*)object;
 	  return (rqd);
         }
+      free(rqd->argv);
       free(rqd);
-      rqd = NULL;
     }
-  return (rqd);
+  return (NULL);
 }
 
 t_request_data		*cli_parse_pose(t_request_type *type,
@@ -86,17 +87,18 @@ t_request_data		*cli_parse_pose(t_request_type *type,
   (void) w;
   if ((rqd = cli_request_data_init(u->request, type->argc)) != NULL)
     {
-        rqd->user = u;
-        if ((object = (char*)malloc(sizeof(char)
-				    * (strlen(u->request) - 4))) != NULL)
-	  {
-	    *object = 0;
-            sscanf(u->request, "pose %s\n", object);
-            rqd->argv[0] = (void*)object;
-            return (rqd);
-	  }
-        free(rqd);
-        rqd = NULL;
+      rqd->user = u;
+      if (strlen(u->request) > 5
+	  && (object = (char*)malloc(sizeof(char)
+				     * (strlen(u->request) - 4))) != NULL)
+	{
+	  *object = 0;
+	  sscanf(u->request, "pose %s\n", object);
+	  rqd->argv[0] = (void*)object;
+	  return (rqd);
+	}
+      free(rqd->argv);
+      free(rqd);
     }
-  return (rqd);
+  return (NULL);
 }
