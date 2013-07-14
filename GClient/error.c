@@ -3,7 +3,7 @@
 ** 
 ** Made by Marin Alcaraz
 ** Login   <alcara_m@epitech.net>
-* 
+** 
 ** Started on  Fri Jun 05 16:42:14 2013 Marin Alcaraz
 ** Last update Thu Mar 03 15:51:18 2013 oleg kuznietsov
 */
