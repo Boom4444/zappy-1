@@ -20,7 +20,8 @@ void		usage_display(char *str)
   printf("-p port\n-x width of the world\n");
   printf("-y height of the world\n-n name_of_team_1 \"name of team 2\" ...\n");
   printf("-c number of clients allowed at the game beginning\n");
-  printf("-t time delay for executing actions.\n");
+  printf("-t time delay for executing actions\n");
+  printf("-d run in daemon mode {PORT}\n");
   exit(EXIT_SUCCESS);
 }
 
