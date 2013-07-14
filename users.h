@@ -5,7 +5,7 @@
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Sat Apr 27 17:03:35 2013 ivan ignatiev
-** Last update Sat Jul 13 14:17:25 2013 ivan ignatiev
+** Last update Sun Jul 14 21:29:51 2013 ivan ignatiev
 */
 
 #ifndef USERS_H_
@@ -125,7 +125,6 @@ void		users_life_proccess(t_server *s, t_world *w);
 t_team		*team_create(char *name, t_server *s);
 t_team		*team_search(t_list *team_list, char *team_name);
 t_list		*team_list_init(t_server *s, t_list *team_names);
-void		team_destroy(t_team *team);
 int		user_graph_destroy(t_user_graph *user);
 int		user_player_destroy(t_user_player *user,
 				    t_server *s, t_world *w);

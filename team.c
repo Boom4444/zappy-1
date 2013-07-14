@@ -5,7 +5,7 @@
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Sat Jul 13 12:19:50 2013 ivan ignatiev
-** Last update Sat Jul 13 12:58:35 2013 ivan ignatiev
+** Last update Sun Jul 14 21:29:20 2013 ivan ignatiev
 */
 
 #include	"main.h"
@@ -62,9 +62,4 @@ t_list		*team_list_init(t_server *s, t_list *team_names)
       current = current->next;
     }
   return (s->team_list);
-}
-
-void		team_destroy(t_team *team)
-{
-  (void) team;
 }

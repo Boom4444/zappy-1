@@ -5,7 +5,7 @@
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Sat Jul 13 19:44:14 2013 ivan ignatiev
-** Last update Sun Jul 14 18:59:06 2013 ivan ignatiev
+** Last update Sun Jul 14 21:22:35 2013 ivan ignatiev
 */
 
 #include	"main.h"
@@ -73,7 +73,7 @@ int		level_up(int eq_players, t_user_player *p,
   while (tmp_item != NULL)
       {
         T_PLAYER(tmp_item->cont)->level++;
-        if (T_PLAYER(tmp_item->cont)->level == 8)
+        if (T_PLAYER(tmp_item->cont)->level == MAX_LEVEL)
 	  T_PLAYER(tmp_item->cont)->team->v_flag++;
         tmp_item = tmp_item->next;
       }
@@ -115,7 +115,7 @@ void		check_victory(t_server *t)
         {
 	  sprintf(response, "seg %s\n", T_TEAM(tmp_team)->name);
 	  cli_answer_to_all_graph(t, response);
-	  t->result = 0;
+	  t->result = 1;
 	  log_show("check_vicroty", "", "Team %s won!",
 		   T_TEAM(tmp_team)->name);
 	  return ;

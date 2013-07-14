@@ -5,13 +5,14 @@
 ** Login   <alcara_m@epitech.net>
 ** 
 ** Started on  Wed Jul 10 10:42:13 2013 Marin Alcaraz
-** Last update Sun Jul 14 18:19:05 2013 ivan ignatiev
+** Last update Sun Jul 14 21:24:23 2013 ivan ignatiev
 */
 
 #ifndef INCANTATION_H_
 # define INCANTATION_H_
 
 # define VICTORY	6
+# define MAX_LEVEL	8
 
 extern int	g_level_combinations[7][7];
 
