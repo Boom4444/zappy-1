@@ -22,9 +22,9 @@ void  cp_error(t_pm *pm, char *loc, char *msg)
     my_exit(pm, -1);
 }
 
-void  ts_error(t_pm *pm, int ret)
+void  ts_error(char *loc, t_pm *pm, int ret)
 {
-  error_show("client_prompt", "pthread_create", strerror(ret));
+  error_show(loc, "pthread_create", strerror(ret));
   my_exit(pm, -1);
 }
 

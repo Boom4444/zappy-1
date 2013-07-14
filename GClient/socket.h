@@ -1,29 +1,20 @@
 /*
-** socket.h for Zappy in /home/el/Zappy/GClient
-**
-** Made by oleg kuznietsov
-** Login   <kuznet_o@epitech.eu>
-**
-** Started on  Sun Jul  14 12:27:10 2013 oleg kuznietsov
-** Last update  Sun Jul  14 12:27:10 2013 oleg kuznietsov
+** socket.h for my_ftp in /home/ignati_i//projects/my_ftp/common
+** 
+** Made by ivan ignatiev
+** Login   <ignati_i@epitech.net>
+** 
+** Started on  Sun Apr 14 04:01:11 2013 ivan ignatiev
+** Last update Sun Apr 14 11:36:21 2013 ivan ignatiev
 */
 
 #ifndef SOCKET_H_
 # define SOCKET_H_
 
-#include <netdb.h>
 #include <sys/types.h>
 #include <sys/socket.h>
 
-typedef struct        s_socket_options
-{
-  struct protoent     *pe;
-  int                 fd;
-  struct sockaddr_in  s_in;
-  int                 port;
-  const char          *ip;
-}                     t_so;
-
-int   socket_connect(const char *ht, const char *pr);
+int	socket_listen(int port);
+int	socket_connect(const char *host, const char *port);
 
 #endif /* !SOCKET_H_ */

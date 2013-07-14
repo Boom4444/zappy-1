@@ -117,10 +117,10 @@ int         main(int argc, char **argv)
   str_put("Welcome to Zappy GClient !\n");
   printf("Trying to connect %s:%s\n", options.host, options.port);
   ctimeout_start(&pm, &c);
-  if ((pm.sfd = socket_connect(options.host, options.port)) == -1)
+  if ((pm.sfd = socket_connect(options.host, options.port)) < 0)
   {
-    error_show("main", "socket_connect", "Connection failed");
     str_put("GClient stop\n");
+    error_show("main", "socket_connect", "Connection failed");
     return (EXIT_SUCCESS);
   }
   c.cto = 1;
