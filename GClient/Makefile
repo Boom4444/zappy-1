@@ -12,33 +12,33 @@ GNAME		=	gclient
 
 TNAME		=	Trantor
 
-GSRC		=	error.c \
-			gc_3.c \
-			gclient.c \
-			gclient_funcs.c \
-			graph_commands.c \
-			socket.c \
-			gc_1.c \
-			gc_4.c \
-			gc_5.c \
-			gclient_errors.c \
-			gclient_parser.c \
-			item.c \
-			tools.c \
-			gc_2.c \
-			gclient_auth.c \
-			gclient_exit.c \
-			gclient_ctimeout.c \
-			gclient_ping.c \
-			list.c
+GSRC		=	GClient/error.c \
+			GClient/gc_3.c \
+			GClient/gclient.c \
+			GClient/gclient_funcs.c \
+			GClient/graph_commands.c \
+			GClient/socket.c \
+			GClient/gc_1.c \
+			GClient/gc_4.c \
+			GClient/gc_5.c \
+			GClient/gclient_errors.c \
+			GClient/gclient_parser.c \
+			GClient/item.c \
+			GClient/tools.c \
+			GClient/gc_2.c \
+			GClient/gclient_auth.c \
+			GClient/gclient_exit.c \
+			GClient/gclient_ctimeout.c \
+			GClient/gclient_ping.c \
+			GClient/list.c
 
-TSRC		=	clip_ressources.c \
-			commands.c \
-			list.c \
-			error.c \
-			sdl_init.c \
-			show_map.c \
-			main.c
+TSRC		=	GClient/clip_ressources.c \
+			GClient/commands.c \
+			GClient/list.c \
+			GClient/error.c \
+			GClient/sdl_init.c \
+			GClient/show_map.c \
+			GClient/main.c
 
 GOBJ		=	$(GSRC:.c=.o)
 
