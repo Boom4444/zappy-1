@@ -5,11 +5,12 @@
 ** Login   <alcara_m@epitech.net>
 ** 
 ** Started on  Thu Jun 20 17:33:58 2013 Marin Alcaraz
-** Last update Sun Jul 14 12:15:24 2013 ivan ignatiev
+** Last update Sun Jul 14 07:34:23 2013 Marin Alcaraz
 */
 
 #include	"main.h"
 #include	"list.h"
+#include	"options.h"
 #include	"error.h"
 #include	"trantor.h"
 
@@ -59,20 +60,6 @@ void		world_destroy(t_world *w)
   free(w->surface);
 }
 
-int		mineral_checker(t_square_unit *sq)
-{
-  int		i;
-
-  i = 0;
-  while (i < RES_TYPES_COUNT)
-    {
-      if (sq->resources[i] != 0)
-	return (1);
-      i = i + 1;
-    }
-  return (0);
-}
-
 int		display_world(t_world *w, int width, int height)
 {
   int		i;
@@ -98,26 +85,5 @@ int		display_world(t_world *w, int width, int height)
       j = 0;
     }
   printf("\n\n");
-  return (0);
-}
-
-int		generate_resource(t_world *w, int width, int height)
-{
-  int		amount;
-  int		minx;
-  int		miny;
-  int		resource;
-
-  amount = 0;
-  srand(time(NULL));
-  while (amount < RESOURCE_LIMIT)
-    {
-      minx = _MOD(rand(), width);
-      miny = _MOD(rand(), height);
-      resource = _MOD(rand(), 7);
-      (w->surface[miny][minx]).resources[resource]++;
-      amount = amount + 1;
-    }
-  log_show("generate_resource", "", "Resources ready to use");
   return (0);
 }

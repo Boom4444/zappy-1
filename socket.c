@@ -5,7 +5,7 @@
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Sun Apr 14 03:49:32 2013 ivan ignatiev
-** Last update Sat Jul 13 17:30:19 2013 ivan ignatiev
+** Last update Sun Jul 14 16:44:40 2013 ivan ignatiev
 */
 
 #include		"main.h"
@@ -60,7 +60,7 @@ int			socket_connect(const char *host,
 
   if (socket_hints(&hints) == -1)
     return (-1);
-  if (getaddrinfo(host, port, &hints, &result) == -1)
+  if (getaddrinfo(host, port, &hints, &result) != 0)
     return (-1);
   rp = result;
   while (rp != NULL)

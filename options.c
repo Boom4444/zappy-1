@@ -5,7 +5,7 @@
 ** Login   <kuznet_o@epitech.net>
 **
 ** Started on  Fri Jun  07 00:47:46 2013 oleg kuznietsov
-** Last update Fri Jul 12 21:47:33 2013 Marin Alcaraz
+** Last update Sun Jul 14 17:25:15 2013 ivan ignatiev
 */
 
 #include	"main.h"
@@ -68,7 +68,7 @@ void		options_get(char *argv[], char c, unsigned int *opt)
       exit(EXIT_SUCCESS);
     }
   *opt = atoi(optarg);
-  if (optarg[0] != '0' && *opt == 0)
+  if (*opt <= 0)
     {
       printf("%s: invalid argument -- \"%s\"\n", argv[0], optarg);
       printf("Use \"%s --help\" to get more information.\n", argv[0]);

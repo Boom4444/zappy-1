@@ -1,11 +1,11 @@
 /*
-** trantor.h for zappy in /home/ignatiev/Projects/zappy
+** trantor.h for zappy in /home/hero/zappy
 ** 
 ** Made by Marin Alcaraz
 ** Login   <alcara_m@epitech.net>
 ** 
 ** Started on  Thu Jun 20 17:38:38 2013 Marin Alcaraz
-** Last update Sun Jul 14 12:15:00 2013 ivan ignatiev
+** Last update Sun Jul 14 17:20:04 2013 ivan ignatiev
 */
 
 #ifndef TRANTOR_H_
@@ -20,7 +20,7 @@
 # define THYSTAME		6
 # define RES_TYPES_COUNT	7
 # define RESOURCE_LIMIT		256
-# define _MOD(x, d)		(((x) < 0) ? ((d) - ((-(x)) % (d))) : ((x) % (d)))
+# define _MOD(x, d)		(((d) + ((x) % (d))) % (d))
 
 typedef struct	s_point
 {
@@ -45,6 +45,7 @@ int	init_world(t_world *w, int width, int height);
 int	display_world(t_world *w, int width, int height);
 int	generate_resource(t_world *w, int width, int height);
 int	mineral_checker(t_square_unit *sq);
+void	random_number(int *container, int limit);
 void	world_destroy(t_world *w);
 
 #endif /* !TRANTOR_H_ */

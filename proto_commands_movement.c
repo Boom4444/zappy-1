@@ -5,7 +5,7 @@
 ** Login   <alcara_m@epitech.net>
 ** 
 ** Started on  Thu Jun 13 16:26:19 2013 Marin Alcaraz
-** Last update Sun Jul 14 15:31:44 2013 ivan ignatiev
+** Last update Sun Jul 14 17:06:15 2013 ivan ignatiev
 */
 
 #include	"main.h"
@@ -30,16 +30,22 @@ static t_point	g_steps[] =
 
 void		cli_avance(t_request_data *rqd, t_server *t, t_world *w)
 {
+  t_point	n;
   char		response[ANSWER_SIZE + 1];
 
-  item_delete_by_content(w->surface[rqd->user->posy][rqd->user->posx].players,
-			 (void*)rqd->user);
-  rqd->user->posx = _MOD(rqd->user->posx + g_steps[rqd->user->orientation].x,
-			 w->width);
-  rqd->user->posy = _MOD(rqd->user->posy + g_steps[rqd->user->orientation].y,
-			 w->height);
-  item_pb(w->surface[rqd->user->posy][rqd->user->posx].players,
-	  (void*)rqd->user, sizeof(t_user));
+  n.x = _MOD(rqd->user->posx + g_steps[rqd->user->orientation].x,
+	     w->width);
+  n.y = _MOD(rqd->user->posy + g_steps[rqd->user->orientation].y,
+	     w->height);
+  if (n.x != rqd->user->posx || n.y != rqd->user->posy)
+    {
+      item_delete_by_content(w->surface[rqd->user->posy][rqd->user->posx].players,
+			     (void*)rqd->user);
+      rqd->user->posx = n.x;
+      rqd->user->posy = n.y;
+      item_pf(w->surface[rqd->user->posy][rqd->user->posx].players,
+	      (void*)rqd->user, sizeof(t_user_player));
+    }
   cli_answer(rqd->user, t, "ok\n");
   sprintf(response, "ppo %d %d %d %d\n", rqd->user->number,
 	  rqd->user->posx, rqd->user->posy, rqd->user->orientation + 1);

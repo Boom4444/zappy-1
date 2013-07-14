@@ -108,7 +108,8 @@ void		cli_pose(t_request_data *rqd, t_server *t, t_world *w)
   char		out[ANSWER_SIZE];
 
   item_index = match_index(rqd->argv[0]);
-  if (item_index >= 0 && item_index < RES_TYPES_COUNT)
+  if (item_index >= 0 && item_index < RES_TYPES_COUNT &&
+      (rqd->user)->inventory[item_index] > 0)
     {
       --((rqd->user)->inventory[item_index]);
       ++((w->surface[rqd->user->posy]

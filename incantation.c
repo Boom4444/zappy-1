@@ -39,7 +39,7 @@ int		init_incantation(t_list *piv, t_request_data *rqd,
   t_item	*tmp_item;
   char		response[ANSWER_SIZE];
   char		aux_level[ANSWER_SIZE];
-  
+
   tmp_item = list_get_head(w->surface[rqd->user->posy]
 			   [rqd->user->posx].players);
   sprintf(response, "pic %d %d %d", rqd->user->posx, rqd->user->posy,
@@ -67,7 +67,7 @@ int		incantate(t_list *players, t_user_player *p,
 			  t_server *t, t_world *w)
 {
   int		eq_players;
-  
+
   eq_players = count_players(w->surface[p->posy]
 			     [p->posx].players, p);
   if (eq_players >= g_level_combinations[p->level - 1][0])
@@ -90,7 +90,7 @@ int		end_incantation(t_list *plv_list, t_request_data *rqd,
   char		response[ANSWER_SIZE];
   char		plv_str[ANSWER_SIZE];
   t_item	*tmp_item;
-  
+
   sprintf(response, "pie %d %d ok\n", rqd->user->posx,
 	  rqd->user->posy);
   cli_answer_to_all_graph(s, response);
@@ -113,7 +113,7 @@ int		end_incantation(t_list *plv_list, t_request_data *rqd,
 int		fail_incantation(t_request_data *rqd, t_server *s)
 {
   char		response[ANSWER_SIZE];
-  
+
   sprintf(response, "pie %d %d ko\n", rqd->user->posx,
 	  rqd->user->posy);
   cli_answer_to_all_graph(s, response);

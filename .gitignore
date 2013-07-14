@@ -36,3 +36,4 @@ access.log
 nbproject
 /nbproject
 *.log
+*.py
