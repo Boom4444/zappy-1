@@ -5,11 +5,11 @@
 ** Login   <kuznet_o@epitech.net>
 **
 ** Started on  Wed Jun 05 19:21:23 2013 oleg kuznietsov
-** Last update Sat Jul 13 18:28:09 2013 oleg kuznietsov
+** Last update Sun Jul 14 21:48:01 2013 ivan ignatiev
 */
 
-#include <stdlib.h>
-#include "list.h"
+#include	<stdlib.h>
+#include	"list.h"
 
 t_list		*list_init()
 {

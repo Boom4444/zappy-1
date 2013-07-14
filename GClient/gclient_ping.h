@@ -5,26 +5,26 @@
 ** Login   <kuznet_o@epitech.eu>
 **
 ** Started on  Sun Jul  14 01:54:50 2013 oleg kuznietsov
-** Last update  Sun Jul  14 01:54:50 2013 oleg kuznietsov
+** Last update Sun Jul 14 22:27:51 2013 ivan ignatiev
 */
 
 #ifndef GCLIENT_PING_H_
 # define GCLIENT_PING_H_
 
-# include <pthread.h>
-# include "gclient.h"
+# include	<pthread.h>
+# include	"gclient.h"
 
-typedef struct    s_ping_args
+typedef struct	s_ping_args
 {
-  t_pm            *pm;
-  int             pret;
-  pthread_t       th1;
-  pthread_t       th2;
-}                 t_ping;
+  t_pm		*pm;
+  int		pret;
+  pthread_t	th1;
+  pthread_t	th2;
+}		t_ping;
 
-void  *ping_end(void *arg);
-void  ping_save(t_pm *pm);
-void  *ping(void *arg);
-void  ping_start(t_pm *pm, t_ping *p);
+void	*ping_end(void *arg);
+void	ping_save(t_pm *pm);
+void	*ping(void *arg);
+void	ping_start(t_pm *pm, t_ping *p);
 
 #endif /* !GCLIENT_PING_H_ */

@@ -5,16 +5,15 @@
 ** Login   <liu_q@epitech.net>
 ** 
 ** Started on  Tue Jul  9 19:23:05 2013 qiuyan liu
-** Last update Sat Jul 13 13:05:54 2013 kuznietsov oleg
+** Last update Sun Jul 14 21:56:06 2013 ivan ignatiev
 */
 
-#include "SDL/SDL.h"
-#include "SDL/SDL_image.h"
+#include <SDL/SDL.h>
 #include "clip_ressources.h"
 #include "map.h"
 
 void		apply_surface(int x, int y, SDL_Surface* source,
-			       SDL_Surface* destination, SDL_Rect* clip)
+			      SDL_Surface* destination, SDL_Rect* clip)
 {
   SDL_Rect	offset;
 

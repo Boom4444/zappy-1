@@ -5,17 +5,17 @@
 ** Login   <alcara_m@epitech.net>
 ** 
 ** Started on  Fri Jun 05 16:42:14 2013 Marin Alcaraz
-** Last update Thu Mar 03 15:51:18 2013 oleg kuznietsov
+** Last update Sun Jul 14 21:59:56 2013 ivan ignatiev
 */
 
-#include <time.h>
-#include <unistd.h>
-#include <stdio.h>
-#include "error.h"
+#include	<time.h>
+#include	<unistd.h>
+#include	<stdio.h>
+#include	"error.h"
 
-void  error_put(char *s)
+void	error_put(char *s)
 {
-  int i;
+  int	i;
 
   i = 0;
   while (s[i] != 0)
@@ -25,11 +25,11 @@ void  error_put(char *s)
   }
 }
 
-int       error_log(char *loc, char *func, char *msg)
+int		error_log(char *loc, char *func, char *msg)
 {
-  FILE    *log_stream;
-  char    *slog_time;
-  time_t  log_time;
+  FILE		*log_stream;
+  char		*slog_time;
+  time_t	log_time;
 
   log_stream = fopen("error.log", "a");
   if (log_stream == NULL)
@@ -46,7 +46,7 @@ int       error_log(char *loc, char *func, char *msg)
   return (1);
 }
 
-int   error_show(char *loc, char *func, char *msg)
+int	error_show(char *loc, char *func, char *msg)
 {
   write(STDERR_FILENO, "Error: ", 7);
   error_put(msg);

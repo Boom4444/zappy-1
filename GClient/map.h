@@ -5,14 +5,14 @@
 ** Login   <liu_q@epitech.net>
 ** 
 ** Started on  Tue Jul  9 16:26:20 2013 qiuyan liu
-** Last update Sat Jul 13 13:48:53 2013 qiuyan liu
+** Last update Sun Jul 14 22:23:09 2013 ivan ignatiev
 */
 
 #ifndef MAP_H_
 # define MAP_H_
 
-# include "SDL/SDL.h"
-# include "SDL/SDL_image.h"
+# include <SDL/SDL.h>
+# include <SDL/SDL_image.h>
 # include "list.h"
 
 # define SCREEN_WIDTH	9
@@ -21,8 +21,7 @@
 # define SQUARE_SIZE	60
 # define FOOD_WIDTH	30
 # define FOOD_HEIGHT	30
-# define SPEED 1
-# define _MOD(x, d) (((x) < 0) ? (((d) - ((-(x)) % (d))) % (d)) : (x) % (d))
+# define SPEED		1
 # define FOOD		11
 # define LINEMATE	12
 # define DERAUMERE	13
@@ -31,6 +30,7 @@
 # define PHIRAS		16
 # define THYSTAME	17
 # define NUM_RESSOURCES	7
+# define _MOD(x, d)	(((d) + ((x) % (d))) % (d))
 
 typedef struct	s_point
 {

@@ -5,11 +5,11 @@
 ** Login   <liu_q@epitech.net>
 ** 
 ** Started on  Tue Jul  9 14:47:14 2013 qiuyan liu
-** Last update Sat Jul 13 12:46:16 2013 qiuyan liu
+** Last update Sun Jul 14 21:53:00 2013 ivan ignatiev
 */
 
-#include "map.h"
-#include "list.h"
+#include	"map.h"
+#include	"list.h"
 
 int	taille_carte(t_map *w, int x, int y)
 {
@@ -34,7 +34,7 @@ void	contenu_carte(t_square_info *res_info, t_map *map)
   int	i;
 
   i = 0;
-  while (i <  map->height * map->width)
+  while (i < map->height * map->width)
     {
       contenu_une_carte(&res_info[i], map);
       i++;

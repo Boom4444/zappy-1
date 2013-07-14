@@ -5,14 +5,14 @@
 ** Login   <liu_q@epitech.net>
 ** 
 ** Started on  Tue Jul  9 19:28:47 2013 qiuyan liu
-** Last update Sat Jul 13 13:51:08 2013 kuznietsov oleg
+** Last update Sun Jul 14 22:17:41 2013 ivan ignatiev
 */
 
-#include "SDL/SDL.h"
-#include "SDL/SDL_image.h"
-#include "map.h"
-#include "show_map.h"
-#include "sdl_init.h"
+#include	<SDL/SDL.h>
+#include	<SDL/SDL_image.h>
+#include	"map.h"
+#include	"show_map.h"
+#include	"sdl_init.h"
 
 int	init_map(t_map *w, int width, int height)
 {
@@ -91,29 +91,29 @@ void	show_res_square(t_map *map, t_point p1, t_graphic *g, t_point p2)
     }
 }
 
-void        show_ressources(t_graphic *g, t_map *map)
+void	show_ressources(t_graphic *g, t_map *map)
 {
-  t_s       s;
+  t_s	s;
 
   s.y = g->CURRENT_Y;
   s.i = 0;
   while (s.i < SCREEN_HEIGHT)
-  {
-    s.x = g->CURRENT_X;
-    s.j = 0;
-    while (s.j < SCREEN_WIDTH)
     {
-      apply_surface(s.j * SQUARE_SIZE, s.i * SQUARE_SIZE,
-        g->ressources, g->screen, &g->clip[0]);
-        s.p1.x = s.x;
-        s.p1.y = s.y;
-        s.p2.x = s.j;
-        s.p2.y = s.i;
-      show_res_square(map, s.p1, g, s.p2);
-      s.x = _MOD(s.x + 1 , map->width);
-      s.j++;
+      s.x = g->CURRENT_X;
+      s.j = 0;
+      while (s.j < SCREEN_WIDTH)
+	{
+	  apply_surface(s.j * SQUARE_SIZE, s.i * SQUARE_SIZE,
+			g->ressources, g->screen, &g->clip[0]);
+	  s.p1.x = s.x;
+	  s.p1.y = s.y;
+	  s.p2.x = s.j;
+	  s.p2.y = s.i;
+	  show_res_square(map, s.p1, g, s.p2);
+	  s.x = _MOD(s.x + 1 , map->width);
+	  s.j++;
+	}
+      s.y = _MOD(s.y + 1, map->height);
+      s.i++;
     }
-    s.y = _MOD(s.y + 1, map->height);
-    s.i++;
-  }
 }

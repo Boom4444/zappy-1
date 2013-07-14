@@ -5,14 +5,14 @@
 ** Login   <kuznet_o@epitech.eu>
 **
 ** Started on  Sun Jul  14 21:23:19 2013 oleg kuznietsov
-** Last update  Sun Jul  14 21:23:19 2013 oleg kuznietsov
+** Last update Sun Jul 14 21:42:19 2013 ivan ignatiev
 */
 
-#include "tools.h"
+#include	"tools.h"
 
-int   str_put(char *s)
+int		str_put(char *s)
 {
-  int i;
+  int		i;
 
   i = 0;
   while (s[i] != 0)

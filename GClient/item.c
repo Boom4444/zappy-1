@@ -5,11 +5,11 @@
 ** Login   <kuznet_o@epitech.net>
 **
 ** Started on  Wed Jun 05 19:21:34 2013 oleg kuznietsov
-** Last update Sat Jul 13 18:40:25 2013 oleg kuznietsov
+** Last update Sun Jul 14 22:17:05 2013 ivan ignatiev
 */
 
-#include <stdlib.h>
-#include "list.h"
+#include	<stdlib.h>
+#include	"list.h"
 
 t_item		*item_create(void *src_content, int content_size)
 {

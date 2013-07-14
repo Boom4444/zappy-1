@@ -5,11 +5,11 @@
 ** Login   <liu_q@epitech.net>
 ** 
 ** Started on  Tue Jul  9 16:37:56 2013 qiuyan liu
-** Last update Wed Jul 10 18:52:11 2013 qiuyan liu
+** Last update Sun Jul 14 21:52:37 2013 ivan ignatiev
 */
 
-#include "SDL/SDL.h"
-#include "map.h"
+#include	<SDL/SDL.h>
+#include	"map.h"
 
 void	clip_background(SDL_Rect clip[20])
 {

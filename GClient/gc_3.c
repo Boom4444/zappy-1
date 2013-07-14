@@ -5,73 +5,73 @@
 ** Login   <kuznet_o@epitech.eu>
 **
 ** Started on  Sat Jul  13 20:35:24 2013 oleg kuznietsov
-** Last update Sat May  13 20:35:24 2013 oleg kuznietsov
+** Last update Sun Jul 14 22:02:53 2013 ivan ignatiev
 */
 
-#include "graph_commands.h"
-#include "gclient_funcs.h"
-#include "gclient_ping.h"
+#include	"graph_commands.h"
+#include	"gclient_funcs.h"
+#include	"gclient_ping.h"
 
-int   gcmd_pdi(char *cmd, t_pm *pm)
+int	gcmd_pdi(char *cmd, t_pm *pm)
 {
   if (nsp_get(cmd) != 1)
-  {
-    cmd_put(-1, cmd);
-    cmd_send(pm, "mct\n");
-    return (-1);
-  }
+    {
+      cmd_put(-1, cmd);
+      cmd_send(pm, "mct\n");
+      return (-1);
+    }
   ping_save(pm);
   cmd_put(1, cmd);
   return (1);
 }
 
-int   gcmd_enw(char *cmd, t_pm *pm)
+int	gcmd_enw(char *cmd, t_pm *pm)
 {
   if (nsp_get(cmd) != 4)
-  {
-    cmd_put(-1, cmd);
-    cmd_send(pm, "mct\n");
-    return (-1);
-  }
+    {
+      cmd_put(-1, cmd);
+      cmd_send(pm, "mct\n");
+      return (-1);
+    }
   ping_save(pm);
   cmd_put(1, cmd);
   return (1);
 }
 
-int   gcmd_eht(char *cmd, t_pm *pm)
+int	gcmd_eht(char *cmd, t_pm *pm)
 {
   if (nsp_get(cmd) != 1)
-  {
-    cmd_put(-1, cmd);
-    cmd_send(pm, "mct\n");
-    return (-1);
-  }
+    {
+      cmd_put(-1, cmd);
+      cmd_send(pm, "mct\n");
+      return (-1);
+    }
   ping_save(pm);
   cmd_put(1, cmd);
   return (1);
 }
 
-int   gcmd_ebo(char *cmd, t_pm *pm)
+int	gcmd_ebo(char *cmd, t_pm *pm)
 {
   if (nsp_get(cmd) != 1)
-  {
-    cmd_put(-1, cmd);
-    cmd_send(pm, "mct\n");
-    return (-1);
-  }
+    {
+      cmd_put(-1, cmd);
+      cmd_send(pm, "mct\n");
+      return (-1);
+    }
   ping_save(pm);
   cmd_put(1, cmd);
   return (1);
 }
 
-int   gcmd_edi(char *cmd, t_pm *pm)
+int	gcmd_edi(char *cmd, t_pm *pm)
 {
   if (nsp_get(cmd) != 1)
-  {
-    cmd_put(-1, cmd);
-    cmd_send(pm, "mct\n");
-    return (-1);
-  }
+    {
+      cmd_put(-1, cmd);
+      cmd_send(pm, "mct\n");
+      return (-1);
+    }
   ping_save(pm);
   cmd_put(1, cmd);
   return (1);
