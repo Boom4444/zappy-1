@@ -10,6 +10,10 @@
 
 #include "socket.h"
 #include "error.h"
+#include <stdlib.h>
+#include <netinet/in.h>
+#include <arpa/inet.h>
+#include <unistd.h>
 
 int     socket_connect(const char *ht, const char *pr)
 {
