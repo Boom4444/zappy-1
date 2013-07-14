@@ -12,9 +12,9 @@ stop_zappy(){
 start_zappy(){
     if [ $# -eq 2 ]
     then
-        ./server_daemon -p $2
+        ./server -d -p $2
     else
-        ./server_daemon
+        ./server -d
     fi
     PID=`cut -d ":" -f 2 zappy.pid`
     echo "Server started with PID:$PID"
@@ -33,7 +33,7 @@ status_zappy(){
 
 if [ $# -lt 1 ]
 then
-    echo "Usage: ./server_status [start, stop, status, restart] {PORT to start}"
+    echo "Usage: ./manager.sh [start, stop, status, restart] {PORT to start}"
     exit
 fi
 
