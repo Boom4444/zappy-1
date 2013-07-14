@@ -5,7 +5,7 @@
 ** Login   <kuznet_o@epitech.net>
 **
 ** Started on  Wed Jun  05 19:21:34 2013 oleg kuznietsov
-** Last update Sat Jul 13 18:40:25 2013 ivan ignatiev
+** Last update Sun Jul 14 19:35:32 2013 ivan ignatiev
 */
 
 #include	"main.h"
@@ -37,7 +37,6 @@ int		item_pf(t_list *list, void *data, int size)
   item = item_create(data, size);
   if (list == NULL || item == NULL)
     return (-1);
-  item->prev = NULL;
   item->next = list->head;
   if (list->head != NULL)
     list->head->prev = item;
@@ -56,7 +55,6 @@ int		item_pb(t_list *list, void *data, int size)
   if (list == NULL || item == NULL)
     return (-1);
   item->prev = list->tail;
-  item->next = NULL;
   if (list->tail != NULL)
     list->tail->next = item;
   if (list->head == NULL)
@@ -85,7 +83,7 @@ int		item_delete(t_list *list, t_item *item)
 	    current->prev->next = current->next;
 	  if (current->next != NULL)
 	    current->next->prev = current->prev;
-	  free(item);
+	  free(current);
 	  list->len -= 1;
 	  return (0);
 	}

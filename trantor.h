@@ -5,7 +5,7 @@
 ** Login   <alcara_m@epitech.net>
 ** 
 ** Started on  Thu Jun 20 17:38:38 2013 Marin Alcaraz
-** Last update Sun Jul 14 08:09:16 2013 Marin Alcaraz
+** Last update Sun Jul 14 17:20:04 2013 ivan ignatiev
 */
 
 #ifndef TRANTOR_H_
@@ -20,7 +20,7 @@
 # define THYSTAME		6
 # define RES_TYPES_COUNT	7
 # define RESOURCE_LIMIT		256
-# define _MOD(x, d)		(((x) < 0) ? ((d) - ((-(x)) % (d))) : ((x) % (d)))
+# define _MOD(x, d)		(((d) + ((x) % (d))) % (d))
 
 typedef struct	s_point
 {

@@ -5,11 +5,12 @@
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Fri May 24 19:45:50 2013 ivan ignatiev
-** Last update Sun Jul 14 18:06:55 2013 ivan ignatiev
+** Last update Sun Jul 14 19:59:07 2013 ivan ignatiev
 */
 
 #include	<stdlib.h>
 #include	<stdio.h>
+#include	<string.h>
 #include	<sys/time.h>
 #include	<sys/types.h>
 #include	<signal.h>
@@ -20,29 +21,83 @@
 
 static int	g_connect = 0;
 
+static int	g_number = 0;
+
+static char	*g_teams[] = {
+  "1\n",
+  "2\n",
+  "3\n",
+  "4\n"
+};
+
+static char	*g_cmds[] = {
+  "fork\n",
+  "avance\n",
+  "droite\n",
+  "pose 2\n",
+  "gauche\n",
+  "pose 3\n",
+  "droite\n",
+  "gauche\n",
+  "WRONG COMMAND\n",
+  "pose 4\n",
+  "JUSTwrong\n",
+  "incantation\n",
+  "broadcast TEST\n",
+  "pose 5\n",
+  "broadcast TEST WORDS\n"
+  "avance\n",
+  "prend food\n",
+  "pose 6\n",
+  "prend deraumer\n",
+  "prend linemate\n",
+  "pose sibur\n",
+  "prend 0\n",
+  "prend 1\n",
+  "pose 6\n",
+  "prend -1\n",
+  "pose 7\n",
+  "pose 1\n",
+  "prend 2n",
+  "pose linemate\n",
+  "avance\n",
+  "avance\n",
+  "pose\n",
+  "prend 3\n",
+  "prend\n",
+  "broadcast\n",
+  "expulse\n",
+  "connect_nbr\n",
+  "mct\n",
+  "prend 4\n",
+  "prend 5\n",
+  "prend 6\n",
+  "sgt\n",
+  "msz\n"
+};
+
 int		client_process(int sfd, fd_set *fdreadset)
 {
   char		buf[255];
   int		len;
+  int		_num;
 
-  if (FD_ISSET(1, fdreadset))
-    {
-      if (!g_connect)
-	return (1);
-      if ((len = read(1, buf, 255)) <= 0)
-	return (-1);
-      buf[len] = '\0';
-      printf("#zappy(client)<--%s", buf);
-      if (write(sfd, buf, len) < 0)
-	return (-1);
-    }
   if (FD_ISSET(sfd, fdreadset))
     {
       if ((len = read(sfd, buf, 255)) <= 0)
 	return (-1);
+      if (!g_connect)
+	{
+	  _num = rand() % 4;
+	  write(sfd, g_teams[_num], strlen(g_teams[_num]));
+	  printf("#zappy(client)<--%s", g_teams[_num]);
+	}
       g_connect = 1;
+      _num = rand() % 39;
+      printf("#zappy(client-%d)<--%s", g_number, g_cmds[_num]);
       buf[len] = '\0';
-      printf("zappy(server)-->%s", buf);
+      printf("#zappy(server-%d)-->%s", g_number, buf);
+      write(sfd, g_cmds[_num], strlen(g_cmds[_num]));
     }
   return (1);
 }
@@ -52,20 +107,17 @@ int		client_prompt(int sfd)
   int		prompt;
   int		rs;
   fd_set	fdreadset;
-  char		delim;
 
   prompt = 1;
-  delim = '#';
   while (prompt > 0)
     {
       FD_ZERO(&fdreadset);
-      FD_SET(1, &fdreadset);
       FD_SET(sfd, &fdreadset);
-      write(0, &delim, 1);
       if ((rs = select(sfd + 1, &fdreadset, NULL, NULL, NULL)) < 0)
-            prompt = -1;
+	prompt = -1;
       else
 	prompt = client_process(sfd, &fdreadset);
+      usleep((rand() % 100) * 10000);
     }
   close(sfd);
   return (prompt == 0 ? EXIT_SUCCESS : EXIT_FAILURE);
@@ -92,17 +144,13 @@ int		client_options(int argc, char **argv,
   return (EXIT_SUCCESS);
 }
 
-void		sigint_handler(int sig)
-{
-  (void) sig;
-}
-
 int		main(int argc, char **argv)
 {
   int		sfd;
   t_options	options;
 
-  signal(SIGINT, sigint_handler);
+  g_number = atoi(argv[1]);
+  srand(time(NULL) + g_number);
   printf("Welcome to ZAPPY Smart Prompt!\n");
   if (client_options(argc, argv, &options) == EXIT_FAILURE)
     return (EXIT_FAILURE);

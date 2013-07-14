@@ -5,7 +5,7 @@
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Sat Jul 13 19:44:14 2013 ivan ignatiev
-** Last update Sun Jul 14 13:02:23 2013 ivan ignatiev
+** Last update Sun Jul 14 18:59:06 2013 ivan ignatiev
 */
 
 #include	"main.h"
@@ -21,6 +21,7 @@
 #include	"item.h"
 #include	"error.h"
 #include	"incantation.h"
+#include	"resource_manager.h"
 
 int		count_players(t_list *players, t_user_player *player)
 {
@@ -31,7 +32,8 @@ int		count_players(t_list *players, t_user_player *player)
   tmp_item = list_get_head(players);
   while (tmp_item != NULL)
     {
-      if (T_PLAYER(tmp_item->cont)->level == player->level)
+      if (T_PLAYER(tmp_item->cont)->connected == CONNECTED
+	  && T_PLAYER(tmp_item->cont)->level == player->level)
 	eq_players = eq_players + 1;
       tmp_item = tmp_item->next;
     }
@@ -78,7 +80,8 @@ int		level_up(int eq_players, t_user_player *p,
     return (0);
 }
 
-int	verify_enough_resources(t_user_player *p, t_world *w)
+int	verify_enough_resources(t_user_player *p, t_server *s,
+				t_world *w)
 {
   int	i;
 
@@ -92,10 +95,11 @@ int	verify_enough_resources(t_user_player *p, t_world *w)
 			     "Not enough resources to begin"
 			     "the incantation"));
 	}
-      w->surface[p->posy][p->posx].resources[i]-=
+      w->surface[p->posy][p->posx].resources[i] -=
 	g_level_combinations[p->level - 1][i];
       i = i + 1;
     }
+  resources_refresh(RES_TYPES_COUNT, s, w);
   return (0);
 }
 

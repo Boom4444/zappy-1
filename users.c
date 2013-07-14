@@ -1,11 +1,11 @@
 /*
-** users.c for zappy in /home/ignatiev/Projects/zappy
+** users.c for zappy in /home/ignati_i/zappy/zappy
 ** 
 ** Made by ivan ignatiev
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Sat Apr 27 14:16:14 2013 ivan ignatiev
-** Last update Sun Jul 14 14:26:00 2013 ivan ignatiev
+** Last update Sun Jul 14 19:29:39 2013 ivan ignatiev
 */
 
 #include	"main.h"
@@ -68,6 +68,8 @@ int		user_destroy(t_user *user, t_server *s, t_world *w)
 {
   item_delete_by_content(s->client_list, (void*)user);
   user_destroy_anr(user, s);
+  if (user->request_buf != NULL)
+    free(user->request_buf);
   if (user->protocol == CLI_PROTO)
     return (user_player_destroy(T_PLAYER(user), s, w));
   else if (user->protocol == GRAPHIC_PROTO)
@@ -83,16 +85,20 @@ int		user_destroy(t_user *user, t_server *s, t_world *w)
 void		users_player_life(t_user_player *user,
 				  t_server *s, t_world *w)
 {
+  char		response[ANSWER_SIZE];
+
   --(user->life);
   if (user->life <= 0)
     {
       user->life = LIFE_UNIT * s->options.tdelay;
       --(user->inventory[FOOD]);
-      food_refresh(s, w, w->height, w->width);
+      resources_refresh(FOOD, s, w);
       if (user->inventory[FOOD] <= 0)
 	{
 	  server_send(user->clientfd, "mort\n");
-	  log_show("users_life_process", "", 
+	  sprintf(response, "pdi %d\n", user->number);
+	  cli_answer_to_all_graph(s, response);
+	  log_show("users_life_process", "",
 		   "PLayer %d finished his food",
 		   user->number);
 	  user->connected = DISCONNECTED;

@@ -5,7 +5,7 @@
 ** Login   <alcara_m@epitech.net>
 ** 
 ** Started on  Tue May 21 09:42:30 2013 Marin Alcaraz
-** Last update Sun Jul 14 14:11:18 2013 ivan ignatiev
+** Last update Sun Jul 14 15:39:35 2013 ivan ignatiev
 */
 
 #include	"main.h"
@@ -22,13 +22,8 @@
 
 int		server_send(int clientfd, char *message)
 {
-  //char		test[1];
-
-  //  if (recv(clientfd, test, 0, MSG_DONTWAIT) == -1
-  //  && errno == 11)
-    return (send(clientfd, message, strlen(message),
-		 MSG_DONTWAIT | MSG_NOSIGNAL));
-  return (-1);
+  return (send(clientfd, message, strlen(message),
+	       MSG_DONTWAIT | MSG_NOSIGNAL));
 }
 
 int			server_init(t_server *s)

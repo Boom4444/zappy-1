@@ -5,7 +5,7 @@
 ** Login   <alcara_m@epitech.net>
 ** 
 ** Started on  Wed Jul 10 10:42:13 2013 Marin Alcaraz
-** Last update Fri Jul 12 22:50:26 2013 Marin Alcaraz
+** Last update Sun Jul 14 18:19:05 2013 ivan ignatiev
 */
 
 #ifndef INCANTATION_H_
@@ -27,6 +27,7 @@ int	end_incantation(t_list *, t_request_data *rqd,
 int	match_players(t_list *ps, t_list *currents);
 int	fail_incantation(t_request_data *rqd, t_server *s);
 void	check_victory(t_server *t);
-int     verify_enough_resources(t_user_player *p, t_world *w);
+int     verify_enough_resources(t_user_player *p, t_server *s,
+				t_world *w);
 
 #endif /* !INCANTATION_H_ */

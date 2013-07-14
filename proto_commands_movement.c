@@ -1,11 +1,11 @@
 /*
-** proto_commands_movement.c for zappy in /home/hero/zappy
+** proto_commands_movement.c for zappy in /home/ignati_i/zappy/zappy
 ** 
 ** Made by Marin Alcaraz
 ** Login   <alcara_m@epitech.net>
 ** 
 ** Started on  Thu Jun 13 16:26:19 2013 Marin Alcaraz
-** Last update Sun Jul 14 12:26:25 2013 ivan ignatiev
+** Last update Sun Jul 14 20:09:37 2013 ivan ignatiev
 */
 
 #include	"main.h"
@@ -30,16 +30,23 @@ static t_point	g_steps[] =
 
 void		cli_avance(t_request_data *rqd, t_server *t, t_world *w)
 {
+  t_point	n;
   char		response[ANSWER_SIZE + 1];
 
-  item_delete_by_content(w->surface[rqd->user->posy][rqd->user->posx].players,
-			 (void*)rqd->user);
-  rqd->user->posx = _MOD(rqd->user->posx + g_steps[rqd->user->orientation].x,
-			 w->width);
-  rqd->user->posy = _MOD(rqd->user->posy + g_steps[rqd->user->orientation].y,
-			 w->height);
-  item_pb(w->surface[rqd->user->posy][rqd->user->posx].players,
-	  (void*)rqd->user, sizeof(t_user));
+  n.x = _MOD(rqd->user->posx + g_steps[rqd->user->orientation].x,
+	     w->width);
+  n.y = _MOD(rqd->user->posy + g_steps[rqd->user->orientation].y,
+	     w->height);
+  if (n.x != rqd->user->posx || n.y != rqd->user->posy)
+    {
+      item_delete_by_content(w->surface[rqd->user->posy]
+			     [rqd->user->posx].players,
+			     (void*)(rqd->user));
+      rqd->user->posx = n.x;
+      rqd->user->posy = n.y;
+      item_pf(w->surface[rqd->user->posy][rqd->user->posx].players,
+	      (void*)(rqd->user), sizeof(t_user_player));
+    }
   cli_answer(rqd->user, t, "ok\n");
   sprintf(response, "ppo %d %d %d %d\n", rqd->user->number,
 	  rqd->user->posx, rqd->user->posy, rqd->user->orientation + 1);
@@ -81,6 +88,7 @@ void		cli_broadcast(t_request_data *rqd, t_server *t, t_world *w)
   while (current_item != NULL)
     {
       if ((T_PLAYER(current_item->cont)->protocol == CLI_PROTO)
+	  && (T_PLAYER(current_item->cont)->connected == CONNECTED)
 	  && T_PLAYER(current_item->cont) != rqd->user)
         {
 	  direction = broadcast_to(T_PLAYER(current_item->cont), rqd, t);
@@ -91,8 +99,7 @@ void		cli_broadcast(t_request_data *rqd, t_server *t, t_world *w)
       current_item = current_item->next;
     }
   cli_answer(rqd->user, t, "ok\n");
-  sprintf(response, "pbc %d %s\n", rqd->user->number,
-            (char *)rqd->argv[0]);
+  sprintf(response, "pbc %d %s\n", rqd->user->number, (char*)rqd->argv[0]);
   free(rqd->argv[0]);
   free(rqd->argv);
   cli_answer_to_all_graph(t, response);

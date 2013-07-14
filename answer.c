@@ -5,7 +5,7 @@
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Thu Jun 20 20:02:59 2013 ivan ignatiev
-** Last update Sun Jul 14 14:12:10 2013 ivan ignatiev
+** Last update Sun Jul 14 15:21:30 2013 ivan ignatiev
 */
 
 #include	"main.h"
@@ -52,10 +52,11 @@ int		cli_answer_to_all_graph(t_server *server, char *message)
   current = list_get_head(server->client_list);
   while (current != NULL)
     {
-      if (T_USER(current->cont)->protocol == GRAPHIC_PROTO)
+      if (T_USER(current->cont)->protocol == GRAPHIC_PROTO
+	  && T_USER(current->cont)->connected == CONNECTED)
 	{
 	  if (server_send(T_GRAPH(current->cont)->clientfd, message) <= 0)
-	    T_ANSWER(current)->user->connected = DISCONNECTED;
+	    T_GRAPH(current->cont)->connected = DISCONNECTED;
 	}
       current = current->next;
     }

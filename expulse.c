@@ -5,7 +5,7 @@
 ** Login   <alcara_m@epitech.net>
 ** 
 ** Started on  Thu Jul 04 09:57:07 2013 Marin Alcaraz
-** Last update Sat Jul 13 18:37:26 2013 ivan ignatiev
+** Last update Sun Jul 14 19:50:35 2013 ivan ignatiev
 */
 
 #include	"main.h"
@@ -31,7 +31,7 @@ void		move_player(t_user_player *player,
   sprintf(response, "ppo %d %d %d %d\n", player->number,
 	  player->posx, player->posy, player->orientation + 1);
   cli_answer_to_all_graph(s, response);
-  item_pb(w->surface[player->posy][player->posy].players,
+  item_pf(w->surface[player->posy][player->posx].players,
 	  player, sizeof(t_user_player));
 }
 
@@ -42,11 +42,13 @@ void		expulse_square(t_point *n, t_request_data *rqd,
   t_item	*current_item;
 
   current_item =
-    list_get_head((w->surface[rqd->user->posy][rqd->user->posx]).players);
+    list_get_head((w->surface[rqd->user->posy]
+		   [rqd->user->posx]).players);
   while (current_item != NULL)
     {
       next = current_item->next;
-      if (current_item->cont != rqd->user)
+      if (T_PLAYER(current_item->cont)->connected == CONNECTED
+	  && current_item->cont != rqd->user)
 	{
 	  T_PLAYER(current_item->cont)->posx = n->x;
 	  T_PLAYER(current_item->cont)->posy = n->y;
