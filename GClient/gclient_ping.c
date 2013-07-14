@@ -65,7 +65,7 @@ void  ping_start(t_pm *pm, t_ping *p)
 {
   p->pm = pm;
   if ((p->pret = pthread_create(&p->th1, NULL, ping, p)) != 0)
-    ts_error(pm, p->pret);
+    ts_error("ping_start", pm, p->pret);
   if ((p->pret = pthread_create(&p->th2, NULL, ping_end, p)) != 0)
-    ts_error(pm, p->pret);
+    ts_error("ping_end", pm, p->pret);
 }

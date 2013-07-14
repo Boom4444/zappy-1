@@ -61,5 +61,5 @@ void  auth_start(t_pm *pm, t_auth *a)
   pm->auth = -1;
   a->pm = pm;
   if ((a->pret = pthread_create(&a->th1, NULL, auth, a)) != 0)
-    ts_error(pm, a->pret);
+    ts_error("auth_start", pm, a->pret);
 }

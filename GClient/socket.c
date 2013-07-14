@@ -51,11 +51,10 @@ int			socket_listen(int port)
   return (sfd);
 }
 
-int			socket_connect(const char *host,
-				       const char *port)
+int               socket_connect(const char *host, const char *port)
 {
-  int			sfd;
-  struct addrinfo	hints;
+  int             sfd;
+  struct addrinfo hints;
   struct addrinfo	*result;
   struct addrinfo	*rp;
 
@@ -66,19 +65,15 @@ int			socket_connect(const char *host,
   rp = result;
   while (rp != NULL)
   {
-    printf("seg\n");
     sfd = socket(rp->ai_family, rp->ai_socktype, rp->ai_protocol);
     if (sfd >= 0 && connect(sfd, rp->ai_addr, rp->ai_addrlen) != -1)
     {
-      printf("fault\n");
       freeaddrinfo(result);
       return (sfd);
-	}
-  printf("or not\n");
-      close(sfd);
-      rp = rp->ai_next;
     }
-    printf("it is\n");
+    close(sfd);
+    rp = rp->ai_next;
+  }
   freeaddrinfo(result); 
   return (-1);
 }

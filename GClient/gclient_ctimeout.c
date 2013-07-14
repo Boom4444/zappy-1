@@ -35,5 +35,5 @@ void  ctimeout_start(t_pm *pm, t_cto *c)
   c->pm = pm;
   c->cto = -1;
   if ((c->pret = pthread_create(&c->th1, NULL, ctimeout, c)) != 0)
-    ts_error(pm, c->pret);
+    ts_error("ctimeout_start", pm, c->pret);
 }

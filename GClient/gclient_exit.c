@@ -43,5 +43,5 @@ void  exit_start(t_pm *pm, t_exit *e)
   e->pm = pm;
   e->es = 0;
   if ((e->pret = pthread_create(&e->th1, NULL, exit_monitor, e)) != 0)
-    ts_error(pm, e->pret);
+    ts_error("exit_start", pm, e->pret);
 }
