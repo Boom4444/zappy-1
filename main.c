@@ -39,19 +39,17 @@ void		sigint_handler(int sig)
 
 void		output_redirection()
 {
-  int		i_fd;
   int		o_fd;
   int		e_fd;
 
-  i_fd = open("/dev/null", O_RDWR, 0);
   o_fd = open("out.log", O_WRONLY | O_APPEND | O_CREAT, 0644);
   e_fd = open("err.log", O_WRONLY | O_APPEND | O_CREAT, 0644);
-  if (i_fd == -1 || o_fd == -1 || e_fd == -1)
+  if (o_fd == -1 || e_fd == -1)
     {
       error_show("output_redirection", "open", "Unable to open log files");
       exit(EXIT_FAILURE);
     }
-  dup2(i_fd, STDIN_FILENO);
+  close(STDIN_FILENO);
   dup2(o_fd, STDOUT_FILENO);
   dup2(e_fd, STDERR_FILENO);
 }
