@@ -50,14 +50,19 @@ int   nsp_get(char *str)
   return (c);
 }
 
-void        cmd_put(char *cmd)
+void        cmd_put(int i, char *cmd)
 {
   time_t    t;
   struct tm s;
 
   t = time(NULL);
   s = *localtime(&t);
-  printf("processed[%d:%d:%d]: %s", s.tm_hour, s.tm_min, s.tm_sec, cmd);
+  if (i == 1)
+    printf("\e[1;36mprocessed\e[m [%d:%d:%d]: \e[1;36mm%s\e[m",
+          s.tm_hour, s.tm_min, s.tm_sec, cmd);
+  else
+    printf("\e[1;31m failed\e[m   [%d:%d:%d]: \e[1;31m%s\e[m",
+          s.tm_hour, s.tm_min, s.tm_sec, cmd);
 }
 
 void  select_monitor(fd_set *fd_rs, t_ppo *p, t_pm *pm)

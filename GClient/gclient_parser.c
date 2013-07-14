@@ -61,6 +61,7 @@ int   pbuf_process(t_ppo *po, t_pm *pm)
       if (cmd_process(po->pbuf, pm) == -1)
         return (-1);
       ++po->i;
+      po->t = po->i;
       po->plen = 0;
     }
     else if (bp_guide(4, po, pm) == -1)

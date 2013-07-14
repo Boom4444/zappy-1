@@ -30,9 +30,9 @@ void      *auth(void *arg)
     if (a->pm->auth == 0)
     {
       pthread_mutex_lock(&a->pm->lock);
+      str_put("Authentication successful. Conncted to Zappy\n");
       a->pm->auth = 1;
       pthread_mutex_unlock(&a->pm->lock);
-      str_put("Authentication successful. Conncted to Zappy\n");
       pthread_exit((void *)1);
     }
     ++i;

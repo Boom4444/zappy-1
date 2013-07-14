@@ -33,6 +33,7 @@ void      *exit_monitor(void *arg)
   while (e->es == 0);
   if (e->pm->sfd != -1)
     close(e->pm->sfd);
+  usleep(500000);
   str_put("GClient stop\n");
   exit(EXIT_SUCCESS);
 }

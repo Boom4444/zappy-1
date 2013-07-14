@@ -46,11 +46,11 @@ void      *ping(void *arg)
   while(p->pm->auth != 1);
   while (42)
   {
-    sleep(2);
+    sleep(3);
     if (p->pm->auth == 0)
     {
       cmd_send(p->pm, "mct\n");
-      sleep(3);
+      sleep(2);
       if (p->pm->auth == 0)
       {
         error_show("ping", "pm->auth == 0", "Server is not responding");

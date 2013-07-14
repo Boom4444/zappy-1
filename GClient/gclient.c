@@ -55,7 +55,7 @@ int   screen_update(t_ppo *po, t_pm *pm)
   po->i = 0;
   po->t = 0;
   if (pbuf_process(po, pm) == -1)
-    return (0);
+    return (po->plen = 0);
   while (po->i < po->tlen)
   {
     while (po->i != po->tlen && po->tbuf[po->i] != '\n')
@@ -65,7 +65,7 @@ int   screen_update(t_ppo *po, t_pm *pm)
       if (bp_guide(1, po, pm) == -1)
         return (0);
       if (cmd_process(po->rbuf, pm) == -1)
-        return (0);
+        return (po->plen = 0);
       ++po->i;
       po->t = po->i;
     }

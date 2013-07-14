@@ -17,11 +17,12 @@ int   gcmd_pdi(char *cmd, t_pm *pm)
 {
   if (nsp_get(cmd) != 1)
   {
+    cmd_put(-1, cmd);
     cmd_send(pm, "mct\n");
     return (-1);
   }
   ping_save(pm);
-  cmd_put(cmd);
+  cmd_put(1, cmd);
   return (1);
 }
 
@@ -29,11 +30,12 @@ int   gcmd_enw(char *cmd, t_pm *pm)
 {
   if (nsp_get(cmd) != 4)
   {
+    cmd_put(-1, cmd);
     cmd_send(pm, "mct\n");
     return (-1);
   }
   ping_save(pm);
-  cmd_put(cmd);
+  cmd_put(1, cmd);
   return (1);
 }
 
@@ -41,11 +43,12 @@ int   gcmd_eht(char *cmd, t_pm *pm)
 {
   if (nsp_get(cmd) != 1)
   {
+    cmd_put(-1, cmd);
     cmd_send(pm, "mct\n");
     return (-1);
   }
   ping_save(pm);
-  cmd_put(cmd);
+  cmd_put(1, cmd);
   return (1);
 }
 
@@ -53,11 +56,12 @@ int   gcmd_ebo(char *cmd, t_pm *pm)
 {
   if (nsp_get(cmd) != 1)
   {
+    cmd_put(-1, cmd);
     cmd_send(pm, "mct\n");
     return (-1);
   }
   ping_save(pm);
-  cmd_put(cmd);
+  cmd_put(1, cmd);
   return (1);
 }
 
@@ -65,10 +69,11 @@ int   gcmd_edi(char *cmd, t_pm *pm)
 {
   if (nsp_get(cmd) != 1)
   {
+    cmd_put(-1, cmd);
     cmd_send(pm, "mct\n");
     return (-1);
   }
   ping_save(pm);
-  cmd_put(cmd);
+  cmd_put(1, cmd);
   return (1);
 }

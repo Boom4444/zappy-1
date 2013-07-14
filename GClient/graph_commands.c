@@ -56,7 +56,7 @@ int   cmd_process(char *cmd, t_pm *pm)
       return (graph_cmd[i].func(cmd, pm));
     ++i;
   }
-  cmd_send(pm, "mct\n");
+  cmd_put(-1, cmd);
   return (-1);
 }
 
@@ -64,11 +64,12 @@ int   gcmd_msz(char *cmd, t_pm *pm)
 {
   if (nsp_get(cmd) != 2)
   {
+    cmd_put(-1, cmd);
     cmd_send(pm, "mct\n");
     return (-1);
   }
   ping_save(pm);
-  cmd_put(cmd);
+  cmd_put(1, cmd);
   return (1);
 }
 
@@ -76,24 +77,25 @@ int   gcmd_bct(char *cmd, t_pm *pm)
 {
   if (nsp_get(cmd) != 9)
   {
+    cmd_put(-1, cmd);
     cmd_send(pm, "mct\n");
     return (-1);
   }
   ping_save(pm);
-  cmd_put(cmd);
+  cmd_put(1, cmd);
   return (1);
 }
 
 int   gcmd_tna(char *cmd, t_pm *pm)
 {
   ping_save(pm);
-  cmd_put(cmd);
+  cmd_put(1, cmd);
   return (1);
 }
 
 int   gcmd_pnw(char *cmd, t_pm *pm)
 {
   ping_save(pm);
-  cmd_put(cmd);
+  cmd_put(1, cmd);
   return (1);
 }
