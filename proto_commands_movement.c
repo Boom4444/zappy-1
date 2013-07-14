@@ -5,7 +5,7 @@
 ** Login   <alcara_m@epitech.net>
 ** 
 ** Started on  Thu Jun 13 16:26:19 2013 Marin Alcaraz
-** Last update Sun Jul 14 12:26:25 2013 ivan ignatiev
+** Last update Sun Jul 14 15:31:44 2013 ivan ignatiev
 */
 
 #include	"main.h"
@@ -81,6 +81,7 @@ void		cli_broadcast(t_request_data *rqd, t_server *t, t_world *w)
   while (current_item != NULL)
     {
       if ((T_PLAYER(current_item->cont)->protocol == CLI_PROTO)
+	  && (T_PLAYER(current_item->cont)->connected == CONNECTED)
 	  && T_PLAYER(current_item->cont) != rqd->user)
         {
 	  direction = broadcast_to(T_PLAYER(current_item->cont), rqd, t);
@@ -91,8 +92,7 @@ void		cli_broadcast(t_request_data *rqd, t_server *t, t_world *w)
       current_item = current_item->next;
     }
   cli_answer(rqd->user, t, "ok\n");
-  sprintf(response, "pbc %d %s\n", rqd->user->number,
-            (char *)rqd->argv[0]);
+  sprintf(response, "pbc %d %s\n", rqd->user->number, (char*)rqd->argv[0]);
   free(rqd->argv[0]);
   free(rqd->argv);
   cli_answer_to_all_graph(t, response);

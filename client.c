@@ -5,7 +5,7 @@
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Fri May 24 19:45:50 2013 ivan ignatiev
-** Last update Sat Jul 13 17:54:49 2013 ivan ignatiev
+** Last update Sun Jul 14 14:44:23 2013 ivan ignatiev
 */
 
 #include	<stdlib.h>
@@ -102,7 +102,7 @@ int		main(int argc, char **argv)
   int		sfd;
   t_options	options;
 
-    signal(SIGINT, sigint_handler);
+  //    signal(SIGINT, sigint_handler);
     printf("Welcome to ZAPPY Smart Prompt!\n");
     if (client_options(argc, argv, &options) == EXIT_FAILURE)
         return (EXIT_FAILURE);

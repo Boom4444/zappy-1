@@ -5,7 +5,7 @@
 ** Login   <alcara_m@epitech.net>
 ** 
 ** Started on  Thu Jul 04 09:57:07 2013 Marin Alcaraz
-** Last update Sat Jul 13 18:37:26 2013 ivan ignatiev
+** Last update Sun Jul 14 15:25:09 2013 ivan ignatiev
 */
 
 #include	"main.h"
@@ -46,7 +46,8 @@ void		expulse_square(t_point *n, t_request_data *rqd,
   while (current_item != NULL)
     {
       next = current_item->next;
-      if (current_item->cont != rqd->user)
+      if (T_PLAYER(current_item->cont)->connected == CONNECTED
+	  && current_item->cont != rqd->user)
 	{
 	  T_PLAYER(current_item->cont)->posx = n->x;
 	  T_PLAYER(current_item->cont)->posy = n->y;

@@ -5,7 +5,7 @@
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Sat Apr 27 14:16:14 2013 ivan ignatiev
-** Last update Sun Jul 14 14:26:00 2013 ivan ignatiev
+** Last update Sun Jul 14 14:43:37 2013 ivan ignatiev
 */
 
 #include	"main.h"
@@ -81,6 +81,8 @@ int		user_destroy(t_user *user, t_server *s, t_world *w)
 
 void		users_player_life(t_user_player *user, t_server *s)
 {
+  char		response[ANSWER_SIZE];
+
   --(user->life);
   if (user->life <= 0)
     {
@@ -89,6 +91,8 @@ void		users_player_life(t_user_player *user, t_server *s)
       if (user->inventory[FOOD] <= 0)
 	{
 	  server_send(user->clientfd, "mort\n");
+	  sprintf(response, "pdi %d\n", user->number);
+	  cli_answer_to_all_graph(s, response);
 	  log_show("users_life_process", "", "PLayer %d finished his food",
 		   user->number);
 	  user->connected = DISCONNECTED;
