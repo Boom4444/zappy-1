@@ -39,20 +39,6 @@ int		init_world(t_world *w, int width, int height)
   return (0);
 }
 
-int		mineral_checker(t_square_unit *sq)
-{
-  int		i;
-
-  i = 0;
-  while (i < RES_TYPES_COUNT)
-    {
-      if (sq->resources[i] != 0)
-	return (1);
-      i = i + 1;
-    }
-  return (0);
-}
-
 int		display_world(t_world *w, int width, int height)
 {
   int		i;
@@ -81,12 +67,7 @@ int		display_world(t_world *w, int width, int height)
   return (0);
 }
 
-void		random_number(int *container, int limit)
-{
-  *container = rand() % limit;
-}
-
-int		generate_resource(t_world *w, int width, int height)
+void		food_refresh(t_world *w, int width, int height)
 {
   int		amount;
   int		minx;
@@ -94,14 +75,13 @@ int		generate_resource(t_world *w, int width, int height)
   int		resource;
 
   amount = 0;
+  resource = 0;
   srand(time(NULL));
-  while (amount < RESOURCE_LIMIT)
+  while (amount < RESOURCE_LIMIT / 16)
     {
       random_number(&minx, width);
       random_number(&miny, height);
-      random_number(&resource, 7);
       (w->surface[miny][minx]).resources[resource]++;
       amount = amount + 1;
     }
-  return (0);
 }

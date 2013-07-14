@@ -42,6 +42,7 @@ SSRC	=	server.c 				\
 		proto_commands_voir.c 			\
 		proto_commands_res.c 			\
 		trantor.c 				\
+		resource_manager.c 			\
 		request.c 				\
 		request_data.c 				\
 		graph_utils.c 				\

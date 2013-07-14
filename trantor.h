@@ -46,5 +46,6 @@ int	display_world(t_world *w, int width, int height);
 int	generate_resource(t_world *w, int width, int height);
 int	mineral_checker(t_square_unit *sq);
 void	random_number(int *container, int limit);
+void	food_refresh(t_world *w, int width, int height);
 
 #endif /* !TRANTOR_H_ */

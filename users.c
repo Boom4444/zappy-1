@@ -48,13 +48,15 @@ int		user_destroy(t_user *user, t_server *s, t_world *w)
   return (log_show("user_destroy", "", "Client disconnected and removed"));
 }
 
-void		users_player_life(t_user_player *user, t_server *s)
+void		users_player_life(t_user_player *user,
+				  t_server *s, t_world *w)
 {
   --(user->life);
   if (user->life <= 0)
     {
       user->life = LIFE_UNIT * s->options.tdelay;
       --(user->inventory[FOOD]);
+      food_refresh(w, w->height, w->width);
       if (user->inventory[FOOD] <= 0)
 	{
 	  server_send(user->clientfd, "mort\n");
@@ -70,14 +72,13 @@ void		users_life_proccess(t_server *s, t_world *w)
   t_item	*current;
   t_item	*next;
 
-  (void) w;
   current = list_get_head(s->client_list);
   while (current != NULL)
     {
       next = current->next;
       if (T_USER(current->cont)->protocol == CLI_PROTO
 	  && T_USER(current->cont)->connected == CONNECTED)
-	users_player_life(T_PLAYER(current->cont), s);
+	users_player_life(T_PLAYER(current->cont), s, w);
       else if (T_USER(current->cont)->protocol == EGG_PROTO
 	       && T_USER(current->cont)->protocol == PRE_CONNECTED)
         {

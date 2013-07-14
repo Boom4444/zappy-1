@@ -20,10 +20,10 @@
 #include	"graph_command.h"
 #include	"users_graph.h"
 
-int         get_content(int *info, char *response, t_world *w)
+int		get_content(int *info, char *response, t_world *w)
 {
-    int     i;
-    char    aux_response[STR_LIMIT];
+    int		i;
+    char	aux_response[STR_LIMIT];
 
     while (i < 7)
     {
@@ -36,31 +36,32 @@ int         get_content(int *info, char *response, t_world *w)
     return (0);
 }
 
-void        parse_and_answer(char *response, t_graph_data *rqd, t_world *w)
+void	parse_and_answer(char *response,
+			 t_graph_data *rqd, t_world *w)
 {
-    int     i;
-    int     j;
-    int     min;
-    char	bct_line[STR_LIMIT];
+  int	indexes[3];
+  char	bct_line[STR_LIMIT];
 
-    while (j < w->height)
+  indexes[0] = 0;
+  while (indexes[0] < w->height)
     {
-        i = 0;
-        while (i < w->width)
+      indexes[1] = 0;
+      while (indexes[1] < w->width)
         {
-            sprintf(response, "bct %d %d", i, j);
-            min = 0;
-            while (min < RES_TYPES_COUNT)
+	  sprintf(response, "bct %d %d", indexes[1], indexes[0]);
+	  indexes[2] = 0;
+	  while (indexes[3] < RES_TYPES_COUNT)
             {
-                sprintf(bct_line, " %d",
-                        w->surface[j][i].resources[min++]);
-                strcat(response, bct_line);
+	      sprintf(bct_line, " %d",
+		      w->surface[indexes[0]][indexes[1]].
+		      resources[indexes[2]++]);
+	      strcat(response, bct_line);
             }
-            i = i + 1;
-            strcat(response, "\n");
-            cli_answer_to_graph(rqd->user, response);
+	  indexes[1] = indexes[1] + 1;
+	  strcat(response, "\n");
+	  cli_answer_to_graph(rqd->user, response);
         }
-        j = j + 1;
-        response[0] = '\0';
+      indexes[0] = indexes[0] + 1;
+      response[0] = '\0';
     }
 }

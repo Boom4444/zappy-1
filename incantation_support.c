@@ -26,7 +26,7 @@ int		count_players(t_list *players, t_user_player *player)
 {
   int		eq_players;
   t_item	*tmp_item;
-  
+
   eq_players = 0;
   tmp_item = list_get_head(players);
   while (tmp_item != NULL)
@@ -43,7 +43,7 @@ int		match_players(t_list *ps, t_list *currents)
   int		flag;
   t_item	*tmp_item;
   t_item	*ps_current;
-  
+
   flag = 0;
   tmp_item = list_get_head(currents);
   ps_current = list_get_head(ps);
@@ -62,7 +62,7 @@ int		level_up(int eq_players, t_user_player *p,
 			 t_list *players, t_world *w)
 {
   t_item	*tmp_item;
-  
+
   tmp_item = list_get_head(players);
   if (eq_players != match_players(players,
 				  w->surface[p->posy][p->posx].players))
@@ -81,7 +81,7 @@ int		level_up(int eq_players, t_user_player *p,
 int	verify_enough_resources(t_user_player *p, t_world *w)
 {
   int	i;
-  
+
   i = 1;
   while (i < RES_TYPES_COUNT)
     {
@@ -89,7 +89,7 @@ int	verify_enough_resources(t_user_player *p, t_world *w)
 	  g_level_combinations[p->level - 1][i])
 	{
 	  return (error_show("incantate", "",
-			     "Not enough resources to begin" 
+			     "Not enough resources to begin"
 			     "the incantation"));
 	}
       w->surface[p->posy][p->posx].resources[i]-=
@@ -103,7 +103,7 @@ void		check_victory(t_server *t)
 {
   char		response[ANSWER_SIZE];
   t_item	*tmp_team;
-  
+
   tmp_team = list_get_head(t->team_list);
   while (tmp_team != NULL)
     {

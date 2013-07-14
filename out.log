@@ -22,3 +22,11 @@
 [1;36mINFO  [Sun Jul 14 06:22:59 2013  in server_start] : Server start[m
 [1;36mINFO  [Sun Jul 14 06:22:59 2013  in team_create] : Team created : 'Team1'[m
 [1;36mINFO  [Sun Jul 14 06:22:59 2013  in team_create] : Team created : 'Team2'[m
+[1;36mINFO  [Sun Jul 14 06:44:54 2013  in server_start] : Server start[m
+[1;36mINFO  [Sun Jul 14 06:44:54 2013  in team_create] : Team created : 'Team1'[m
+[1;36mINFO  [Sun Jul 14 06:44:54 2013  in team_create] : Team created : 'Team2'[m
+[1;36mINFO  [Sun Jul 14 06:45:12 2013 accept in select_accept_connection] : User 127.0.0.1 connected to the server[m
+[1;36mINFO  [Sun Jul 14 06:45:15 2013  in user_player_init] : Player 1 created in team 'Team1'[m
+[1;36mINFO  [Sun Jul 14 06:45:50 2013 accept in select_accept_connection] : User 127.0.0.1 connected to the server[m
+[1;36mINFO  [Sun Jul 14 06:45:50 2013  in user_graph_init] : Graphic client created[m
+[1;36mINFO  [Sun Jul 14 06:46:09 2013  in cli_parse] : Request 'prend 0' for player 1 accepted on the 5691th tick, plan : 5698[m
