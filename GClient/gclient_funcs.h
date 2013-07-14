@@ -12,10 +12,7 @@
 # define GCLIENT_FUNCS_H_
 
 #include "gclient.h"
-#include <sys/select.h>
-// #include <sys/time.h>
 #include <sys/types.h>
-// #include <unistd.h>
 
 
 void  cmd_send(t_pm *pm, char *cmd);
