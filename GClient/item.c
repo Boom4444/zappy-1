@@ -8,8 +8,8 @@
 ** Last update Sat Jul 13 18:40:25 2013 oleg kuznietsov
 */
 
-#include "list.h"
 #include <stdlib.h>
+#include "list.h"
 
 t_item		*item_create(void *src_content, int content_size)
 {

@@ -11,7 +11,7 @@
 #ifndef GRAPH_COMMAND_H_
 # define	GRAPH_COMMAND_H_
 
-#include "gclient.h"
+# include "gclient.h"
 
 typedef int   (*t_graph_func)(char *cmd, t_pm *pm);
 

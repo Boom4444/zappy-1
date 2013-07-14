@@ -11,8 +11,8 @@
 #ifndef GCLIENT_EXIT_H_
 # define GCLIENT_EXIT_H_
 
-#include "gclient.h"
-#include <pthread.h>
+# include <pthread.h>
+# include "gclient.h"
 
 typedef struct    s_exit_args
 {

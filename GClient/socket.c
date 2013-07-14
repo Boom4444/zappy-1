@@ -8,11 +8,11 @@
 ** Last update Sat Jul 13 17:30:19 2013 oleg kuznietsov
 */
 
-#include "socket.h"
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
 #include <netdb.h>
+#include "socket.h"
 
 static int        socket_hints(struct addrinfo *hints)
 {
@@ -74,6 +74,6 @@ int               socket_connect(const char *host, const char *port)
     close(sfd);
     rp = rp->ai_next;
   }
-  freeaddrinfo(result); 
+  freeaddrinfo(result);
   return (-1);
 }

@@ -12,7 +12,6 @@
 #include "gclient_funcs.h"
 #include "gclient_ping.h"
 
-
 int   gcmd_pdi(char *cmd, t_pm *pm)
 {
   if (nsp_get(cmd) != 1)

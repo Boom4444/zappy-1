@@ -11,9 +11,8 @@
 #ifndef GCLIENT_FUNCS_H_
 # define GCLIENT_FUNCS_H_
 
-#include "gclient.h"
-#include <sys/types.h>
-
+# include <sys/types.h>
+# include "gclient.h"
 
 void  cmd_send(t_pm *pm, char *cmd);
 int   nsp_get(char *str);

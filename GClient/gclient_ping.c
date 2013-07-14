@@ -8,6 +8,7 @@
 ** Last update  Sun Jul  14 01:54:44 2013 oleg kuznietsov
 */
 
+#include <pthread.h>
 #include "gclient_ping.h"
 #include "gclient_funcs.h"
 #include "gclient_exit.h"
@@ -15,7 +16,6 @@
 #include "socket.h"
 #include "error.h"
 #include "tools.h"
-#include <pthread.h>
 
 void      *ping_end(void *arg)
 {
@@ -43,7 +43,7 @@ void      *ping(void *arg)
   t_ping  *p;
 
   p = (t_ping *)arg;
-  while(p->pm->auth != 1);
+  while (p->pm->auth != 1);
   while (42)
   {
     sleep(3);

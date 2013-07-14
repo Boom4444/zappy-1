@@ -80,21 +80,21 @@ int		main( void )
   t_graphic	g;
 
   g.quit = 0;
-  if( init(&g) == 0 || taille_carte(&map, 9, 6))
+  if (init(&g) == 0 || taille_carte(&map, 9, 6))
     return (1);
   contenu_carte(res_info, &map);
-  while( g.quit == 0 )
+  while (g.quit == 0)
     {
-        while( SDL_PollEvent( &g.event ) )
+        while (SDL_PollEvent(&g.event))
         {
 	  handle_input(&g);
-	  if( g.event.type == SDL_QUIT )
+	  if (g.event.type == SDL_QUIT)
 	    g.quit = 1;
         }
 	move(&map, &g);
 	show_ressources(&g, &map);
 	usleep(50000);
-        if( SDL_Flip( g.screen ) == -1 )
+        if (SDL_Flip(g.screen) == -1)
 	  return 1;
     }
   clean_up(&g);

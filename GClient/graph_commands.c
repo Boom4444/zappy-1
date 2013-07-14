@@ -8,11 +8,11 @@
 ** Last update Wed May 10 13:41:46 2013 oleg kuznietsov
 */
 
+#include <string.h>
 #include "graph_commands.h"
 #include "gclient_auth.h"
 #include "gclient_ping.h"
 #include "gclient_funcs.h"
-#include <string.h>
 
 static t_gcmd   graph_cmd[] =
 {
@@ -87,13 +87,6 @@ int   gcmd_bct(char *cmd, t_pm *pm)
 }
 
 int   gcmd_tna(char *cmd, t_pm *pm)
-{
-  ping_save(pm);
-  cmd_put(1, cmd);
-  return (1);
-}
-
-int   gcmd_pnw(char *cmd, t_pm *pm)
 {
   ping_save(pm);
   cmd_put(1, cmd);

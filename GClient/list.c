@@ -8,8 +8,8 @@
 ** Last update Sat Jul 13 18:28:09 2013 oleg kuznietsov
 */
 
-#include "list.h"
 #include <stdlib.h>
+#include "list.h"
 
 t_list		*list_init()
 {

@@ -8,14 +8,14 @@
 ** Last update Wed May 12 14:58:18 2013 oleg kuznietsov
 */
 
+#include <stdio.h>
+#include <time.h>
 #include "gclient_funcs.h"
 #include "gclient_exit.h"
 #include "gclient_errors.h"
 #include "socket.h"
 #include "error.h"
 #include "tools.h"
-#include <stdio.h>
-#include <time.h>
 
 void  cmd_send(t_pm *pm, char *cmd)
 {

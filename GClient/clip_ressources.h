@@ -11,7 +11,7 @@
 #ifndef CLIP_RESSOURCES_H_
 # define CLIP_RESSOURCES_H_
 
-#include "SDL/SDL.h"
+# include "SDL/SDL.h"
 
 void	clip_ressources(SDL_Rect clip[20]);
 

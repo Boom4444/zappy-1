@@ -8,10 +8,10 @@
 ** Last update Wed May 12 14:58:18 2001 oleg kuznietsov
 */
 
+#include <string.h>
 #include "gclient_parser.h"
 #include "gclient_errors.h"
 #include "graph_commands.h"
-#include <string.h>
 
 int   bp_guide(int bp_case, t_ppo *po, t_pm *pm)
 {

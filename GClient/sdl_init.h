@@ -9,12 +9,12 @@
 */
 
 #ifndef SDL_INIT_H_
-#define SDL_INIT_H_
+# define SDL_INIT_H_
 
-#include "map.h"
+# include "map.h"
 
-void		apply_surface( int x, int y, SDL_Surface* source,\
-			       SDL_Surface* destination, SDL_Rect* clip );
+void		apply_surface( int x, int y, SDL_Surface* source,
+                      SDL_Surface* destination, SDL_Rect* clip );
 SDL_Surface	*load_image( char filename[10] );
 int		load_files(t_graphic *g);
 int		init(t_graphic *g);

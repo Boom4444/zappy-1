@@ -11,8 +11,8 @@
 #ifndef GCLIENT_AUTH_H_
 # define GCLIENT_AUTH_H_
 
-#include <pthread.h>
-#include "gclient.h"
+# include <pthread.h>
+# include "gclient.h"
 
 typedef struct    s_tauth_args
 {

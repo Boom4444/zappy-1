@@ -11,8 +11,8 @@
 #ifndef GCLIENT_PING_H_
 # define GCLIENT_PING_H_
 
-#include "gclient.h"
-#include <pthread.h>
+# include <pthread.h>
+# include "gclient.h"
 
 typedef struct    s_ping_args
 {

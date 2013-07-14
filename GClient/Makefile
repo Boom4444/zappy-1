@@ -5,7 +5,7 @@
 ## Login   <kuznet_o@epitech.eu>
 ##
 ## Started on  Sun Jul  14 03:42:20 2013 oleg kuznietsov
-## Last update Sun Jul 14 09:31:26 2013 Oleg Kuznietsov
+## Last update Sun Jul 14 21:28:36 2013 Oleg Kuznietsov
 ##
 
 GNAME		=	gclient
@@ -20,6 +20,7 @@ GSRC		=	error.c \
 			socket.c \
 			gc_1.c \
 			gc_4.c \
+			gc_5.c \
 			gclient_errors.c \
 			gclient_parser.c \
 			item.c \

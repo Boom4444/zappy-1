@@ -5,12 +5,13 @@
 ** Login   <liu_q@epitech.net>
 ** 
 ** Started on  Tue Jul  9 19:28:47 2013 qiuyan liu
-** Last update Sat Jul 13 13:51:08 2013 qiuyan liu
+** Last update Sat Jul 13 13:51:08 2013 kuznietsov oleg
 */
 
 #include "SDL/SDL.h"
 #include "SDL/SDL_image.h"
 #include "map.h"
+#include "show_map.h"
 #include "sdl_init.h"
 
 int	init_map(t_map *w, int width, int height)
@@ -20,7 +21,7 @@ int	init_map(t_map *w, int width, int height)
 
   i = 0;
   j = 0;
-  w->surface = (t_square_content **)\
+  w->surface = (t_square_content **)
     malloc(sizeof(t_square_content *) * height);
   while (i < height)
     {
@@ -29,7 +30,7 @@ int	init_map(t_map *w, int width, int height)
       j = 0;
       while ( j < width )
 	{
-	  memset(w->surface[i][j].ressources, 0,\
+	  memset(w->surface[i][j].ressources, 0,
 		 sizeof(int) * NUM_RESSOURCES);
 	  j = j + 1;
 	}
@@ -43,9 +44,9 @@ int	init_map(t_map *w, int width, int height)
 
 void	handle_input(t_graphic *g)
 {
-  if( g->event.type == SDL_KEYDOWN )
+  if (g->event.type == SDL_KEYDOWN)
     {
-      if ( g->event.key.keysym.sym == SDLK_UP)
+      if (g->event.key.keysym.sym == SDLK_UP)
         g->yVel -= SPEED;
       else if ( g->event.key.keysym.sym == SDLK_DOWN)
         g->yVel += SPEED;
@@ -54,7 +55,7 @@ void	handle_input(t_graphic *g)
       else if (g->event.key.keysym.sym == SDLK_RIGHT)
 	g->xVel += SPEED;
     }
-  else if ( g->event.type == SDL_KEYUP )
+  else if (g->event.type == SDL_KEYUP)
     {
       if (g->event.key.keysym.sym == SDLK_UP)
         g->yVel += SPEED;
@@ -90,34 +91,29 @@ void	show_res_square(t_map *map, t_point p1, t_graphic *g, t_point p2)
     }
 }
 
-void		show_ressources(t_graphic *g, t_map *map)
+void        show_ressources(t_graphic *g, t_map *map)
 {
-  int		x;
-  int		y;
-  int		i;
-  int		j;
-  t_point	p1;
-  t_point	p2;
+  t_s       s;
 
-  y = g->CURRENT_Y;
-  i = 0;
-  while (i < SCREEN_HEIGHT)
+  s.y = g->CURRENT_Y;
+  s.i = 0;
+  while (s.i < SCREEN_HEIGHT)
+  {
+    s.x = g->CURRENT_X;
+    s.j = 0;
+    while (s.j < SCREEN_WIDTH)
     {
-      x = g->CURRENT_X;
-      j = 0;
-      while (j < SCREEN_WIDTH)
-        {
-          apply_surface(j * SQUARE_SIZE, i * SQUARE_SIZE,\
-			g->ressources, g->screen, &g->clip[0]);
-	  p1.x = x;
-	  p1.y = y;
-	  p2.x = j;
-	  p2.y = i;
-	  show_res_square(map, p1, g, p2);
-	  x = _MOD(x + 1 , map->width);
-	  j++;
-        }
-      y = _MOD(y + 1, map->height);
-      i++;
+      apply_surface(s.j * SQUARE_SIZE, s.i * SQUARE_SIZE,
+        g->ressources, g->screen, &g->clip[0]);
+        s.p1.x = s.x;
+        s.p1.y = s.y;
+        s.p2.x = s.j;
+        s.p2.y = s.i;
+      show_res_square(map, s.p1, g, s.p2);
+      s.x = _MOD(s.x + 1 , map->width);
+      s.j++;
     }
+    s.y = _MOD(s.y + 1, map->height);
+    s.i++;
+  }
 }

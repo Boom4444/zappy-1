@@ -8,12 +8,12 @@
 ** Last update  Sun Jul  14 01:54:44 2013 oleg kuznietsov
 */
 
+#include <pthread.h>
+#include <stdlib.h>
 #include "gclient_ctimeout.h"
 #include "gclient_errors.h"
 #include "tools.h"
 #include "error.h"
-#include <pthread.h>
-#include <stdlib.h>
 
 void      *ctimeout(void *arg)
 {

@@ -9,12 +9,22 @@
 */
 
 #ifndef SHOW_MAP_H_
-#define SHOW_MAP_H_
+# define SHOW_MAP_H_
 
-int	init_map(t_map *w, int width, int height);
+typedef struct  s_shiet
+{
+  int           x;
+  int           y;
+  int           i;
+  int           j;
+  t_point       p1;
+  t_point       p2;
+}               t_s;
+
+int	  init_map(t_map *w, int width, int height);
 void	handle_input(t_graphic *g);
 void	move(t_map *map, t_graphic *g);
-void	show_res_square(t_map *map, int x, int y, t_graphic *g);
+void  show_res_square(t_map *map, t_point p1, t_graphic *g, t_point p2);
 void	show_ressources(t_graphic *g, t_map *map);
 
 #endif /* SHOW_MAP_H_ */

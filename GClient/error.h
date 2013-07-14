@@ -11,8 +11,8 @@
 #ifndef ERROR_H_
 # define ERROR_H_
 
-#include <string.h>
-#include <errno.h>
+# include <string.h>
+# include <errno.h>
 
 void  error_put(char *s);
 int   error_log(char *loc, char *func, char *msg);

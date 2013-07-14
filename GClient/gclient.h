@@ -11,7 +11,7 @@
 #ifndef CLIENT_H_
 # define CLIENT_H_
 
-#include <pthread.h>
+# include <pthread.h>
 
 typedef struct  s_options
 {

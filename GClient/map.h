@@ -22,7 +22,7 @@
 # define FOOD_WIDTH	30
 # define FOOD_HEIGHT	30
 # define SPEED 1
-# define _MOD(x,d) (((x) < 0) ? (((d) - ( (-(x)) % (d))) % (d)) : (x) % (d))
+# define _MOD(x, d) (((x) < 0) ? (((d) - ((-(x)) % (d))) % (d)) : (x) % (d))
 # define FOOD		11
 # define LINEMATE	12
 # define DERAUMERE	13
@@ -46,7 +46,7 @@ typedef struct	s_square_info
 }		t_square_info;
 
 typedef struct	s_square_content
-{ 
+{
     int		ressources[NUM_RESSOURCES];
 }		t_square_content;
 

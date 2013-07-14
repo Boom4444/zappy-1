@@ -8,13 +8,13 @@
 ** Last update Wed May 12 14:58:18 2013 oleg kuznietsov
 */
 
+#include <pthread.h>
 #include "gclient_auth.h"
 #include "gclient_exit.h"
 #include "gclient_funcs.h"
 #include "gclient_errors.h"
 #include "error.h"
 #include "tools.h"
-#include <pthread.h>
 
 void      *auth(void *arg)
 {

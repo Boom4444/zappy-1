@@ -8,6 +8,13 @@
 ** Last update Wed May 12 14:58:18 2001 oleg kuznietsov
 */
 
+#include <stdlib.h>
+#include <stdio.h>
+#include <sys/select.h>
+#include <sys/time.h>
+#include <sys/types.h>
+#include <unistd.h>
+#include <signal.h>
 #include "gclient.h"
 #include "error.h"
 #include "tools.h"
@@ -19,13 +26,6 @@
 #include "gclient_exit.h"
 #include "gclient_ctimeout.h"
 #include "socket.h"
-#include <stdlib.h>
-#include <stdio.h>
-#include <sys/select.h>
-#include <sys/time.h>
-#include <sys/types.h>
-#include <unistd.h>
-#include <signal.h>
 
 static int  *g_exit;
 
