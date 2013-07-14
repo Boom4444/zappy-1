@@ -1,42 +1,24 @@
-[1;36mINFO  [Sun Jul 14 04:06:33 2013  in server_start] : Server start[m
-[1;36mINFO  [Sun Jul 14 04:06:33 2013  in team_create] : Team created : 'Team1'[m
-[1;36mINFO  [Sun Jul 14 04:06:33 2013  in team_create] : Team created : 'Team2'[m
-[1;36mINFO  [Sun Jul 14 04:07:45 2013 accept in select_accept_connection] : User 127.0.0.1 connected to the server[m
-[1;36mINFO  [Sun Jul 14 04:07:48 2013  in user_player_init] : Player 1 created in team 'Team1'[m
-[1;36mINFO  [Sun Jul 14 04:08:05 2013  in user_destroy] : Player 1 disconnected and removed[m
-[1;36mINFO  [Sun Jul 14 04:08:06 2013 accept in select_accept_connection] : User 127.0.0.1 connected to the server[m
-[1;36mINFO  [Sun Jul 14 04:08:09 2013  in user_graph_init] : Graphic client created[m
-[1;36mINFO  [Sun Jul 14 04:08:46 2013  in graph_parse] : GFX Request 'mct' accepted[m
-[1;36mINFO  [Sun Jul 14 04:08:52 2013  in graph_parse] : GFX Request 'mct' accepted[m
-[1;36mINFO  [Sun Jul 14 04:10:34 2013  in user_destroy] : GFX Client disconnected and removed[m
-[1;36mINFO  [Sun Jul 14 04:11:01 2013  in server_start] : Server start[m
-[1;36mINFO  [Sun Jul 14 04:11:01 2013  in team_create] : Team created : 'Team1'[m
-[1;36mINFO  [Sun Jul 14 04:11:01 2013  in team_create] : Team created : 'Team2'[m
-[1;36mINFO  [Sun Jul 14 04:11:52 2013  in server_start] : Server start[m
-[1;36mINFO  [Sun Jul 14 04:11:52 2013  in team_create] : Team created : 'Team1'[m
-[1;36mINFO  [Sun Jul 14 04:11:52 2013  in team_create] : Team created : 'Team2'[m
-[1;36mINFO  [Sun Jul 14 04:13:46 2013  in server_start] : Server start[m
-[1;36mINFO  [Sun Jul 14 04:13:46 2013  in team_create] : Team created : 'Team1'[m
-[1;36mINFO  [Sun Jul 14 04:13:46 2013  in team_create] : Team created : 'Team2'[m
-[1;36mINFO  [Sun Jul 14 04:14:57 2013 accept in select_accept_connection] : User 127.0.0.1 connected to the server[m
-[1;36mINFO  [Sun Jul 14 04:14:57 2013  in user_graph_init] : Graphic client created[m
-[1;36mINFO  [Sun Jul 14 04:15:03 2013  in user_destroy] : GFX Client disconnected and removed[m
-[1;36mINFO  [Sun Jul 14 04:15:15 2013 accept in select_accept_connection] : User 127.0.0.1 connected to the server[m
-[1;36mINFO  [Sun Jul 14 04:15:16 2013  in user_graph_init] : Graphic client created[m
-[1;36mINFO  [Sun Jul 14 04:15:20 2013  in user_destroy] : GFX Client disconnected and removed[m
-[1;36mINFO  [Sun Jul 14 04:17:02 2013 accept in select_accept_connection] : User 10.41.177.226 connected to the server[m
-[1;36mINFO  [Sun Jul 14 04:17:06 2013  in user_graph_init] : Graphic client created[m
-[1;36mINFO  [Sun Jul 14 04:19:00 2013  in user_destroy] : GFX Client disconnected and removed[m
-[1;36mINFO  [Sun Jul 14 04:25:38 2013 accept in select_accept_connection] : User 10.41.177.226 connected to the server[m
-[1;36mINFO  [Sun Jul 14 04:25:39 2013  in user_destroy] : Client disconnected and removed[m
-[1;36mINFO  [Sun Jul 14 04:26:18 2013 accept in select_accept_connection] : User 10.41.177.226 connected to the server[m
-[1;36mINFO  [Sun Jul 14 04:26:18 2013  in user_graph_init] : Graphic client created[m
-[1;36mINFO  [Sun Jul 14 04:26:19 2013  in graph_parse] : GFX Request 'mct' accepted[m
-[1;36mINFO  [Sun Jul 14 04:26:19 2013  in graph_parse] : GFX Request 'mct' accepted[m
-[1;36mINFO  [Sun Jul 14 04:26:19 2013  in graph_parse] : GFX Request 'mct' accepted[m
-[1;36mINFO  [Sun Jul 14 04:26:19 2013  in graph_parse] : GFX Request 'mct' accepted[m
-[1;36mINFO  [Sun Jul 14 04:26:19 2013  in graph_parse] : GFX Request 'mct' accepted[m
-[1;36mINFO  [Sun Jul 14 04:26:19 2013  in graph_parse] : GFX Request 'mct' accepted[m
-[1;36mINFO  [Sun Jul 14 04:26:19 2013  in graph_parse] : GFX Request 'mct' accepted[m
-[1;36mINFO  [Sun Jul 14 04:26:19 2013  in graph_parse] : GFX Request 'mct' accepted[m
-[1;36mINFO  [Sun Jul 14 04:26:19 2013  in user_destroy] : GFX Client disconnected and removed[m
+[1;36mINFO  [Sun Jul 14 06:03:57 2013  in server_start] : Server start[m
+[1;36mINFO  [Sun Jul 14 06:03:57 2013  in team_create] : Team created : 'Team1'[m
+[1;36mINFO  [Sun Jul 14 06:03:57 2013  in team_create] : Team created : 'Team2'[m
+[1;36mINFO  [Sun Jul 14 06:04:03 2013  in server_start] : Server start[m
+[1;36mINFO  [Sun Jul 14 06:04:03 2013  in team_create] : Team created : 'Team1'[m
+[1;36mINFO  [Sun Jul 14 06:04:03 2013  in team_create] : Team created : 'Team2'[m
+[1;36mINFO  [Sun Jul 14 06:06:16 2013  in server_start] : Server start[m
+[1;36mINFO  [Sun Jul 14 06:06:16 2013  in team_create] : Team created : 'Team1'[m
+[1;36mINFO  [Sun Jul 14 06:06:16 2013  in team_create] : Team created : 'Team2'[m
+[1;36mINFO  [Sun Jul 14 06:09:27 2013  in server_start] : Server start[m
+[1;36mINFO  [Sun Jul 14 06:09:27 2013  in team_create] : Team created : 'Team1'[m
+[1;36mINFO  [Sun Jul 14 06:09:27 2013  in team_create] : Team created : 'Team2'[m
+[1;36mINFO  [Sun Jul 14 06:09:35 2013  in server_start] : Server start[m
+[1;36mINFO  [Sun Jul 14 06:09:35 2013  in team_create] : Team created : 'Team1'[m
+[1;36mINFO  [Sun Jul 14 06:09:35 2013  in team_create] : Team created : 'Team2'[m
+[1;36mINFO  [Sun Jul 14 06:10:02 2013  in server_start] : Server start[m
+[1;36mINFO  [Sun Jul 14 06:10:02 2013  in team_create] : Team created : 'Team1'[m
+[1;36mINFO  [Sun Jul 14 06:10:02 2013  in team_create] : Team created : 'Team2'[m
+[1;36mINFO  [Sun Jul 14 06:10:35 2013  in server_start] : Server start[m
+[1;36mINFO  [Sun Jul 14 06:10:35 2013  in team_create] : Team created : 'Team1'[m
+[1;36mINFO  [Sun Jul 14 06:10:35 2013  in team_create] : Team created : 'Team2'[m
+[1;36mINFO  [Sun Jul 14 06:22:59 2013  in server_start] : Server start[m
+[1;36mINFO  [Sun Jul 14 06:22:59 2013  in team_create] : Team created : 'Team1'[m
+[1;36mINFO  [Sun Jul 14 06:22:59 2013  in team_create] : Team created : 'Team2'[m
