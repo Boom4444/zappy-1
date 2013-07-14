@@ -5,7 +5,7 @@
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Sat Jul 13 19:55:19 2013 ivan ignatiev
-** Last update Sat Jul 13 19:55:23 2013 ivan ignatiev
+** Last update Sun Jul 14 14:22:08 2013 ivan ignatiev
 */
 
 #include	"main.h"
@@ -37,7 +37,7 @@ int		cli_accept_request(t_user_player *u,
 	  cli_answer(u, s, "ko\n");
 	  error_show("cli_parse", "", "Player %d request limit", u->number);
 	}
-      if ((request = cli_request_parse(s, u, w)) != NULL)
+      else if ((request = cli_request_parse(s, u, w)) != NULL)
 	{
 	  request->data->user->request_counter++;
 	  item_pb(s->request_list, (void*)request, sizeof(t_request));

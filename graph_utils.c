@@ -5,7 +5,7 @@
 ** Login   <alcara_m@epitech.net>
 ** 
 ** Started on  Fri Jul 12 22:31:08 2013 Marin Alcaraz
-** Last update Fri Jul 12 22:31:56 2013 Marin Alcaraz
+** Last update Sun Jul 14 07:32:28 2013 Marin Alcaraz
 */
 
 #include	"main.h"
@@ -19,49 +19,51 @@
 #include	"answer.h"
 #include	"graph_command.h"
 #include	"users_graph.h"
+#include	"str.h"
 
-int		get_content(int *info, char *response, t_world *w)
+int		get_content(int *info, char *response,
+			    t_world *w)
 {
-    int		i;
-    char	aux_response[STR_LIMIT];
+  int		i;
+  char		aux_response[STR_LIMIT];
 
-    while (i < 7)
+  while (i < 7)
     {
-        sprintf(aux_response, " %d",
-                w->surface[info[1]][info[0]].resources[i]);
-        strcat(response, aux_response);
-        aux_response[0] = '\0';
-        i = i + 1;
+      sprintf(aux_response, " %d",
+	      w->surface[info[1]][info[0]].resources[i]);
+      strcat(response, aux_response);
+      aux_response[0] = '\0';
+      i = i + 1;
     }
-    return (0);
+  return (0);
 }
 
-void	parse_and_answer(char *response,
-			 t_graph_data *rqd, t_world *w)
+void		parse_and_answer(char *response, t_graph_data *rqd,
+				 t_world *w)
 {
-  int	indexes[3];
-  char	bct_line[STR_LIMIT];
+  int		is[3];
+  char		bct_line[STR_LIMIT];
 
-  indexes[0] = 0;
-  while (indexes[0] < w->height)
+  is[0] = 0;
+  while (is[0] < w->height)
     {
-      indexes[1] = 0;
-      while (indexes[1] < w->width)
+      is[1] = 0;
+      while (is[1] < w->width)
         {
-	  sprintf(response, "bct %d %d", indexes[1], indexes[0]);
-	  indexes[2] = 0;
-	  while (indexes[3] < RES_TYPES_COUNT)
+	  sprintf(bct_line, "bct %d %d", is[1], is[0]);
+	  response = stralloccat(response, bct_line);
+	  is[2] = 0;
+	  while (is[2] < RES_TYPES_COUNT)
             {
 	      sprintf(bct_line, " %d",
-		      w->surface[indexes[0]][indexes[1]].
-		      resources[indexes[2]++]);
-	      strcat(response, bct_line);
+		      w->surface[is[0]][is[1]].resources[is[2]++]);
+	      response = stralloccat(response, bct_line);
             }
-	  indexes[1] = indexes[1] + 1;
-	  strcat(response, "\n");
-	  cli_answer_to_graph(rqd->user, response);
+	  is[1] = is[1] + 1;
+	  response = stralloccat(response, "\n");
         }
-      indexes[0] = indexes[0] + 1;
-      response[0] = '\0';
+      cli_answer_to_graph(rqd->user, response);
+      *response = '\0';
+      is[0] = is[0] + 1;
     }
 }

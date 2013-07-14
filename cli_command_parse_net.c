@@ -5,7 +5,7 @@
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Sat Jul 13 18:20:10 2013 ivan ignatiev
-** Last update Sat Jul 13 18:27:29 2013 ivan ignatiev
+** Last update Sun Jul 14 12:58:24 2013 ivan ignatiev
 */
 
 #include	"main.h"
@@ -53,6 +53,7 @@ t_request_data		*cli_parse_fork(t_request_type *type,
   if ((rqd = cli_request_data_init(u->request, type->argc)) != NULL)
     {
       rqd->user = u;
+      sprintf(response, "pfk %d\n", u->number);
       cli_answer_to_all_graph(s, response);
     }
   return (rqd);

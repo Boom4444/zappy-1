@@ -5,7 +5,7 @@
 ** Login   <kuznet_o@epitech.eu>
 **
 ** Started on  Fri Jun  07 00:49:53 2013 oleg kuznietsov
-** Last update Sat Jul 13 16:12:20 2013 ivan ignatiev
+** Last update Sun Jul 14 13:40:50 2013 ivan ignatiev
 */
 
 #include	"main.h"
@@ -87,6 +87,8 @@ void		teams_fill(t_opt *opt, int n)
   int		i;
   char		tmp[255];
 
+  if (opt->names == NULL || opt->names->len != 0)
+    return ;
   i = 1;
   while (i <= n)
     {

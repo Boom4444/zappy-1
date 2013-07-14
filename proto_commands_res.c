@@ -5,7 +5,7 @@
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Sat Jul 13 20:17:33 2013 ivan ignatiev
-** Last update Sat Jul 13 20:17:34 2013 ivan ignatiev
+** Last update Sun Jul 14 14:10:27 2013 ivan ignatiev
 */
 
 #include	"main.h"
@@ -35,6 +35,8 @@ int		match_index(char *str)
 {
   int		i;
 
+  if (is_numeric(str))
+    return (atoi(str));
   i = 0;
   while (i < RES_TYPES_COUNT)
     {
@@ -42,8 +44,6 @@ int		match_index(char *str)
 	return (i);
       i = i + 1;
     }
-  if (is_numeric(str))
-    return (atoi(str));
   return (-1);
 }
 

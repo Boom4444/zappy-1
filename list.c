@@ -5,7 +5,7 @@
 ** Login   <kuznet_o@epitech.net>
 **
 ** Started on  Wed Jun  05 19:21:23 2013 oleg kuznietsov
-** Last update Sat Jul 13 18:28:09 2013 ivan ignatiev
+** Last update Sun Jul 14 12:22:15 2013 ivan ignatiev
 */
 
 #include	"main.h"
@@ -51,7 +51,7 @@ t_list		*list_delete(t_list *list)
   current = list_get_head(list);
   while (current != NULL)
     {
-      next = current;
+      next = current->next;
       free(current);
       current = next;
     }

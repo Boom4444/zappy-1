@@ -5,7 +5,7 @@
 ** Login   <alcara_m@epitech.net>
 ** 
 ** Started on  Tue May 21 09:42:30 2013 Marin Alcaraz
-** Last update Sat Jul 13 19:00:48 2013 ivan ignatiev
+** Last update Sun Jul 14 14:11:18 2013 ivan ignatiev
 */
 
 #include	"main.h"
@@ -22,24 +22,26 @@
 
 int		server_send(int clientfd, char *message)
 {
-  char		test[1];
+  //char		test[1];
 
-  if (recv(clientfd, test, 0, MSG_DONTWAIT) == -1
-      && errno == 11)
-    return (send(clientfd, message, strlen(message), MSG_DONTWAIT));
+  //  if (recv(clientfd, test, 0, MSG_DONTWAIT) == -1
+  //  && errno == 11)
+    return (send(clientfd, message, strlen(message),
+		 MSG_DONTWAIT | MSG_NOSIGNAL));
   return (-1);
 }
 
-int		server_init(t_server *s)
+int			server_init(t_server *s)
 {
   struct sockaddr_in	s_in;
 
   log_show("server_start", "", "Server start");
-  s->client_list = list_init();
-  s->team_list = team_list_init(s, s->options.names);
-  s->request_list = list_init();
-  s->answer_list = list_init();
-  s->server_fd = create_socket();
+  if ((s->client_list = list_init()) == NULL
+      || (s->team_list = team_list_init(s, s->options.names)) == NULL
+      || (s->request_list = list_init()) == NULL
+      || (s->answer_list = list_init()) == NULL
+      || (s->server_fd = create_socket()) < 0)
+    return (-1);
   s->tick = 0;
   s->diff = 0;
   s->players_count = 0;
@@ -65,9 +67,13 @@ int		server_stop(t_server *s, t_world *w)
     {
       if (T_USER(current->cont)->clientfd >= 0)
 	close(T_USER(current->cont)->clientfd);
+      free(current->cont);
       current = current->next;
     }
   close(s->server_fd);
+  list_delete(s->client_list);
+  list_delete(s->team_list);
+  world_destroy(w);
   log_show("server_stop", "", "Server stop");
   return (0);
 }

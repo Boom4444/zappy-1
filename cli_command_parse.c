@@ -5,7 +5,7 @@
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Thu Jun 13 17:27:55 2013 ivan ignatiev
-** Last update Sat Jul 13 18:22:49 2013 ivan ignatiev
+** Last update Sun Jul 14 12:29:30 2013 ivan ignatiev
 */
 
 #include	"main.h"
@@ -91,11 +91,12 @@ t_request_data		*cli_parse_broadcast(t_request_type *type,
   if ((rqd = cli_request_data_init(u->request, type->argc)) != NULL)
     {
       rqd->user = u;
-      if ((text = (char*)malloc(sizeof(char)
-				* (strlen(u->request) - 9))) != NULL)
+      if (strlen(u->request) > 10
+	  && (text = (char*)malloc(sizeof(char)
+				   * (strlen(u->request) - 9))) != NULL)
         {
 	  *text = 0;
-	  sscanf(u->request, "broadcast %s\n", text);
+	  sscanf(u->request, "broadcast %[^\n]\n", text);
 	  rqd->argv[0] = (void*)text;
 	  return (rqd);
         }

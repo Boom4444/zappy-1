@@ -5,11 +5,12 @@
 ** Login   <alcara_m@epitech.net>
 ** 
 ** Started on  Thu Jun 20 17:33:58 2013 Marin Alcaraz
-** Last update Sat Jul 13 19:11:27 2013 ivan ignatiev
+** Last update Sun Jul 14 07:34:23 2013 Marin Alcaraz
 */
 
 #include	"main.h"
 #include	"list.h"
+#include	"options.h"
 #include	"error.h"
 #include	"trantor.h"
 
@@ -39,6 +40,26 @@ int		init_world(t_world *w, int width, int height)
   return (0);
 }
 
+void		world_destroy(t_world *w)
+{
+  int		i;
+  int		j;
+
+  i = 0;
+  while (i < w->height)
+    {
+      j = 0;
+      while (j < w->width)
+	{
+	  list_delete(w->surface[i][j].players);
+	  ++j;
+	}
+      free(w->surface[i]);
+      ++i;
+    }
+  free(w->surface);
+}
+
 int		display_world(t_world *w, int width, int height)
 {
   int		i;
@@ -65,23 +86,4 @@ int		display_world(t_world *w, int width, int height)
     }
   printf("\n\n");
   return (0);
-}
-
-void		food_refresh(t_world *w, int width, int height)
-{
-  int		amount;
-  int		minx;
-  int		miny;
-  int		resource;
-
-  amount = 0;
-  resource = 0;
-  srand(time(NULL));
-  while (amount < RESOURCE_LIMIT / 16)
-    {
-      random_number(&minx, width);
-      random_number(&miny, height);
-      (w->surface[miny][minx]).resources[resource]++;
-      amount = amount + 1;
-    }
 }

@@ -11,11 +11,35 @@
 #include	"main.h"
 #include	"list.h"
 #include	"error.h"
+#include	"options.h"
 #include	"trantor.h"
+#include	"server.h"
+#include	"users.h"
+#include	"request.h"
+#include	"answer.h"
+#include	"proto_commands_items.h"
+#include	"resource_manager.h"
 
-void		random_number(int *container, int limit)
+void		food_refresh(t_server *s, t_world *w,
+			     int width, int height)
 {
-  *container = rand() % limit;
+  int		amount;
+  int		minx;
+  int		miny;
+  char		response[ANSWER_SIZE];
+
+  amount = 0;
+  srand(time(NULL));
+  while (amount < RESOURCE_LIMIT / 16)
+    {
+      minx = _MOD(rand(), width);
+      miny = _MOD(rand(), height);
+      (w->surface[miny][minx]).resources[0]++;
+      cli_command_bct(response, minx, miny, w);
+      cli_answer_to_all_graph(s, response);
+      amount = amount + 1;
+    }
+  log_show("generate_resource", "", "Resources ready to use");
 }
 
 int		generate_resource(t_world *w, int width, int height)
@@ -29,9 +53,9 @@ int		generate_resource(t_world *w, int width, int height)
   srand(time(NULL));
   while (amount < RESOURCE_LIMIT)
     {
-      random_number(&minx, width);
-      random_number(&miny, height);
-      random_number(&resource, 7);
+      minx = _MOD(rand(), width);
+      miny = _MOD(rand(), height);
+      resource = _MOD(rand(), 7);
       (w->surface[miny][minx]).resources[resource]++;
       amount = amount + 1;
     }
