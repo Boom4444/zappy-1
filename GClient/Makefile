@@ -5,7 +5,7 @@
 ## Login   <kuznet_o@epitech.eu>
 ##
 ## Started on  Sun Jul  14 03:42:20 2013 oleg kuznietsov
-## Last update Sun Jul 14 07:47:15 2013 Oleg Kuznietsov
+## Last update Sun Jul 14 09:31:26 2013 Oleg Kuznietsov
 ##
 
 GNAME		=	gclient
@@ -27,6 +27,7 @@ GSRC		=	error.c \
 			gc_2.c \
 			gclient_auth.c \
 			gclient_exit.c \
+			gclient_ctimeout.c \
 			gclient_ping.c \
 			list.c
 

@@ -13,7 +13,7 @@
 
 #include "gclient.h"
 
-typedef int (*t_graph_func)(char *cmd, t_pm *pm);
+typedef int   (*t_graph_func)(char *cmd, t_pm *pm);
 
 typedef struct  s_graph_cmd
 {
@@ -21,6 +21,7 @@ typedef struct  s_graph_cmd
   t_graph_func  func;
 }               t_gcmd;
 
+int   cmd_process(char *cmd, t_pm *pm);
 int   gcmd_msz(char *cmd, t_pm *pm);
 int   gcmd_bct(char *cmd, t_pm *pm);
 int   gcmd_tna(char *cmd, t_pm *pm);

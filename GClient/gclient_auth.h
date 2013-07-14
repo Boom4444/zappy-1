@@ -23,5 +23,6 @@ typedef struct    s_tauth_args
 
 void  *auth(void *arg);
 void  auth_start(t_pm *pm, t_auth *a);
+int   ll_auth(char *cmd, t_pm *pm);
 
 #endif /* !GCLIENT_AUTH_H_ */

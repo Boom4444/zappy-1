@@ -38,4 +38,10 @@ typedef struct    s_program_memory
   int             sfd;
 }                 t_pm;
 
+int   client_options(int argc, char **argv, t_options *options);
+int   screen_update(t_ppo *po, t_pm *pm);
+void  client_prompt(t_pm *pm);
+void  sigint_handler(int sig);
+int   main(int argc, char **argv);
+
 #endif /* !CLIENT_H_ */

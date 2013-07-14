@@ -8,8 +8,8 @@
 ** Last update Wed May 12 14:58:18 2001 oleg kuznietsov
 */
 
+#include "gclient_errors.h"
 #include "error.h"
-#include "gclient.h"
 
 void  cp_error(t_pm *pm, char *loc, char *msg)
 {

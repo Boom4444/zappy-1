@@ -22,4 +22,8 @@ typedef struct    s_exit_args
   pthread_t       th1;
 }                 t_exit;
 
+void  my_exit(t_pm *pm, int status);
+void  *exit_monitor(void *arg);
+void  exit_start(t_pm *pm, t_exit *e);
+
 #endif /* !GCLIENT_EXIT_H_ */

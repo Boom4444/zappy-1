@@ -11,4 +11,16 @@
 #ifndef GCLIENT_FUNCS_H_
 # define GCLIENT_FUNCS_H_
 
+#include "gclient.h"
+#include <sys/select.h>
+// #include <sys/time.h>
+#include <sys/types.h>
+// #include <unistd.h>
+
+
+void  cmd_send(t_pm *pm, char *cmd);
+int   nsp_get(char *str);
+void  cmd_put(char *cmd);
+void  select_monitor(fd_set *fd_rs, t_ppo *p, t_pm *pm);
+
 #endif /* !GCLIENT_FUNCS_H_ */

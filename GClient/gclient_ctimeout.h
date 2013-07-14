@@ -8,23 +8,21 @@
 ** Last update  Sun Jul  14 01:54:50 2013 oleg kuznietsov
 */
 
-#ifndef GCLIENT_PING_H_
-# define GCLIENT_PING_H_
+#ifndef GCLIENT_CTIMEOUT_H_
+# define GCLIENT_CTIMEOUT_H_
 
 #include "gclient.h"
 #include <pthread.h>
 
-typedef struct    s_ping_args
+typedef struct    s_ctimeout_args
 {
-  t_pm            *pm;
+  int             cto;
   int             pret;
+  t_pm            *pm;
   pthread_t       th1;
-  pthread_t       th2;
-}                 t_ping;
+}                 t_cto;
 
-void  *ping_end(void *arg);
-void  ping_save(t_pm *pm);
-void  *ping(void *arg);
-void  ping_start(t_pm *pm, t_ping *p);
+void  *ctimeout(void *arg);
+void  ctimeout_start(t_pm *pm, t_cto *c);
 
-#endif /* !GCLIENT_PING_H_ */
+#endif /* !GCLIENT_CTIMEOUT_H_ */

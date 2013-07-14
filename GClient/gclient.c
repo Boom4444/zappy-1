@@ -14,6 +14,7 @@
 #include "gclient_auth.h"
 #include "gclient_ping.h"
 #include "gclient_exit.h"
+#include "gclient_ctimeout.h"
 #include "socket.h"
 #include <stdlib.h>
 #include <stdio.h>
@@ -103,6 +104,7 @@ int         main(int argc, char **argv)
   t_pm      pm;
   t_options options;
   t_exit    e;
+  t_cto     c;
 
   signal(SIGINT, sigint_handler);
   g_exit = &e.es;
@@ -111,12 +113,15 @@ int         main(int argc, char **argv)
     return (EXIT_SUCCESS);
   str_put("Welcome to Zappy GClient !\n");
   printf("Trying to connect %s:%s\n", options.host, options.port);
+  ctimeout_start(&pm, &c);
   if ((pm.sfd = socket_connect(options.host, options.port)) == -1)
   {
     error_show("main", "socket_connect", "Connection failed");
     str_put("GClient stop\n");
     return (EXIT_SUCCESS);
   }
+  c.cto = 1;
   client_prompt(&pm);
+  str_put("GClient stop\n");
   return (EXIT_FAILURE);
 }

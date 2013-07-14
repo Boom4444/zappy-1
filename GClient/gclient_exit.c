@@ -30,11 +30,15 @@ void      *exit_monitor(void *arg)
 
   e = (t_exit *)arg;
   while (e->es == 0);
-  my_exit(e->pm, 1);
+  if (e->pm->sfd != -1)
+    close(e->pm->sfd);
+  str_put("GClient stop\n");
+  exit(EXIT_SUCCESS);
 }
 
 void  exit_start(t_pm *pm, t_exit *e)
 {
+  pm->sfd = -1;
   e->pm = pm;
   e->es = 0;
   if ((e->pret = pthread_create(&e->th1, NULL, exit_monitor, e)) != 0)

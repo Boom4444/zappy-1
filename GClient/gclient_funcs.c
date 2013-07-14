@@ -11,7 +11,6 @@
 #include "gclient_funcs.h"
 #include "socket.h"
 #include "error.h"
-#include "gclient.h"
 #include "tools.h"
 #include <stdio.h>
 #include <time.h>
@@ -59,7 +58,7 @@ void        cmd_put(char *cmd)
   printf("processed[%d:%d:%d]: %s", s.tm_hour, s.tm_min, s.tm_sec, cmd);
 }
 
-void   select_monitor(fd_set *fd_rs, t_ppo *p, t_pm *pm)
+void  select_monitor(fd_set *fd_rs, t_ppo *p, t_pm *pm)
 {
   if (select(pm->sfd + 1, fd_rs, NULL, NULL, NULL) == -1)
     cp_error(pm, "select", strerror(errno));
