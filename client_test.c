@@ -5,7 +5,7 @@
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Fri May 24 19:45:50 2013 ivan ignatiev
-** Last update Sun Jul 14 18:08:57 2013 ivan ignatiev
+** Last update Sun Jul 14 19:59:07 2013 ivan ignatiev
 */
 
 #include	<stdlib.h>
@@ -89,12 +89,12 @@ int		client_process(int sfd, fd_set *fdreadset)
       if (!g_connect)
 	{
 	  _num = rand() % 4;
-	  write(sfd, g_teams[_num], strlen(teams[_num]));
+	  write(sfd, g_teams[_num], strlen(g_teams[_num]));
 	  printf("#zappy(client)<--%s", g_teams[_num]);
 	}
       g_connect = 1;
-      _num = rand() % 40;
-      printf("#zappy(client-%d)<--%s", g_number, cmds[_num]);
+      _num = rand() % 39;
+      printf("#zappy(client-%d)<--%s", g_number, g_cmds[_num]);
       buf[len] = '\0';
       printf("#zappy(server-%d)-->%s", g_number, buf);
       write(sfd, g_cmds[_num], strlen(g_cmds[_num]));

@@ -5,7 +5,7 @@
 ** Login   <alcara_m@epitech.net>
 ** 
 ** Started on  Thu Jul 04 09:57:07 2013 Marin Alcaraz
-** Last update Sun Jul 14 16:52:38 2013 ivan ignatiev
+** Last update Sun Jul 14 19:50:35 2013 ivan ignatiev
 */
 
 #include	"main.h"
@@ -31,7 +31,7 @@ void		move_player(t_user_player *player,
   sprintf(response, "ppo %d %d %d %d\n", player->number,
 	  player->posx, player->posy, player->orientation + 1);
   cli_answer_to_all_graph(s, response);
-  item_pf(w->surface[player->posy][player->posy].players,
+  item_pf(w->surface[player->posy][player->posx].players,
 	  player, sizeof(t_user_player));
 }
 

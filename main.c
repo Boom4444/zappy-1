@@ -5,7 +5,7 @@
 ** Login   <alcara_m@epitech.net>
 ** 
 ** Started on  Fri Mar 15 16:48:12 2013 Marin Alcaraz
-** Last update Sun Jul 14 17:20:25 2013 ivan ignatiev
+** Last update Sun Jul 14 19:54:38 2013 ivan ignatiev
 */
 
 #include	"main.h"
