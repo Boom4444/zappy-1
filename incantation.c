@@ -5,7 +5,7 @@
 ** Login   <alcara_m@epitech.net>
 ** 
 ** Started on  Wed Jul 10 09:57:57 2013 Marin Alcaraz
-** Last update Fri Jul 12 22:52:26 2013 Marin Alcaraz
+** Last update Sun Jul 14 18:18:41 2013 ivan ignatiev
 */
 
 #include	"main.h"
@@ -72,7 +72,7 @@ int		incantate(t_list *players, t_user_player *p,
 			     [p->posx].players, p);
   if (eq_players >= g_level_combinations[p->level - 1][0])
     {
-      if (verify_enough_resources(p, w) == -1)
+      if (verify_enough_resources(p, t, w) == -1)
 	return (-1);
       if (level_up(eq_players, p, players, w) != 0)
 	return (-1);

@@ -5,7 +5,7 @@
 ** Login   <alcara_m@epitech.net>
 ** 
 ** Started on  Thu Jun 13 16:26:19 2013 Marin Alcaraz
-** Last update Sun Jul 14 17:06:15 2013 ivan ignatiev
+** Last update Sun Jul 14 12:45:20 2013 Marin Alcaraz
 */
 
 #include	"main.h"
@@ -41,11 +41,11 @@ void		cli_avance(t_request_data *rqd, t_server *t, t_world *w)
     {
       item_delete_by_content(w->surface[rqd->user->posy]
 			     [rqd->user->posx].players,
-			     (void*)rqd->user);
+			     (void*)(rqd->user));
       rqd->user->posx = n.x;
       rqd->user->posy = n.y;
       item_pf(w->surface[rqd->user->posy][rqd->user->posx].players,
-	      (void*)rqd->user, sizeof(t_user_player));
+	      (void*)(rqd->user), sizeof(t_user_player));
     }
   cli_answer(rqd->user, t, "ok\n");
   sprintf(response, "ppo %d %d %d %d\n", rqd->user->number,

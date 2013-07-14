@@ -5,7 +5,7 @@
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Fri May 24 19:45:50 2013 ivan ignatiev
-** Last update Sun Jul 14 15:15:58 2013 ivan ignatiev
+** Last update Sun Jul 14 18:08:57 2013 ivan ignatiev
 */
 
 #include	<stdlib.h>
@@ -23,15 +23,14 @@ static int	g_connect = 0;
 
 static int	g_number = 0;
 
-static char	*teams[] = {
+static char	*g_teams[] = {
   "1\n",
   "2\n",
   "3\n",
   "4\n"
 };
 
-
-static char	*cmds[] = {
+static char	*g_cmds[] = {
   "fork\n",
   "avance\n",
   "droite\n",
@@ -90,15 +89,15 @@ int		client_process(int sfd, fd_set *fdreadset)
       if (!g_connect)
 	{
 	  _num = rand() % 4;
-	  write(sfd, teams[_num], strlen(teams[_num]));
-	  printf("#zappy(client)<--%s", teams[_num]);
+	  write(sfd, g_teams[_num], strlen(teams[_num]));
+	  printf("#zappy(client)<--%s", g_teams[_num]);
 	}
       g_connect = 1;
       _num = rand() % 40;
       printf("#zappy(client-%d)<--%s", g_number, cmds[_num]);
       buf[len] = '\0';
       printf("#zappy(server-%d)-->%s", g_number, buf);
-      write(sfd, cmds[_num], strlen(cmds[_num]));
+      write(sfd, g_cmds[_num], strlen(g_cmds[_num]));
     }
   return (1);
 }
@@ -144,7 +143,6 @@ int		client_options(int argc, char **argv,
     }
   return (EXIT_SUCCESS);
 }
-
 
 int		main(int argc, char **argv)
 {
