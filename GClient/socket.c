@@ -1,80 +1,41 @@
 /*
-** socket.c for zappy in /home/ignatiev/Projects/zappy
-** 
-** Made by ivan ignatiev
-** Login   <ignati_i@epitech.net>
-** 
-** Started on  Sun Apr 14 03:49:32 2013 ivan ignatiev
-** Last update Wed May 29 18:30:04 2013 oleg kuznietsov
+** socket.c for Zappy in /home/el/Zappy/GClient
+**
+** Made by oleg kuznietsov
+** Login   <kuznet_o@epitech.eu>
+**
+** Started on  Sun Jul  14 12:27:00 2013 oleg kuznietsov
+** Last update  Sun Jul  14 12:27:00 2013 oleg kuznietsov
 */
 
-#include    "socket.h"
-#include		<string.h>
-#include		<netdb.h>
-#include		<unistd.h>
+#include "socket.h"
+#include "error.h"
 
-static int    socket_hints(struct addrinfo *hints)
+int     socket_connect(const char *ht, const char *pr)
 {
-  struct protoent *pe;
+  t_so  s;
 
-  memset(hints, 0, sizeof(struct addrinfo));
-  hints->ai_family = AF_INET;
-  hints->ai_socktype = SOCK_STREAM;
-  hints->ai_flags = 0;
-  if ((pe = getprotobyname("tcp")) == NULL)
-    return (-1);
-  hints->ai_protocol = pe->p_proto;
-  return (0);
-}
-
-static int    socket_addr(struct sockaddr_in *addr,
-            int port)
-{
-  addr->sin_family = AF_INET;
-  addr->sin_addr.s_addr = INADDR_ANY;
-  addr->sin_port = htons(port);
-  return (0);
-}
-
-int     socket_listen(int port)
-{
-  int     sfd;
-  struct protoent *pe;
-  struct sockaddr_in  saddr;
-
-  if ((pe = getprotobyname("tcp")) == NULL
-      || (sfd = socket(AF_INET, SOCK_STREAM, pe->p_proto)) < 0
-      || socket_addr(&saddr, port) < 0
-      || bind(sfd, (struct sockaddr*)&saddr, sizeof(saddr)) < 0
-      || listen(sfd, 20) < 0)
-    return (-1);
-  return (sfd);
-}
-
-int     socket_connect(const char *host,
-               const char *port)
-{
-  int     sfd;
-  struct addrinfo hints;
-  struct addrinfo *result;
-  struct addrinfo *rp;
-
-  if (socket_hints(&hints) == -1)
-    return (-1);
-  if (getaddrinfo(host, port, &hints, &result) == -1)
-    return (-1);
-  rp = result;
-  while (rp != NULL)
-    {
-      sfd = socket(rp->ai_family, rp->ai_socktype, rp->ai_protocol);
-      if (sfd >= 0 && connect(sfd, rp->ai_addr, rp->ai_addrlen) != -1)
+  s.ip = ht;
+  s.port = atoi(pr);
+  s.s_in.sin_family = AF_INET;
+  s.s_in.sin_port = htons(s.port);
+  s.s_in.sin_addr.s_addr = inet_addr(s.ip);
+  if (!(s.pe = getprotobyname("TCP")))
   {
-    freeaddrinfo(result);
-    return (sfd);
+    error_show("socket_connect", "getprotobyname", strerror(errno));
+    return -1;
   }
-      close(sfd);
-      rp = rp->ai_next;
-    }
-  freeaddrinfo(result);
-  return (-1);
+  if ((s.fd = socket(AF_INET, SOCK_STREAM, s.pe->p_proto)) == -1)
+  {
+    error_show("socket_connect", "socket", strerror(errno));
+    return -1;
+  }
+  if (connect(s.fd, (struct sockaddr*)&s.s_in, sizeof(s.s_in)) == -1)
+  {
+    error_show("socket_connect", "connect", strerror(errno));
+    close(s.fd);
+    return -1;
+  }
+  endprotoent();
+  return (s.fd);
 }
