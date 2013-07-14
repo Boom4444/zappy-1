@@ -11,6 +11,7 @@
 #include "socket.h"
 #include <stdlib.h>
 #include <string.h>
+#include <unistd.h>
 #include <netdb.h>
 
 static int		socket_hints(struct addrinfo *hints)
