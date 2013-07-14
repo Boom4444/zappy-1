@@ -5,7 +5,7 @@
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Sat Apr 27 14:16:14 2013 ivan ignatiev
-** Last update Sat Jul 13 19:06:43 2013 ivan ignatiev
+** Last update Sun Jul 14 14:26:00 2013 ivan ignatiev
 */
 
 #include	"main.h"
@@ -17,6 +17,7 @@
 #include	"error.h"
 #include	"item.h"
 #include	"answer.h"
+#include	"request.h"
 
 t_user		*user_create(void)
 {
@@ -33,9 +34,39 @@ t_user		*user_create(void)
   return (user);
 }
 
+void		user_destroy_anr(t_user *user, t_server *s)
+{
+  t_item	*current;
+  t_item	*next;
+
+  current = list_get_head(s->answer_list);
+  while (current != NULL)
+    {
+      next = current->next;
+      if (T_ANSWER(current)->user == (void*)user)
+	{
+	  free(current->cont);
+	  item_delete(s->answer_list, current);
+	}
+      current = next;
+    }
+  current = list_get_head(s->request_list);
+  while (current != NULL)
+    {
+      next = current->next;
+      if (T_REQUEST(current)->data->user == (void*)user)
+	{
+	  free(current->cont);
+	  item_delete(s->request_list, current);
+	}
+      current = next;
+    }
+}
+
 int		user_destroy(t_user *user, t_server *s, t_world *w)
 {
   item_delete_by_content(s->client_list, (void*)user);
+  user_destroy_anr(user, s);
   if (user->protocol == CLI_PROTO)
     return (user_player_destroy(T_PLAYER(user), s, w));
   else if (user->protocol == GRAPHIC_PROTO)

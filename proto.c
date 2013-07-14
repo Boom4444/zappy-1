@@ -5,7 +5,7 @@
 ** Login   <alcara_m@epitech.net>
 ** 
 ** Started on  Wed Jun 12 16:34:40 2013 Marin Alcaraz
-** Last update Sat Jul 13 19:56:26 2013 ivan ignatiev
+** Last update Sun Jul 14 12:44:48 2013 ivan ignatiev
 */
 
 #include	"main.h"
@@ -85,6 +85,9 @@ t_user		*proto_define_transform(t_user *u,
       free(u->request);
       return (u);
     }
+  error_show("proto_define", "", "Limit of players or undefined team");
+  server_send(u->clientfd, "ko\n");
+  u->connected = DISCONNECTED;
   return (u);
 }
 
@@ -101,8 +104,6 @@ t_user		*proto_define(t_user *u, t_server *s, t_world *w)
       u->request_buf = stralloccat(u->request_buf, buf);
       if ((u->request = getnextline(u->request_buf)) != NULL)
 	return (proto_define_transform(u, s, w));
-      error_show("proto_define", "", "Limit of players or undefined team");
-      server_send(u->clientfd, "ko\n");
     }
   u->connected = DISCONNECTED;
   return (u);

@@ -5,7 +5,7 @@
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Sat Jul 13 19:44:14 2013 ivan ignatiev
-** Last update Fri Jul 12 22:51:41 2013 Marin Alcaraz
+** Last update Sun Jul 14 13:02:23 2013 ivan ignatiev
 */
 
 #include	"main.h"
@@ -106,14 +106,13 @@ void		check_victory(t_server *t)
   tmp_team = list_get_head(t->team_list);
   while (tmp_team != NULL)
     {
-      printf("%s v_flag: %d\n",
-	     T_TEAM(tmp_team)->name,
-	     T_TEAM(tmp_team)->v_flag);
       if (T_TEAM(tmp_team)->v_flag == VICTORY)
         {
 	  sprintf(response, "seg %s\n", T_TEAM(tmp_team)->name);
 	  cli_answer_to_all_graph(t, response);
 	  t->result = 0;
+	  log_show("check_vicroty", "", "Team %s won!",
+		   T_TEAM(tmp_team)->name);
 	  return ;
         }
       tmp_team = tmp_team->next;

@@ -5,7 +5,7 @@
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Wed Jun 12 17:02:27 2013 Marin Alcaraz
-** Last update Fri Jul 12 22:34:42 2013 Marin Alcaraz
+** Last update Sun Jul 14 12:51:22 2013 ivan ignatiev
 */
 
 #include	"main.h"
@@ -98,8 +98,7 @@ int		graph_command_mct(t_graph_data *rqd,
   char		*response;
 
   (void) s;
-  if ((response  = malloc(STR_LIMIT * w->width)) == NULL)
-    return (error_show("graph", "command_mct", "Unable to alloc resp"));
+  response = NULL;
   parse_and_answer(response, rqd, w);
   free(response);
   return (0);

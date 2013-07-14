@@ -5,7 +5,7 @@
 ** Login   <alcara_m@epitech.net>
 ** 
 ** Started on  Thu Jun 13 16:28:40 2013 Marin Alcaraz
-** Last update Sat Jul 13 19:25:49 2013 ivan ignatiev
+** Last update Sun Jul 14 14:08:59 2013 ivan ignatiev
 */
 
 #include	"main.h"
@@ -104,13 +104,11 @@ void		cli_prend(t_request_data *rqd, t_server *t, t_world *w)
 
 void		cli_pose(t_request_data *rqd, t_server *t, t_world *w)
 {
-  int		item;
   int		item_index;
   char		out[ANSWER_SIZE];
 
-  item = (rqd->user)->inventory[atoi(rqd->argv[0])];
   item_index = match_index(rqd->argv[0]);
-  if (item > 0 && item_index >= 0 && item_index < RES_TYPES_COUNT)
+  if (item_index >= 0 && item_index < RES_TYPES_COUNT)
     {
       --((rqd->user)->inventory[item_index]);
       ++((w->surface[rqd->user->posy]

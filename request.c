@@ -5,7 +5,7 @@
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Thu Jun 20 20:00:46 2013 ivan ignatiev
-** Last update Sat Jul 13 20:06:29 2013 ivan ignatiev
+** Last update Sun Jul 14 14:11:34 2013 ivan ignatiev
 */
 
 #include	"main.h"
@@ -67,11 +67,12 @@ t_request		*cli_request_parse(t_server *s, t_user_player *user,
 void			cli_requests_process(t_server *s, t_world *w)
 {
   t_item		*current;
-  t_item		*tmp;
+  t_item		*next;
 
   current = list_get_head(s->request_list);
   while (current != NULL)
     {
+      next = current->next;
       if (T_REQUEST(current)->type->func != NULL
 	  && T_REQUEST(current)->data != NULL
 	  && s->tick >= T_REQUEST(current)->tick)
@@ -83,11 +84,8 @@ void			cli_requests_process(t_server *s, t_world *w)
 	  --(T_REQUEST(current)->data->user->request_counter);
 	  free(T_REQUEST(current)->data->message);
 	  s->diff = 1;
-	  tmp = current;
-	  current = current->next;
-	  item_delete(s->request_list, tmp);
+	  item_delete(s->request_list, current);
         }
-      else
-	current = current->next;
+      current = next;
     }
 }

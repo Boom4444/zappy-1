@@ -5,7 +5,7 @@
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Wed Jul 10 15:46:40 2013 ivan ignatiev
-** Last update Sat Jul 13 17:10:41 2013 ivan ignatiev
+** Last update Sun Jul 14 14:10:47 2013 ivan ignatiev
 */
 
 #include	"main.h"
@@ -67,6 +67,7 @@ int		is_numeric(char *str)
     {
       if (!isdigit(str[i]))
 	return (0);
+      ++i;
     }
   return (1);
 }

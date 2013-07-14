@@ -5,7 +5,7 @@
 ** Login   <alcara_m@epitech.net>
 ** 
 ** Started on  Thu Jun 20 17:33:58 2013 Marin Alcaraz
-** Last update Sat Jul 13 19:11:27 2013 ivan ignatiev
+** Last update Sun Jul 14 12:15:24 2013 ivan ignatiev
 */
 
 #include	"main.h"
@@ -37,6 +37,26 @@ int		init_world(t_world *w, int width, int height)
   w->width = width;
   w->height = height;
   return (0);
+}
+
+void		world_destroy(t_world *w)
+{
+  int		i;
+  int		j;
+
+  i = 0;
+  while (i < w->height)
+    {
+      j = 0;
+      while (j < w->width)
+	{
+	  list_delete(w->surface[i][j].players);
+	  ++j;
+	}
+      free(w->surface[i]);
+      ++i;
+    }
+  free(w->surface);
 }
 
 int		mineral_checker(t_square_unit *sq)
@@ -81,11 +101,6 @@ int		display_world(t_world *w, int width, int height)
   return (0);
 }
 
-void		random_number(int *container, int limit)
-{
-  *container = rand() % limit;
-}
-
 int		generate_resource(t_world *w, int width, int height)
 {
   int		amount;
@@ -97,11 +112,12 @@ int		generate_resource(t_world *w, int width, int height)
   srand(time(NULL));
   while (amount < RESOURCE_LIMIT)
     {
-      random_number(&minx, width);
-      random_number(&miny, height);
-      random_number(&resource, 7);
+      minx = _MOD(rand(), width);
+      miny = _MOD(rand(), height);
+      resource = _MOD(rand(), 7);
       (w->surface[miny][minx]).resources[resource]++;
       amount = amount + 1;
     }
+  log_show("generate_resource", "", "Resources ready to use");
   return (0);
 }

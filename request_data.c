@@ -5,7 +5,7 @@
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Sat Jul 13 20:04:36 2013 ivan ignatiev
-** Last update Sat Jul 13 20:07:09 2013 ivan ignatiev
+** Last update Sun Jul 14 12:28:07 2013 ivan ignatiev
 */
 
 #include	"main.h"
@@ -80,7 +80,10 @@ t_request		*cli_request_fill(t_request *request, t_user_player *user,
 	     request->data->message, user->number,
 	     s->tick, request->tick);
   else
-    request->data = NULL;
+    {
+      free(request);
+      return (NULL);
+    }
   user->tick = request->tick;
   return (request);
 }

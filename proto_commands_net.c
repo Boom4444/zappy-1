@@ -5,7 +5,7 @@
 ** Login   <alcara_m@epitech.net>
 ** 
 ** Started on  Thu Jun 13 16:31:20 2013 Marin Alcaraz
-** Last update Sat Jul 13 19:18:14 2013 ivan ignatiev
+** Last update Sun Jul 14 12:41:45 2013 ivan ignatiev
 */
 
 #include	"main.h"
@@ -56,7 +56,10 @@ void		cli_incantation(t_request_data *rqd, t_server *s, t_world *w)
   int		st;
 
   if (rqd->argv[0] == NULL)
-    return ;
+    {
+      cli_answer(rqd->user, s, "ko\n");
+      return ;
+    }
   if ((st = incantate(rqd->argv[0], T_PLAYER(rqd->user), s, w)) != 0)
     {
       fail_incantation(rqd, s);
