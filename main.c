@@ -1,11 +1,11 @@
 /*
-** main.c for zappy in /home/hero/zappy
+** main.c for zappy in /Users/Marin/zappy
 ** 
 ** Made by Marin Alcaraz
 ** Login   <alcara_m@epitech.net>
 ** 
 ** Started on  Fri Mar 15 16:48:12 2013 Marin Alcaraz
-** Last update Sun Jul 14 23:26:22 2013 ivan ignatiev
+** Last update Wed Jul 17 17:44:47 2013 Marin Alcaraz
 */
 
 #include	"main.h"
