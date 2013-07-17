@@ -5,7 +5,7 @@
 ** Login   <alcara_m@epitech.net>
 ** 
 ** Started on  Fri Mar 15 16:48:12 2013 Marin Alcaraz
-** Last update Sun Jul 14 17:20:25 2013 ivan ignatiev
+** Last update Sun Jul 14 23:26:22 2013 ivan ignatiev
 */
 
 #include	"main.h"
@@ -28,7 +28,8 @@ void		server_settings_init(t_opt *opt)
   opt->cmax = 10;
   opt->tdelay = 100;
   opt->mode = 0;
-  opt->names = list_init();
+  if ((opt->names = list_init()) == NULL)
+    exit(EXIT_FAILURE);
 }
 
 void		sigint_handler(int sig)
@@ -89,7 +90,8 @@ int		main(int argc, char *argv[])
   options_parse(argc, argv, &(s.options));
   if (s.options.mode == 1)
       daemonize();
-  init_world(&w, s.options.width, s.options.height);
+  if (init_world(&w, s.options.width, s.options.height) < 0)
+    return (EXIT_FAILURE);
   generate_resource(&w, s.options.width, s.options.height);
   if (server_init(&s) != 0)
     {

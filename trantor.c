@@ -5,7 +5,7 @@
 ** Login   <alcara_m@epitech.net>
 ** 
 ** Started on  Thu Jun 20 17:33:58 2013 Marin Alcaraz
-** Last update Sun Jul 14 07:34:23 2013 Marin Alcaraz
+** Last update Sun Jul 14 21:28:57 2013 ivan ignatiev
 */
 
 #include	"main.h"
@@ -72,13 +72,13 @@ int		display_world(t_world *w, int width, int height)
     {
       while (j < width)
         {
-            if (mineral_checker(&w->surface[i][j]) != 0)
-	      printf(" R ");
-            else if (list_get_head((w->surface[i][j]).players) != NULL)
-                printf(" P ");
-            else
-	      printf(" * ");
-            j = j + 1;
+	  if (mineral_checker(&w->surface[i][j]) != 0)
+	    printf(" R ");
+	  else if (list_get_head((w->surface[i][j]).players) != NULL)
+	    printf(" P ");
+	  else
+	    printf(" * ");
+	  j = j + 1;
         }
       printf("\n");
       i = i + 1;

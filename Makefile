@@ -60,6 +60,42 @@ CSRC 	= 	client.c 	\
 
 COBJ 	= 	$(CSRC:.c=.o)
 
+GNAME	=	gclient
+
+TNAME	=	Trantor
+
+GSRC	=	GClient/error.c 		\
+		GClient/gc_3.c 			\
+		GClient/gclient.c 		\
+		GClient/gclient_funcs.c 	\
+		GClient/graph_commands.c	\
+		GClient/socket.c 		\
+		GClient/gc_1.c 			\
+		GClient/gc_4.c 			\
+		GClient/gc_5.c 			\
+		GClient/gclient_errors.c 	\
+		GClient/gclient_parser.c 	\
+		GClient/item.c 			\
+		GClient/tools.c 		\
+		GClient/gc_2.c 			\
+		GClient/gclient_auth.c 		\
+		GClient/gclient_exit.c 		\
+		GClient/gclient_ctimeout.c 	\
+		GClient/gclient_ping.c 		\
+		GClient/list.c
+
+TSRC	=	GClient/clip_ressources.c 	\
+		GClient/commands.c 		\
+		GClient/list.c 			\
+		GClient/error.c 		\
+		GClient/sdl_init.c 		\
+		GClient/show_map.c 		\
+		GClient/main.c
+
+GOBJ	=	$(GSRC:.c=.o)
+
+TOBJ	=	$(TSRC:.c=.o)
+
 CFLAGS	=	-Wall -Wextra -Werror -g3
 
 CC	=	cc
@@ -70,7 +106,7 @@ ECHO	=	echo -e
 %.o: 	%.c
 	$(CC) -c -o $@ $< $(CFLAGS)
 
-all	: $(SNAME) $(CNAME) $(WNAME)
+all	: $(SNAME) $(CNAME) $(WNAME) $(GNAME) $(TNAME)
 
 $(SNAME) : $(SOBJ)
 	$(CC) $(SOBJ) $(CFLAGS) -o $(SNAME) -lm
@@ -80,16 +116,28 @@ $(CNAME) : $(COBJ)
 	$(CC) $(COBJ) $(CFLAGS) -o $(CNAME)
 	@$(ECHO) '\033[0;33m> CLI Client Compiled\033[0m'
 
+$(GNAME) : $(GOBJ)
+	$(CC) $(GOBJ) $(FLAGS) -o $(GNAME) -pthread
+	@$(ECHO) '\033[0;33m> GClient Compiled\033[0m'
+
+$(TNAME) : $(TOBJ)
+	$(CC) $(TOBJ) $(FLAGS) -o $(TNAME) -lSDL -lSDL_image
+	@$(ECHO) '\033[0;33m> Trantor Compiled\033[0m'
+
 clean	:
 	$(RM) $(SOBJ)
-	$(RM) $(DOBJ)
 	$(RM) $(COBJ)
+	$(RM) $(GOBJ) 
+	$(RM) $(TOBJ)
 	@$(ECHO) '\033[0;33m> Directory cleaned\033[0m'
 
 fclean	: clean
 	$(RM) $(SNAME)
-	$(RM) $(DNAME)
 	$(RM) $(CNAME)
+	$(RM) $(GNAME) 
+	$(RM) $(TNAME)
 	@$(ECHO) '\033[0;33m> Removed executables\033[0m'
 
-re	: fclean clean re all
+re	: fclean all
+
+.PHONY: all clean fclean re

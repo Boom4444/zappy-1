@@ -5,7 +5,7 @@
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Sat Jul 13 12:20:54 2013 ivan ignatiev
-** Last update Fri Jul 12 22:30:12 2013 Marin Alcaraz
+** Last update Sun Jul 14 21:27:13 2013 ivan ignatiev
 */
 
 #include	"main.h"
@@ -44,10 +44,10 @@ int		user_graph_destroy(t_user_graph *user)
 		   "GFX Client disconnected and removed"));
 }
 
-int 			graph_display_users(t_server *s, t_graph_data *rqd)
+int 		graph_display_users(t_server *s, t_graph_data *rqd)
 {
   t_item 	*current;
-  char 	response[STR_LIMIT];
+  char		response[STR_LIMIT];
 
   current = list_get_head(s->client_list);
   while (current != NULL)
@@ -68,10 +68,10 @@ int 			graph_display_users(t_server *s, t_graph_data *rqd)
   return (0);
 }
 
-int             graph_display_eggs(t_server *s, t_graph_data *rqd)
+int		graph_display_eggs(t_server *s, t_graph_data *rqd)
 {
-  t_item      *current;
-  char        response[STR_LIMIT];
+  t_item	*current;
+  char		response[STR_LIMIT];
 
   current = list_get_head(s->client_list);
   while (current != NULL)
@@ -83,7 +83,7 @@ int             graph_display_eggs(t_server *s, t_graph_data *rqd)
 		  T_EGG(current->cont)->parent_number,
 		  T_EGG(current->cont)->posx,
 		  T_EGG(current->cont)->posy);
-            cli_answer_to_graph(rqd->user, response);
+	  cli_answer_to_graph(rqd->user, response);
         }
       current = current->next;
     }
